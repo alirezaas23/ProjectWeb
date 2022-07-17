@@ -1,2 +1,63 @@
-﻿body {
+﻿@font-face {
+    font-family: Vazir;
+    src: url('../fonts/Vazir-FD.eot');
+    src: url('../fonts/Vazir-FD.eot?#iefix') format('embedded-opentype'), url('../fonts/Vazir-FD.woff2') format('woff2'), url('../fonts/Vazir-FD.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+body {
+    font-family: Vazir;
+    background-color: whitesmoke;
+}
+
+.card {
+    border-radius: 10px !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+}
+
+.btn-account {
+    width: 120px;
+    background: #F94C66;
+    color: white;
+    opacity: .6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-account:hover {
+    color: white;
+    opacity: 1;
+    transition: 1s;
+    border-radius: 20px;
+}
+
+.btn-account:not(:hover) {
+    transition: 1s;
+}
+
+.text-hover {
+    color: black;
+}
+
+.text-hover:hover {
+    text-decoration: none;
+    color: #47B5FF;
+    transition: .5s;
+}
+
+.text-hover:not(:hover) {
+    transition: .5s;
+}
+
+.input-custom {
+    border-color: rgba(0,0,0, .1);
+    border-radius: 10px;
+}
+
+.input-custom:hover {
+    border-color: rgba(3, 138, 255, 0.3);
+    transition: .5s;
 }
