@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace MyWeb.Application.ViewModels
+namespace ProjectWeb.Application.ViewModels
 {
     public class RegisterViewModel
     {

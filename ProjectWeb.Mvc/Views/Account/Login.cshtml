@@ -1,6 +1,6 @@
-﻿@model RegisterViewModel
+﻿@model LoginViewModel
 @{
-    ViewData["Title"] = "عضویت در سایت";
+    ViewData["Title"] = "ورود به سایت";
     Layout = "~/Views/Shared/_Layout_Account.cshtml";
 }
 
@@ -13,14 +13,14 @@
                         <img src="~/imgs/icons8-user-100.png" alt="Register-Icon" />
                     </div>
                     <div class="d-flex justify-content-between">
-                        <h5>عضویت</h5>
+                        <h5>ورود</h5>
                         <a asp-controller="Home" asp-action="Index" class="text-hover">
                             <i class="fas fa-home"></i>
                             صفحه خانه
                         </a>
                     </div>
                     <hr />
-                    <form method="post" asp-controller="Account" asp-action="Register">
+                    <form method="post" asp-controller="Account" asp-action="Login">
                         <!-- ModelState -->
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
@@ -31,13 +31,6 @@
                             <span asp-validation-for="UserName" class="text-danger font-weight-bold"></span>
                         </div>
 
-                        <!-- Email -->
-                        <div class="form-group">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control input-custom" />
-                            <span asp-validation-for="Email" class="text-danger font-weight-bold"></span>
-                        </div>
-
                         <!-- Password -->
                         <div class="form-group">
                             <label asp-for="Password"></label>
@@ -45,29 +38,34 @@
                             <span asp-validation-for="Password" class="text-danger font-weight-bold"></span>
                         </div>
 
-                        <!-- Confirm Password -->
+                        <!-- Remember Me -->
                         <div class="form-group">
-                            <label asp-for="ConfirmPassword"></label>
-                            <input asp-for="ConfirmPassword" class="form-control input-custom" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger font-weight-bold"></span>
+                            <input asp-for="RememberMe" class="custom-checkbox" checked="checked" />
+                            <label asp-for="RememberMe"></label>
                         </div>
-                        <button type="submit" class="btn btn-account">عضویت</button>
+
+                        <button type="submit" class="btn btn-account">ورود</button>
                     </form>
-
                     <hr />
-
-                    <p>
-                        <i class="fas fa-circle"></i>
-                        اکانت دارید؟ همین حالا <a asp-controller="Account" asp-action="Login" class="text-hover">وارد</a> شوید!
-                    </p>
+                    <div class="d-flex justify-content-between">
+                        <a asp-controller="Account" asp-action="Register" class="text-hover">
+                            <i class="fas fa-user-plus"></i>
+                            عضویت
+                        </a>
+                        <a asp-controller="" asp-action="" class="text-hover">
+                            فراموشی کلمه عبور
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     }
+
