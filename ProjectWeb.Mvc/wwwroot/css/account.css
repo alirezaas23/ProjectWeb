@@ -10,28 +10,29 @@
 
 body {
     font-family: Vazir;
-    background-color: whitesmoke;
+    background-color: #f5f2ea;
 }
 
 .card {
-    border-radius: 10px !important;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border: none;
 }
 
 .btn-account {
-    width: 120px;
-    background: #F94C66;
+    width: 100%;
+    background: #3330E4;
     color: white;
-    opacity: .6;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: .8;
+    box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
 }
 
 .btn-account:hover {
     color: white;
     opacity: 1;
     transition: 1s;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 .btn-account:not(:hover) {
