@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebMarkupMin.AspNetCore3;
 
 namespace ProjectWeb.Mvc
 {
@@ -38,6 +39,14 @@ namespace ProjectWeb.Mvc
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddWebMarkupMin(options =>
+            {
+                options.AllowMinificationInDevelopmentEnvironment = true;
+                options.AllowCompressionInDevelopmentEnvironment = true;
+            })
+                .AddHtmlMinification()
+                .AddHttpCompression();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +64,8 @@ namespace ProjectWeb.Mvc
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseWebMarkupMin();
 
             app.UseRouting();
 
