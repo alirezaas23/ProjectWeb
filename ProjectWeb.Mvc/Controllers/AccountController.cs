@@ -62,5 +62,30 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                if (result.IsLockedOut)
+                {
+                    ViewData["ErrorMessage"] = "اکانت شما به دلیل 5 بار ورود ناموفق به مدت 5 دقیقه قفل شد!";
+                    return View(model);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "نام کاربری یا کلمه عبور اشتباه است!");
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
     }
 }
