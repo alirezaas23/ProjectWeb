@@ -1,34 +1,63 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject SignInManager<IdentityUser> _signInManager
+@inject UserManager<IdentityUser> _userManager
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ProjectWeb.Mvc</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.rtl.css"/>
-    <link rel="stylesheet" href="~/lib/aos/aos.css"/>
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.rtl.css" />
+    <link rel="stylesheet" href="~/lib/aos/aos.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="custom-nav mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProjectWeb.Mvc</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul>
+                    @{
+                        var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                        if (_signInManager.IsSignedIn(User))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <a class="dropdown text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-caret-down"></i>
+                                        @user.UserName
+                                        <img src="~/imgs/icons8-user-45.png" alt="User-Icon" class="mr-1" />
+                                    </a>
+
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item text-hover" href="#">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            مشاهده حساب کاربری
+                                        </a>
+                                        <a class="dropdown-item text-hover" href="#">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            ویرایش حساب کاربری
+                                        </a>
+                                        <a class="dropdown-item text-hover" href="#">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            خروج از حساب کاربری
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <i class="far fa-user ml-1"></i>
+                                <a asp-controller="Account" asp-action="Login" class="text-hover">ورود</a> /
+                                <a asp-controller="" asp-action="" class="text-hover">عضویت</a>
+                            </li>
+                        }
+                    }
+                </ul>
             </div>
         </nav>
     </header>
@@ -44,7 +73,7 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/aos/aos.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="~/js/site.js"></script>
