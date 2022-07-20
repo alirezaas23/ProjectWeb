@@ -144,12 +144,12 @@ header .custom-nav .logo img{
     margin-top: 20px;
     line-height: 2;
     font-size: 13px;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border:none;
 }
 
 .small-dot {
     font-size: 5px;
-    color: green;
+    color: #47B5FF;
 }

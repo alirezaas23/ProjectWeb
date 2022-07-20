@@ -28,21 +28,24 @@
                                     <a class="dropdown text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-caret-down"></i>
                                         @user.UserName
-                                        <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1"/>
+                                        <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1" />
                                     </a>
 
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item text-hover" href="#">
+                                        <a class="dropdown-item text-hover">
                                             <i class="fas fa-circle small-dot"></i>
                                             مشاهده حساب کاربری
                                         </a>
-                                        <a class="dropdown-item text-hover" href="#">
+                                        <a class="dropdown-item text-hover">
                                             <i class="fas fa-circle small-dot"></i>
                                             ویرایش حساب کاربری
                                         </a>
-                                        <a class="dropdown-item text-hover" asp-controller="Account" asp-action="LogOut">
+                                        <a asp-controller="Account" asp-action="LogOut" class="dropdown-item text-hover">
                                             <i class="fas fa-circle small-dot"></i>
                                             خروج از حساب کاربری
+                                        </a>
+                                        <a class="dropdown-item text-hover" asp-controller="Account" asp-action="LogOut">
+
                                         </a>
                                     </div>
                                 </div>
@@ -60,7 +63,7 @@
                 </ul>
 
                 <div class="logo">
-                    <img src="~/imgs/Dima.jpg" alt="Logo"/>
+                    <img src="~/imgs/Dima.jpg" alt="Logo" />
                 </div>
             </div>
         </nav>
