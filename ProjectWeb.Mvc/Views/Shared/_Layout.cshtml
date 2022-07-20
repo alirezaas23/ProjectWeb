@@ -28,7 +28,7 @@
                                     <a class="dropdown text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-caret-down"></i>
                                         @user.UserName
-                                        <img src="~/imgs/icons8-user-45.png" alt="User-Icon" class="mr-1" />
+                                        <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1"/>
                                     </a>
 
                                     <div class="dropdown-menu">
@@ -40,7 +40,7 @@
                                             <i class="fas fa-circle small-dot"></i>
                                             ویرایش حساب کاربری
                                         </a>
-                                        <a class="dropdown-item text-hover" href="#">
+                                        <a class="dropdown-item text-hover" asp-controller="Account" asp-action="LogOut">
                                             <i class="fas fa-circle small-dot"></i>
                                             خروج از حساب کاربری
                                         </a>
@@ -53,7 +53,7 @@
                             <li>
                                 <i class="far fa-user ml-1"></i>
                                 <a asp-controller="Account" asp-action="Login" class="text-hover">ورود</a> /
-                                <a asp-controller="" asp-action="" class="text-hover">عضویت</a>
+                                <a asp-controller="Account" asp-action="Register" class="text-hover">عضویت</a>
                             </li>
                         }
                     }

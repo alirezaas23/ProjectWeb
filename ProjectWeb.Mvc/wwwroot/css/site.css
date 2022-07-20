@@ -88,11 +88,9 @@ body {
     height: 60px;
     background: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    color: white;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .custom-nav ul {
@@ -109,7 +107,7 @@ header .custom-nav ul li {
     font-size: 15px;
     float: left;
     margin-right: 20px;
-    margin-top: 13px;
+    margin-top: 17px;
 }
 
 header .custom-nav ul li a {
@@ -120,11 +118,11 @@ header .custom-nav ul li a {
 header .custom-nav .logo {
     float: right;
     width: 29%;
+    align-items: center;
 }
 
 header .custom-nav .logo img{
     height: 60px;
-    margin-top: 5px;
 }
 
 .text-hover {
