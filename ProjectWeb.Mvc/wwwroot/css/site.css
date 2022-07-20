@@ -140,16 +140,35 @@ header .custom-nav .logo img{
     transition: .5s;
 }
 
+.menu-text-hover {
+    color: black !important;
+    cursor: pointer;
+}
+
+.menu-text-hover:hover {
+    text-decoration: none;
+    color: #79c74e !important;
+    transition: .5s;
+}
+
+.menu-text-hover:not(:hover) {
+    transition: .5s;
+}
+
 .dropdown .dropdown-menu {
     margin-top: 20px;
     line-height: 2;
     font-size: 13px;
-    border-radius: 15px;
+    border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border:none;
 }
 
+.dropdown .dropdown-menu :hover{
+    background-color: transparent;
+}
+
 .small-dot {
     font-size: 5px;
-    color: #47B5FF;
+    color: #79c74e;
 }
