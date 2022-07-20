@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ProjectWeb.Application\ProjectWeb.Application.csproj" />
     <ProjectReference Include="..\ProjectWeb.Infra.Data\ProjectWeb.Infra.Data.csproj" />
+    <ProjectReference Include="..\ProjectWeb.Infra.IoC\ProjectWeb.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>
