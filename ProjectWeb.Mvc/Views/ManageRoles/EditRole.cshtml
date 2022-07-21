@@ -1,6 +1,6 @@
-﻿@model AddRoleViewModel
+﻿@model ShowRoleViewModel
 @{
-    ViewData["Title"] = "AddRole";
+    ViewData["Title"] = "EditRole";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
@@ -10,30 +10,34 @@
             <div class="card">
                 <div class="card-body p-3 p-md-5">
                     <div class="d-flex justify-content-between mb-2">
-                        <p>افزودن مقام</p>
+                        <p>ویرایش مقام</p>
                         <a asp-controller="ManageRoles" asp-action="Index" class="text-hover">
                             <i class="fas fa-home"></i>
                             لیست مقام ها
                         </a>
                     </div>
-                    <form method="post" asp-controller="ManageRoles" asp-action="AddRole">
+
+                    <form method="post" asp-controller="ManageRoles" asp-action="EditRole">
                         <!-- ModelState -->
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
+                        <!-- RoleId -->
+                        <input hidden asp-for="RoleId"/>
+
                         <!-- RoleName -->
                         <div class="form-group">
-                            <input asp-for="RoleName" class="form-control input-custom" placeholder="نام مقام"/>
+                            <input asp-for="RoleName" class="form-control input-custom" />
                             <span asp-validation-for="RoleName" class="text-danger small"></span>
                         </div>
 
-                        <button type="submit" class="btn btn-role">افزودن مقام</button>
+                        <button type="submit" class="btn btn-edit">ویرایش مقام</button>
                     </form>
 
                     <hr />
 
                     <p class="text-center small">
                         <i class="fas fa-user-check"></i>
-                        برای افزودن مقام به کاربر <a asp-controller="" asp-action="" class="font-weight-bold text-hover">اینجا</a> بزنید
+                        برای افزودن مقام جدید <a asp-controller="ManageRoles" asp-action="AddRole" class="font-weight-bold text-hover">اینجا</a> بزنید
                     </p>
                 </div>
             </div>

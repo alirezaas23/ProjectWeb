@@ -1,4 +1,17 @@
-﻿.text-hover {
+﻿@font-face {
+    font-family: Vazir;
+    src: url('../fonts/Vazir-FD.eot');
+    src: url('../fonts/Vazir-FD.eot?#iefix') format('embedded-opentype'), url('../fonts/Vazir-FD.woff2') format('woff2'), url('../fonts/Vazir-FD.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body{
+    font-family: Vazir;
+}
+
+.text-hover {
     color: black;
 }
 
@@ -16,4 +29,74 @@
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border: none;
+}
+
+.btn-role {
+    width: 100%;
+    background: #3CCF4E;
+    color: white;
+    opacity: .8;
+    box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.btn-role:hover {
+    color: white;
+    opacity: 1;
+    transition: 1s;
+    border-radius: 15px;
+}
+
+.btn-role:not(:hover) {
+    transition: 1s;
+}
+
+.input-custom {
+    border-color: rgba(0,0,0, .1);
+    border-radius: 10px;
+}
+
+.input-custom:hover {
+    border-color: rgba(3, 138, 255, 0.3);
+    transition: .5s;
+}
+
+.btn-delete {
+    width: 100%;
+    background: #EB1D36;
+    color: white;
+    opacity: .8;
+    box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.btn-delete:hover {
+    color: white;
+    opacity: 1;
+    transition: 1s;
+    border-radius: 15px;
+}
+
+.btn-delete:not(:hover) {
+    transition: 1s;
+}
+
+.btn-edit {
+    width: 100%;
+    background: #646FD4;
+    color: white;
+    opacity: .8;
+    box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.btn-edit:hover {
+    color: white;
+    opacity: 1;
+    transition: 1s;
+    border-radius: 15px;
+}
+
+.btn-edit:not(:hover) {
+    transition: 1s;
 }
