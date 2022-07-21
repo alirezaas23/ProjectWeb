@@ -1,0 +1,19 @@
+﻿.text-hover {
+    color: black;
+}
+
+.text-hover:hover {
+    text-decoration: none;
+    color: #47B5FF;
+    transition: .5s;
+}
+
+.text-hover:not(:hover) {
+    transition: .5s;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: none;
+}
