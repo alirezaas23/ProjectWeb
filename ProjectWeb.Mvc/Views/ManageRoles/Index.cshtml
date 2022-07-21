@@ -20,12 +20,14 @@
     }
     else
     {
-        <table class="table text-center">
+        <table class="table text-center small">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>نام مقام</th>
-                    <th></th>
+                    <th>
+                        <i class="fas fa-cog"></i>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +41,8 @@
                             <a asp-controller="ManageRoles" asp-action="EditRole" asp-route-id="@item.Id" class="text-hover">ویرایش مقام</a>
                         </td>
                     </tr>
+
+                    row++;
                 }
             </tbody>
         </table>

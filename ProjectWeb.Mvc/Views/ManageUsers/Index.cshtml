@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ShowUsersViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    int row = 1;
+}
+
+@{
+    if (!Model.Any())
+    {
+        <div class="alert alert-danger">
+            کاربری یافت نشد
+        </div>
+    }
+    else
+    {
+        <table class="table text-center small">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>نام کاربری</th>
+                    <th>ایمیل کاربر</th>
+                    <th>
+                        <i class="fas fa-cog"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@row</td>
+                        <td>@item.UserName</td>
+                        <td>@item.UserEmail</td>
+                        <td>
+                            <a asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId" class="text-hover">
+                                ویرایش اطلاعات
+                            </a> /
+                            <a asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId" class="text-hover">
+                                حذف کاربر
+                            </a> /
+                            <a asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId" class="text-hover">
+                                افزودن مقام
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
