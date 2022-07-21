@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectWeb.Mvc.Models;
 using System;
@@ -22,6 +23,8 @@ namespace ProjectWeb.Mvc.Controllers
         {
             return View();
         }
+
+        [Authorize]
 
         public IActionResult Privacy()
         {

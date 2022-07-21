@@ -20,26 +20,36 @@
                         </a>
                     </div>
                     <!-- ViewData -->
-                    @if (ViewData["ErrorMessage"] != null)
-                    {
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-circle"></i>
-                            @ViewData["ErrorMessage"]
-                        </div>
+                    @{
+                        if (ViewData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                <i class="fas fa-exclamation-circle"></i>
+                                @ViewData["ErrorMessage"]
+                            </div>
+                        }
+
+                        if (ViewData["ReturnUrl"] != null)
+                        {
+                            <div class="alert alert-warning small">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                برای دسترسی وارد اکانت خود شوید
+                            </div>
+                        }
                     }
-                    <form method="post" asp-controller="Account" asp-action="Login">
+                    <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
                         <!-- ModelState -->
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                         <!-- UserName -->
                         <div class="form-group">
-                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری"/>
+                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" />
                             <span asp-validation-for="UserName" class="text-danger small"></span>
                         </div>
 
                         <!-- Password -->
                         <div class="form-group">
-                            <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور"/>
+                            <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور" />
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
 
