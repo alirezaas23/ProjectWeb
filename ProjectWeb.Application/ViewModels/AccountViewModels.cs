@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -10,12 +11,14 @@ namespace ProjectWeb.Application.ViewModels
         [Required(ErrorMessage = "لطفا نام کاربری را وارد کنید")]
         [Display(Name = "نام کاربری")]
         [StringLength(255, MinimumLength = 5, ErrorMessage = "نام کاربری باید حداقل 5 کاراکتر باشد")]
+        [Remote("IsUserNameInUse", "Account", HttpMethod = "POST", AdditionalFields = "__RequestVerificationToken")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "لطفا ایمیل خود را وارد کنید")]
         [Display(Name = "ایمیل")]
         [EmailAddress(ErrorMessage = "لطفا ایمیل معتبری وارد کنید")]
         [MaxLength(255)]
+        [Remote("IsEmailInUse", "Account", HttpMethod = "POST", AdditionalFields = "__RequestVerificationToken")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "لطفا کلمه عبور را وارد کنید")]

@@ -93,5 +93,35 @@ namespace ProjectWeb.Mvc.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IsEmailInUse(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if(user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json("اکانتی با این ایمیل وجود دارد");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IsUserNameInUse(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json("اکانتی با این نام کاربری وجود دارد");
+            }
+        }
     }
 }
