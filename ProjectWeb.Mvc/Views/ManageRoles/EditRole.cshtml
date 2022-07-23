@@ -10,10 +10,9 @@
             <div class="card">
                 <div class="card-body p-3 p-md-5">
                     <div class="d-flex justify-content-between mb-2">
-                        <p>ویرایش مقام</p>
-                        <a asp-controller="ManageRoles" asp-action="Index" class="text-hover">
+                        <p>ویرایش مقام <span class="font-weight-bold">@Model.RoleName</span></p>
+                        <a asp-controller="ManageRoles" asp-action="Index" class="text-hover" title="بازگشت به لیست مقام ها">
                             <i class="fas fa-home"></i>
-                            لیست مقام ها
                         </a>
                     </div>
 
@@ -36,8 +35,8 @@
                     <hr />
 
                     <p class="text-center small">
-                        <i class="fas fa-user-check"></i>
-                        برای افزودن مقام جدید <a asp-controller="ManageRoles" asp-action="AddRole" class="font-weight-bold text-hover">اینجا</a> بزنید
+                        <i class="fas fa-trash-alt"></i>
+                        برای حذف مقام <a asp-controller="ManageRoles" asp-action="DeleteRole" asp-route-id="@Model.RoleId" class="font-weight-bold text-hover">اینجا</a> بزنید
                     </p>
                 </div>
             </div>
