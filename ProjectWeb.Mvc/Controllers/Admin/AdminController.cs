@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectWeb.Mvc.Controllers.Admin
 {
-    [Authorize]
+    [Authorize(Roles = "ادمین")]
     public class AdminController : Controller
     {
         [HttpGet]

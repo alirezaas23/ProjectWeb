@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers.Admin
 {
-    [Authorize]
+    [Authorize(Roles = "ادمین")]
     public class ManageRolesController : Controller
     {
         private RoleManager<IdentityRole> _roleManager;

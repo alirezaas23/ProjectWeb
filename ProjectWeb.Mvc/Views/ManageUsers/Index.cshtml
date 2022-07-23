@@ -41,6 +41,9 @@
                             </a> /
                             <a asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId" class="text-hover">
                                 افزودن مقام
+                            </a> /
+                            <a asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId" class="text-hover">
+                                حذف مقام
                             </a>
                         </td>
                     </tr>
