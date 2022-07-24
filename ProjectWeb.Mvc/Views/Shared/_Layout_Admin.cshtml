@@ -15,15 +15,10 @@
     <link rel="stylesheet" href="~/css/admin.css" />
 </head>
 <body>
-    <div class="row">
-        <div class="col-md-1 main-menu"></div>
-        <div class="col-md-11">
-            <div class="container-fluid">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-        </div>
+    <div class="container">
+        <main role="main">
+            @RenderBody()
+        </main>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
