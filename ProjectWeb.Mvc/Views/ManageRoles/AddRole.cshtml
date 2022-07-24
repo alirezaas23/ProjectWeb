@@ -21,7 +21,7 @@
 
                         <!-- RoleName -->
                         <div class="form-group">
-                            <input asp-for="RoleName" class="form-control input-custom" placeholder="نام مقام"/>
+                            <input asp-for="RoleName" class="form-control input-custom" placeholder="نام مقام" />
                             <span asp-validation-for="RoleName" class="text-danger small"></span>
                         </div>
 
@@ -44,4 +44,8 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        $("header").hide();
+        $("footer").hide();
+    </script>
     }

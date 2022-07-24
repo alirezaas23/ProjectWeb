@@ -37,11 +37,11 @@
                         @for (int i = 0; i < Model.UserRoles.Count; i++)
                         {
                             <div class="form-group">
-                                <input asp-for="@Model.UserRoles[i].IsSelected"/>
+                                <input asp-for="@Model.UserRoles[i].IsSelected" />
                                 <label>@Model.UserRoles[i].RoleName</label>
                             </div>
 
-                            <input type="hidden" asp-for="@Model.UserRoles[i].RoleName"/>
+                            <input type="hidden" asp-for="@Model.UserRoles[i].RoleName" />
                         }
 
                         <input hidden asp-for="@Model.UserId" />
@@ -62,3 +62,9 @@
 </div>
 
 
+@section Scripts{
+    <script>
+        $("header").hide();
+        $("footer").hide();
+    </script>
+}
