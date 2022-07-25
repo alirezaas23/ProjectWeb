@@ -32,6 +32,13 @@
                                     </a>
 
                                     <div class="dropdown-menu">
+                                        @if (User.IsInRole("ادمین"))
+                                        {
+                                            <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                صفحه مدیریت سایت
+                                            </a>
+                                        }
                                         <a class="dropdown-item menu-text-hover">
                                             <i class="fas fa-circle small-dot"></i>
                                             مشاهده حساب کاربری
