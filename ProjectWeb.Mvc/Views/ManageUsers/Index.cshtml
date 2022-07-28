@@ -14,42 +14,42 @@
     }
     else
     {
-        <table class="table text-center small">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>نام کاربری</th>
-                    <th>ایمیل کاربر</th>
-                    <th>
-                        <i class="fas fa-cog"></i>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@row</td>
-                        <td>@item.UserName</td>
-                        <td>@item.UserEmail</td>
-                        <td>
-                            <a asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId" class="text-hover">
-                                ویرایش اطلاعات
-                            </a> /
-                            <a asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId" class="text-hover">
-                                حذف کاربر
-                            </a> /
-                            <a asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId" class="text-hover">
-                                افزودن مقام
-                            </a> /
-                            <a asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId" class="text-hover">
-                                حذف مقام
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h3>
+                                کاربر شماره @row
+                            </h3>
+                            <h4 class="font-weight-bold">نام کاربری :</h4>
+                            <p class="text-muted">@item.UserName</p>
+
+                            <h4 class="font-weight-bold">ایمیل کاربر :</h4>
+                            <p class="text-muted">@item.UserEmail</p>
+                            <hr />
+                            <div class="mb-2">
+                                <a asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId" class="btn btn-outline-info btn-sm">
+                                    ویرایش اطلاعات
+                                </a> /
+                                <a asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId" class="btn btn-outline-danger btn-sm">
+                                    حذف کاربر
+                                </a> /
+                                <a asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId" class="btn btn-outline-success btn-sm">
+                                    افزودن مقام
+                                </a> /
+                                <a asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId" class="btn btn-outline-warning btn-sm">
+                                    حذف مقام
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                row++;
+            }
+        </div>
     }
 }
 

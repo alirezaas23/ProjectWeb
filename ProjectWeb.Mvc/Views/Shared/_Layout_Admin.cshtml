@@ -13,8 +13,99 @@
     <link rel="stylesheet" href="~/lib/aos/aos.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/admin.css" />
+    <link rel="stylesheet" href="~/css/responsive-admin.css" />
 </head>
 <body>
+    <header>
+        <nav class="custom-nav mb-3">
+            <div class="container">
+                <div id="hamburger-icon">
+                    <img src="~/imgs/hamburger-icon.png" alt="hamburger-icon" />
+                </div>
+                <ul>
+                    <li>
+                        @{
+                            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                            <div class="dropdown">
+                                <a class="dropdown text-hover white-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-caret-down"></i>
+                                    @user.UserName
+                                    <img src="~/imgs/icons8-administrator-male-30.png" alt="admin-Icon" class="mr-1" />
+                                </a>
+
+                                <div class="dropdown-menu">
+                                    <a asp-controller="Home" asp-action="Index" class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        صفحه خانه سایت
+                                    </a>
+                                    <a asp-controller="ManageUsers" asp-action="Index" class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        مدیریت کابران
+                                    </a>
+                                    <a asp-controller="ManageRoles" asp-action="Index" class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        مدیریت مقام ها
+                                    </a>
+                                    <a class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        مشاهده حساب کاربری
+                                    </a>
+                                    <a class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        ویرایش حساب کاربری
+                                    </a>
+                                    <a class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        سفارشات
+                                    </a>
+                                    <a class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        پیام ها
+                                    </a>
+                                    <a asp-controller="Account" asp-action="LogOut" class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        خروج از حساب کاربری
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </li>
+                </ul>
+
+                <div class="logo">
+                    <img src="~/imgs/admin-logo.png" />
+                </div>
+            </div>
+        </nav>
+        <nav id="responsive-menu">
+            <ul>
+                <li>
+                    <a asp-controller="Home" asp-action="Index" class="white-text text-hover">صفحه خانه سایت</a>
+                </li>
+                <li>
+                    <a asp-controller="ManageUsers" asp-action="Index" class="white-text text-hover">مدیریت کاربران</a>
+                </li>
+                <li>
+                    <a asp-controller="ManageRoles" asp-action="Index" class="white-text text-hover">مدیریت مقام ها</a>
+                </li>
+                <li>
+                    <a asp-controller="" asp-action="" class="white-text text-hover">مشاهده حساب کاربری</a>
+                </li>
+                <li>
+                    <a asp-controller="" asp-action="" class="white-text text-hover">ویرایش حساب کاربری</a>
+                </li>
+                <li>
+                    <a asp-controller="" asp-action="" class="white-text text-hover">سفارشات</a>
+                </li>
+                <li>
+                    <a asp-controller="" asp-action="" class="white-text text-hover">پیام ها</a>
+                </li>
+                <li>
+                    <a asp-controller="Account" asp-action="LogOut" class="white-text text-hover">خروج از حساب کاربری</a>
+                </li>   
+            </ul>
+        </nav>
+    </header>
     <div class="container">
         <main role="main">
             @RenderBody()

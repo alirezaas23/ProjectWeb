@@ -1,0 +1,45 @@
+﻿@media screen and (max-width:578px){
+    header nav ul{
+        display: none;
+    }
+
+    header nav .logo{
+        float: left !important;
+        text-align: left;
+    }
+
+    #hamburger-icon {
+        display: block;
+        float: right;
+        line-height: 4;
+    }
+
+    #hamburger-icon img{
+        cursor: pointer;
+    }
+
+    #responsive-menu {
+        width: 220px;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, .9);
+        top: 0;
+        z-index: 1;
+        right: -220px;
+        position: absolute;
+        display: block;
+    }
+
+    #responsive-menu ul{
+        width: 100%;
+        height: 100%;
+        display: block;
+        margin-top: 10px;
+    }
+
+    #responsive-menu ul li{
+        color: white;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
