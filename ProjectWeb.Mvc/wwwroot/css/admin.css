@@ -36,6 +36,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border: none;
+    z-index: -1;
 }
 
 .btn-role {
@@ -180,16 +181,20 @@ header .custom-nav .logo img{
     transition: .5s;
 }
 
+.dropdown{
+    z-index: 1;
+}
+
 .dropdown .dropdown-menu {
     margin-top: 25px;
     line-height: 2;
     font-size: 13px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border:none;
+    border: none;
 }
 
-.dropdown .dropdown-menu :hover{
+.dropdown .dropdown-menu :hover {
     background-color: transparent;
 }
 
