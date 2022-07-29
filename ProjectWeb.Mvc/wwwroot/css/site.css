@@ -207,7 +207,7 @@ header .custom-nav .logo img{
 
 .list-group-item {
     border: 0 !important;
-    padding: 6px;
+    padding: 8px 8px;
 }
 
 .card-header{
@@ -217,4 +217,13 @@ header .custom-nav .logo img{
 .profile-font {
     color: lightslategray;
     font-size: 13px;
+}
+
+.input-custom {
+    border-color: #e5edf0;
+    border-radius: 5px;
+}
+
+.input-custom:hover {
+    transition: .5s;
 }

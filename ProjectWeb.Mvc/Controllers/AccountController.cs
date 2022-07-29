@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.ViewModels;
+using ProjectWeb.Domain.Models;
 using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<UserApp> _userManager;
+        private readonly SignInManager<UserApp> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<UserApp> userManager, SignInManager<UserApp> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -32,7 +33,7 @@ namespace ProjectWeb.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser()
+                var user = new UserApp()
                 {
                     UserName = model.UserName,
                     Email = model.Email,

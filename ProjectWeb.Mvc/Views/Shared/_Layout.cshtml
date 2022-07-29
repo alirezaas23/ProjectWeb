@@ -1,7 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 @inject SignInManager<IdentityUser> _signInManager
-@inject UserManager<IdentityUser> _userManager
+@using ProjectWeb.Domain.Models
+@inject UserManager<UserApp> _userManager
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>

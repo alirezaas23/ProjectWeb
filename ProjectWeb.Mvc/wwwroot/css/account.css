@@ -54,11 +54,10 @@ body {
 }
 
 .input-custom {
-    border-color: rgba(0,0,0, .1);
-    border-radius: 10px;
+    border-color: #e5edf0;
+    border-radius: 5px;
 }
 
 .input-custom:hover {
-    border-color: rgba(3, 138, 255, 0.3);
     transition: .5s;
 }

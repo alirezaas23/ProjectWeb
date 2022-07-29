@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
 using ProjectWeb.Infra.IoC;
 using System;
@@ -37,7 +38,7 @@ namespace ProjectWeb.Mvc
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
             });
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<UserApp, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireNonAlphanumeric = false;

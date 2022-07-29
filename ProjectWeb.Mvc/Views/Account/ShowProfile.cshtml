@@ -8,13 +8,11 @@
     <div class="col-md-12 col-lg-3">
         <ul class="list-group border custom-box-shadow">
             <li class="list-group-item text-center list-group-bg">
-                <div class="d-flex">
-                    <a asp-controller="Account" asp-action="LogOut" title="خروج از حساب">
-                        <i class="fas fa-power-off icon-hover"></i>
-                    </a>
-                </div>
                 <img src="~/imgs/male-user-100.png" alt="user-icon" />
                 <p class="text-white mt-1">@Model.UserName</p>
+                <a asp-controller="Account" asp-action="LogOut" title="خروج از حساب">
+                    <i class="fas fa-power-off icon-hover"></i>
+                </a>
             </li>
             <li class="list-group-item">
                 <a class="text-hover small-font">
@@ -56,19 +54,19 @@
             <div class="card-body">
                 <div class="profile-font">
                     <p>
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user ml-2"></i>
                         نام کاربری : @Model.UserName
                     </p>
 
                     <p>
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-envelope ml-2"></i>
                         ایمیل : @Model.Email
                     </p>
 
                     <p>
-                        <i class="fas fa-phone"></i>
-                        شماره تماس : 
-                        @if(Model.PhoneNumber == null)
+                        <i class="fas fa-phone ml-2"></i>
+                        شماره تماس :
+                        @if (Model.PhoneNumber == null)
                         {
                             <span>وارد نشده است</span>
                         }
@@ -78,7 +76,7 @@
                         }
                     </p>
 
-                    @if(ViewBag.Warning != null)
+                    @if (ViewBag.Warning != null)
                     {
                         <div class="alert alert-warning">
                             <i class="fas fa-exclamation-circle"></i>
