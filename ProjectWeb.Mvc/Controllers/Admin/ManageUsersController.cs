@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.ViewModels;
+using ProjectWeb.Domain.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,10 +11,10 @@ namespace ProjectWeb.Mvc.Controllers.Admin
     [Authorize(Roles = "ادمین")]
     public class ManageUsersController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<UserApp> _userManager;
         private RoleManager<IdentityRole> _roleManager;
 
-        public ManageUsersController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public ManageUsersController(UserManager<UserApp> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;

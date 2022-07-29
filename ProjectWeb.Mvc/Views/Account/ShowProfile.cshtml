@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li class="list-group-item">
-                <a class="text-hover small-font">
+                <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@Model.UserId" class="text-hover small-font">
                     <i class="fas fa-circle menu-small-icon"></i>
                     ویرایش حساب کاربری
                 </a>
@@ -48,6 +48,13 @@
     </div>
     <div class="col-md-12 col-lg-9 mt-3 mt-lg-0">
         <div class="card custom-box-shadow">
+            @if(ViewBag.Message != null)
+            {
+                <div class="alert alert-primary d-flex justify-content-between close-alert small">
+                    @ViewBag.Message
+                    <i class="fas fa-times close-icon"></i>
+                </div>
+            }
             <div class="card-header">
                 <p class="font-weight-bold">اطلاعات حساب کاربری</p>
             </div>
@@ -88,4 +95,3 @@
         </div>
     </div>
 </div>
-
