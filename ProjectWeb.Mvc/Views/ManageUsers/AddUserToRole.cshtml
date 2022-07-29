@@ -1,12 +1,13 @@
 ﻿@model AddUserToRoleViewModel
 @using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> _userManager
+@using ProjectWeb.Domain.Models
+@inject UserManager<UserApp> _userManager
 @{
     ViewData["Title"] = "AddUserToRole";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
-<div data-aos="fade-down">
+<div data-aos="fade-down" data-aos-duration="1000">
     <div class="row d-flex justify-content-center align-items-center vh-100 m-1 m-md-0">
         <div class="col-12 col-lg-5">
             <div class="card">

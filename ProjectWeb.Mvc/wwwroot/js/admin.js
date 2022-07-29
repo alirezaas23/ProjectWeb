@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
-    AOS.init();
+    AOS.init({
+        once : true
+    });
     $("#hamburger-icon img").click(function () {
         var responsiveMenu = $("#responsive-menu");
         responsiveMenu.show();
