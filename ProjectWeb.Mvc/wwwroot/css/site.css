@@ -172,3 +172,49 @@ header .custom-nav .logo img{
     font-size: 5px;
     color: #79c74e;
 }
+
+.list-group-bg{
+    background-image: url("../imgs/Icon-Grid.svg") !important;
+}
+
+.icon-hover{
+    color: white;
+}
+
+.icon-hover:hover{
+    transition: .5s;
+    color: #47B5FF;
+    cursor: pointer;
+}
+
+.icon-hover:not(:hover){
+    transition: .5s;
+}
+
+.menu-small-icon {
+    color: #47B5FF;
+    font-size: 6px;
+}
+
+.small-font{
+    font-size: 13px;
+}
+
+.custom-box-shadow {
+    border: 1px solid #ecf0f4 !important;
+    box-shadow: 0 0 7px 0 #eaeff4 !important;
+}
+
+.list-group-item {
+    border: 0 !important;
+    padding: 6px;
+}
+
+.card-header{
+    background-color: white;
+}
+
+.profile-font {
+    color: lightslategray;
+    font-size: 13px;
+}

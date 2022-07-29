@@ -129,5 +129,25 @@ namespace ProjectWeb.Mvc.Controllers
                 return Json("اکانتی با این نام کاربری وجود دارد");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ShowProfile(string id)
+        {
+            if (string.IsNullOrEmpty(id)) return NotFound();
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+            var userModel = new ShowProfileViewModel()
+            {
+                Email = user.Email,
+                UserId = user.Id,
+                UserName = user.UserName,
+                PhoneNumber = user.PhoneNumber
+            };
+            if(user.PhoneNumber == null)
+            {
+                ViewBag.Warning = "لطفا شماره تماس خود را در قسمت ویرایش حساب ثبت کنید";
+            }
+            return View(userModel);
+        }
     }
 }

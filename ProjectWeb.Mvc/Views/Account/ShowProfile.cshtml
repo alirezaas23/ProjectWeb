@@ -1,0 +1,93 @@
+﻿@model ShowProfileViewModel
+@{
+    ViewData["Title"] = "ShowProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-lg-3">
+        <ul class="list-group border custom-box-shadow">
+            <li class="list-group-item text-center list-group-bg">
+                <div class="d-flex">
+                    <a asp-controller="Account" asp-action="LogOut" title="خروج از حساب">
+                        <i class="fas fa-power-off icon-hover"></i>
+                    </a>
+                </div>
+                <img src="~/imgs/male-user-100.png" alt="user-icon" />
+                <p class="text-white mt-1">@Model.UserName</p>
+            </li>
+            <li class="list-group-item">
+                <a class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    ویرایش حساب کاربری
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    تغییر کلمه عبور
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    سفارشات من
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    پیام ها
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    خروج از حساب
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-12 col-lg-9 mt-3 mt-lg-0">
+        <div class="card custom-box-shadow">
+            <div class="card-header">
+                <p class="font-weight-bold">اطلاعات حساب کاربری</p>
+            </div>
+            <div class="card-body">
+                <div class="profile-font">
+                    <p>
+                        <i class="fas fa-user"></i>
+                        نام کاربری : @Model.UserName
+                    </p>
+
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        ایمیل : @Model.Email
+                    </p>
+
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        شماره تماس : 
+                        @if(Model.PhoneNumber == null)
+                        {
+                            <span>وارد نشده است</span>
+                        }
+                        else
+                        {
+                            @Model.PhoneNumber
+                        }
+                    </p>
+
+                    @if(ViewBag.Warning != null)
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-circle"></i>
+                            @ViewBag.Warning
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
