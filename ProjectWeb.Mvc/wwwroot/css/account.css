@@ -14,8 +14,7 @@ body {
 }
 
 .card {
-    border-radius: 20px;
-    box-shadow: 0 0px 7px 0 #eaeff4;
+    border-radius: 10px;
     border: none;
 }
 
@@ -60,4 +59,9 @@ body {
 
 .input-custom:hover {
     transition: .5s;
+}
+
+.custom-box-shadow {
+    border: 1px solid #ecf0f4 !important;
+    box-shadow: 0px 0 7px 0 #eaeff4 !important;
 }

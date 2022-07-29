@@ -18,7 +18,7 @@
             @foreach (var item in Model)
             {
                 <div class="col-12">
-                    <div class="card mb-3">
+                    <div class="card custom-box-shadow mb-3">
                         <div class="card-body">
                             <h3>
                                 کاربر شماره @row
@@ -30,16 +30,16 @@
                             <p class="text-muted">@item.UserEmail</p>
                             <hr />
                             <div class="mb-2">
-                                <a asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId" class="btn btn-outline-info btn-sm">
+                                <a asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId" class="btn btn-edit-user">
                                     ویرایش اطلاعات
-                                </a> /
-                                <a asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId" class="btn btn-outline-danger btn-sm">
+                                </a> 
+                                <a asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId" class="btn btn-delete-user">
                                     حذف کاربر
-                                </a> /
-                                <a asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId" class="btn btn-outline-success btn-sm">
+                                </a> 
+                                <a asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId" class="btn btn-addrole-user">
                                     افزودن مقام
-                                </a> /
-                                <a asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId" class="btn btn-outline-warning btn-sm">
+                                </a> 
+                                <a asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId" class="btn btn-delete-user">
                                     حذف مقام
                                 </a>
                             </div>
