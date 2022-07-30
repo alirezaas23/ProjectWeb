@@ -87,4 +87,29 @@ namespace ProjectWeb.Application.ViewModels
 
         public string UserName { get; set; }
     }
+
+    public class ChangePasswordViewModel
+    {
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "لطفا کلمه عبور فعلی خود را وارد کنید")]
+        [Display(Name = "کلمه عبور فعلی")]
+        [MaxLength(255)]
+        [DataType(DataType.Password)]
+        public string CurrentPassword { get; set; }
+
+        [Required(ErrorMessage = "لطفا کلمه عبور جدید خود را وارد کنید")]
+        [Display(Name = "کلمه عبور جدید")]
+        [StringLength(255, MinimumLength = 6, ErrorMessage = "کلمه عبور باید حداقل 6 کاراکتر داشته باشد")]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+        [Required(ErrorMessage = "لطفا تکرار کلمه عبور جدید خود را وارد کنید")]
+        [Display(Name = "تکرار کلمه عبور جدید")]
+        [DataType(DataType.Password)]
+        [Compare(nameof(NewPassword))]
+
+        public string ConfirmNewPassword { get; set; }
+    }
 }

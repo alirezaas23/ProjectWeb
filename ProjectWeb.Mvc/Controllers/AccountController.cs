@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.ViewModels;
 using ProjectWeb.Domain.Models;
@@ -132,6 +133,7 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> ShowProfile(string id)
         {
             ViewBag.Message = TempData["Message"];
@@ -153,6 +155,7 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> EditAccount(string id)
         {
             if (string.IsNullOrEmpty(id)) return NotFound();
