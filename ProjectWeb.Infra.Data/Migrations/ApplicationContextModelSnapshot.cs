@@ -35,6 +35,9 @@ namespace ProjectWeb.Infra.Data.Migrations
                     b.Property<string>("TicketText")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("TicketId");
 
                     b.ToTable("Tickets");
