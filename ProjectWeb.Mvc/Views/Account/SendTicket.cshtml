@@ -89,6 +89,8 @@
                             <textarea asp-for="TicketText" id="my-textarea"></textarea>
                             <span asp-validation-for="TicketText" class="text-danger"></span>
                         </div>
+
+                        <input asp-for="UserId" hidden/>
                         <button type="submit" class="btn btn-edit">ارسال تیکت</button>
                     </form>
                 </div>
