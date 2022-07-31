@@ -8,5 +8,6 @@ namespace ProjectWeb.Application.Interfaces
     public interface ITicketInterface
     {
         void AddTicket(Ticket ticket);
+        IEnumerable<Ticket> GetTickets();
     }
 }

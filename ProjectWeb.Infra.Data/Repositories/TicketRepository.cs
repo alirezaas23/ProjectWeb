@@ -22,6 +22,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             SaveChanges();
         }
 
+        public IEnumerable<Ticket> GetTickets()
+        {
+            return _ctx.Tickets;
+        }
+
         public void SaveChanges()
         {
             _ctx.SaveChanges();

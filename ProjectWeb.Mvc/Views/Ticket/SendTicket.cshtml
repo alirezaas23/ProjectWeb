@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a asp-controller="Account" asp-action="SendTicket" class="text-hover small-font">
+                        <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
                             <i class="fas fa-circle menu-small-icon"></i>
                             ارسال تیکت
                         </a>
@@ -64,7 +64,7 @@
                     <p class="font-weight-bold">ارسال تیکت جدید</p>
                 </div>
                 <div class="card-body profile-font">
-                    <form asp-controller="Account" asp-action="SendTicket" method="post">
+                    <form asp-controller="Ticket" asp-action="SendTicket" method="post">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
                         <div class="row">
                             <div class="col-12 col-md-6">
@@ -90,7 +90,7 @@
                             <span asp-validation-for="TicketText" class="text-danger"></span>
                         </div>
 
-                        <input asp-for="UserId" hidden/>
+                        <input asp-for="UserId" hidden />
                         <button type="submit" class="btn btn-edit">ارسال تیکت</button>
                     </form>
                 </div>

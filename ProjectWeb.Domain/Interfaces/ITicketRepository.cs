@@ -9,5 +9,6 @@ namespace ProjectWeb.Domain.Interfaces
     {
         void AddTicket(Ticket ticket);
         void SaveChanges();
+        IEnumerable<Ticket> GetTickets();
     }
 }

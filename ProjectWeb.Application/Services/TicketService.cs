@@ -20,5 +20,10 @@ namespace ProjectWeb.Application.Services
         {
             _ticketRepository.AddTicket(ticket);
         }
+
+        public IEnumerable<Ticket> GetTickets()
+        {
+            return _ticketRepository.GetTickets();
+        }
     }
 }
