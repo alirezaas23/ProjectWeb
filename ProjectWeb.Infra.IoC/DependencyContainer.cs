@@ -3,9 +3,6 @@ using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.Services;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Infra.Data.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProjectWeb.Infra.IoC
 {

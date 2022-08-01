@@ -162,7 +162,7 @@ namespace ProjectWeb.Mvc.Controllers.Admin
             var roles = _roleManager.Roles.ToList();
             foreach (var role in roles)
             {
-                if(await _userManager.IsInRoleAsync(user, role.Name))
+                if (await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     userModel.UserRoles.Add(new UserRolesViewModel { RoleName = role.Name });
                 }

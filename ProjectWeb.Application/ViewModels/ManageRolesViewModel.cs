@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace ProjectWeb.Application.ViewModels
 {
@@ -20,7 +17,7 @@ namespace ProjectWeb.Application.ViewModels
         public string RoleId { get; set; }
 
         [Required(ErrorMessage = "نام مقام جدید را وارد کنید")]
-        [MaxLength (255)]
+        [MaxLength(255)]
         [Remote("IsRoleInUse", "ManageRoles", HttpMethod = "POST", AdditionalFields = "__RequestVerificationToken")]
         public string RoleName { get; set; }
     }

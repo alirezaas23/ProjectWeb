@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.ViewModels;
 using ProjectWeb.Domain.Models;
-using System;
-using System.Globalization;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
@@ -82,7 +79,7 @@ namespace ProjectWeb.Mvc.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
                 if (result.Succeeded)
                 {
-                    if(!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
@@ -113,7 +110,7 @@ namespace ProjectWeb.Mvc.Controllers
         public async Task<IActionResult> IsEmailInUse(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            if(user == null)
+            if (user == null)
             {
                 return Json(true);
             }
@@ -153,7 +150,7 @@ namespace ProjectWeb.Mvc.Controllers
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber
             };
-            if(user.PhoneNumber == null)
+            if (user.PhoneNumber == null)
             {
                 ViewBag.Warning = "لطفا شماره تماس خود را در قسمت ویرایش حساب ثبت کنید";
             }

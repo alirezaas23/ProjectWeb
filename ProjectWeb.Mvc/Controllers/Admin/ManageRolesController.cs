@@ -59,7 +59,7 @@ namespace ProjectWeb.Mvc.Controllers.Admin
         public async Task<IActionResult> IsRoleInUse(string roleName)
         {
             var role = await _roleManager.FindByNameAsync(roleName);
-            if(role == null)
+            if (role == null)
             {
                 return Json(true);
             }
@@ -98,7 +98,7 @@ namespace ProjectWeb.Mvc.Controllers.Admin
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            if(string.IsNullOrEmpty(id)) return NotFound();
+            if (string.IsNullOrEmpty(id)) return NotFound();
             var role = await _roleManager.FindByIdAsync(id);
             if (role == null) return NotFound();
             var roleModel = new ShowRoleViewModel()
