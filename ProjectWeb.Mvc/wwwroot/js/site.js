@@ -8,8 +8,8 @@ $(".close-icon").click(function () {
 });
 
 function CheckInput() {
-    var input = document.getElementById('phone-input').value;
-    var result = document.getElementById('phone-error');
+    let input = document.getElementById('phone-input').value;
+    let result = document.getElementById('phone-error');
     try {
         if (isNaN(input)) throw "لطفا شماره تماس معتبری وارد کنید!";
 
@@ -29,4 +29,3 @@ function CheckInput() {
         result.innerHTML = error;
     }
 }
-
