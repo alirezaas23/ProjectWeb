@@ -72,10 +72,7 @@ namespace ProjectWeb.Application.ViewModels
         [StringLength(255)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "لطفا ایمیل خود را وارد کنید")]
         [Display(Name = "ایمیل")]
-        [EmailAddress(ErrorMessage = "لطفا ایمیل معتبری وارد کنید")]
-        [Remote("IsEmailInUse", "Account", HttpMethod = "POST", AdditionalFields = "__RequestVerificationToken")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "لطفا شماره تماس خود را وارد کنید")]

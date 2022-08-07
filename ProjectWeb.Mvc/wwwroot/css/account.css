@@ -10,7 +10,6 @@
 
 body {
     font-family: Vazir;
-    background-color: #f5f2ea;
 }
 
 .card {
@@ -20,7 +19,7 @@ body {
 
 .btn-account {
     width: 100%;
-    background: #3330E4;
+    background: #0096FF;
     color: white;
     opacity: .8;
     box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
@@ -63,5 +62,5 @@ body {
 
 .custom-box-shadow {
     border: 1px solid #ecf0f4 !important;
-    box-shadow: 0px 0 7px 0 #eaeff4 !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
