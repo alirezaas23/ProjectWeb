@@ -6,96 +6,43 @@
 
 @{
     ViewData["Title"] = "SendTicket";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_Profile.cshtml";
 }
 
-<div data-aos="zoom-in" data-aos-duration="1000">
-    <div class="row">
-        <div class="col-md-12 col-lg-3">
-            <ul class="list-group border custom-box-shadow">
-                @{
-                    var user = await _userManager.FindByIdAsync(Model.UserId);
-                    <li class="list-group-item text-center list-group-bg">
-                        <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
-                            <img src="~/imgs/male-user-100.png" alt="user-icon" />
-                        </a>
-                        <p class="text-white mt-1">@user.UserName</p>
-                        <p class="text-white mt-1"></p>
-                        <a asp-controller="Account" asp-action="LogOut" title="خروج از حساب">
-                            <i class="fas fa-power-off icon-hover"></i>
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover small-font">
-                            <i class="fas fa-circle menu-small-icon"></i>
-                            ویرایش حساب کاربری
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="text-hover small-font">
-                            <i class="fas fa-circle menu-small-icon"></i>
-                            سفارشات من
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
-                            <i class="fas fa-circle menu-small-icon"></i>
-                            ارسال تیکت
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="text-hover small-font">
-                            <i class="fas fa-circle menu-small-icon"></i>
-                            پیام های من
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
-                            <i class="fas fa-circle menu-small-icon"></i>
-                            خروج از حساب
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
-        <div class="col-md-12 col-lg-9 mt-4 mt-lg-0">
-            <div class="card custom-box-shadow">
-                <div class="card-header">
-                    <p class="font-weight-bold">ارسال تیکت جدید</p>
+<div class="card custom-box-shadow">
+    <div class="card-header">
+        <p class="font-weight-bold">ارسال تیکت جدید</p>
+    </div>
+    <div class="card-body profile-font">
+        <form asp-controller="Ticket" asp-action="SendTicket" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <i class="far fa-envelope-open ml-2"></i>
+                        <label asp-for="TicketSubject"></label>
+                        <input asp-for="TicketSubject" class="form-control input-custom" />
+                        <span asp-validation-for="TicketSubject" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="card-body profile-font">
-                    <form asp-controller="Ticket" asp-action="SendTicket" method="post">
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <i class="far fa-envelope-open ml-2"></i>
-                                    <label asp-for="TicketSubject"></label>
-                                    <input asp-for="TicketSubject" class="form-control input-custom" />
-                                    <span asp-validation-for="TicketSubject" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <i class="far fa-calendar ml-2"></i>
-                                    <label asp-for="TicketDateTime"></label>
-                                    <input asp-for="TicketDateTime" class="form-control input-custom" readonly />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mt-2">
-                            <i class="far fa-comment ml-2"></i>
-                            <label asp-for="TicketText"></label>
-                            <textarea asp-for="TicketText" id="my-textarea"></textarea>
-                            <span asp-validation-for="TicketText" class="text-danger"></span>
-                        </div>
-
-                        <input asp-for="UserId" hidden />
-                        <button type="submit" class="btn btn-edit">ارسال تیکت</button>
-                    </form>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <i class="far fa-calendar ml-2"></i>
+                        <label asp-for="TicketDateTime"></label>
+                        <input asp-for="TicketDateTime" class="form-control input-custom" readonly />
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="form-group mt-2">
+                <i class="far fa-comment ml-2"></i>
+                <label asp-for="TicketText"></label>
+                <textarea asp-for="TicketText" id="my-textarea"></textarea>
+                <span asp-validation-for="TicketText" class="text-danger"></span>
+            </div>
+
+            <input asp-for="UserId" hidden />
+            <button type="submit" class="btn btn-edit">ارسال تیکت</button>
+        </form>
     </div>
 </div>
 

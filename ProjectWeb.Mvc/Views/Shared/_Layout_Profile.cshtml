@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using ProjectWeb.Domain.Models
+@inject SignInManager<UserApp> _signInManager
+@inject UserManager<UserApp> _userManager
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjectWeb.Mvc</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.rtl.css" />
+    <link rel="stylesheet" href="~/lib/aos/aos.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="custom-nav mb-3">
+            <div class="container">
+                <ul>
+                    @{
+                        var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                        if (_signInManager.IsSignedIn(User))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <a class="dropdown text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-caret-down"></i>
+                                        @user.UserName
+                                        <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1" />
+                                    </a>
+
+                                    <div class="dropdown-menu">
+                                        @if (User.IsInRole("ادمین"))
+                                        {
+                                            <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                صفحه مدیریت سایت
+                                            </a>
+                                        }
+                                        <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            مشاهده حساب کاربری
+                                        </a>
+                                        <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            ویرایش حساب کاربری
+                                        </a>
+                                        <a class="dropdown-item menu-text-hover">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            سفارشات من
+                                        </a>
+                                        <a class="dropdown-item menu-text-hover">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            پیام های من
+                                        </a>
+                                        <a asp-controller="Account" asp-action="LogOut" class="dropdown-item menu-text-hover">
+                                            <i class="fas fa-circle small-dot"></i>
+                                            خروج از حساب کاربری
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <i class="far fa-user ml-1"></i>
+                                <a asp-controller="Account" asp-action="Login" class="text-hover">ورود</a> /
+                                <a asp-controller="Account" asp-action="Register" class="text-hover">عضویت</a>
+                            </li>
+                        }
+                    }
+                </ul>
+
+                <div class="logo">
+                    <a asp-controller="Home" asp-action="Index">
+                        <img src="~/imgs/Dima.jpg" alt="Logo" />
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div data-aos="zoom-in" data-aos-duration="1000">
+        <div class="container">
+            <main role="main" class="pb-3">
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <ul class="list-group border custom-box-shadow">
+                            <li class="list-group-item text-center list-group-bg">
+                                <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                                    <img src="~/imgs/male-user-100.png" alt="user-icon" />
+                                </a>
+                                <p class="text-white mt-1">@user.UserName</p>
+                                <a asp-controller="Account" asp-action="LogOut" title="خروج از حساب">
+                                    <i class="fas fa-power-off icon-hover"></i>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover small-font">
+                                    <i class="fas fa-circle menu-small-icon"></i>
+                                    ویرایش حساب کاربری
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="text-hover small-font">
+                                    <i class="fas fa-circle menu-small-icon"></i>
+                                    سفارشات من
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
+                                    <i class="fas fa-circle menu-small-icon"></i>
+                                    ارسال تیکت
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="text-hover small-font">
+                                    <i class="fas fa-circle menu-small-icon"></i>
+                                    پیام های من
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
+                                    <i class="fas fa-circle menu-small-icon"></i>
+                                    خروج از حساب
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        @RenderBody()
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - ProjectWeb.Mvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/aos/aos.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
