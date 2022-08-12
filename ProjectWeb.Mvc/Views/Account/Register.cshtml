@@ -24,26 +24,30 @@
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
 
                         <!-- UserName -->
-                        <div class="form-group">
-                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" />
+                        <div class="UsernameWithIcon">
+                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" id="reg-user-input" />
+                            <i class='bx bx-user' id="reg-user-icon"></i>
                             <span asp-validation-for="UserName" class="text-danger small"></span>
                         </div>
 
                         <!-- Email -->
-                        <div class="form-group">
-                            <input asp-for="Email" class="form-control input-custom" placeholder="ایمیل" />
+                        <div class="UsernameWithIcon">
+                            <input asp-for="Email" class="form-control input-custom" placeholder="ایمیل" id="reg-email-input" />
+                            <i class='bx bx-envelope' id="reg-email-icon"></i>
                             <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
 
                         <!-- Password -->
-                        <div class="form-group">
-                            <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور" />
+                        <div class="UsernameWithIcon">
+                            <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور" id="reg-pass-input" />
+                            <i class='bx bx-lock-alt' id="reg-pass-icon"></i>
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
 
                         <!-- Confirm Password -->
-                        <div class="form-group">
-                            <input asp-for="ConfirmPassword" class="form-control input-custom" placeholder="تکرار کلمه عبور" />
+                        <div class="UsernameWithIcon">
+                            <input asp-for="ConfirmPassword" class="form-control input-custom" placeholder="تکرار کلمه عبور" id="reg-passconfirm-input"/>
+                            <i class='bx bx-lock-alt' id="reg-passconfirm-icon"></i>
                             <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
                         </div>
 
@@ -67,4 +71,65 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+    <script>
+        var regUserInput = document.getElementById('reg-user-input');
+        regUserInput.addEventListener("focusin", function () {
+            let icon = document.getElementById('reg-user-icon');
+            icon.style.color = "#54BAB9";
+        });
+        regUserInput.addEventListener("focusout", function () {
+            let icon = document.getElementById('reg-user-icon');
+            if (regUserInput.value == "") {
+                icon.style.color = "red";
+            }
+            else {
+                icon.style.color = "#7e8388";
+            }
+        });
+
+        var regEmailInput = document.getElementById('reg-email-input');
+        regEmailInput.addEventListener("focusin", function () {
+            let icon = document.getElementById('reg-email-icon');
+            icon.style.color = "#54BAB9";
+        });
+        regEmailInput.addEventListener("focusout", function () {
+            let icon = document.getElementById('reg-email-icon');
+            if (regEmailInput.value == "") {
+                icon.style.color = "red";
+            }
+            else {
+                icon.style.color = "#7e8388";
+            }
+        });
+
+        var regPassInput = document.getElementById('reg-pass-input');
+        regPassInput.addEventListener("focusin", function () {
+            let icon = document.getElementById('reg-pass-icon');
+            icon.style.color = "#54BAB9";
+        });
+        regPassInput.addEventListener("focusout", function () {
+            let icon = document.getElementById('reg-pass-icon');
+            if (regPassInput.value == "") {
+                icon.style.color = "red";
+            }
+            else {
+                icon.style.color = "#7e8388";
+            }
+        });
+
+        var regConfirmPassInput = document.getElementById('reg-passconfirm-input');
+        regConfirmPassInput.addEventListener("focusin", function () {
+            let icon = document.getElementById('reg-passconfirm-icon');
+            icon.style.color = "#54BAB9";
+        });
+        regConfirmPassInput.addEventListener("focusout", function () {
+            let icon = document.getElementById('reg-passconfirm-icon');
+            if (regConfirmPassInput.value == "") {
+                icon.style.color = "red";
+            }
+            else {
+                icon.style.color = "#7e8388";
+            }
+        });
+    </script>
+}

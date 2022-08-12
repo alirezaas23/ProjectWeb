@@ -42,14 +42,16 @@
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
 
                         <!-- UserName -->
-                        <div class="form-group">
-                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" />
-                            <span asp-validation-for="UserName" class="text-danger small"></span>
+                        <div class="UsernameWithIcon">
+                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" id="login-user-input" />
+                            <i class='bx bx-user' id="login-userName-icon"></i>
+                            <span asp-validation-for="UserName" class="text-danger small" id="login-user-error"></span>
                         </div>
 
                         <!-- Password -->
-                        <div class="form-group">
-                            <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور" />
+                        <div class="UsernameWithIcon">
+                            <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور" id="login-pass-input" />
+                            <i class='bx bx-lock-alt' id="login-pass-icon"></i>
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
 

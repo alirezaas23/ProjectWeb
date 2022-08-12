@@ -233,7 +233,7 @@ footer {
 }
 
 .btn-edit-user {
-    width: 120px;
+    width: 100%;
     padding: 5px;
     color: white;
     font-size: 15px;
@@ -253,7 +253,7 @@ footer {
 }
 
 .btn-delete-user {
-    width: 120px;
+    width: 100%;
     padding: 5px;
     color: white;
     font-size: 15px;
@@ -273,7 +273,7 @@ footer {
 }
 
 .btn-addrole-user {
-    width: 120px;
+    width: 100%;
     padding: 5px;
     color: white;
     font-size: 15px;
@@ -295,4 +295,21 @@ footer {
 .custom-box-shadow {
     border: 1px solid #ecf0f4 !important;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.btn-user-settings {
+    width: 150px;
+    padding: 5px;
+    color: white;
+    font-size: 15px;
+    background: #EB1D36;
+    opacity: .8;
+    transition: .5s;
+}
+
+.btn-user-settings:hover{
+    color: white;
+    border-radius: 10px;
+    transition: .5s;
+    opacity: 1;
 }

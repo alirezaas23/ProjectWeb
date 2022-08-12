@@ -17,7 +17,8 @@
                             var user = await _userManager.FindByIdAsync(Model.UserId);
                             <p>حذف کاربر <span class="font-weight-bold">@user.UserName</span></p>
                         }
-                        <a asp-controller="ManageUsers" asp-action="Index" class="text-hover" title="بازگشت به لیست کاربران">
+                        <a asp-controller="ManageUsers" asp-action="Index" class="text-hover custom-tooltip" data-toggle="tooltip" data-placement="top"
+                           title="بازگشت به لیست کاربران">
                             <i class="fas fa-home"></i>
                         </a>
                     </div>

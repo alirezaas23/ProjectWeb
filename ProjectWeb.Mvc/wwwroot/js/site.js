@@ -36,3 +36,6 @@ function CheckInput() {
         return false;
     }
 }
+
+$("#custom-tooltip").tooltip();
+$("#logout-tooltip").tooltip();

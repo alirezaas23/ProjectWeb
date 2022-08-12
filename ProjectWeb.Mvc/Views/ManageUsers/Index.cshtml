@@ -17,39 +17,41 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                <div class="col-12">
-                    <div class="card custom-box-shadow mb-3">
-                        <div class="card-body">
-                            <h3>
-                                کاربر شماره @row
-                            </h3>
-                            <h4 class="font-weight-bold">نام کاربری :</h4>
-                            <p class="text-muted">@item.UserName</p>
-
-                            <h4 class="font-weight-bold">ایمیل کاربر :</h4>
-                            <p class="text-muted">@item.UserEmail</p>
-                            <hr />
-                            <div class="mb-2">
-                                <a asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId" class="btn btn-edit-user">
-                                    ویرایش اطلاعات
-                                </a> 
-                                <a asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId" class="btn btn-delete-user">
-                                    حذف کاربر
-                                </a> 
-                                <a asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId" class="btn btn-addrole-user">
-                                    افزودن مقام
-                                </a> 
-                                <a asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId" class="btn btn-delete-user">
-                                    حذف مقام
+                <div class="col-12 col-md-6 col-lg-4 mt-2">
+                    <div data-aos="flip-left" data-aos-duration="1000">
+                        <div class="card custom-box-shadow small">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="~/imgs/male-user-100.png" alt="@item.UserName" data-toggle="tooltip" data-placement="top"
+                                         title="@item.UserName" class="tool-tip" />
+                                </div>
+                                <hr />
+                                <p>
+                                    <i class="far fa-user ml-2"></i>
+                                    نام کاربری :
+                                    @item.UserName
+                                </p>
+                                <p>
+                                    <i class="far fa-envelope ml-2"></i>
+                                    ایمیل :
+                                    @item.UserEmail
+                                </p>
+                                <a asp-controller="ManageUsers" asp-action="UserEditIndex" asp-route-id="@item.UserId" class="btn btn-user-settings mt-3">
+                                    <i class="fas fa-cog ml-1"></i>
+                                    تنظیمات کاربر
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                row++;
+                </div>
             }
         </div>
     }
 }
 
+@section Scripts{
+    <script>
+        $('.tool-tip').tooltip();
+    </script>
+}

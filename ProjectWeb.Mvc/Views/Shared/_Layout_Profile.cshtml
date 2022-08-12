@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.rtl.css" />
     <link rel="stylesheet" href="~/lib/aos/aos.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -94,10 +95,11 @@
                         <ul class="list-group border custom-box-shadow">
                             <li class="list-group-item text-center list-group-bg">
                                 <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
-                                    <img src="~/imgs/male-user-100.png" alt="user-icon" />
+                                    <img src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
+                                         title="@user.UserName" />
                                 </a>
                                 <p class="text-white mt-1">@user.UserName</p>
-                                <a asp-controller="Account" asp-action="LogOut" title="خروج از حساب">
+                                <a asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" id="logout-tooltip" title="خروج از حساب">
                                     <i class="fas fa-power-off icon-hover"></i>
                                 </a>
                             </li>
