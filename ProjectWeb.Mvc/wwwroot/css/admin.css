@@ -313,3 +313,44 @@ footer {
     transition: .5s;
     opacity: 1;
 }
+
+.custom-alert-danger {
+    width: 100%;
+    padding: 10px;
+    border-right: 5px solid #ff4858;
+    background: #ffe0e3;
+    border-radius: 3px;
+    color: #ff4858;
+}
+
+.custom-alert-danger i{
+    position:relative;
+    top: 5px;
+    font-size:20px;
+}
+
+.custom-alert-info {
+    width: 100%;
+    padding: 35px;
+    border-right: 5px solid #71c9ff;
+    background: #d7f0ff;
+    border-radius: 3px;
+    color: black;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.custom-alert-info #ticket-date{
+    position:absolute;
+    top: 5px;
+    right: 10px;
+    font-size: small;
+    display: inline;
+}
+
+.custom-alert-info #ticket-detail{
+    position: absolute;
+    right: 8px;
+    font-size: 16px;
+}

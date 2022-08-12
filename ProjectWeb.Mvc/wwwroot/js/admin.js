@@ -22,3 +22,4 @@
 });
 
 $(".custom-tooltip").tooltip();
+$(".ticket-tooltip").tooltip();

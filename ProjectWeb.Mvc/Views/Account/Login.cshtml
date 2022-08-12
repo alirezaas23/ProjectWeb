@@ -43,14 +43,14 @@
 
                         <!-- UserName -->
                         <div class="UsernameWithIcon">
-                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" id="login-user-input" />
+                            <input asp-for="UserName" class="input-custom" placeholder="نام کاربری" id="login-user-input" />
                             <i class='bx bx-user' id="login-userName-icon"></i>
                             <span asp-validation-for="UserName" class="text-danger small" id="login-user-error"></span>
                         </div>
 
                         <!-- Password -->
                         <div class="UsernameWithIcon">
-                            <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور" id="login-pass-input" />
+                            <input asp-for="Password" class="input-custom" placeholder="کلمه عبور" id="login-pass-input" />
                             <i class='bx bx-lock-alt' id="login-pass-icon"></i>
                             <i class='bx bxs-lock-open' id="show-pass-icon" title="نمایش کلمه عبور"></i>
                             <span asp-validation-for="Password" class="text-danger small"></span>

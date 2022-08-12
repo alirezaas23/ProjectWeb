@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectWeb.Domain.Models.Ticket>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ProjectWeb.Domain.Models.UserApp> userManager
+@{
+    ViewData["Title"] = "AllTickets";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@{
+    if (!Model.Any())
+    {
+        <div class="custom-alert-danger">
+            <i class='bx bx-message-square-error'></i>
+            هیچ پیامی یافت نشد !
+        </div>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            var user = await userManager.FindByIdAsync(item.UserId);
+            <a class="ticket-tooltip" asp-controller="" asp-action="" asp-route-id="" data-toggle="tooltip" data-placement="top" title="ارسال شده توسط @user.UserName">
+                <div class="custom-alert-info">
+                    <div id="ticket-date">
+                        <i class="far fa-calendar-alt"></i>
+                        تاریخ ارسال :
+                        @item.TicketDateTime
+                    </div>
+                    <div id="ticket-detail">
+                        <i class="far fa-bell"></i>
+                        موضوع تیکت :
+                        @item.TicketSubject
+                    </div>
+                </div>
+            </a>
+        }
+    }
+}
+

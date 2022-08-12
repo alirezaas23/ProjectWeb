@@ -52,5 +52,12 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult AllTickets()
+        {
+            var tickets = _ticketInterface.GetTickets();
+            return View(tickets);
+        }
     }
 }

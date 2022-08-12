@@ -52,12 +52,12 @@ body {
 }
 
 .input-custom {
-    border-color: #e5edf0;
-    border-radius: 5px;
-}
-
-.input-custom:hover {
-    transition: .5s;
+    border: none;
+    border-bottom: 1px solid #d1d4d7;
+    border-radius: 0;
+    padding: 10px;
+    width: 100%;
+    transition: .1s;
 }
 
 .custom-box-shadow {
@@ -78,7 +78,7 @@ body {
 #login-userName-icon {
     position: absolute;
     right: 5px;
-    top: 9px;
+    top: 10px;
     font-size: 20px;
     color: #d1d4d7;
 }
@@ -90,7 +90,7 @@ body {
 #login-pass-icon {
     position: absolute;
     right: 5px;
-    top: 9px;
+    top: 10px;
     font-size: 20px;
     color: #d1d4d7;
 }
@@ -102,7 +102,7 @@ body {
 .UsernameWithIcon #reg-user-icon {
     position: absolute;
     right: 5px;
-    top: 9px;
+    top: 10px;
     font-size: 20px;
     color: #d1d4d7;
 }
@@ -114,7 +114,7 @@ body {
 .UsernameWithIcon #reg-email-icon {
     position: absolute;
     right: 5px;
-    top: 9px;
+    top: 10px;
     font-size: 20px;
     color: #d1d4d7;
 }
@@ -126,7 +126,7 @@ body {
 .UsernameWithIcon #reg-pass-icon {
     position: absolute;
     right: 5px;
-    top: 9px;
+    top: 10px;
     font-size: 20px;
     color: #d1d4d7;
 }
@@ -138,7 +138,7 @@ body {
 .UsernameWithIcon #reg-passconfirm-icon {
     position: absolute;
     right: 5px;
-    top: 9px;
+    top: 10px;
     font-size: 20px;
     color: #d1d4d7;
 }
@@ -146,7 +146,7 @@ body {
 .UsernameWithIcon #show-pass-icon {
     position: absolute;
     left: 5px;
-    top: 9px;
+    top: 10px;
     font-size: 20px;
     color: #d1d4d7;
     cursor: pointer;
