@@ -35,3 +35,12 @@ loginPassInput.addEventListener("focusout", function () {
         icon.style.color = "#7e8388";
     }
 });
+
+var showPass = document.getElementById('show-pass-icon');
+showPass.addEventListener("mousedown", function () {
+    loginPassInput.type = "text";
+});
+
+showPass.addEventListener("click", function () {
+    loginPassInput.type = "password";
+});

@@ -52,6 +52,7 @@
                         <div class="UsernameWithIcon">
                             <input asp-for="Password" class="form-control input-custom" placeholder="کلمه عبور" id="login-pass-input" />
                             <i class='bx bx-lock-alt' id="login-pass-icon"></i>
+                            <i class='bx bxs-lock-open' id="show-pass-icon" title="نمایش کلمه عبور"></i>
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
 
@@ -84,5 +85,5 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}
 
