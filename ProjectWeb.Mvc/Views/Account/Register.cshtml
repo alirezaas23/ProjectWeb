@@ -16,7 +16,6 @@
                         <p>عضویت</p>
                         <a asp-controller="Home" asp-action="Index" class="text-hover">
                             <i class="fas fa-home"></i>
-                            صفحه خانه
                         </a>
                     </div>
                     <form method="post" asp-controller="Account" asp-action="Register">
@@ -24,28 +23,28 @@
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
 
                         <!-- UserName -->
-                        <div class="UsernameWithIcon">
+                        <div class="InputWithIcon">
                             <input asp-for="UserName" class="input-custom" placeholder="نام کاربری" id="reg-user-input" />
                             <i class='bx bx-user' id="reg-user-icon"></i>
                             <span asp-validation-for="UserName" class="text-danger small"></span>
                         </div>
 
                         <!-- Email -->
-                        <div class="UsernameWithIcon">
+                        <div class="InputWithIcon">
                             <input asp-for="Email" class="input-custom" placeholder="ایمیل" id="reg-email-input" />
                             <i class='bx bx-envelope' id="reg-email-icon"></i>
                             <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
 
                         <!-- Password -->
-                        <div class="UsernameWithIcon">
+                        <div class="InputWithIcon">
                             <input asp-for="Password" class="input-custom" placeholder="کلمه عبور" id="reg-pass-input" />
                             <i class='bx bx-lock-alt' id="reg-pass-icon"></i>
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
 
                         <!-- Confirm Password -->
-                        <div class="UsernameWithIcon">
+                        <div class="InputWithIcon">
                             <input asp-for="ConfirmPassword" class="input-custom" placeholder="تکرار کلمه عبور" id="reg-passconfirm-input"/>
                             <i class='bx bx-lock-alt' id="reg-passconfirm-icon"></i>
                             <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>

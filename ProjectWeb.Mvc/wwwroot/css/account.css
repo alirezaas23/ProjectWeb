@@ -66,12 +66,12 @@ body {
 }
 
 
-.UsernameWithIcon {
-    margin-bottom: 10px;
+.InputWithIcon {
+    margin-bottom: 15px;
     position: relative;
 }
 
-.UsernameWithIcon #login-user-input{
+.InputWithIcon #login-user-input{
     padding-right: 30px;
 }
 
@@ -83,7 +83,7 @@ body {
     color: #d1d4d7;
 }
 
-.UsernameWithIcon #login-pass-input {
+.InputWithIcon #login-pass-input {
     padding-right: 30px;
 }
 
@@ -95,11 +95,11 @@ body {
     color: #d1d4d7;
 }
 
-.UsernameWithIcon #reg-user-input{
+.InputWithIcon #reg-user-input {
     padding-right: 30px;
 }
 
-.UsernameWithIcon #reg-user-icon {
+.InputWithIcon #reg-user-icon {
     position: absolute;
     right: 5px;
     top: 10px;
@@ -107,11 +107,11 @@ body {
     color: #d1d4d7;
 }
 
-.UsernameWithIcon #reg-email-input{
+.InputWithIcon #reg-email-input {
     padding-right: 30px;
 }
 
-.UsernameWithIcon #reg-email-icon {
+.InputWithIcon #reg-email-icon {
     position: absolute;
     right: 5px;
     top: 10px;
@@ -119,11 +119,11 @@ body {
     color: #d1d4d7;
 }
 
-.UsernameWithIcon #reg-pass-input{
+.InputWithIcon #reg-pass-input {
     padding-right: 30px;
 }
 
-.UsernameWithIcon #reg-pass-icon {
+.InputWithIcon #reg-pass-icon {
     position: absolute;
     right: 5px;
     top: 10px;
@@ -131,11 +131,11 @@ body {
     color: #d1d4d7;
 }
 
-.UsernameWithIcon #reg-passconfirm-input {
+.InputWithIcon #reg-passconfirm-input {
     padding-right: 30px;
 }
 
-.UsernameWithIcon #reg-passconfirm-icon {
+.InputWithIcon #reg-passconfirm-icon {
     position: absolute;
     right: 5px;
     top: 10px;
@@ -143,7 +143,7 @@ body {
     color: #d1d4d7;
 }
 
-.UsernameWithIcon #show-pass-icon {
+.InputWithIcon #show-pass-icon {
     position: absolute;
     left: 5px;
     top: 10px;
@@ -152,6 +152,6 @@ body {
     cursor: pointer;
 }
 
-.UsernameWithIcon #show-pass-icon:hover{
+.InputWithIcon #show-pass-icon:hover{
     color: #54BAB9;
 }
