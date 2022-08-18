@@ -28,7 +28,10 @@ namespace ProjectWeb.Mvc.Controllers.Admin
                 {
                     UserId = u.Id,
                     UserEmail = u.Email,
-                    UserName = u.UserName
+                    UserName = u.UserName,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    PhoneNumber = u.PhoneNumber
                 }).ToList();
 
             return View(users);
@@ -195,21 +198,6 @@ namespace ProjectWeb.Mvc.Controllers.Admin
             }
 
             return View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> UserEditIndex(string id)
-        {
-            if (string.IsNullOrEmpty(id)) return NotFound();
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null) return NotFound();
-            var userModel = new ShowUserViewModel()
-            {
-                UserId = user.Id,
-                UserEmail = user.Email,
-                UserName = user.UserName
-            };
-            return View(userModel);
         }
     }
 }

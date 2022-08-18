@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
-    int row = 1;
 }
 
 @{
@@ -21,6 +20,29 @@
                     <div data-aos="flip-left" data-aos-duration="1000">
                         <div class="card custom-box-shadow small">
                             <div class="card-body">
+                                <div class="text-left">
+                                    <div class="dropdown">
+                                        <i class="fas fa-ellipsis-v dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; font-size: 15px;"></i>
+                                        <div class="dropdown-menu dropdown-menu-right  dropdown-no-m">
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                ویرایش اطلاعات
+                                            </a>
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                حذف کاربر
+                                            </a>
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                افزودن مقام
+                                            </a>
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                حذف مقام
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="text-center">
                                     <img src="~/imgs/male-user-100.png" alt="@item.UserName" data-toggle="tooltip" data-placement="top"
                                          title="@item.UserName" class="tool-tip" />
@@ -36,10 +58,30 @@
                                     ایمیل :
                                     @item.UserEmail
                                 </p>
-                                <a asp-controller="ManageUsers" asp-action="UserEditIndex" asp-route-id="@item.UserId" class="btn btn-user-settings mt-3">
-                                    <i class="fas fa-cog ml-1"></i>
-                                    تنظیمات کاربر
-                                </a>
+                                <p>
+                                    <i class="far fa-user ml-2"></i>
+                                    نام و نام خانوادگی :
+                                    @if(item.FirstName == null && item.LastName == null)
+                                    {
+                                        <span class="text-danger">اطلاعاتی وارد نشده است.</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@item.FirstName @item.LastName</span>
+                                    }
+                                </p>
+                                <p>
+                                    <i class="fas fa-phone ml-2"></i>
+                                    شماره تماس :
+                                    @if (item.PhoneNumber == null)
+                                    {
+                                        <span class="text-danger">شماره تماس وارد نشده است</span>
+                                    }
+                                    else
+                                    {
+                                        @item.PhoneNumber
+                                    }
+                                </p>
                             </div>
                         </div>
                     </div>

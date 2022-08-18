@@ -9,6 +9,9 @@ namespace ProjectWeb.Application.ViewModels
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string UserEmail { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
     }
 
     public class ShowUserViewModel
