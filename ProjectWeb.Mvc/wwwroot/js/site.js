@@ -1,6 +1,4 @@
-﻿AOS.init({
-    once: true
-});
+﻿AOS.init();
 
 $(".close-icon").click(function () {
     $(".close-alert").fadeOut();

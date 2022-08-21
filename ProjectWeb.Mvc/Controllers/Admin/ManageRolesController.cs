@@ -132,5 +132,16 @@ namespace ProjectWeb.Mvc.Controllers.Admin
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult SearchRoles(string name)
+        {
+            if(string.IsNullOrEmpty(name))
+            {
+                return RedirectToAction("Index", "ManageRoles");
+            }
+            var user = _roleManager.Roles.Where(r => r.Name.Contains(name));
+            return View("Index", user);
+        }
     }
 }

@@ -23,5 +23,10 @@ namespace ProjectWeb.Application.Services
         {
             return _ticketRepository.GetTickets();
         }
+
+        public Ticket SearchById(int id)
+        {
+            return _ticketRepository.SearchById(id);
+        }
     }
 }

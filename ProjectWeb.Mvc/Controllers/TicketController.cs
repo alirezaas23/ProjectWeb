@@ -59,5 +59,20 @@ namespace ProjectWeb.Mvc.Controllers
             var tickets = _ticketInterface.GetTickets();
             return View(tickets);
         }
+
+        [HttpGet]
+        public IActionResult TicketInfo(int id)
+        {
+            var ticket = _ticketInterface.SearchById(id);
+            var ticketModel = new TicketInfoViewModel()
+            {
+                TicketDateTime = ticket.TicketDateTime,
+                TicketId = ticket.TicketId,
+                TicketSubject = ticket.TicketSubject,
+                TicketText = ticket.TicketText,
+                UserId = ticket.UserId
+            };
+            return View(ticketModel);
+        }
     }
 }

@@ -109,24 +109,42 @@
                                     ویرایش حساب کاربری
                                 </a>
                             </li>
-                            <li class="list-group-item">
-                                <a class="text-hover small-font">
-                                    <i class="fas fa-circle menu-small-icon"></i>
-                                    سفارشات من
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
-                                    <i class="fas fa-circle menu-small-icon"></i>
-                                    ارسال تیکت
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a class="text-hover small-font">
-                                    <i class="fas fa-circle menu-small-icon"></i>
-                                    پیام های من
-                                </a>
-                            </li>
+                            @if (User.IsInRole("ادمین"))
+                            {
+                                <li class="list-group-item">
+                                    <a class="text-hover small-font">
+                                        <i class="fas fa-circle menu-small-icon"></i>
+                                        سفارشات
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover small-font">
+                                        <i class="fas fa-circle menu-small-icon"></i>
+                                        مشاهده تیکت ها
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="list-group-item">
+                                    <a class="text-hover small-font">
+                                        <i class="fas fa-circle menu-small-icon"></i>
+                                        سفارشات من
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
+                                        <i class="fas fa-circle menu-small-icon"></i>
+                                        ارسال تیکت
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a class="text-hover small-font">
+                                        <i class="fas fa-circle menu-small-icon"></i>
+                                        پیام های من
+                                    </a>
+                                </li>
+                            }
                             <li class="list-group-item">
                                 <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
                                     <i class="fas fa-circle menu-small-icon"></i>

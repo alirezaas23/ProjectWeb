@@ -1,6 +1,4 @@
-﻿AOS.init({
-    once: true
-});
+﻿AOS.init();
 
 var loginUserInput = document.getElementById('login-user-input');
 

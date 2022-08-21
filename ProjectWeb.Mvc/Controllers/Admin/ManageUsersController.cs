@@ -23,16 +23,7 @@ namespace ProjectWeb.Mvc.Controllers.Admin
         [HttpGet]
         public IActionResult Index()
         {
-            var users = _userManager.Users.
-                Select(u => new ShowUsersViewModel()
-                {
-                    UserId = u.Id,
-                    UserEmail = u.Email,
-                    UserName = u.UserName,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    PhoneNumber = u.PhoneNumber
-                }).ToList();
+            var users = _userManager.Users.ToList();
 
             return View(users);
         }
@@ -198,6 +189,17 @@ namespace ProjectWeb.Mvc.Controllers.Admin
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult SearchUsers(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return RedirectToAction("Index", "ManageUsers");
+            }
+            var user = _userManager.Users.Where(u => u.FirstName.Contains(name) || u.LastName.Contains(name) || u.UserName.Contains(name) || u.Email.Contains(name));
+            return View("Index", user);
         }
     }
 }

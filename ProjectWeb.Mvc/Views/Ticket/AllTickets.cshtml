@@ -16,24 +16,53 @@
     }
     else
     {
-        @foreach (var item in Model)
-        {
-            var user = await userManager.FindByIdAsync(item.UserId);
-            <a class="ticket-tooltip" asp-controller="" asp-action="" asp-route-id="" data-toggle="tooltip" data-placement="top" title="ارسال شده توسط @user.UserName">
-                <div class="custom-alert-info">
-                    <div id="ticket-date">
-                        <i class="far fa-calendar-alt"></i>
-                        تاریخ ارسال :
-                        @item.TicketDateTime
-                    </div>
-                    <div id="ticket-detail">
-                        <i class="far fa-bell"></i>
-                        موضوع تیکت :
-                        @item.TicketSubject
+        <div class="row">
+            @foreach (var ticket in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-4 mt-2" style="z-index: 0;">
+                    <div data-aos="flip-left" data-aos-duration="1000">
+                        <div class="card custom-box-shadow small">
+                            <div class="card-body">
+                                <div class="text-left">
+                                    <div class="dropdown">
+                                        <i class="fas fa-ellipsis-v dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; font-size: 15px;"></i>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-no-m">
+                                            <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="TicketInfo" asp-route-id="@ticket.TicketId">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                مشاهده تیکت
+                                            </a>
+                                            <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="" asp-route-id="@ticket.TicketId">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                حذف تیکت
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <p>
+                                    <i class="far fa-calendar-alt"></i>
+                                    تاریخ ارسال :
+                                    @ticket.TicketDateTime
+                                </p>
+                                <p>
+                                    <i class="fas fa-file-signature"></i>
+                                    موضوع تیکت :
+                                    @ticket.TicketSubject
+                                </p>
+                                @{
+                                    var user = await userManager.FindByIdAsync(ticket.UserId);
+                                    <p>
+                                        <i class="far fa-user"></i>
+                                        فرستنده :
+                                        @user.UserName
+                                    </p>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </a>
-        }
+            }
+        </div>
     }
 }
 

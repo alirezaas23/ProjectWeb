@@ -1,0 +1,51 @@
+﻿@model TicketInfoViewModel
+@using Microsoft.AspNetCore.Identity
+@using ProjectWeb.Domain.Models
+@inject UserManager<UserApp> _userManager
+@{
+    ViewData["Title"] = "TicketInfo";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div data-aos="fade-down" data-aos-duration="1000">
+    <div>
+        @{
+            var user = await _userManager.FindByIdAsync(Model.UserId);
+            <p>
+                <div class="dropdown" style="z-index: 0;">
+                    <i class="far fa-comment-alt" style="font-size: 30px;"></i>
+                    <span class="font-weight-bold dropdown-toggle text-hover" data-toggle="dropdown" style="cursor: pointer;">@user.UserName</span>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-no-m">
+                        <p class="dropdown-item menu-text-hover">
+                            <i class="far fa-user"></i>
+                            @user.FirstName @user.LastName
+                        </p>
+                        <p class="dropdown-item menu-text-hover">
+                            <i class="far fa-envelope"></i>
+                            @user.Email
+                        </p>
+                        <p class="dropdown-item menu-text-hover">
+                            <i class="fas fa-phone-alt"></i>
+                            @user.PhoneNumber
+                        </p>
+                    </div>
+                </div>
+            </p>
+            <p class="small mt-2">
+                <i class="far fa-calendar-alt"></i>
+                تاریخ ارسال :
+                @Model.TicketDateTime
+            </p>
+            <hr />
+            <div class="border p-3" style="border-radius: 10px;">
+                <p>
+                    @Html.Raw(Model.TicketText)
+                </p>
+                <button class="btn btn-ticket-answer">
+                    پاسخ به تیکت
+                </button>
+            </div>
+        }
+    </div>
+</div>
+

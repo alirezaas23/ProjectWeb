@@ -29,5 +29,10 @@ namespace ProjectWeb.Infra.Data.Repositories
         {
             _ctx.SaveChanges();
         }
+
+        public Ticket SearchById(int id)
+        {
+            return _ctx.Tickets.Find(id);
+        }
     }
 }

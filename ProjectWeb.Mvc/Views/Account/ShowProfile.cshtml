@@ -5,17 +5,16 @@
 }
 
 <div class="card custom-box-shadow">
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-primary d-flex justify-content-between close-alert small">
-            @ViewBag.Message
-            <i class="fas fa-times close-icon"></i>
-        </div>
-    }
     <div class="card-header">
         <p class="font-weight-bold">اطلاعات حساب کاربری</p>
     </div>
     <div class="card-body">
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-primary">
+                @ViewBag.Message
+            </div>
+        }
         <div class="profile-font">
             <p>
                 <i class="far fa-user ml-2"></i>

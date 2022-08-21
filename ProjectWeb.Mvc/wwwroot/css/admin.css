@@ -40,14 +40,12 @@ body {
     width: 100%;
     background: #3CCF4E;
     color: white;
-    opacity: .8;
     box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
     padding: 10px;
 }
 
 .btn-role:hover {
     color: white;
-    opacity: 1;
     transition: 1s;
     border-radius: 15px;
 }
@@ -69,14 +67,12 @@ body {
     width: 100%;
     background: #EB1D36;
     color: white;
-    opacity: .8;
     box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
     padding: 10px;
 }
 
 .btn-delete:hover {
     color: white;
-    opacity: 1;
     transition: 1s;
     border-radius: 15px;
 }
@@ -89,14 +85,12 @@ body {
     width: 100%;
     background: #646FD4;
     color: white;
-    opacity: .8;
     box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
     padding: 10px;
 }
 
 .btn-edit:hover {
     color: white;
-    opacity: 1;
     transition: 1s;
     border-radius: 15px;
 }
@@ -238,14 +232,12 @@ footer {
     color: white;
     font-size: 15px;
     background: #81CACF;
-    opacity: .8;
 }
 
 .btn-edit-user:hover{
     color: white;
     border-radius: 10px;
     transition: .5s;
-    opacity: 1;
 }
 
 .btn-edit-user:not(:hover){
@@ -258,14 +250,12 @@ footer {
     color: white;
     font-size: 15px;
     background: #EB1D36;
-    opacity: .8;
 }
 
 .btn-delete-user:hover {
     color: white;
     border-radius: 10px;
     transition: .5s;
-    opacity: 1;
 }
 
 .btn-delete-user:not(:hover){
@@ -278,14 +268,12 @@ footer {
     color: white;
     font-size: 15px;
     background: #3CCF4E;
-    opacity: .8;
 }
 
 .btn-addrole-user:hover{
     color: white;
     border-radius: 10px;
     transition: .5s;
-    opacity: 1;
 }
 
 .btn-addrole-user:not(:hover){
@@ -303,7 +291,6 @@ footer {
     color: white;
     font-size: 15px;
     background: #EB1D36;
-    opacity: .8;
     transition: .5s;
 }
 
@@ -311,7 +298,6 @@ footer {
     color: white;
     border-radius: 10px;
     transition: .5s;
-    opacity: 1;
 }
 
 .custom-alert-danger {
@@ -361,4 +347,83 @@ footer {
 
 .dropdown-no-m{
     margin-top: 0 !important;
+}
+
+.input-with-icon{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.icon-in-input{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+table {
+    font-weight: bold;
+    border-bottom: 3px solid #7952b3;
+    box-shadow: 1px 2px 5px 0px #def7f6;
+}
+
+table thead{
+    /*background: #03987a;*/
+    background: #7952b3;
+    color: white;
+}
+
+table tbody tr:hover{
+    background: #e5edf0; 
+}
+
+table tbody tr:nth-child(even) {
+    background: #f3f3f3;
+    color: #7952b3;
+}
+
+
+.btn-custom-purple {
+    background: #7952b3;
+    min-width: 150px;
+    color: white;
+    margin-bottom: 10px;
+    transition: .5s;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-custom-purple:hover{
+    color: white;
+    border-radius: 10px;
+    transition: .5s;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.input-icon{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.icon-for-input {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #e5edf0;
+}
+
+.input-pr{
+    padding-right: 30px;
+}
+
+.btn-ticket-answer {
+    background: #3120E0;
+    min-width: 150px;
+    color: white;
+    transition: .5s;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-ticket-answer:hover{
+    color: white;
+    border-radius: 10px;
+    transition: .5s;
 }

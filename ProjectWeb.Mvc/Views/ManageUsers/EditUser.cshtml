@@ -39,8 +39,9 @@
                         <p class="text-muted">@Model.UserEmail</p>
 
                         <!-- UserName -->
-                        <div class="form-group">
-                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" />
+                        <div class="input-with-icon">
+                            <input asp-for="UserName" class="form-control input-custom" placeholder="نام کاربری" style="padding-right: 30px;"/>
+                            <i class="fas fa-user icon-in-input"></i>
                             <span asp-validation-for="UserName" class="text-danger small"></span>
                         </div>
 

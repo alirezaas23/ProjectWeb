@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShowUsersViewModel>
+﻿@model IEnumerable<ProjectWeb.Domain.Models.UserApp>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
@@ -13,6 +13,12 @@
     }
     else
     {
+        <div class="input-icon">
+            <form asp-controller="ManageUsers" asp-action="SearchUsers" method="get">
+                <input type="search" class="form-control input-custom input-pr" placeholder="بر اساس نام، نام خانوادگی، ایمیل و نام کاربری سرچ کنید ..." name="name" id="user-search-input" />
+                <i class="fas fa-search icon-for-input" id="user-search-icon"></i>
+            </form>
+        </div>
         <div class="row">
             @foreach (var item in Model)
             {
@@ -23,20 +29,20 @@
                                 <div class="text-left">
                                     <div class="dropdown">
                                         <i class="fas fa-ellipsis-v dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; font-size: 15px;"></i>
-                                        <div class="dropdown-menu dropdown-menu-right  dropdown-no-m">
-                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.UserId">
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-no-m">
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="EditUser" asp-route-id="@item.Id">
                                                 <i class="fas fa-circle small-dot"></i>
                                                 ویرایش اطلاعات
                                             </a>
-                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.UserId">
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="DeleteUser" asp-route-id="@item.Id">
                                                 <i class="fas fa-circle small-dot"></i>
                                                 حذف کاربر
                                             </a>
-                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.UserId">
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="AddUserToRole" asp-route-id="@item.Id">
                                                 <i class="fas fa-circle small-dot"></i>
                                                 افزودن مقام
                                             </a>
-                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.UserId">
+                                            <a class="dropdown-item menu-text-hover" asp-controller="ManageUsers" asp-action="DeleteUserFromRole" asp-route-id="@item.Id">
                                                 <i class="fas fa-circle small-dot"></i>
                                                 حذف مقام
                                             </a>
@@ -56,12 +62,12 @@
                                 <p>
                                     <i class="far fa-envelope ml-2"></i>
                                     ایمیل :
-                                    @item.UserEmail
+                                    @item.Email
                                 </p>
                                 <p>
                                     <i class="far fa-user ml-2"></i>
                                     نام و نام خانوادگی :
-                                    @if(item.FirstName == null && item.LastName == null)
+                                    @if (item.FirstName == null && item.LastName == null)
                                     {
                                         <span class="text-danger">اطلاعاتی وارد نشده است.</span>
                                     }
@@ -95,5 +101,19 @@
 @section Scripts{
     <script>
         $('.tool-tip').tooltip();
+        var userSearchInput = document.getElementById('user-search-input');
+        userSearchInput.addEventListener("focusin", changeUserSearchIconColor);
+        userSearchInput.addEventListener("focusout", backUserSearchIconColor);
+
+        function changeUserSearchIconColor() {
+            let icon = document.getElementById('user-search-icon');
+            icon.style.transition = "0.5s";
+            icon.style.color = "#47B5FF";
+        }
+
+        function backUserSearchIconColor() {
+            let icon = document.getElementById('user-search-icon');
+            icon.style.color = "#e5edf0";
+        }
     </script>
 }
