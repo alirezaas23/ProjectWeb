@@ -8,5 +8,6 @@ namespace ProjectWeb.Application.Interfaces
         void AddTicket(Ticket ticket);
         IEnumerable<Ticket> GetTickets();
         Ticket SearchById(int id);
+        void DeleteTicket(int id);
     }
 }

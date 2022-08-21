@@ -20,6 +20,13 @@ namespace ProjectWeb.Infra.Data.Repositories
             SaveChanges();
         }
 
+        public void DeleteTicket(int id)
+        {
+            var ticket = _ctx.Tickets.Find(id);
+            _ctx.Tickets.Remove(ticket);
+            SaveChanges();
+        }
+
         public IEnumerable<Ticket> GetTickets()
         {
             return _ctx.Tickets;

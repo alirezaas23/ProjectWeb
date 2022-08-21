@@ -56,6 +56,7 @@ namespace ProjectWeb.Mvc.Controllers
         [HttpGet]
         public IActionResult AllTickets()
         {
+            ViewBag.Message = TempData["Message"];
             var tickets = _ticketInterface.GetTickets();
             return View(tickets);
         }
@@ -73,6 +74,29 @@ namespace ProjectWeb.Mvc.Controllers
                 UserId = ticket.UserId
             };
             return View(ticketModel);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteTicket(int id)
+        {
+            var ticket = _ticketInterface.SearchById(id);
+            var ticketModel = new TicketInfoViewModel()
+            {
+                TicketDateTime = ticket.TicketDateTime,
+                TicketId = ticket.TicketId,
+                TicketSubject = ticket.TicketSubject,
+                TicketText = ticket.TicketText,
+                UserId = ticket.UserId
+            };
+            return View(ticketModel);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult DeleteTicket(TicketInfoViewModel model)
+        {
+            _ticketInterface.DeleteTicket(model.TicketId);
+            TempData["Message"] = "تیکت مورد نظر با موفقیت حذف شد.";
+            return RedirectToAction("AllTickets", "Ticket");
         }
     }
 }

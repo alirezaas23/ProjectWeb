@@ -16,6 +16,12 @@
     }
     else
     {
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
         <div class="row">
             @foreach (var ticket in Model)
             {
@@ -31,7 +37,7 @@
                                                 <i class="fas fa-circle small-dot"></i>
                                                 مشاهده تیکت
                                             </a>
-                                            <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="" asp-route-id="@ticket.TicketId">
+                                            <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="DeleteTicket" asp-route-id="@ticket.TicketId">
                                                 <i class="fas fa-circle small-dot"></i>
                                                 حذف تیکت
                                             </a>
@@ -41,19 +47,19 @@
                                 <hr />
                                 <p>
                                     <i class="far fa-calendar-alt"></i>
-                                    تاریخ ارسال :
+                                    <span class="font-weight-bold">تاریخ ارسال :</span>
                                     @ticket.TicketDateTime
                                 </p>
                                 <p>
                                     <i class="fas fa-file-signature"></i>
-                                    موضوع تیکت :
+                                    <span class="font-weight-bold">موضوع تیکت :</span>
                                     @ticket.TicketSubject
                                 </p>
                                 @{
                                     var user = await userManager.FindByIdAsync(ticket.UserId);
                                     <p>
                                         <i class="far fa-user"></i>
-                                        فرستنده :
+                                        <span class="font-weight-bold">فرستنده :</span>
                                         @user.UserName
                                     </p>
                                 }

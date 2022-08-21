@@ -94,10 +94,12 @@
                     <a asp-controller="ManageRoles" asp-action="Index" class="white-text text-hover">مدیریت مقام ها</a>
                 </li>
                 <li>
-                    <a asp-controller="" asp-action="" class="white-text text-hover">مشاهده حساب کاربری</a>
+                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="white-text text-hover">مشاهده حساب کاربری</a>
                 </li>
                 <li>
-                    <a asp-controller="" asp-action="" class="white-text text-hover">ویرایش حساب کاربری</a>
+                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                        ویرایش حساب کاربری
+                    </a>
                 </li>
                 <li>
                     <a asp-controller="" asp-action="" class="white-text text-hover">سفارشات</a>
@@ -107,7 +109,7 @@
                 </li>
                 <li>
                     <a asp-controller="Account" asp-action="LogOut" class="white-text text-hover">خروج از حساب کاربری</a>
-                </li>   
+                </li>
             </ul>
         </nav>
     </header>

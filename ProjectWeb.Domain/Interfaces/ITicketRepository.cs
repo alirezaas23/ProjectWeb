@@ -9,5 +9,6 @@ namespace ProjectWeb.Domain.Interfaces
         void SaveChanges();
         IEnumerable<Ticket> GetTickets();
         Ticket SearchById(int id);
+        void DeleteTicket(int id);
     }
 }

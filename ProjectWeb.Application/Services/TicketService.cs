@@ -19,6 +19,11 @@ namespace ProjectWeb.Application.Services
             _ticketRepository.AddTicket(ticket);
         }
 
+        public void DeleteTicket(int id)
+        {
+            _ticketRepository.DeleteTicket(id);
+        }
+
         public IEnumerable<Ticket> GetTickets()
         {
             return _ticketRepository.GetTickets();
