@@ -15,11 +15,13 @@ namespace ProjectWeb.Mvc.Controllers
     {
         private readonly ITicketInterface _ticketInterface;
         private readonly UserManager<UserApp> _userManager;
+        private readonly ITicketAnswerInterface _ticketAnswerInterface;
 
-        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager)
+        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager, ITicketAnswerInterface ticketAnswerInterface)
         {
             _ticketInterface = ticketInterface;
             _userManager = userManager;
+            _ticketAnswerInterface = ticketAnswerInterface;
         }
 
         [HttpGet]
@@ -113,6 +115,16 @@ namespace ProjectWeb.Mvc.Controllers
                 Ticket = ticket
             };
             return View(ticketModel);
+        }
+
+        [HttpPost]
+        public IActionResult TicketAnswer(AnswerTicketViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View();
         }
     }
 }

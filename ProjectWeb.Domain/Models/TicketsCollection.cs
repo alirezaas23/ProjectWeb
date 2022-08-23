@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectWeb.Domain.Models
 {
-    public class Ticket_TicketAnswer
+    public class TicketsCollection
     {
         public int Id { get; set; }
         public int TicketId { get; set; }

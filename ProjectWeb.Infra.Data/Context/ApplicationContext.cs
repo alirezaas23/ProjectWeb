@@ -9,6 +9,6 @@ namespace ProjectWeb.Infra.Data.Context
             : base(options) { }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<TicketAnswer> TicketAnswers { get; set; }
-        public DbSet<Ticket_TicketAnswer> Ticket_TicketAnswers { get; set; }
+        public DbSet<TicketsCollection> TicketsCollections { get; set; }
     }
 }
