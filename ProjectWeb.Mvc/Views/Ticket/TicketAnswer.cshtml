@@ -1,4 +1,4 @@
-﻿@model TicketAnswerViewModel
+﻿@model AnswerTicketViewModel
 @using Microsoft.AspNetCore.Identity
 @using ProjectWeb.Domain.Models
 @inject UserManager<UserApp> _userManager
@@ -58,6 +58,7 @@
                     <label asp-for="TicketAnswerText"></label>
                     <textarea asp-for="TicketAnswerText" id="my-textarea"></textarea>
                 </div>
+                <input asp-for="Ticket.TicketId" hidden/>
                 <button type="submit" class="btn btn-ticket-answer-post">ارسال پاسخ</button>
             </form>
         </div>

@@ -30,17 +30,4 @@ namespace ProjectWeb.Application.ViewModels
         public string TicketText { get; set; }
         public string UserId { get; set; }
     }
-
-    public class TicketAnswerViewModel
-    {
-        public Ticket Ticket { get; set; }
-        [Display(Name = "تاریخ ارسال پاسخ")]
-        public string TicketAnswerDate { get; set; }
-
-        [Required(ErrorMessage = "پاسخ تیکت را وارد کنید")]
-        [Display(Name = "متن پاسخ")]
-        [DataType(DataType.MultilineText)]
-        [AllowHtml]
-        public string TicketAnswerText { get; set; }
-    }
 }

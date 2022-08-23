@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.ViewModels;
+using ProjectWeb.Application.ViewModels.TicketAnswerViewModels;
 using ProjectWeb.Domain.Models;
 using System;
 using System.Globalization;
@@ -105,7 +106,7 @@ namespace ProjectWeb.Mvc.Controllers
             var ticket = _ticketInterface.SearchById(id);
             if (ticket == null) return NotFound();
             PersianCalendar calendar = new PersianCalendar();
-            var ticketModel = new TicketAnswerViewModel()
+            var ticketModel = new AnswerTicketViewModel()
             {
                 TicketAnswerDate = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
                     + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
