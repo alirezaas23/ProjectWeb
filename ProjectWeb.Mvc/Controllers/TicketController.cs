@@ -98,5 +98,20 @@ namespace ProjectWeb.Mvc.Controllers
             TempData["Message"] = "تیکت مورد نظر با موفقیت حذف شد.";
             return RedirectToAction("AllTickets", "Ticket");
         }
+
+        [HttpGet]
+        public IActionResult TicketAnswer(int id)
+        {
+            var ticket = _ticketInterface.SearchById(id);
+            if (ticket == null) return NotFound();
+            PersianCalendar calendar = new PersianCalendar();
+            var ticketModel = new TicketAnswerViewModel()
+            {
+                TicketAnswerDate = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
+                    + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
+                Ticket = ticket
+            };
+            return View(ticketModel);
+        }
     }
 }

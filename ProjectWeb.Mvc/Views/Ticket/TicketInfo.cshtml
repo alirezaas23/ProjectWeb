@@ -8,7 +8,7 @@
 }
 
 <div data-aos="fade-down" data-aos-duration="1000">
-    <div>
+    <div class="ticket-info">
         @{
             var user = await _userManager.FindByIdAsync(Model.UserId);
             <p>
@@ -39,11 +39,17 @@
             <hr />
             <div class="border p-3" style="border-radius: 10px;">
                 <p>
+                    <i class="fas fa-file-signature"></i>
+                    <span class="font-weight-bold">عنوان تیکت :</span>
+                    @Model.TicketSubject
+                </p>
+                <hr />
+                <p>
                     @Html.Raw(Model.TicketText)
                 </p>
-                <button class="btn btn-ticket-answer">
+                <a asp-controller="Ticket" asp-action="TicketAnswer" asp-route-id="@Model.TicketId" class="btn btn-ticket-answer">
                     پاسخ به تیکت
-                </button>
+                </a>
             </div>
         }
     </div>

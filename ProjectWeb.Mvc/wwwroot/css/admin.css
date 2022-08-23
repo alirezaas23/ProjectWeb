@@ -427,3 +427,26 @@ table tbody tr:nth-child(even) {
     border-radius: 10px;
     transition: .5s;
 }
+
+.btn-ticket-answer-post {
+    width: 150px;
+    background: #7DCE13;
+    color: white;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    font-size: 13px;
+}
+
+.btn-ticket-answer-post:hover{
+    transition: 1s;
+    border-radius: 15px;
+    color: white;
+}
+
+.btn-ticket-answer-post:not(:hover){
+    transition: 1s;
+}
+
+.ticket-info img{
+    width: 100%;
+}

@@ -1,4 +1,6 @@
-﻿namespace ProjectWeb.Domain.Models
+﻿using System.Collections.Generic;
+
+namespace ProjectWeb.Domain.Models
 {
     public class Ticket
     {
@@ -7,5 +9,6 @@
         public string TicketSubject { get; set; }
         public string TicketDateTime { get; set; }
         public string TicketText { get; set; }
+        public ICollection<Ticket_TicketAnswer> Ticket_TicketAnswers { get; set; }
     }
 }
