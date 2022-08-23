@@ -52,7 +52,7 @@ namespace ProjectWeb.Mvc.Controllers
                 ticket.TicketDateTime = model.TicketDateTime;
                 ticket.UserId = model.UserId;
                 _ticketInterface.AddTicket(ticket);
-                TempData["Message"] = "تیکت شما با موفقیت ارسال شد.به زودی با شما تماس خواهیم گرفت.";
+                TempData["Message"] = "تیکت شما با موفقیت ارسال شد.برای دریافت پاسخ به قسمت پیام های من بروید.";
                 return RedirectToAction("ShowProfile", "Account", new { id = model.UserId });
             }
             return View(model);
