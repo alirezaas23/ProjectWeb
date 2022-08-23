@@ -16,12 +16,14 @@ namespace ProjectWeb.Mvc.Controllers
         private readonly ITicketInterface _ticketInterface;
         private readonly UserManager<UserApp> _userManager;
         private readonly ITicketAnswerInterface _ticketAnswerInterface;
+        private readonly ITicketsCollectionInterface _ticketsCollectionInterface;
 
-        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager, ITicketAnswerInterface ticketAnswerInterface)
+        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager, ITicketAnswerInterface ticketAnswerInterface, ITicketsCollectionInterface ticketsCollectionInterface)
         {
             _ticketInterface = ticketInterface;
             _userManager = userManager;
             _ticketAnswerInterface = ticketAnswerInterface;
+            _ticketsCollectionInterface = ticketsCollectionInterface;
         }
 
         [HttpGet]
@@ -122,7 +124,23 @@ namespace ProjectWeb.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                var ticketAnswer = new TicketAnswer();
+                ticketAnswer.TicketAnswerDateTime = model.TicketAnswerDate;
+                ticketAnswer.TicketAnswerText = model.TicketAnswerText;
+                _ticketAnswerInterface.AddTicketAnswer(ticketAnswer);
 
+                var ticket = _ticketInterface.SearchById(model.Ticket.TicketId);
+
+                var ticketsCollection = new TicketsCollection()
+                {
+                    TicketAnswerId = ticketAnswer.TicketAnswerId,
+                    TicketAnswer = ticketAnswer,
+                    TicketId = ticket.TicketId,
+                    Ticket = ticket
+                };
+                _ticketsCollectionInterface.AddTicketCollection(ticketsCollection);
+                TempData["Message"] = "پاسخ تیکت با موفقیت ارسال شد.";
+                return RedirectToAction(nameof(AllTickets));
             }
             return View();
         }

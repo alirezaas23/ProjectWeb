@@ -7,6 +7,6 @@ namespace ProjectWeb.Application.Interfaces
 {
     public interface ITicketsCollectionInterface
     {
-        void AddTicketCollection(TicketsCollection ticketsCollection)
+        void AddTicketCollection(TicketsCollection ticketsCollection);
     }
 }
