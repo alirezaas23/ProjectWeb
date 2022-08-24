@@ -47,8 +47,9 @@
                 <p>
                     @Html.Raw(Model.TicketText)
                 </p>
-                <a asp-controller="Ticket" asp-action="TicketAnswer" asp-route-id="@Model.TicketId" class="btn btn-ticket-answer">
-                    پاسخ به تیکت
+                <hr />
+                <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover">
+                    بازگشت به لیست تیکت ها
                 </a>
             </div>
         }
