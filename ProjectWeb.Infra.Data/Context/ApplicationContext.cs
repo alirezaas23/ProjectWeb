@@ -8,7 +8,5 @@ namespace ProjectWeb.Infra.Data.Context
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options) { }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<TicketAnswer> TicketAnswers { get; set; }
-        public DbSet<TicketsCollection> TicketsCollections { get; set; }
     }
 }

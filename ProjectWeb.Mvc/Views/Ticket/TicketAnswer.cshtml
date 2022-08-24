@@ -57,6 +57,7 @@
                 <div class="form-group">
                     <label asp-for="TicketAnswerText"></label>
                     <textarea asp-for="TicketAnswerText" id="my-textarea"></textarea>
+                    <span asp-validation-for="TicketAnswerText" class="text-danger"></span>
                 </div>
                 <input asp-for="Ticket.TicketId" hidden/>
                 <button type="submit" class="btn btn-ticket-answer-post">ارسال پاسخ</button>

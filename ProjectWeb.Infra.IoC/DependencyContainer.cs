@@ -12,10 +12,6 @@ namespace ProjectWeb.Infra.IoC
         {
             services.AddTransient<ITicketRepository, TicketRepository>();
             services.AddTransient<ITicketInterface, TicketService>();
-            services.AddTransient<ITicketAnswerRepository, TicketAnswerRepository>();
-            services.AddTransient<ITicketAnswerInterface, TicketAnswerService>();
-            services.AddTransient<ITicketsCollectionRepository, TicketsCollectionRepository>();
-            services.AddTransient<ITicketsCollectionInterface, TicketsCollectionService>();
         }
     }
 }

@@ -9,6 +9,5 @@ namespace ProjectWeb.Domain.Models
         public string TicketSubject { get; set; }
         public string TicketDateTime { get; set; }
         public string TicketText { get; set; }
-        public ICollection<TicketsCollection> TicketsCollections { get; set; }
     }
 }

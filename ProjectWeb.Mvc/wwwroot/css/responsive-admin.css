@@ -21,7 +21,7 @@
     #responsive-menu {
         width: 220px;
         height: 100vh;
-        background-color: rgba(0, 0, 0, .9);
+        background-color: #f6f6f6;
         top: 0;
         z-index: 1;
         right: -220px;
@@ -37,9 +37,11 @@
     }
 
     #responsive-menu ul li{
-        color: white;
         width: 100%;
         text-align: center;
         margin-bottom: 20px;
+    }
+    #responsive-menu ul li a{
+        color: black;
     }
 }

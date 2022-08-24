@@ -77,7 +77,7 @@
 
                 <div class="logo animate__animated animate__bounceIn">
                     <a asp-controller="Admin" asp-action="Index">
-                        <img src="~/imgs/admin-logo.png" />
+                        <img src="~/imgs/admin.png" />
                     </a>
                 </div>
             </div>
@@ -85,30 +85,30 @@
         <nav id="responsive-menu">
             <ul>
                 <li>
-                    <a asp-controller="Home" asp-action="Index" class="white-text text-hover">صفحه خانه سایت</a>
+                    <a asp-controller="Home" asp-action="Index" class="text-hover">صفحه خانه سایت</a>
                 </li>
                 <li>
-                    <a asp-controller="ManageUsers" asp-action="Index" class="white-text text-hover">مدیریت کاربران</a>
+                    <a asp-controller="ManageUsers" asp-action="Index" class="text-hover">مدیریت کاربران</a>
                 </li>
                 <li>
-                    <a asp-controller="ManageRoles" asp-action="Index" class="white-text text-hover">مدیریت مقام ها</a>
+                    <a asp-controller="ManageRoles" asp-action="Index" class="text-hover">مدیریت مقام ها</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="white-text text-hover">مشاهده حساب کاربری</a>
+                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="text-hover">مشاهده حساب کاربری</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="white-text text-hover">
+                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover">
                         ویرایش حساب کاربری
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="" asp-action="" class="white-text text-hover">سفارشات</a>
+                    <a asp-controller="" asp-action="" class="text-hover">سفارشات</a>
                 </li>
                 <li>
-                    <a asp-controller="Ticket" asp-action="AllTickets" class="white-text text-hover">پیام ها</a>
+                    <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover">پیام ها</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="LogOut" class="white-text text-hover">خروج از حساب کاربری</a>
+                    <a asp-controller="Account" asp-action="LogOut" class="text-hover">خروج از حساب کاربری</a>
                 </li>
             </ul>
         </nav>

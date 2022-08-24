@@ -15,15 +15,11 @@ namespace ProjectWeb.Mvc.Controllers
     {
         private readonly ITicketInterface _ticketInterface;
         private readonly UserManager<UserApp> _userManager;
-        private readonly ITicketAnswerInterface _ticketAnswerInterface;
-        private readonly ITicketsCollectionInterface _ticketsCollectionInterface;
 
-        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager, ITicketAnswerInterface ticketAnswerInterface, ITicketsCollectionInterface ticketsCollectionInterface)
+        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager)
         {
             _ticketInterface = ticketInterface;
             _userManager = userManager;
-            _ticketAnswerInterface = ticketAnswerInterface;
-            _ticketsCollectionInterface = ticketsCollectionInterface;
         }
 
         [HttpGet]
@@ -102,47 +98,6 @@ namespace ProjectWeb.Mvc.Controllers
             _ticketInterface.DeleteTicket(model.TicketId);
             TempData["Message"] = "تیکت مورد نظر با موفقیت حذف شد.";
             return RedirectToAction("AllTickets", "Ticket");
-        }
-
-        [HttpGet]
-        public IActionResult TicketAnswer(int id)
-        {
-            var ticket = _ticketInterface.SearchById(id);
-            if (ticket == null) return NotFound();
-            PersianCalendar calendar = new PersianCalendar();
-            var ticketModel = new AnswerTicketViewModel()
-            {
-                TicketAnswerDate = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
-                    + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
-                Ticket = ticket
-            };
-            return View(ticketModel);
-        }
-
-        [HttpPost]
-        public IActionResult TicketAnswer(AnswerTicketViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var ticketAnswer = new TicketAnswer();
-                ticketAnswer.TicketAnswerDateTime = model.TicketAnswerDate;
-                ticketAnswer.TicketAnswerText = model.TicketAnswerText;
-                _ticketAnswerInterface.AddTicketAnswer(ticketAnswer);
-
-                var ticket = _ticketInterface.SearchById(model.Ticket.TicketId);
-
-                var ticketsCollection = new TicketsCollection()
-                {
-                    TicketAnswerId = ticketAnswer.TicketAnswerId,
-                    TicketAnswer = ticketAnswer,
-                    TicketId = ticket.TicketId,
-                    Ticket = ticket
-                };
-                _ticketsCollectionInterface.AddTicketCollection(ticketsCollection);
-                TempData["Message"] = "پاسخ تیکت با موفقیت ارسال شد.";
-                return RedirectToAction(nameof(AllTickets));
-            }
-            return View();
         }
     }
 }
