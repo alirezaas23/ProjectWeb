@@ -37,3 +37,4 @@ function CheckInput() {
 
 $("#custom-tooltip").tooltip();
 $("#logout-tooltip").tooltip();
+

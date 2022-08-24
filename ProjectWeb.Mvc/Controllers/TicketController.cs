@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.ViewModels;
-using ProjectWeb.Application.ViewModels.TicketAnswerViewModels;
 using ProjectWeb.Domain.Models;
 using System;
 using System.Globalization;

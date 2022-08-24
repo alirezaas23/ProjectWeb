@@ -1,0 +1,34 @@
+﻿@media screen and (max-width: 992px) {
+    header {
+        height: 600px !important;
+        transition: 0.5s;
+    }
+}
+
+@media screen and (max-width: 768px){
+    header .header-title h1{
+        font-size: 30px;
+        transition: 0.5s;
+    }
+}
+
+@media screen and (max-width: 578px) {
+    header {
+        height: 400px !important;
+    }
+    header .header-title h1{
+        font-size: 23px;
+        transition: 0.5s;
+    }
+}
+
+@media screen and (max-width: 400px){
+    header .header-title h1 {
+        font-size: 20px;
+        transition: 0.5s;
+    }
+    header .header-title p {
+        font-size: 13px;
+        transition: 0.5s;
+    }
+}
