@@ -13,19 +13,23 @@
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.rtl.css" />
     <link rel="stylesheet" href="~/lib/aos/aos.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/responsive.css"/>
+    <link rel="stylesheet" href="~/css/responsive.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
         <div class="background-overaly">
-            <nav class="custom-nav mb-3">
-                <div class="container">
-                    <ul>
-                        @{
-                            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                            if (_signInManager.IsSignedIn(User))
-                            {
+            <div data-aos="fade-down" data-aos-duration="800">
+                <nav class="custom-nav mb-3">
+                    <div class="container">
+                        <div id="hamburger-icon">
+                            <i class="fas fa-bars" id="ham-icon" onclick="ShowMenu()"></i>
+                        </div>
+                        <ul>
+                            @{
+                                var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                                if (_signInManager.IsSignedIn(User))
+                                {
                                 <li>
                                     <div class="dropdown">
                                         <a class="dropdown nav-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -36,12 +40,12 @@
 
                                         <div class="dropdown-menu">
                                             @if (User.IsInRole("ادمین"))
-                                            {
-                                                <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
-                                                    <i class="fas fa-circle small-dot"></i>
-                                                    صفحه مدیریت سایت
-                                                </a>
-                                            }
+                                                {
+                                            <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
+                                                <i class="fas fa-circle small-dot"></i>
+                                                صفحه مدیریت سایت
+                                            </a>
+                                                }
                                             <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
                                                 <i class="fas fa-circle small-dot"></i>
                                                 مشاهده حساب کاربری
@@ -65,25 +69,84 @@
                                         </div>
                                     </div>
                                 </li>
-                            }
-                            else
-                            {
-                                <li>
+                                }
+                                else
+                                {
+                                <li class="text-white">
                                     <i class="far fa-user ml-1"></i>
                                     <a asp-controller="Account" asp-action="Login" class="nav-text">ورود</a> /
                                     <a asp-controller="Account" asp-action="Register" class="nav-text">عضویت</a>
                                 </li>
+                                }
+                            }
+                        </ul>
+
+                        <div class="logo">
+                            <a asp-controller="Home" asp-action="Index">
+                                <img src="~/imgs/logo-web.png" alt="Logo" />
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+
+                <nav id="responsive-nav">
+                    <ul>
+                        @{
+                            if (_signInManager.IsSignedIn(User))
+                            {
+
+                            <li style="border-bottom: 2px double #47B5FF;">
+                                <i class="far fa-user ml-1"></i>
+                                <span>@user.UserName</span>
+                            </li>
+                            @if (User.IsInRole("ادمین"))
+                            {
+                            <li>
+                                <a asp-controller="Admin" asp-action="Index">
+                                    صفحه مدیریت سایت
+                                </a>
+                            </li>
+                            }
+                            <li>
+                                <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                                    مشاهده حساب کاربری
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
+                                    ویرایش حساب کاربری
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    سفارشات من
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    پیام های من
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="LogOut">
+                                    خروج از حساب کاربری
+                                </a>
+                            </li>
+
+                            }
+                            else
+                            {
+                            <li class="text-white">
+                                <i class="far fa-user ml-1"></i>
+                                <a asp-controller="Account" asp-action="Login" class="nav-text">ورود</a> /
+                                <a asp-controller="Account" asp-action="Register" class="nav-text">عضویت</a>
+                            </li>
                             }
                         }
                     </ul>
+                </nav>
+            </div>
 
-                    <div class="logo">
-                        <a asp-controller="Home" asp-action="Index">
-                            <img src="~/imgs/logo-web.png" alt="Logo" />
-                        </a>
-                    </div>
-                </div>
-            </nav>
 
             <div class="container">
                 <div class="header-title">
@@ -114,7 +177,7 @@
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/aos/aos.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
-    <script src="~/js/site.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
