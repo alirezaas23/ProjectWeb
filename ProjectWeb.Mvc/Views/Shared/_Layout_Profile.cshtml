@@ -16,12 +16,16 @@
     <link rel="stylesheet" href="~/lib/aos/aos.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/css/Responsive.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
         <nav class="custom-nav mb-3">
             <div class="container">
+                <div id="hamburger-icon">
+                    <i class="fas fa-bars" id="ham-icon" onclick="ShowNav()"></i>
+                </div>
                 <ul>
                     @{
                         var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -84,6 +88,62 @@
                     </a>
                 </div>
             </div>
+        </nav>
+        <nav id="responsive-nav">
+            <ul>
+                @{
+                    if (_signInManager.IsSignedIn(User))
+                    {
+
+                        <li class="user-nav-item">
+                            <i class="far fa-user ml-1 text-white"></i>
+                            <span>@user.UserName</span>
+                        </li>
+                        @if (User.IsInRole("ادمین"))
+                        {
+                            <li>
+                                <a asp-controller="Admin" asp-action="Index">
+                                    صفحه مدیریت سایت
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                                مشاهده حساب کاربری
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
+                                ویرایش حساب کاربری
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                سفارشات من
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                پیام های من
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="LogOut">
+                                خروج از حساب کاربری
+                            </a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="text-white">
+                            <i class="far fa-user ml-1"></i>
+                            <a asp-controller="Account" asp-action="Login" class="nav-text">ورود</a> /
+                            <a asp-controller="Account" asp-action="Register" class="nav-text">عضویت</a>
+                        </li>
+                    }
+                }
+            </ul>
         </nav>
     </header>
 
