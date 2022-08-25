@@ -21,14 +21,13 @@
 
     #responsive-menu {
         width: 220px;
-        height: 100vh;
+        height: 100%;
         background: white;
         top: 0;
         z-index: 1;
         right: -220px;
         position: fixed;
         display: none;
-        border-radius: 10px 0 0 10px;
     }
 
     #responsive-menu ul{

@@ -84,13 +84,16 @@
 
                 <div class="logo">
                     <a asp-controller="Home" asp-action="Index">
-                        <img src="~/imgs/Dima.jpg" alt="Logo" />
+                        <img src="~/imgs/logo-web.png" alt="Logo" />
                     </a>
                 </div>
             </div>
         </nav>
         <nav id="responsive-nav">
             <ul>
+                <li class="p-3">
+                    <img src="~/imgs/logo-web.png" alt="Logo" height="80" />
+                </li>
                 @{
                     if (_signInManager.IsSignedIn(User))
                     {
