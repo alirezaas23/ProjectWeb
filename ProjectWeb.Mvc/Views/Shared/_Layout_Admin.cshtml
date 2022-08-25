@@ -29,7 +29,7 @@
                     <li>
                         @{
                             var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                            <div class="dropdown animate__animated animate__bounceIn">
+                            <div class="dropdown">
                                 <a class="dropdown text-hover white-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-caret-down"></i>
                                     @user.UserName
@@ -75,7 +75,7 @@
                     </li>
                 </ul>
 
-                <div class="logo animate__animated animate__bounceIn">
+                <div class="logo">
                     <a asp-controller="Admin" asp-action="Index">
                         <img src="~/imgs/admin.png" />
                     </a>

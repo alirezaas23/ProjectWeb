@@ -1,89 +1,52 @@
-﻿@media screen and (max-width: 992px) {
-    header {
-        height: 600px !important;
-        transition: 0.5s;
-    }
-
-    header .custom-nav ul{
+﻿@media screen and (max-width: 578px){
+    header nav ul{
         display: none;
     }
 
     #hamburger-icon{
         display: block !important;
-        float: left;
     }
 
     #hamburger-icon #ham-icon{
-        color: white;
-        font-size: 30px;
-        margin-top: 15px;
+        font-size: 25px;
+        margin: 20px 0;
         cursor: pointer;
     }
 
-    #responsive-nav {
+    #responsive-nav{
         display: none;
         width: 220px;
-        height: 100vh;
-        z-index: 1;
-        position: absolute;
-        right: -220px;
+        height: 100%;
+        position: fixed;
         top: 0;
-        background-color: #f6f6f6;
+        right: -220px;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1;
+        font-size: 15px;
+        border-radius: 10px 0 0 10px;
+    }
+
+    #responsive-nav span, i{
+        color: white;
     }
 
     #responsive-nav ul{
         display: block;
         width: 100%;
-        float: right;
-        height: 100%;
-        margin: 0;
-        padding: 0;
     }
 
     #responsive-nav ul li{
         width: 100%;
-        margin-top: 13px;
-        text-align: center;
+        margin: 15px;
     }
 
     #responsive-nav ul li a{
-        color: black;
-        font-size: 17px;
-        transition: 0.5s;
-        cursor: pointer;
+        text-decoration: none;
+        color: white;
+        transition: all 0.5s ease;
     }
 
     #responsive-nav ul li a:hover{
         color: #47B5FF;
-        text-decoration: none;
-        transition: 0.5s;
-    }
-}
-
-@media screen and (max-width: 768px){
-    header .header-title h1{
-        font-size: 30px;
-        transition: 0.5s;
-    }
-}
-
-@media screen and (max-width: 578px) {
-    header {
-        height: 400px !important;
-    }
-    header .header-title h1{
-        font-size: 23px;
-        transition: 0.5s;
-    }
-}
-
-@media screen and (max-width: 400px){
-    header .header-title h1 {
-        font-size: 20px;
-        transition: 0.5s;
-    }
-    header .header-title p {
-        font-size: 13px;
-        transition: 0.5s;
     }
 }
