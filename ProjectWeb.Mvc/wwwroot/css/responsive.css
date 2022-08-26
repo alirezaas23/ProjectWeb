@@ -1,4 +1,14 @@
-﻿@media screen and (max-width: 578px){
+﻿@media screen and (max-width: 992px){
+    .intro-title h2 {
+        font-size: 24px;
+    }
+
+    .intro-title p {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 768px){
     header nav ul{
         display: none;
     }
@@ -11,6 +21,9 @@
         font-size: 25px;
         margin: 20px 0;
         cursor: pointer;
+        position: relative;
+        z-index:1;
+        left: 10px;
     }
 
     #responsive-nav{
@@ -47,5 +60,14 @@
 
     #responsive-nav ul li a:hover{
         color: #47B5FF;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .intro-title h2{
+        font-size: 18px;
+    }
+    .intro-title p {
+        font-size: 12px;
     }
 }

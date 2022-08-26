@@ -120,7 +120,12 @@ header .custom-nav ul li {
 
 header .custom-nav ul li a {
     text-decoration: none;
-    color: white;
+    color: black;
+    transition: all 0.5s ease;
+}
+
+header .custom-nav ul li a:hover{
+    color: #A10035;
 }
 
 header .custom-nav .logo {
@@ -132,6 +137,8 @@ header .custom-nav .logo {
 header .custom-nav .logo img{
     height: 55px;
     margin-top: 3px;
+    position: absolute;
+    z-index: 1;
 }
 
 #hamburger-icon{
@@ -281,4 +288,41 @@ header .custom-nav .logo img{
 .nav-text:hover{
     color: #47B5FF;
     transition: 0.5s;
+}
+
+.intro-title {
+    text-shadow: 1px 1px 2px lightblue;
+}
+
+.intro-title p {
+    margin-top: 20px;
+}
+
+.pa-z1{
+    position: relative;
+    z-index: 1;
+}
+
+.svg-pi{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+}
+
+.ul-nav-item {
+    z-index: 1;
+    color: black;
+    position: relative;
+    top: 4px;
+}
+
+.ul-text-hover{
+    color: black !important;
+    transition: all 0.5s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ul-text-hover:hover{
+    color: #A10035 !important;
 }

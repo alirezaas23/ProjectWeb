@@ -20,6 +20,10 @@
       "files": [
         "animate.min.css"
       ]
+    },
+    {
+      "library": "hover.css@2.3.1",
+      "destination": "wwwroot/lib/hover.css/"
     }
   ]
 }
