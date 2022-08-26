@@ -29,4 +29,8 @@
     <ProjectReference Include="..\ProjectWeb.Infra.IoC\ProjectWeb.Infra.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Product\" />
+  </ItemGroup>
+
 </Project>
