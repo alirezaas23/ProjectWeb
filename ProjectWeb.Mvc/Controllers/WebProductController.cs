@@ -25,6 +25,7 @@ namespace ProjectWeb.Mvc.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var WebProducts = _webProductInterface.WebProductsList();
             ViewBag.Message = TempData["Message"];
             return View();
         }

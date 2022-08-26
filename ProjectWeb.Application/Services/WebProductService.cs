@@ -20,5 +20,10 @@ namespace ProjectWeb.Application.Services
         {
             _webProductRepository.AddWebProduct(webProduct);
         }
+
+        public IEnumerable<WebProduct> WebProductsList()
+        {
+            return _webProductRepository.WebProductsList();
+        }
     }
 }

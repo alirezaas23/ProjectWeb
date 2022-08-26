@@ -26,5 +26,10 @@ namespace ProjectWeb.Infra.Data.Repositories
         {
             _ctx.SaveChanges();
         }
+
+        public IEnumerable<WebProduct> WebProductsList()
+        {
+            return _ctx.WebProducts;
+        }
     }
 }
