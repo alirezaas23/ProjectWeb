@@ -27,31 +27,27 @@ namespace ProjectWeb.Mvc.Controllers
         {
             var WebProducts = _webProductInterface.WebProductsList();
             ViewBag.Message = TempData["Message"];
-            return View();
+            return View(WebProducts);
         }
 
         [HttpGet]
-        public IActionResult AddWebDesign()
+        public IActionResult AddWebProduct()
         {
             return View();
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult AddWebDesign(AddWebProductViewModel model)
+        public IActionResult AddWebProduct(AddWebProductViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                WebProduct webProduct = new WebProduct();
-                webProduct.WebProductName = model.WebProductName;
-                webProduct.WebProductPrice = model.WebProductPrice;
-                webProduct.WebProductDeliverDate = model.WebProductDeliverDate;
-                webProduct.WebProductDescription = model.WebProductDescription;
-                webProduct.WebProductImage = _uploadFileInterface.uploadPhoto(model.WebProductImage);
-                _webProductInterface.AddWebProduct(webProduct);
-                TempData["Message"] = "محصول جدید با موفقیت ثبت شد.";
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
+            WebProduct webProduct = new WebProduct();
+            webProduct.WebProductName = model.WebProductName;
+            webProduct.WebProductPrice = model.WebProductPrice;
+            webProduct.WebProductDeliverDate = model.WebProductDeliverDate;
+            webProduct.WebProductDescription = model.WebProductDescription;
+            webProduct.WebProductImage = _uploadFileInterface.uploadPhoto(model.WebProductImage);
+            _webProductInterface.AddWebProduct(webProduct);
+            TempData["Message"] = "محصول جدید با موفقیت ثبت شد.";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

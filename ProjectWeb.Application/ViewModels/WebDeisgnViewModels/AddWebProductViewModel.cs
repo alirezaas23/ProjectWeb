@@ -20,7 +20,7 @@ namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
 
         [Required(ErrorMessage = "لطفا قیمت را وارد کنید")]
         [Display(Name = "قیمت محصول وب")]
-        public double WebProductPrice { get; set; }
+        public long WebProductPrice { get; set; }
 
         [Required(ErrorMessage = "لطفا توضیحات را وارد کنید")]
         [Display(Name = "توضیحات محصول وب")]

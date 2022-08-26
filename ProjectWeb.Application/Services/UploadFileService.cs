@@ -10,6 +10,12 @@ namespace ProjectWeb.Application.Services
     public class UploadFileService : IUploadFileInterface
     {
         private readonly IHostingEnvironment _environment;
+
+        public UploadFileService(IHostingEnvironment environment)
+        {
+            _environment = environment;
+        }
+
         public string uploadPhoto(IFormFile file)
         {
             if (file == null) return "";

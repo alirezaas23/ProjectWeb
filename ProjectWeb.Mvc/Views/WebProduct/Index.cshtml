@@ -2,7 +2,53 @@
 @{
     ViewData["Title"] = "لیست محصولات وب";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    int row = 1;
 }
 
-<h1>Index</h1>
-
+<a asp-controller="WebProduct" asp-action="AddWebProduct" class="btn btn-custom-purple">
+    افزودن محصول جدید
+</a>
+<hr />
+@{
+    if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info">
+            @ViewBag.Message
+        </div>
+    }
+    if (!Model.Any())
+    {
+        <div class="alert alert-danger">
+            هیچ محصول وبی یافت نشد!
+        </div>
+    }
+    else
+    {
+        <div style="overflow-x: auto;">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>نام محصول</th>
+                        <th>قیمت محصول</th>
+                        <th>
+                            <i class="fas fa-cog"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@row</td>
+                            <td>@product.WebProductName</td>
+                            <td>@product.WebProductPrice</td>
+                            <td></td>
+                        </tr>
+                        row++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
