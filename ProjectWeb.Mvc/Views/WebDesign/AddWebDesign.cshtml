@@ -1,0 +1,75 @@
+﻿@model AddWebDesignViewModel
+@{
+    ViewData["Title"] = "افزودن محصول وب";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="row d-flex justify-content-center align-items-center vh-100" data-aos="fade-down" data-aos-duration="1000">
+    <div class="col-12 col-lg-6">
+        <div class="card custom-box-shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <p>افزودن محصول</p>
+                    <a asp-controller="WebDesign" asp-action="Index" title="بازگشت به لیست محصولات" class="text-hover">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+                <form asp-controller="WebDesign" asp-action="AddWebDesign" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="WebProductName"></label>
+                                <input asp-for="WebProductName" class="form-control input-custom" />
+                                <span asp-validation-for="WebProductName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="WebProductImage"></label>
+                                <input asp-for="WebProductImage" class="form-control input-custom" />
+                                <span asp-validation-for="WebProductImage" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="WebProductPrice"></label>
+                                <input asp-for="WebProductPrice" class="form-control input-custom" />
+                                <span asp-validation-for="WebProductPrice" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <label asp-for="WebProductDeliverDate"></label>
+                                <input asp-for="WebProductDeliverDate" class="form-control input-custom" />
+                                <span asp-validation-for="WebProductDeliverDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WebProductDescription"></label>
+                        <textarea id="my-textarea"></textarea>
+                        <span asp-validation-for="WebProductDescription" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-ticket-answer-post">افزودن محصول</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor/adapters/jquery.js"></script>
+    <script>
+
+        $(function () {
+            $('#my-textarea').ckeditor();
+        });
+        document.getElementsByTagName("header")[0].style.display = "none";
+        document.getElementsByTagName("footer")[0].style.display = "none";
+    </script>
+}
