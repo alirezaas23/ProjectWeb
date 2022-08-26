@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
 {
-    public class AddWebDesignViewModel
+    public class AddWebProductViewModel
     {
         [Required(ErrorMessage = "لطفا تصویر را وارد کنید")]
         [Display(Name = "تصویر محصول وب")]

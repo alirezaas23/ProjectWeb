@@ -31,9 +31,9 @@
                         var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
                         if (_signInManager.IsSignedIn(User))
                         {
-                            <li>
+                            <li class="profile-ul-text-hover">
                                 <div class="dropdown">
-                                    <a class="dropdown text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    <a class="dropdown" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-caret-down"></i>
                                         @user.UserName
                                         <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1" />
@@ -70,17 +70,17 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item profile-ul-text-hover">
                                 <a>
                                     قوانین و مقررات
                                 </a>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item profile-ul-text-hover">
                                 <a>
                                     ارتباط با ما
                                 </a>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item profile-ul-text-hover">
                                 <a>
                                     درباره ما
                                 </a>

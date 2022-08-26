@@ -317,12 +317,23 @@ header .custom-nav .logo img{
 }
 
 .ul-text-hover{
-    color: black !important;
+    color: white !important;
     transition: all 0.5s ease;
     text-decoration: none;
     cursor: pointer;
 }
 
 .ul-text-hover:hover{
+    color: #A10035 !important;
+}
+
+.profile-ul-text-hover {
+    color: black !important;
+    transition: all 0.5s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-ul-text-hover:hover {
     color: #A10035 !important;
 }
