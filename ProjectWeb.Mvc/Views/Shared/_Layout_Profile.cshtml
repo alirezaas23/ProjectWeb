@@ -29,71 +29,60 @@
                 <ul>
                     @{
                         var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                        if (_signInManager.IsSignedIn(User))
-                        {
-                            <li class="profile-ul-text-hover">
-                                <div class="dropdown">
-                                    <a class="dropdown" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-caret-down"></i>
-                                        @user.UserName
-                                        <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1" />
-                                    </a>
+                        <li class="profile-ul-text-hover">
+                            <div class="dropdown pa-z1">
+                                <a class="dropdown navbar-hover-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-caret-down"></i>
+                                    @user.UserName
+                                    <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1" />
+                                </a>
 
-                                    <div class="dropdown-menu">
-                                        @if (User.IsInRole("ادمین"))
-                                        {
-                                            <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
-                                                <i class="fas fa-circle small-dot"></i>
-                                                صفحه مدیریت سایت
-                                            </a>
-                                        }
-                                        <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                                <div class="dropdown-menu">
+                                    @if (User.IsInRole("ادمین"))
+                                    {
+                                        <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
                                             <i class="fas fa-circle small-dot"></i>
-                                            مشاهده حساب کاربری
+                                            صفحه مدیریت سایت
                                         </a>
-                                        <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
-                                            <i class="fas fa-circle small-dot"></i>
-                                            ویرایش حساب کاربری
-                                        </a>
-                                        <a class="dropdown-item menu-text-hover">
-                                            <i class="fas fa-circle small-dot"></i>
-                                            سفارشات من
-                                        </a>
-                                        <a class="dropdown-item menu-text-hover">
-                                            <i class="fas fa-circle small-dot"></i>
-                                            پیام های من
-                                        </a>
-                                        <a asp-controller="Account" asp-action="LogOut" class="dropdown-item menu-text-hover">
-                                            <i class="fas fa-circle small-dot"></i>
-                                            خروج از حساب کاربری
-                                        </a>
-                                    </div>
+                                    }
+                                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        مشاهده حساب کاربری
+                                    </a>
+                                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        ویرایش حساب کاربری
+                                    </a>
+                                    <a class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        سفارشات من
+                                    </a>
+                                    <a class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        پیام های من
+                                    </a>
+                                    <a asp-controller="Account" asp-action="LogOut" class="dropdown-item menu-text-hover">
+                                        <i class="fas fa-circle small-dot"></i>
+                                        خروج از حساب کاربری
+                                    </a>
                                 </div>
-                            </li>
-                            <li class="ul-nav-item profile-ul-text-hover">
-                                <a>
-                                    قوانین و مقررات
-                                </a>
-                            </li>
-                            <li class="ul-nav-item profile-ul-text-hover">
-                                <a>
-                                    ارتباط با ما
-                                </a>
-                            </li>
-                            <li class="ul-nav-item profile-ul-text-hover">
-                                <a>
-                                    درباره ما
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="ul-nav-item ul-text-hover">
-                                <i class="far fa-user ml-1"></i>
-                                <a asp-controller="Account" asp-action="Login" class="text-hover">ورود</a> /
-                                <a asp-controller="Account" asp-action="Register" class="text-hover">عضویت</a>
-                            </li>
-                        }
+                            </div>
+                        </li>
+                        <li class="ul-nav-item navbar-hover-text">
+                            <a>
+                                قوانین و مقررات
+                            </a>
+                        </li>
+                        <li class="ul-nav-item navbar-hover-text">
+                            <a>
+                                ارتباط با ما
+                            </a>
+                        </li>
+                        <li class="ul-nav-item navbar-hover-text">
+                            <a>
+                                درباره ما
+                            </a>
+                        </li>
                     }
                 </ul>
 
@@ -110,149 +99,139 @@
                     <img src="~/imgs/logo-web.png" alt="Logo" height="80" />
                 </li>
                 @{
-                    if (_signInManager.IsSignedIn(User))
+                    <li class="user-nav-item">
+                        <i class="far fa-user ml-1 text-white"></i>
+                        <span>@user.UserName</span>
+                    </li>
+                    @if (User.IsInRole("ادمین"))
                     {
-
-                        <li class="user-nav-item">
-                            <i class="far fa-user ml-1 text-white"></i>
-                            <span>@user.UserName</span>
-                        </li>
-                        @if (User.IsInRole("ادمین"))
-                        {
-                            <li>
-                                <a asp-controller="Admin" asp-action="Index">
-                                    صفحه مدیریت سایت
-                                </a>
-                            </li>
-                        }
                         <li>
-                            <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
-                                مشاهده حساب کاربری
+                            <a asp-controller="Admin" asp-action="Index">
+                                صفحه مدیریت سایت
                             </a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
-                                ویرایش حساب کاربری
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                سفارشات من
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                پیام های من
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                قوانین و مقررات
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                ارتباط با ما
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                درباره ما
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-controller="Account" asp-action="LogOut">
-                                خروج از حساب کاربری
-                            </a>
-                        </li>
-
-                    }
-                    else
-                    {
-                        <li class="text-white">
-                            <i class="far fa-user ml-1"></i>
-                            <a asp-controller="Account" asp-action="Login" class="nav-text">ورود</a> /
-                            <a asp-controller="Account" asp-action="Register" class="nav-text">عضویت</a>
                         </li>
                     }
+                    <li>
+                        <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                            مشاهده حساب کاربری
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
+                            ویرایش حساب کاربری
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            سفارشات من
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            پیام های من
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            قوانین و مقررات
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            ارتباط با ما
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            درباره ما
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="LogOut">
+                            خروج از حساب کاربری
+                        </a>
+                    </li>
                 }
             </ul>
         </nav>
     </header>
 
-    <div data-aos="zoom-in" data-aos-duration="1000">
-        <div class="container">
-            <main role="main" class="pb-3">
-                <div class="row">
-                    <div class="col-12 col-lg-3 mb-3 mb-lg-0">
-                        <ul class="list-group border custom-box-shadow">
-                            <li class="list-group-item text-center list-group-bg">
-                                <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
-                                    <img src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
-                                         title="@user.UserName" />
-                                </a>
-                                <p class="text-white mt-1">@user.UserName</p>
-                                <a asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" id="logout-tooltip" title="خروج از حساب">
-                                    <i class="fas fa-power-off icon-hover"></i>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover small-font">
-                                    <i class="fas fa-circle menu-small-icon"></i>
-                                    ویرایش حساب کاربری
-                                </a>
-                            </li>
-                            @if (User.IsInRole("ادمین"))
-                            {
-                                <li class="list-group-item">
-                                    <a class="text-hover small-font">
-                                        <i class="fas fa-circle menu-small-icon"></i>
-                                        سفارشات
+    <section>
+        <svg class="svg-pi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,256L34.3,234.7C68.6,213,137,171,206,160C274.3,149,343,171,411,154.7C480,139,549,85,617,80C685.7,75,754,117,823,117.3C891.4,117,960,75,1029,58.7C1097.1,43,1166,53,1234,69.3C1302.9,85,1371,107,1406,117.3L1440,128L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
+        <div data-aos="zoom-in" data-aos-duration="1000">
+            <div class="container">
+                <main role="main" class="pb-3">
+                    <div class="row">
+                        <div class="col-12 col-lg-3 mb-3 mb-lg-0">
+                            <ul class="list-group border custom-box-shadow">
+                                <li class="list-group-item text-center list-group-bg">
+                                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                                        <img src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
+                                             title="@user.UserName" />
+                                    </a>
+                                    <p class="text-white mt-1">@user.UserName</p>
+                                    <a asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" id="logout-tooltip" title="خروج از حساب">
+                                        <i class="fas fa-power-off icon-hover"></i>
                                     </a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover small-font">
+                                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover small-font">
                                         <i class="fas fa-circle menu-small-icon"></i>
-                                        مشاهده تیکت ها
+                                        ویرایش حساب کاربری
                                     </a>
                                 </li>
-                            }
-                            else
-                            {
+                                @if (User.IsInRole("ادمین"))
+                                {
+                                    <li class="list-group-item">
+                                        <a class="text-hover small-font">
+                                            <i class="fas fa-circle menu-small-icon"></i>
+                                            سفارشات
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover small-font">
+                                            <i class="fas fa-circle menu-small-icon"></i>
+                                            مشاهده تیکت ها
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="list-group-item">
+                                        <a class="text-hover small-font">
+                                            <i class="fas fa-circle menu-small-icon"></i>
+                                            سفارشات من
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
+                                            <i class="fas fa-circle menu-small-icon"></i>
+                                            ارسال تیکت
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="text-hover small-font">
+                                            <i class="fas fa-circle menu-small-icon"></i>
+                                            پیام های من
+                                        </a>
+                                    </li>
+                                }
                                 <li class="list-group-item">
-                                    <a class="text-hover small-font">
+                                    <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
                                         <i class="fas fa-circle menu-small-icon"></i>
-                                        سفارشات من
+                                        خروج از حساب
                                     </a>
                                 </li>
-                                <li class="list-group-item">
-                                    <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
-                                        <i class="fas fa-circle menu-small-icon"></i>
-                                        ارسال تیکت
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="text-hover small-font">
-                                        <i class="fas fa-circle menu-small-icon"></i>
-                                        پیام های من
-                                    </a>
-                                </li>
-                            }
-                            <li class="list-group-item">
-                                <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
-                                    <i class="fas fa-circle menu-small-icon"></i>
-                                    خروج از حساب
-                                </a>
-                            </li>
-                        </ul>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-9">
+                            @RenderBody()
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-9">
-                        @RenderBody()
-                    </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
-    </div>
+    </section>
 
     <footer class="border-top footer text-muted">
         <div class="container">

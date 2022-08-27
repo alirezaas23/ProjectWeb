@@ -31,7 +31,7 @@
                         {
                             <li>
                                 <div class="dropdown pa-z1">
-                                    <a class="dropdown ul-text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    <a class="dropdown navbar-hover-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-caret-down"></i>
                                         <span>@user.UserName</span>
                                         <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1" />
@@ -68,17 +68,17 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item navbar-hover-text">
                                 <a>
                                     قوانین و مقررات
                                 </a>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item navbar-hover-text">
                                 <a>
                                     ارتباط با ما
                                 </a>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item navbar-hover-text">
                                 <a>
                                     درباره ما
                                 </a>
@@ -86,22 +86,23 @@
                         }
                         else
                         {
-                            <li class="ul-nav-item ul-text-hover pa-z1">
-                                <i class="far fa-user ml-1"></i>
-                                <a asp-controller="Account" asp-action="Login">ورود</a> /
-                                <a asp-controller="Account" asp-action="Register">عضویت</a>
+                            <li class="ul-nav-item pa-z1">
+                                <i class="far fa-user ml-1 navbar-hover-text"></i>
+                                <a asp-controller="Account" asp-action="Login" class="navbar-hover-text">ورود</a>
+                                <span style="color: white;">/</span>
+                                <a asp-controller="Account" asp-action="Register" class="navbar-hover-text">عضویت</a>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item navbar-hover-text">
                                 <a>
                                     قوانین و مقررات
                                 </a>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item navbar-hover-text">
                                 <a>
                                     ارتباط با ما
                                 </a>
                             </li>
-                            <li class="ul-nav-item ul-text-hover">
+                            <li class="ul-nav-item navbar-hover-text">
                                 <a>
                                     درباره ما
                                 </a>
