@@ -10,5 +10,6 @@ namespace ProjectWeb.Domain.Interfaces
         void AddWebProduct(WebProduct webProduct);
         void SaveChanges();
         IEnumerable<WebProduct> WebProductsList();
+        WebProduct FindById(int id);
     }
 }

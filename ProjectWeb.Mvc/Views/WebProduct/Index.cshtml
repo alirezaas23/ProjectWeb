@@ -43,7 +43,11 @@
                             <td>@row</td>
                             <td>@product.WebProductName</td>
                             <td>@product.WebProductPrice</td>
-                            <td></td>
+                            <td class="small">
+                                <a asp-controller="WebProduct" asp-action="DeleteProduct" asp-route-id="@product.WebProductID" class="text-hover">
+                                    حذف محصول
+                                </a>
+                            </td>
                         </tr>
                         row++;
                     }

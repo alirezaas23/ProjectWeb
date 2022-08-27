@@ -451,3 +451,7 @@ table tbody tr:nth-child(even) {
 .ticket-info img{
     width: 100%;
 }
+
+ul{
+    list-style-position: inside;
+}

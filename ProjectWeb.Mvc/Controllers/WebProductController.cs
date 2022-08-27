@@ -49,5 +49,21 @@ namespace ProjectWeb.Mvc.Controllers
             TempData["Message"] = "محصول جدید با موفقیت ثبت شد.";
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult DeleteProduct(int id)
+        {
+            var product = _webProductInterface.FindById(id);
+            var modelProduct = new ShowWebProductViewModel()
+            {
+                WebProductDeliverDate = product.WebProductDeliverDate,
+                WebProductDescription = product.WebProductDescription,
+                WebProductID = product.WebProductID,
+                WebProductImage = product.WebProductImage,
+                WebProductName = product.WebProductName,
+                WebProductPrice = product.WebProductPrice
+            };
+            return View(modelProduct);
+        }
     }
 }

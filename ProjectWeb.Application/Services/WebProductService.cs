@@ -21,6 +21,11 @@ namespace ProjectWeb.Application.Services
             _webProductRepository.AddWebProduct(webProduct);
         }
 
+        public WebProduct FindById(int id)
+        {
+            return _webProductRepository.FindById(id);
+        }
+
         public IEnumerable<WebProduct> WebProductsList()
         {
             return _webProductRepository.WebProductsList();

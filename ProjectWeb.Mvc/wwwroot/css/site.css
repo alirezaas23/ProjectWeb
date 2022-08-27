@@ -17,7 +17,7 @@ a.navbar-brand {
 }
 
 ul{
-    list-style: none;
+    list-style-position: inside;
     margin: 0;
     padding: 0;
 }
@@ -315,4 +315,9 @@ header .custom-nav .logo img{
 .navbar-hover-text:hover{
     color: black;
     text-decoration: none;
+}
+
+.custom-ul{
+    list-style: circle;
+    list-style-position: inside;
 }

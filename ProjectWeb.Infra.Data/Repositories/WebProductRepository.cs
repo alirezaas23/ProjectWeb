@@ -22,6 +22,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             SaveChanges();
         }
 
+        public WebProduct FindById(int id)
+        {
+            return _ctx.WebProducts.Find(id);
+        }
+
         public void SaveChanges()
         {
             _ctx.SaveChanges();

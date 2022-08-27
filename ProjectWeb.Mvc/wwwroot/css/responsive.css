@@ -45,6 +45,7 @@
     #responsive-nav ul{
         display: block;
         width: 100%;
+        list-style: none;
     }
 
     #responsive-nav ul li{
