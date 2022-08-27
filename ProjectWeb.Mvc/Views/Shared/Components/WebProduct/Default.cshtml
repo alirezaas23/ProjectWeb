@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProjectWeb.Domain.Models.WebProduct>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-12 col-lg-4" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <div class="card custom-box-shadow text-muted">
+                <img src="@product.WebProductImage" alt="@product.WebProductName" class="card-img-top" />
+                <div class="card-body">
+                    <div class="mt-2">
+                        <p class="text-muted small">
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            @product.WebProductDeliverDate
+                        </p>
+                        <p class="mt-2 font-weight-bold">
+                            @product.WebProductName
+                        </p>
+                        <p class="mt-2 text-muted small text-justify">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                            molestiae quas vel sint commodi repudiandae
+                        </p>
+                        <hr />
+                        <div style="">
+                            <div class="d-flex justify-content-between">
+                                <p class="text-left">
+                                    <i class="fas fa-dollar-sign mr-1"></i>
+                                    @product.WebProductPrice تومان
+                                </p>
+                                <p class="text-right">
+                                    <a class="mr-3 text-hover">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                    <a class="text-hover">
+                                        <i class="fas fa-heart"></i>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -14,7 +14,7 @@
                 <h2 data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000">
                     طراحی سایت خود را به ما بسپارید
                 </h2>
-                <p data-aos="fade-up" data-aos-delay="700" data-aos-duration="1000">
+                <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
                     طراحی کاربر پسند، تحویل سریع، سرعت بالا
                 </p>
             </div>
@@ -24,7 +24,7 @@
 
 <section class="mt-5">
     <div class="row">
-        <div class="col-12 col-lg-4" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="900">
+        <div class="col-12 col-lg-4" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="600">
             <div class="card custom-box-shadow text-center">
                 <div class="card-body">
                     <img src="~/imgs/best-price.png" alt="قیمت_مناسب"/>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="1100">
+        <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="700">
             <div class="card custom-box-shadow text-center">
                 <div class="card-body">
                     <img src="~/imgs/support.png" alt="پشتیبانی_همیشگی" />
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="1300">
+        <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="800">
             <div class="card custom-box-shadow text-center">
                 <div class="card-body">
                     <img src="~/imgs/responive-deisgn.png" alt="طراحی_تعاملی" />
@@ -55,4 +55,11 @@
             </div>
         </div>
     </div>
+</section>
+
+<section class="mt-5">
+    <p style="border-bottom: 3px solid blue;width: 80px; padding-bottom: 5px;" data-aos="fade-left" data-aos-duration="1000">
+        محصولات
+    </p>
+    @await Component.InvokeAsync("WebProduct")
 </section>
