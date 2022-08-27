@@ -22,6 +22,13 @@ namespace ProjectWeb.Infra.Data.Repositories
             SaveChanges();
         }
 
+        public void DeleteProduct(int id)
+        {
+            var product = FindById(id);
+            _ctx.WebProducts.Remove(product);
+            SaveChanges();
+        }
+
         public WebProduct FindById(int id)
         {
             return _ctx.WebProducts.Find(id);

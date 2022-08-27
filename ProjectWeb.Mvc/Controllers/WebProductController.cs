@@ -65,5 +65,13 @@ namespace ProjectWeb.Mvc.Controllers
             };
             return View(modelProduct);
         }
+
+        [HttpPost, ValidateAntiForgeryToken, ActionName("DeleteProduct")]
+        public IActionResult DeleteProductPost(int id)
+        {
+            _webProductInterface.DeleteProduct(id);
+            TempData["Message"] = "محصول مورد نظر با موفقیت حذف شد.";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

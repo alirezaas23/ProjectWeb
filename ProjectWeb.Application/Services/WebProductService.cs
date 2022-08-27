@@ -21,6 +21,11 @@ namespace ProjectWeb.Application.Services
             _webProductRepository.AddWebProduct(webProduct);
         }
 
+        public void DeleteProduct(int id)
+        {
+            _webProductRepository.DeleteProduct(id);
+        }
+
         public WebProduct FindById(int id)
         {
             return _webProductRepository.FindById(id);
