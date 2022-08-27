@@ -1,9 +1,7 @@
 ﻿using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using ProjectWeb.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProjectWeb.Application.Services
 {

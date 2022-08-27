@@ -4,59 +4,60 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     int row = 1;
 }
-
-<a asp-controller="WebProduct" asp-action="AddWebProduct" class="btn btn-custom-purple">
-    افزودن محصول جدید
-</a>
-<hr />
-@{
-    if (ViewBag.Message != null)
-    {
-        <div class="alert alert-info">
-            @ViewBag.Message
-        </div>
-    }
-    if (!Model.Any())
-    {
-        <div class="alert alert-danger">
-            هیچ محصول وبی یافت نشد!
-        </div>
-    }
-    else
-    {
-        <div style="overflow-x: auto;">
-            <table class="table text-center">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>نام محصول</th>
-                        <th>قیمت محصول</th>
-                        <th>
-                            <i class="fas fa-cog"></i>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var product in Model)
-                    {
+<div data-aos="fade-down" data-aos-duration="1000">
+    <a asp-controller="WebProduct" asp-action="AddWebProduct" class="btn btn-custom-purple">
+        افزودن محصول جدید
+    </a>
+    <hr />
+    @{
+        if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
+        if (!Model.Any())
+        {
+            <div class="alert alert-danger">
+                هیچ محصول وبی یافت نشد!
+            </div>
+        }
+        else
+        {
+            <div style="overflow-x: auto;">
+                <table class="table text-center">
+                    <thead>
                         <tr>
-                            <td>@row</td>
-                            <td>@product.WebProductName</td>
-                            <td>@product.WebProductPrice</td>
-                            <td class="small">
-                                <a asp-controller="WebProduct" asp-action="DeleteProduct" asp-route-id="@product.WebProductID" class="text-hover">
-                                    حذف محصول
-                                </a>
-                                /
-                                <a asp-controller="WebProduct" asp-action="EditProduct" asp-route-id="@product.WebProductID" class="text-hover">
-                                    ویرایش محصول
-                                </a>
-                            </td>
+                            <th>#</th>
+                            <th>نام محصول</th>
+                            <th>قیمت محصول</th>
+                            <th>
+                                <i class="fas fa-cog"></i>
+                            </th>
                         </tr>
-                        row++;
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@row</td>
+                                <td>@product.WebProductName</td>
+                                <td>@product.WebProductPrice</td>
+                                <td class="small">
+                                    <a asp-controller="WebProduct" asp-action="DeleteProduct" asp-route-id="@product.WebProductID" class="text-hover">
+                                        حذف محصول
+                                    </a>
+                                    /
+                                    <a asp-controller="WebProduct" asp-action="EditProduct" asp-route-id="@product.WebProductID" class="text-hover">
+                                        ویرایش محصول
+                                    </a>
+                                </td>
+                            </tr>
+                            row++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
     }
-}
+</div>

@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.ViewComponents

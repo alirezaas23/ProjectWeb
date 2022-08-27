@@ -4,25 +4,27 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
-<h4>
-    حذف محصول @Model.WebProductName
-</h4>
-<div class="border p-3">
-    <img src="@Model.WebProductImage" alt="@Model.WebProductName" style="width: 100%;"/>
-    <p class="mt-2">
-        نام محصول : <span class="font-weight-bold">@Model.WebProductName</span>
-    </p>
-    <p class="mt-2">
-        قیمت محصول : <span class="font-weight-bold">@Model.WebProductPrice تومان</span>
-    </p>
-    <p class="mt-2">
-        توضیحات محصول : @Html.Raw(Model.WebProductDescription)
-    </p>
-    <hr />
-    <p>
-        آیا میخواهید این محصول را حذف کنید ؟
-    </p>
-    <form method="post" asp-controller="WebProduct" asp-action="DeleteProduct" asp-route-id="@Model.WebProductID">
-        <button type="submit" class="btn btn-product-delete">حذف محصول</button>
-    </form>
+<div data-aos="fade-down" data-aos-duration="1000">
+    <h4>
+        حذف محصول @Model.WebProductName
+    </h4>
+    <div class="border p-3">
+        <img src="@Model.WebProductImage" alt="@Model.WebProductName" style="width: 100%;" />
+        <p class="mt-2">
+            نام محصول : <span class="font-weight-bold">@Model.WebProductName</span>
+        </p>
+        <p class="mt-2">
+            قیمت محصول : <span class="font-weight-bold">@Model.WebProductPrice تومان</span>
+        </p>
+        <p class="mt-2">
+            توضیحات محصول : @Html.Raw(Model.WebProductDescription)
+        </p>
+        <hr />
+        <p>
+            آیا میخواهید این محصول را حذف کنید ؟
+        </p>
+        <form method="post" asp-controller="WebProduct" asp-action="DeleteProduct" asp-route-id="@Model.WebProductID">
+            <button type="submit" class="btn btn-product-delete">حذف محصول</button>
+        </form>
+    </div>
 </div>

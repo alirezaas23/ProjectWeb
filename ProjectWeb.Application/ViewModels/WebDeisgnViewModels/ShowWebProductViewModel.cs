@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
+﻿namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
 {
     public class ShowWebProductViewModel
     {

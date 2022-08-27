@@ -3,55 +3,57 @@
     ViewData["Title"] = "EditProduct";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
-<h4>
-    ویرایش محصول @Model.WebProductName
-</h4>
-<div class="border p-3">
-    <form method="post" asp-controller="WebProduct" asp-action="EditProduct" enctype="multipart/form-data">
-        <div class="form-group">
-            <label asp-for="ImageUrl"></label>
-            <img src="@Model.ImageUrl" alt="@Model.WebProductName" style="width: 100%;" />
-        </div>
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <div class="form-group">
-                    <label asp-for="WebProductName"></label>
-                    <input asp-for="WebProductName" class="form-control input-custom" />
-                    <span asp-validation-for="WebProductName" class="text-danger"></span>
+<div data-aos="fade-down" data-aos-duration="1000">
+    <h4>
+        ویرایش محصول @Model.WebProductName
+    </h4>
+    <div class="border p-3">
+        <form method="post" asp-controller="WebProduct" asp-action="EditProduct" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <img src="@Model.ImageUrl" alt="@Model.WebProductName" style="width: 100%;" />
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="WebProductName"></label>
+                        <input asp-for="WebProductName" class="form-control input-custom" />
+                        <span asp-validation-for="WebProductName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="WebProductImage"></label>
+                        <input asp-for="WebProductImage" class="form-control input-custom" />
+                        <span asp-validation-for="WebProductImage" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-6">
-                <div class="form-group">
-                    <label asp-for="WebProductImage"></label>
-                    <input asp-for="WebProductImage" class="form-control input-custom" />
-                    <span asp-validation-for="WebProductImage" class="text-danger"></span>
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="WebProductPrice"></label>
+                        <input asp-for="WebProductPrice" class="form-control input-custom" inputmode="numeric" />
+                        <span asp-validation-for="WebProductPrice" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="WebProductDeliverDate"></label>
+                        <input asp-for="WebProductDeliverDate" class="form-control input-custom" />
+                        <span asp-validation-for="WebProductDeliverDate" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <div class="form-group">
-                    <label asp-for="WebProductPrice"></label>
-                    <input asp-for="WebProductPrice" class="form-control input-custom" inputmode="numeric" />
-                    <span asp-validation-for="WebProductPrice" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="WebProductDescription"></label>
+                <textarea asp-for="WebProductDescription" id="my-textarea"></textarea>
+                <span asp-validation-for="WebProductDescription" class="text-danger"></span>
             </div>
-            <div class="col-12 col-lg-6">
-                <div class="form-group">
-                    <label asp-for="WebProductDeliverDate"></label>
-                    <input asp-for="WebProductDeliverDate" class="form-control input-custom" />
-                    <span asp-validation-for="WebProductDeliverDate" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="WebProductDescription"></label>
-            <textarea asp-for="WebProductDescription" id="my-textarea"></textarea>
-            <span asp-validation-for="WebProductDescription" class="text-danger"></span>
-        </div>
-        <input type="hidden" asp-for="WebProductID"/>
-        <button type="submit" class="btn btn-ticket-answer-post">ویرایش محصول</button>
-    </form>
+            <input type="hidden" asp-for="WebProductID" />
+            <button type="submit" class="btn btn-ticket-answer-post">ویرایش محصول</button>
+        </form>
+    </div>
 </div>
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}

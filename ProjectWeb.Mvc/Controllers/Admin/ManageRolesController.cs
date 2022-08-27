@@ -136,7 +136,7 @@ namespace ProjectWeb.Mvc.Controllers.Admin
         [HttpGet]
         public IActionResult SearchRoles(string name)
         {
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
                 return RedirectToAction("Index", "ManageRoles");
             }

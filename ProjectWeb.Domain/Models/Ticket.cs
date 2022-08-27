@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ProjectWeb.Domain.Models
+﻿namespace ProjectWeb.Domain.Models
 {
     public class Ticket
     {

@@ -1,5 +1,4 @@
-﻿using ProjectWeb.Domain.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace ProjectWeb.Application.ViewModels

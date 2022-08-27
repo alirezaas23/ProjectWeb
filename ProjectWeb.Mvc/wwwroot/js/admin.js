@@ -1,4 +1,6 @@
-﻿AOS.init();
+﻿AOS.init({
+    once: true
+});
 
 $(".custom-tooltip").tooltip();
 $(".ticket-tooltip").tooltip();
