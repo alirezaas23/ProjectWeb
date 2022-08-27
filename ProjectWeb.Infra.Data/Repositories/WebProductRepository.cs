@@ -29,6 +29,21 @@ namespace ProjectWeb.Infra.Data.Repositories
             SaveChanges();
         }
 
+        public void EditProduct(WebProduct webProduct)
+        {
+            var product = FindById(webProduct.WebProductID);
+            product.WebProductID = webProduct.WebProductID;
+            product.WebProductDeliverDate = webProduct.WebProductDeliverDate;
+            product.WebProductDescription = webProduct.WebProductDescription;
+            if (webProduct.WebProductImage != null && webProduct.WebProductImage != "")
+            {
+                product.WebProductImage = webProduct.WebProductImage;
+            }
+            product.WebProductName = webProduct.WebProductName;
+            product.WebProductPrice = webProduct.WebProductPrice;
+            SaveChanges();
+        }
+
         public WebProduct FindById(int id)
         {
             return _ctx.WebProducts.Find(id);

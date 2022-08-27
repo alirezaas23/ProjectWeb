@@ -73,5 +73,35 @@ namespace ProjectWeb.Mvc.Controllers
             TempData["Message"] = "محصول مورد نظر با موفقیت حذف شد.";
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult EditProduct(int id)
+        {
+            var product = _webProductInterface.FindById(id);
+            var productModel = new EditWebProductViewModel()
+            {
+                ImageUrl = product.WebProductImage,
+                WebProductDeliverDate = product.WebProductDeliverDate,
+                WebProductDescription = product.WebProductDescription,
+                WebProductID = product.WebProductID,
+                WebProductName = product.WebProductName,
+                WebProductPrice = product.WebProductPrice
+            };
+            return View(productModel);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult EditProduct(EditWebProductViewModel model)
+        {
+            var product = new WebProduct();
+            product.WebProductDeliverDate = model.WebProductDeliverDate;
+            product.WebProductDescription = model.WebProductDescription;
+            product.WebProductID = model.WebProductID;
+            product.WebProductImage = _uploadFileInterface.uploadPhoto(model.WebProductImage);
+            product.WebProductName = model.WebProductName;
+            product.WebProductPrice = model.WebProductPrice;
+            _webProductInterface.EditProduct(product);
+            TempData["Message"] = "محصول مورد نظر با موفقیت ویرایش شد.";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

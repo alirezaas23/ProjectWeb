@@ -12,5 +12,6 @@ namespace ProjectWeb.Domain.Interfaces
         IEnumerable<WebProduct> WebProductsList();
         WebProduct FindById(int id);
         void DeleteProduct(int id);
+        void EditProduct(WebProduct webProduct);
     }
 }
