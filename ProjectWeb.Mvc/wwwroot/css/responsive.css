@@ -27,6 +27,7 @@
     }
 
     #responsive-nav{
+        overflow-y: auto;
         display: none;
         width: 220px;
         height: 100%;

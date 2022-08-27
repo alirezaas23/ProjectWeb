@@ -57,8 +57,5 @@ function ShowNav() {
             }
         }
     });
-    window.addEventListener("resize", function () {
-        responsiveNav.style.display = "none";
-        container.style.display = "none";
-    });
+    
 }

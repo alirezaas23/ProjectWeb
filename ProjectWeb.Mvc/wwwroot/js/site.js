@@ -78,8 +78,4 @@ function ShowNav() {
             }
         }
     });
-    window.addEventListener("resize", function () {
-        responsiveNav.style.display = "none";
-        bgOverlay.style.display = "none";
-    })
 }
