@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
 {
-    [Authorize(Roles = "ادمین")]
     public class WebProductController : Controller
     {
         private readonly IWebProductInterface _webProductInterface;
@@ -24,6 +23,7 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ادمین")]
         public IActionResult Index()
         {
             var WebProducts = _webProductInterface.WebProductsList();
@@ -32,12 +32,14 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ادمین")]
         public IActionResult AddWebProduct()
         {
             return View();
         }
 
         [HttpPost, ValidateAntiForgeryToken]
+        [Authorize(Roles = "ادمین")]
         public IActionResult AddWebProduct(AddWebProductViewModel model)
         {
             WebProduct webProduct = new WebProduct();
@@ -52,6 +54,7 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ادمین")]
         public IActionResult DeleteProduct(int id)
         {
             var product = _webProductInterface.FindById(id);
@@ -68,6 +71,7 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken, ActionName("DeleteProduct")]
+        [Authorize(Roles = "ادمین")]
         public IActionResult DeleteProductPost(int id)
         {
             _webProductInterface.DeleteProduct(id);
@@ -76,6 +80,7 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ادمین")]
         public IActionResult EditProduct(int id)
         {
             var product = _webProductInterface.FindById(id);
@@ -91,6 +96,7 @@ namespace ProjectWeb.Mvc.Controllers
             return View(productModel);
         }
         [HttpPost, ValidateAntiForgeryToken]
+        [Authorize(Roles = "ادمین")]
         public IActionResult EditProduct(EditWebProductViewModel model)
         {
             var product = new WebProduct();
@@ -106,7 +112,7 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> WebProductInfo(int id)
         {
             ViewBag.Message = TempData["Message"];
