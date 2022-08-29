@@ -24,14 +24,14 @@
                                     <i class="fas fa-dollar-sign mr-1"></i>
                                     @product.WebProductPrice تومان
                                 </p>
-                                <p class="text-right">
-                                    <a class="mr-3 text-hover">
+                                <div class="text-right">
+                                    <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID" class="mr-3 text-hover">
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                                     <a class="text-hover">
                                         <i class="fas fa-heart"></i>
                                     </a>
-                                </p>
+                                </div>
                             </div>
                         </div>
                     </div>

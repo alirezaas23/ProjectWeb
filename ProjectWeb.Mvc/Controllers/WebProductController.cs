@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.ViewModels.WebDeisgnViewModels;
 using ProjectWeb.Domain.Models;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
 {
@@ -11,11 +14,13 @@ namespace ProjectWeb.Mvc.Controllers
     {
         private readonly IWebProductInterface _webProductInterface;
         private readonly IUploadFileInterface _uploadFileInterface;
+        private readonly UserManager<UserApp> _userManager;
 
-        public WebProductController(IWebProductInterface webProductInterface, IUploadFileInterface uploadFileInterface)
+        public WebProductController(IWebProductInterface webProductInterface, IUploadFileInterface uploadFileInterface, UserManager<UserApp> userManager)
         {
             _webProductInterface = webProductInterface;
             _uploadFileInterface = uploadFileInterface;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -98,6 +103,19 @@ namespace ProjectWeb.Mvc.Controllers
             _webProductInterface.EditProduct(product);
             TempData["Message"] = "محصول مورد نظر با موفقیت ویرایش شد.";
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> WebProductInfo(int id)
+        {
+            var product = _webProductInterface.FindById(id);
+            var user =  await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (user.AccountConfirm == false)
+            {
+                return RedirectToAction("AccountConfirm", "Account", new {userId = user.Id });
+            }
+            return View(product);
         }
     }
 }

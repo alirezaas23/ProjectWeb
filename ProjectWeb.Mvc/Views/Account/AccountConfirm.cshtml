@@ -1,0 +1,51 @@
+﻿@model AccountConfirmViewModel
+@{
+    ViewData["Title"] = "تایید حساب کاربری";
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+}
+
+<section>
+    <div class="row d-flex justify-content-center align-items-center vh-100 m-1 m-md-0" data-aos="fade-down" data-aos-duration="1000">
+        <div class="col-lg-8">
+            <div class="card custom-box-shadow small">
+                <div class="card-header card-header-green-color text-white">
+                    <h5>
+                        <i class="far fa-check-circle ml-1"></i>
+                        تایید حساب کاربری
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-circle ml-2"></i>
+                        حساب کاربری شما تایید نشده است. لطفا مشخصات را بررسی و تایید کنید.
+                    </div>
+                    <h6 class="font-weight-bold">
+                        مشخصات حساب <span> @Model.UserName</span> :
+                    </h6>
+                    <p class="mt-3">
+                        <i class="far fa-user ml-2"></i>
+                        نام و نام خانوادگی : <span class="font-weight-bold">@Model.FirstName @Model.LastName</span>
+                    </p>
+                    <p>
+                        <i class="far fa-envelope ml-2"></i>
+                        ایمیل : <span class="font-weight-bold">@Model.Email</span>
+                    </p>
+                    <p>
+                        <i class="fas fa-phone ml-2"></i>
+                        شماره تماس : <span class="font-weight-bold">@Model.PhoneNumber</span>
+                    </p>
+                    <hr />
+                    <p>
+                        آیا مشخصات فوق را تایید میکنید ؟
+                    </p>
+                    <form method="post" asp-controller="Account" asp-action="AccountConfirm" asp-route-userId="@Model.UserId">
+                        <button type="submit" class="btn btn-edit">تایید حساب کاربری</button> |
+                        <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@Model.UserId" class="text-hover">
+                            ویرایش حساب کاربری
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -202,5 +202,36 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> AccountConfirm(string userId)
+        {
+            if (string.IsNullOrEmpty(userId)) return NotFound();
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return NotFound();
+            var userModel = new AccountConfirmViewModel()
+            {
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                UserId = user.Id,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+            return View(userModel);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken, ActionName("AccountConfirm")]
+        public async Task<IActionResult> AccountConfirmPost(string userId)
+        {
+            if (string.IsNullOrEmpty(userId)) return NotFound();
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return NotFound();
+            user.AccountConfirm = true;
+            await _userManager.UpdateAsync(user);
+            TempData["Message"] = "حساب کاربری شما تایید شد. با تشکر.";
+            return RedirectToAction(nameof(ShowProfile), new { id = user.Id});
+        }
     }
 }
