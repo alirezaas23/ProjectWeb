@@ -1,0 +1,15 @@
+﻿@model ProjectWeb.Domain.Models.WebProduct
+@{
+    ViewData["Title"] = "WebProductInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.Message
+        </div>
+    }
+}
+@Model.WebProductName

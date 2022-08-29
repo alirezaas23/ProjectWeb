@@ -205,33 +205,31 @@ namespace ProjectWeb.Mvc.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> AccountConfirm(string userId)
+        public async Task<IActionResult> AccountConfirm(string userId, int productId)
         {
-            if (string.IsNullOrEmpty(userId)) return NotFound();
             var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) return NotFound();
             var userModel = new AccountConfirmViewModel()
             {
                 Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 UserId = user.Id,
                 UserName = user.UserName,
-                FirstName = user.FirstName,
-                LastName = user.LastName
+                WebProductId = productId
             };
             return View(userModel);
         }
 
         [HttpPost, ValidateAntiForgeryToken, ActionName("AccountConfirm")]
-        public async Task<IActionResult> AccountConfirmPost(string userId)
+        public async Task<IActionResult> AccountConfirmPost(AccountConfirmViewModel model)
         {
-            if (string.IsNullOrEmpty(userId)) return NotFound();
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(model.UserId);
             if (user == null) return NotFound();
             user.AccountConfirm = true;
             await _userManager.UpdateAsync(user);
             TempData["Message"] = "حساب کاربری شما تایید شد. با تشکر.";
-            return RedirectToAction(nameof(ShowProfile), new { id = user.Id});
+            return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
         }
     }
 }

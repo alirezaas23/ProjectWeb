@@ -109,11 +109,12 @@ namespace ProjectWeb.Mvc.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> WebProductInfo(int id)
         {
+            ViewBag.Message = TempData["Message"];
             var product = _webProductInterface.FindById(id);
             var user =  await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             if (user.AccountConfirm == false)
             {
-                return RedirectToAction("AccountConfirm", "Account", new {userId = user.Id });
+                return RedirectToAction("AccountConfirm", "Account", new {userId = user.Id, productId = id });
             }
             return View(product);
         }

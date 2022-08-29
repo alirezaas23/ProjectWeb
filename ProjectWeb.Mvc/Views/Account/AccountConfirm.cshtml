@@ -38,9 +38,11 @@
                     <p>
                         آیا مشخصات فوق را تایید میکنید ؟
                     </p>
-                    <form method="post" asp-controller="Account" asp-action="AccountConfirm" asp-route-userId="@Model.UserId">
+                    <form method="post" asp-controller="Account" asp-action="AccountConfirm">
+                        <input hidden asp-for="WebProductId"/>
+                        <input hidden asp-for="UserId"/>
                         <button type="submit" class="btn btn-edit">تایید حساب کاربری</button> |
-                        <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@Model.UserId" class="text-hover">
+                        <a asp-controller="Account" asp-action="EditAccount" class="text-hover">
                             ویرایش حساب کاربری
                         </a>
                     </form>
