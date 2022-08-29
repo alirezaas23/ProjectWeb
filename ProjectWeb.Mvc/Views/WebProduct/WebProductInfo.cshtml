@@ -1,15 +1,65 @@
 ﻿@model ProjectWeb.Domain.Models.WebProduct
 @{
-    ViewData["Title"] = "WebProductInfo";
+    ViewData["Title"] = Model.WebProductName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{
-    if (ViewBag.Message != null)
-    {
-        <div class="alert alert-success">
-            @ViewBag.Message
+<section data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000">
+    <div class="row">
+        <div class="col-12">
+            <div class="card custom-box-shadow">
+                <div class="card-body text-muted">
+                    @{
+                        if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-success">
+                                @ViewBag.Message
+                            </div>
+                        }
+                    }
+                    <h4>
+                        @Model.WebProductName
+                    </h4>
+                    <hr />
+                    <img src="@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" title="@Model.WebProductName" />
+                    <div class="mt-3 border p-2 custom-box-shadow">
+                        <p>
+                            <i class="fas fa-file-contract"></i>
+                            <span class="font-weight-bold">توضیحات محصول :</span>
+                            @Html.Raw(Model.WebProductDescription)
+                        </p>
+                    </div>
+                    <div class="mt-3 border p-2 custom-box-shadow">
+                        <p>
+                            <i class="fas fa-dollar-sign"></i>
+                            <span class="font-weight-bold">قیمت محصول : </span>
+                            @Model.WebProductPrice تومان
+                        </p>
+                        <p>
+                            <i class="fas fa-calendar-alt"></i>
+                            <span class="font-weight-bold">زمان تحویل : </span>
+                            @Model.WebProductDeliverDate
+                        </p>
+                        <form>
+                            <div class="position-relative">
+                                <button class="btn btn-edit">افزودن به سبد</button>
+                                <i class="fas fa-shopping-cart icon-for-btn"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
-}
-@Model.WebProductName
+    </div>
+</section>
+
+<section>
+    <div class="card mt-3 custom-box-shadow">
+        <div class="card-body">
+            <p class="mt-3" style="border-bottom: 3px solid blue;width: 120px; padding-bottom: 5px;" data-aos="fade-left" data-aos-duration="1000">
+                محصولات مشابه
+            </p>
+            @await Component.InvokeAsync("WebProduct")
+        </div>
+    </div>
+</section>

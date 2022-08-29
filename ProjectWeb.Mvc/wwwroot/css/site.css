@@ -321,3 +321,14 @@ header .custom-nav .logo img{
     list-style: circle;
     list-style-position: inside;
 }
+
+.width-100 {
+    width: 100% !important;
+}
+
+.icon-for-btn {
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    color: white;
+}
