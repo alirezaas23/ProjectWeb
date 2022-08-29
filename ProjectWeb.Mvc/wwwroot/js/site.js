@@ -73,6 +73,7 @@ function ShowNav() {
         function CloseNav() {
             if (pos == -220) {
                 clearInterval(interval);
+                responsiveNav.style.display = "none";
             }
             else {
                 pos -= 5;

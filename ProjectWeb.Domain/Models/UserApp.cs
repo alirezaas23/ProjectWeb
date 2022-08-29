@@ -6,5 +6,6 @@ namespace ProjectWeb.Domain.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool AccountConfirm { get; set; }
     }
 }
