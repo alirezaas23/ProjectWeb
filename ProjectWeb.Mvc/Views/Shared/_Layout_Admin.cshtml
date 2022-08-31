@@ -8,7 +8,7 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewData["Title"] - ProjectWeb.Mvc</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.rtl.css" />
     <link rel="stylesheet" href="~/lib/aos/aos.css" />
@@ -89,33 +89,33 @@
         <nav id="responsive-menu">
             <ul style="list-style: none;">
                 <li>
-                    <a asp-controller="Home" asp-action="Index" class="text-hover">صفحه خانه سایت</a>
+                    <a asp-controller="Home" asp-action="Index">صفحه خانه سایت</a>
                 </li>
                 <li>
-                    <a asp-controller="WebProduct" asp-action="Index" class="text-hover">محصولات وب</a>
+                    <a asp-controller="WebProduct" asp-action="Index">محصولات وب</a>
                 </li>
                 <li>
-                    <a asp-controller="ManageUsers" asp-action="Index" class="text-hover">مدیریت کاربران</a>
+                    <a asp-controller="ManageUsers" asp-action="Index">مدیریت کاربران</a>
                 </li>
                 <li>
-                    <a asp-controller="ManageRoles" asp-action="Index" class="text-hover">مدیریت مقام ها</a>
+                    <a asp-controller="ManageRoles" asp-action="Index">مدیریت مقام ها</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="text-hover">مشاهده حساب کاربری</a>
+                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">مشاهده حساب کاربری</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover">
+                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
                         ویرایش حساب کاربری
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="" asp-action="" class="text-hover">سفارشات</a>
+                    <a asp-controller="" asp-action="">سفارشات</a>
                 </li>
                 <li>
-                    <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover">پیام ها</a>
+                    <a asp-controller="Ticket" asp-action="AllTickets">پیام ها</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="LogOut" class="text-hover">خروج از حساب کاربری</a>
+                    <a asp-controller="Account" asp-action="LogOut">خروج از حساب کاربری</a>
                 </li>
             </ul>
         </nav>

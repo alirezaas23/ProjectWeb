@@ -23,7 +23,7 @@
         overflow-y: auto;
         width: 220px;
         height: 100%;
-        background: white;
+        background: rgba(0, 0, 0, 0.9);
         top: 0;
         z-index: 1;
         right: -220px;
@@ -43,12 +43,14 @@
     }
 
     #responsive-menu ul li a{
-        color: black;
+        color: white;
         display: block;
         padding: 10px;
+        transition: all 0.5s ease;
     }
 
     #responsive-menu ul li a:hover{
-        background: #f5f5ff !important;
+        color: #47B5FF;
+        text-decoration: none;
     }
 }

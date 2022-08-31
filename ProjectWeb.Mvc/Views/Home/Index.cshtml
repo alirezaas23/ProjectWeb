@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "صفحه خانه سایت";
 }
 
 <section>
@@ -21,6 +21,10 @@
         </div>
     </div>
 </section>
+
+<div class="text-center mt-5 mb-5 animate__animated animate__shakeY animate__delay-2s animate__slow animate__repeat-2" data-aos="zoom-in" data-aos-delay="1000">
+    <img src="~/imgs/scroll-down.png" alt="Scroll-down" width="100" />
+</div>
 
 <section class="mt-5">
     <div class="row">
@@ -58,7 +62,7 @@
 </section>
 
 <section class="mt-5">
-    <p style="border-bottom: 3px solid blue;width: 80px; padding-bottom: 5px;" data-aos="fade-left" data-aos-duration="1000">
+    <p class="my-p" data-aos="fade-left" data-aos-duration="1000">
         محصولات
     </p>
     @await Component.InvokeAsync("WebProduct")

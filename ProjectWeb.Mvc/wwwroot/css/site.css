@@ -332,3 +332,9 @@ header .custom-nav .logo img{
     right: 10px;
     color: white;
 }
+
+.my-p {
+    border-bottom: 3px solid #00bffe;
+    width: fit-content;
+    padding: 5px;
+}
