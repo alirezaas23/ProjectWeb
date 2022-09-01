@@ -9,5 +9,7 @@ namespace ProjectWeb.Infra.Data.Context
             : base(options) { }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<WebProduct> WebProducts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }
