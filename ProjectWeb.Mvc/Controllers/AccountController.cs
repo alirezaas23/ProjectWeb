@@ -137,43 +137,47 @@ namespace ProjectWeb.Mvc.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> ShowProfile(string id)
+        public IActionResult ShowProfile(string id)
         {
             ViewBag.Message = TempData["Message"];
-            if (string.IsNullOrEmpty(id)) return NotFound();
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null) return NotFound();
-            var userModel = new ShowProfileViewModel()
+            using(var user = _userManager.FindByIdAsync(id))
             {
-                Email = user.Email,
-                UserId = user.Id,
-                UserName = user.UserName,
-                PhoneNumber = user.PhoneNumber
-            };
-            if (user.PhoneNumber == null)
-            {
-                ViewBag.Warning = "لطفا شماره تماس خود را در قسمت ویرایش حساب ثبت کنید";
+                if (string.IsNullOrEmpty(id)) return NotFound();
+                if (user == null) return NotFound();
+                var userModel = new ShowProfileViewModel()
+                {
+                    Email = user.Result.Email,
+                    UserId = user.Result.Id,
+                    UserName = user.Result.UserName,
+                    PhoneNumber = user.Result.PhoneNumber
+                };
+                if (user.Result.PhoneNumber == null)
+                {
+                    ViewBag.Warning = "لطفا شماره تماس خود را در قسمت ویرایش حساب ثبت کنید";
+                }
+                return View(userModel);
             }
-            return View(userModel);
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> EditAccount(string id)
+        public IActionResult EditAccount(string id)
         {
-            if (string.IsNullOrEmpty(id)) return NotFound();
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null) return NotFound();
-            var userModel = new EditAccountViewModel()
+            using(var user = _userManager.FindByIdAsync(id))
             {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                PhoneNumber = user.PhoneNumber,
-                UserId = user.Id,
-                UserName = user.UserName
-            };
-            return View(userModel);
+                if (string.IsNullOrEmpty(id)) return NotFound();
+                if (user == null) return NotFound();
+                var userModel = new EditAccountViewModel()
+                {
+                    Email = user.Result.Email,
+                    FirstName = user.Result.FirstName,
+                    LastName = user.Result.LastName,
+                    PhoneNumber = user.Result.PhoneNumber,
+                    UserId = user.Result.Id,
+                    UserName = user.Result.UserName
+                };
+                return View(userModel);
+            }
         }
 
         [HttpPost]

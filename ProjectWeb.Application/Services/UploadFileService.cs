@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using ProjectWeb.Application.Interfaces;
+using System.IO;
 
 namespace ProjectWeb.Application.Services
 {
@@ -17,10 +18,12 @@ namespace ProjectWeb.Application.Services
         {
             if (file == null) return "";
             var path = _environment.WebRootPath + "\\Images\\Product\\" + file.FileName;
-            using var f = System.IO.File.Create(path);
-            file.CopyTo(f);
-            path = path.Split("wwwroot")[1];
-            return path;
+            using (FileStream f = new FileStream(path, FileMode.Open, FileAccess.Write))
+            {
+                file.CopyTo(f);
+                path = path.Split("wwwroot")[1];
+                return path;
+            }
         }
     }
 }
