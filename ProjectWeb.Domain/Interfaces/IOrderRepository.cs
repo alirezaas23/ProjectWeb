@@ -7,10 +7,10 @@ namespace ProjectWeb.Domain.Interfaces
 {
     public interface IOrderRepository
     {
-        Order IsOrderInUse(string userId);
-        void UpdateSum(int OrderId);
-        void AddOrder(Order order);
         void UpdateOrder(Order order);
+        void UpdateSum(int OrderId);
+        Order IsOrderInUse(string userId);
+        void AddOrder(Order order);
         void SaveChanges();
     }
 }

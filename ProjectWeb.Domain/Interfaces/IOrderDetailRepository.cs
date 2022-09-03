@@ -7,9 +7,9 @@ namespace ProjectWeb.Domain.Interfaces
 {
     public interface IOrderDetailRepository
     {
-        void AddOrderDetail(OrderDetail orderDetail);
-        OrderDetail IsProductInUse(int orderId, int productId);
         void UpdateOrderDetail(OrderDetail orderDetail);
+        OrderDetail IsProductInUse(int orderId, int productId);
+        void AddOrderDetail(OrderDetail orderDetail);
         void SaveChanges();
     }
 }

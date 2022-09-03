@@ -11,7 +11,6 @@ namespace ProjectWeb.Infra.Data.Repositories
     public class OrderDetailRepository : IOrderDetailRepository
     {
         private readonly ApplicationContext _ctx;
-
         public OrderDetailRepository(ApplicationContext ctx)
         {
             this._ctx = ctx;

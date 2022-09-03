@@ -25,26 +25,26 @@ namespace ProjectWeb.Mvc.Controllers
         public IActionResult AddToBasket(int id)
         {
             PersianCalendar calendar = new PersianCalendar();
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = _orderInterface.IsOrderInUse(userId);
             if (order == null)
             {
                 order = new Order()
                 {
                     IsFinally = false,
+                    Sum = 0,
                     OrderDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
                     + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
-                    Sum = 0,
-                    UserId = userId,
+                    UserId = userId
                 };
                 _orderInterface.AddOrder(order);
                 var orderDetail = new OrderDetail()
                 {
                     Count = 1,
                     OrderId = order.OrderId,
-                    Order = order,
+                    Price = ((int)_webProductInterface.FindById(id).WebProductPrice),
                     WebProductId = id,
-                    Price = ((int)_webProductInterface.FindById(id).WebProductPrice)
+                    Order = order
                 };
                 _orderDetailInterface.AddOrderDetail(orderDetail);
             }
@@ -57,9 +57,9 @@ namespace ProjectWeb.Mvc.Controllers
                     {
                         Count = 1,
                         OrderId = order.OrderId,
-                        Order = order,
+                        Price = ((int)_webProductInterface.FindById(id).WebProductPrice),
                         WebProductId = id,
-                        Price = ((int)_webProductInterface.FindById(id).WebProductPrice)
+                        Order = order
                     };
                     _orderDetailInterface.AddOrderDetail(orderDetail);
                 }
