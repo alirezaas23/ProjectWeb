@@ -7,6 +7,7 @@ namespace ProjectWeb.Application.Interfaces
 {
     public interface IOrderInterface
     {
+        void UpdateSum(int OrderId);
         Order IsOrderInUse(string userId);
         void AddOrder(Order order);
     }

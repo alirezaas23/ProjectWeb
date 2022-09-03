@@ -26,9 +26,22 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.Orders.SingleOrDefault(o => o.UserId == userId && !o.IsFinally);
         }
 
+        public void SaveChanges()
+        {
+            _ctx.SaveChanges();
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            _ctx.Orders.Update(order);
+        }
+
         public void UpdateSum(int OrderId)
         {
-            throw new NotImplementedException();
+            var order = _ctx.Orders.Find(OrderId);
+            order.Sum = _ctx.OrderDetails.Where(o => o.OrderId == order.OrderId).Select(o => o.Count * o.Price).Sum();
+            UpdateOrder(order);
+            SaveChanges();
         }
     }
 }

@@ -69,6 +69,7 @@ namespace ProjectWeb.Mvc.Controllers
                     _orderDetailInterface.UpdateOrderDetail(detail);
                 }
             }
+            _orderInterface.UpdateSum(order.OrderId);
             TempData["Message"] = "محصول به سبد خرید اضافه شد!";
             return RedirectToAction("WebProductInfo", "WebProduct", new { id = id });
         }

@@ -24,5 +24,10 @@ namespace ProjectWeb.Application.Services
         {
             return _orderRepository.IsOrderInUse(userId);
         }
+
+        public void UpdateSum(int OrderId)
+        {
+            _orderRepository.UpdateSum(OrderId);
+        }
     }
 }

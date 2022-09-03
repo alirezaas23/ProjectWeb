@@ -10,5 +10,7 @@ namespace ProjectWeb.Domain.Interfaces
         Order IsOrderInUse(string userId);
         void UpdateSum(int OrderId);
         void AddOrder(Order order);
+        void UpdateOrder(Order order);
+        void SaveChanges();
     }
 }
