@@ -17,6 +17,8 @@ namespace ProjectWeb.Infra.IoC
             services.AddScoped<IUploadFileInterface, UploadFileService>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IOrderInterface, OrderService>();
+            services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddTransient<IOrderDetailInterface, OrderDetailService>();
         }
     }
 }
