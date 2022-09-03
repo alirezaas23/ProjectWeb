@@ -40,7 +40,7 @@
                             <span class="font-weight-bold">زمان تحویل : </span>
                             @Model.WebProductDeliverDate
                         </p>
-                        <form>
+                        <form asp-controller="Order" asp-action="AddToBasket" asp-route-id="@Model.WebProductID">
                             <div class="position-relative">
                                 <button class="btn btn-edit">افزودن به سبد</button>
                                 <i class="fas fa-shopping-cart icon-for-btn"></i>

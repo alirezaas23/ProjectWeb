@@ -20,5 +20,15 @@ namespace ProjectWeb.Application.Services
         {
             _orderDetailRepository.AddOrderDetail(orderDetail);
         }
+
+        public OrderDetail IsProductInUse(int orderId, int productId)
+        {
+            return _orderDetailRepository.IsProductInUse(orderId, productId);
+        }
+
+        public void UpdateOrderDetail(OrderDetail orderDetail)
+        {
+            _orderDetailRepository.UpdateOrderDetail(orderDetail);
+        }
     }
 }

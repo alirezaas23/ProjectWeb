@@ -25,5 +25,10 @@ namespace ProjectWeb.Infra.Data.Repositories
         {
             return _ctx.Orders.SingleOrDefault(o => o.UserId == userId && !o.IsFinally);
         }
+
+        public void UpdateSum(int OrderId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
