@@ -1,52 +1,52 @@
-﻿@model ProjectWeb.Domain.Models.WebProduct
+﻿@model ShowWebProductViewModel
 @{
     ViewData["Title"] = "خرید " + Model.WebProductName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000">
+<section data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000" class="mb-5">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info">
+            <i class="far fa-check-circle"></i>
+            @ViewBag.Message
+        </div>
+    }
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+            <img src="@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" />
+        </div>
+        <div class="col-12 col-md-6">
             <div class="card custom-box-shadow">
-                <div class="card-body text-muted">
-                    @{
-                        if (ViewBag.Message != null)
-                        {
-                            <div class="alert alert-success">
-                                @ViewBag.Message
-                            </div>
-                        }
-                    }
-                    <h4>
+                <div class="card-body">
+                    <h4 class="font-weight-bold">
                         @Model.WebProductName
                     </h4>
-                    <hr />
-                    <img src="@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" title="@Model.WebProductName" />
-                    <div class="mt-3 border p-2 custom-box-shadow">
-                        <p>
-                            <i class="fas fa-file-contract"></i>
-                            <span class="font-weight-bold">توضیحات محصول :</span>
-                            @Html.Raw(Model.WebProductDescription)
-                        </p>
-                    </div>
-                    <div class="mt-3 border p-2 custom-box-shadow">
-                        <p>
-                            <i class="fas fa-dollar-sign"></i>
-                            <span class="font-weight-bold">قیمت محصول : </span>
-                            @Model.WebProductPrice تومان
-                        </p>
-                        <p>
-                            <i class="fas fa-calendar-alt"></i>
-                            <span class="font-weight-bold">زمان تحویل : </span>
-                            @Model.WebProductDeliverDate
-                        </p>
-                        <form asp-controller="Order" asp-action="AddToBasket" asp-route-id="@Model.WebProductID">
-                            <div class="position-relative">
-                                <button class="btn btn-edit">افزودن به سبد</button>
-                                <i class="fas fa-shopping-cart icon-for-btn"></i>
-                            </div>
-                        </form>
-                    </div>
+                    <p class="text-muted">
+                        <i class="fas fa-dollar-sign"></i>
+                        @Model.WebProductPrice تومان
+                    </p>
+                    <p class="text-muted">
+                        @Html.Raw(Model.WebProductDescription)
+                    </p>
+                    <form class="mt-5" asp-controller="Order" asp-action="AddToBasket">
+                        <div class="form-group">
+                            <select asp-for="WebType" class="form-control">
+                                <option value="">-- انتخاب نوع سایت --</option>
+                                <option value="فروشگاهی">سایت فروشگاهی</option>
+                                <option value="اطلاع رسانی">سایت اطلاع رسانی</option>
+                                <option value="خبری">سایت خبری</option>
+                            </select>
+                            <span asp-validation-for="WebType" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="WebProductID" />
+                        <div class="position-relative">
+                            <button class="btn btn-edit text-right">
+                                افزودن به سبد خرید
+                            </button>
+                            <i class="fas fa-shopping-cart icon-for-btn"></i>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -54,12 +54,12 @@
 </section>
 
 <section>
-    <div class="card mt-3 custom-box-shadow">
-        <div class="card-body">
-            <p class="mt-3 my-p" data-aos="fade-left" data-aos-duration="1000">
-                محصولات مشابه
-            </p>
-            @await Component.InvokeAsync("WebProduct")
-        </div>
-    </div>
+    <p class="mt-5 my-p" data-aos="fade-left" data-aos-duration="1000">
+        محصولات مشابه
+    </p>
+    @await Component.InvokeAsync("WebProduct")
 </section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

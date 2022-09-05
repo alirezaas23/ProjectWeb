@@ -82,3 +82,9 @@ function ShowNav() {
         }
     });
 }
+
+var btn = document.getElementById('btn-header');
+btn.addEventListener("click", function () {
+    document.getElementById("products").scrollIntoView({ behavior: 'smooth' });
+
+});

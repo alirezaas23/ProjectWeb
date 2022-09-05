@@ -22,6 +22,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             _ctx.Orders.Add(order);
         }
 
+        public Order FindOrder(int orderId)
+        {
+            return _ctx.Orders.Find(orderId);
+        }
+
         public Order IsOrderInUse(string userId)
         {
             return _ctx.Orders.SingleOrDefault(o => o.UserId == userId && !o.IsFinally);
@@ -39,7 +44,7 @@ namespace ProjectWeb.Infra.Data.Repositories
 
         public void UpdateSum(int OrderId)
         {
-            var order = _ctx.Orders.Find(OrderId);
+            var order = FindOrder(OrderId);
             order.Sum = _ctx.OrderDetails.Where(o => o.OrderId == order.OrderId).Select(o => o.Count * o.Price).Sum();
             UpdateOrder(order);
             SaveChanges();

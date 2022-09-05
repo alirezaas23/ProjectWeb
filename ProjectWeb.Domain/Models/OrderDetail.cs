@@ -15,5 +15,6 @@ namespace ProjectWeb.Domain.Models
         public int Count { get; set; }
         public Order Order { get; set; }
         public WebProduct WebProduct { get; set; }
+        public string WebType { get; set; }
     }
 }

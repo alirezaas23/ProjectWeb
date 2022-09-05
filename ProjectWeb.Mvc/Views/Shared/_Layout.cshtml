@@ -30,7 +30,7 @@
                         if (_signInManager.IsSignedIn(User))
                         {
                             <li>
-                                <div class="dropdown pa-z1">
+                                <div class="dropdown">
                                     <a class="dropdown navbar-hover-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-caret-down"></i>
                                         <span>@user.UserName</span>
@@ -86,7 +86,7 @@
                         }
                         else
                         {
-                            <li class="ul-nav-item pa-z1">
+                            <li class="ul-nav-item">
                                 <i class="far fa-user ml-1 navbar-hover-text"></i>
                                 <a asp-controller="Account" asp-action="Login" class="navbar-hover-text">ورود</a>
                                 <span style="color: white;">/</span>
@@ -208,7 +208,6 @@
         </nav>
     </header>
     <section>
-        <svg class="svg-pi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,256L34.3,234.7C68.6,213,137,171,206,160C274.3,149,343,171,411,154.7C480,139,549,85,617,80C685.7,75,754,117,823,117.3C891.4,117,960,75,1029,58.7C1097.1,43,1166,53,1234,69.3C1302.9,85,1371,107,1406,117.3L1440,128L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
         <div class="container">
             <main role="main" class="pb-3">
                 @RenderBody()
@@ -226,6 +225,7 @@
     <script src="~/lib/aos/aos.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -90,7 +90,6 @@ body {
 }
 
 .custom-nav {
-    width: 100%;
     background: #fefefe;
     display: flex;
     align-items: center;
@@ -99,6 +98,7 @@ body {
 header {
     width: 100%;
     margin-bottom: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .custom-nav ul {
@@ -112,22 +112,22 @@ header .custom-nav ul {
 }
 
 header .custom-nav ul li {
+    display: inline-block;
     font-size: 15px;
     float: left;
-    margin-right: 20px;
-    margin-top: 17px;
+}
+
+header .custom-nav ul li a {
+    
 }
 
 header .custom-nav .logo {
     float: right;
-    width: 29%;
     align-items: center;
 }
 
 header .custom-nav .logo img{
     height: 55px;
-    margin-top: 3px;
-    position: absolute;
     z-index: 1;
 }
 
@@ -305,15 +305,17 @@ header .custom-nav .logo img{
     top: 4px;
 }
 
-.navbar-hover-text{
-    color: white;
+.navbar-hover-text {
+    display: block;
+    padding: 10px 10px;
+    color: black;
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .navbar-hover-text:hover{
-    color: black;
+    color: #47B5FF;
     text-decoration: none;
 }
 
@@ -337,4 +339,18 @@ header .custom-nav .logo img{
     border-bottom: 3px solid #00bffe;
     width: fit-content;
     padding: 5px;
+}
+
+#btn-header {
+    border: none;
+    background: #2a87c6;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 25px;
+    outline: none;
+}
+
+#btn-header:hover{
+    background: #47B5FF;
+    transition: all 0.1s ease;
 }

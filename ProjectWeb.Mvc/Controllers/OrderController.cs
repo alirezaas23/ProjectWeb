@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Application.ViewModels.WebDeisgnViewModels;
 using ProjectWeb.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace ProjectWeb.Mvc.Controllers
             this._orderDetailInterface = orderDetailInterface;
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult AddToBasket(int id)
+        public IActionResult AddToBasket(ShowWebProductViewModel model)
         {
             PersianCalendar calendar = new PersianCalendar();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -42,24 +43,26 @@ namespace ProjectWeb.Mvc.Controllers
                 {
                     Count = 1,
                     OrderId = order.OrderId,
-                    Price = ((int)_webProductInterface.FindById(id).WebProductPrice),
-                    WebProductId = id,
-                    Order = order
+                    Price = ((int)_webProductInterface.FindById(model.WebProductID).WebProductPrice),
+                    WebProductId = model.WebProductID,
+                    Order = order,
+                    WebType = model.WebType
                 };
                 _orderDetailInterface.AddOrderDetail(orderDetail);
             }
             else
             {
-                var detail = _orderDetailInterface.IsProductInUse(order.OrderId, id);
+                var detail = _orderDetailInterface.IsProductInUse(order.OrderId, model.WebProductID);
                 if (detail == null)
                 {
                     var orderDetail = new OrderDetail()
                     {
                         Count = 1,
                         OrderId = order.OrderId,
-                        Price = ((int)_webProductInterface.FindById(id).WebProductPrice),
-                        WebProductId = id,
-                        Order = order
+                        Price = ((int)_webProductInterface.FindById(model.WebProductID).WebProductPrice),
+                        WebProductId = model.WebProductID,
+                        Order = order,
+                        WebType = model.WebType
                     };
                     _orderDetailInterface.AddOrderDetail(orderDetail);
                 }
@@ -71,7 +74,7 @@ namespace ProjectWeb.Mvc.Controllers
             }
             _orderInterface.UpdateSum(order.OrderId);
             TempData["Message"] = "محصول به سبد خرید اضافه شد!";
-            return RedirectToAction("WebProductInfo", "WebProduct", new { id = id });
+            return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
         }
     }
 }

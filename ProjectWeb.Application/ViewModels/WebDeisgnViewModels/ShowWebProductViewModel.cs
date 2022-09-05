@@ -1,4 +1,6 @@
-﻿namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
 {
     public class ShowWebProductViewModel
     {
@@ -8,5 +10,8 @@
         public long WebProductPrice { get; set; }
         public string WebProductDescription { get; set; }
         public string WebProductDeliverDate { get; set; }
+
+        [Required(ErrorMessage = "لطفا نوع سایت خود را انتخاب کنید")]
+        public string WebType { get; set; }
     }
 }

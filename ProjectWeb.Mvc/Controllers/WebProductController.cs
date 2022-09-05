@@ -122,7 +122,16 @@ namespace ProjectWeb.Mvc.Controllers
             {
                 return RedirectToAction("AccountConfirm", "Account", new {userId = user.Id, productId = id });
             }
-            return View(product);
+            var productModel = new ShowWebProductViewModel()
+            {
+                WebProductDeliverDate = product.WebProductDeliverDate,
+                WebProductDescription = product.WebProductDescription,
+                WebProductID = product.WebProductID,
+                WebProductImage = product.WebProductImage,
+                WebProductName = product.WebProductName,
+                WebProductPrice = product.WebProductPrice,
+            };
+            return View(productModel);
         }
     }
 }

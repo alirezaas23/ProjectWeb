@@ -11,6 +11,7 @@ namespace ProjectWeb.Domain.Interfaces
         void UpdateSum(int OrderId);
         Order IsOrderInUse(string userId);
         void AddOrder(Order order);
+        Order FindOrder(int orderId);
         void SaveChanges();
     }
 }
