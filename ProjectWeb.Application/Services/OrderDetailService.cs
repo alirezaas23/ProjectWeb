@@ -21,9 +21,19 @@ namespace ProjectWeb.Application.Services
             _orderDetailRepository.AddOrderDetail(orderDetail);
         }
 
+        public IEnumerable<OrderDetail> GetOrderDetails(int orderId)
+        {
+            return _orderDetailRepository.GetOrderDetails(orderId);
+        }
+
         public OrderDetail IsProductInUse(int orderId, int productId)
         {
             return _orderDetailRepository.IsProductInUse(orderId, productId);
+        }
+
+        public void RemoveOrderDetail(int id)
+        {
+            _orderDetailRepository.RemoveOrderDetail(id);
         }
 
         public void UpdateOrderDetail(OrderDetail orderDetail)

@@ -10,5 +10,7 @@ namespace ProjectWeb.Application.Interfaces
         void UpdateOrderDetail(OrderDetail orderDetail);
         OrderDetail IsProductInUse(int orderId, int productId);
         void AddOrderDetail(OrderDetail orderDetail);
+        IEnumerable<OrderDetail> GetOrderDetails(int orderId);
+        void RemoveOrderDetail(int id);
     }
 }

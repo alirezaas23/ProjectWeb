@@ -27,6 +27,10 @@ a {
     color: #0366d6;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
@@ -104,6 +108,7 @@ header {
 .custom-nav ul {
     float: left;
     list-style: none;
+    margin-top: 4px;
 }
 
 header .custom-nav ul {
@@ -112,13 +117,9 @@ header .custom-nav ul {
 }
 
 header .custom-nav ul li {
-    display: inline-block;
+    display: flex;
     font-size: 15px;
     float: left;
-}
-
-header .custom-nav ul li a {
-    
 }
 
 header .custom-nav .logo {
@@ -219,7 +220,8 @@ header .custom-nav .logo img{
 
 .custom-box-shadow {
     border: 1px solid #ecf0f4 !important;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: 0 0 7px 0 #eaeff4;
+    -moz-box-shadow: 0 0 7px 0 #eaeff4;
 }
 
 .list-group-item {
@@ -306,7 +308,7 @@ header .custom-nav .logo img{
 }
 
 .navbar-hover-text {
-    display: block;
+    display: inline-block;
     padding: 10px 10px;
     color: black;
     text-decoration: none;
@@ -353,4 +355,81 @@ header .custom-nav .logo img{
 #btn-header:hover{
     background: #47B5FF;
     transition: all 0.1s ease;
+}
+
+.remove-icon {
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    color: #b0b9be;
+    border: 1px solid #b0b9be;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.remove-icon:hover{
+    color: red;
+}
+
+.product-row {
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    color: #b0b9be;
+    border: 1px solid #b0b9be;
+}
+
+.btn-buy {
+    width: 100%;
+    background: #7DCE13;
+    color: white;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    font-size: 13px;
+}
+
+.btn-buy:hover{
+    transition: 1s;
+    border-radius: 15px;
+    color: white;
+}
+
+.btn-buy:not(:hover){
+    transition: 1s;
+}
+
+.basket-title {
+    color: #47B5FF;
+}
+
+.basket-title:hover{
+    text-decoration: none;
+    color: #47B5FF;
+}
+
+.muted-color {
+    color: #b0b9be;
+    transition: all 0.5s ease;
+}
+
+.muted-color:hover{
+    color: #47B5FF 
 }

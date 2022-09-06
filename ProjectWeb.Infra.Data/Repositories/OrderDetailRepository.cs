@@ -22,9 +22,26 @@ namespace ProjectWeb.Infra.Data.Repositories
             SaveChanges();
         }
 
+        public OrderDetail FindById(int id)
+        {
+            return _ctx.OrderDetails.Find(id);
+        }
+
+        public IEnumerable<OrderDetail> GetOrderDetails(int orderId)
+        {
+            return _ctx.OrderDetails.Where(o => o.OrderId == orderId).ToList();
+        }
+
         public OrderDetail IsProductInUse(int orderId, int productId)
         {
             return _ctx.OrderDetails.SingleOrDefault(o => o.OrderId == orderId && o.WebProductId == productId);
+        }
+
+        public void RemoveOrderDetail(int id)
+        {
+            var order = FindById(id);
+            _ctx.OrderDetails.Remove(order);
+            SaveChanges();
         }
 
         public void SaveChanges()

@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Application.ViewModels.OrderViewModels;
 using ProjectWeb.Application.ViewModels.WebDeisgnViewModels;
 using ProjectWeb.Domain.Models;
 using System;
@@ -75,6 +77,46 @@ namespace ProjectWeb.Mvc.Controllers
             _orderInterface.UpdateSum(order.OrderId);
             TempData["Message"] = "محصول به سبد خرید اضافه شد!";
             return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ShowOrder()
+        {
+            ViewBag.Message = TempData["Message"];
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var order = _orderInterface.IsOrderInUse(userId);
+            List<ShowOrderDetailViewModel> List = new List<ShowOrderDetailViewModel>();
+            if(order != null)
+            {
+                var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
+                foreach (var item in detail)
+                {
+                    var product = _webProductInterface.FindById(item.WebProductId);
+                    List.Add(new ShowOrderDetailViewModel()
+                    {
+                        Count = item.Count,
+                        ImageName = product.WebProductImage,
+                        Price = item.Price,
+                        Title = product.WebProductName,
+                        Sum = item.Price * item.Count,
+                        OrderDetailId = item.OrderDetailId,
+                        ProductId = product.WebProductID,
+                        WebType = item.WebType
+                    });
+                }
+            }
+            return View(List);
+        }
+
+        public IActionResult RemoveOrder(int id)
+        {
+            _orderDetailInterface.RemoveOrderDetail(id);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var order = _orderInterface.IsOrderInUse(userId);
+            _orderInterface.UpdateSum(order.OrderId);
+            TempData["Message"] = "محصول با موفقیت از سبد خرید حذف شد.";
+            return RedirectToAction(nameof(ShowOrder));
         }
     }
 }
