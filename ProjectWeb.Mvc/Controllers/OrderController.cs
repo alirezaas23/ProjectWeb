@@ -70,8 +70,8 @@ namespace ProjectWeb.Mvc.Controllers
                 }
                 else
                 {
-                    detail.Count += 1;
-                    _orderDetailInterface.UpdateOrderDetail(detail);
+                    TempData["Message"] = "شما این پروژه را در سبد خرید خود دارید. بعد از پرداخت نهایی دوباره اقدام کنید.";
+                    return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
                 }
             }
             _orderInterface.UpdateSum(order.OrderId);

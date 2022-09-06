@@ -53,16 +53,12 @@
                                     @item.Sum تومان
                                 </p>
                                 <p class="text-muted small">
-                                    تعداد :
-                                    @item.Count
-                                </p>
-                                <p class="text-muted small">
                                     نوع سفارش :
                                     @item.WebType
                                 </p>
                             </div>
                             <div>
-                                <a asp-controller="Order" asp-action="RemoveOrder" asp-route-id="@item.OrderDetailId" class="remove-icon custom-box-shadow">
+                                <a title="حذف محصول" asp-controller="Order" asp-action="RemoveOrder" asp-route-id="@item.OrderDetailId" class="remove-icon custom-box-shadow">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
@@ -84,7 +80,7 @@
                             @item.Title
                         </p>
                         <p class="small">
-                            @item.Count * @item.Price
+                            @item.Price تومان
                         </p>
 
                         row2++;
