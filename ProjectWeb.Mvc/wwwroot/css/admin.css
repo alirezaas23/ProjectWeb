@@ -105,11 +105,11 @@ body {
 
 .custom-nav {
     width: 100%;
-    background: #7952b3;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     position: relative;
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .custom-nav ul {
@@ -287,7 +287,8 @@ footer {
 
 .custom-box-shadow {
     border: 1px solid #ecf0f4 !important;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: 0 0 7px 0 #eaeff4;
+    -moz-box-shadow: 0 0 7px 0 #eaeff4;
 }
 
 .btn-user-settings {
@@ -366,29 +367,21 @@ footer {
 }
 
 table {
-    font-weight: bold;
-    border-bottom: 3px solid #7952b3;
-    box-shadow: 1px 2px 5px 0px #def7f6;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 table thead{
-    /*background: #03987a;*/
-    background: #7952b3;
+    background: #6e7bd9;
     color: white;
 }
 
-table tbody tr:hover{
-    background: #e5edf0; 
-}
-
 table tbody tr:nth-child(even) {
-    background: #f3f3f3;
-    color: #7952b3;
+    background: #f8f7ff;
 }
 
 
 .btn-custom-purple {
-    background: #7952b3;
+    background: #6e7bd9;
     min-width: 150px;
     color: white;
     margin-bottom: 10px;
@@ -480,4 +473,18 @@ footer {
     border-radius: 15px;
     color: white;
     transition: 0.5s;
+}
+
+.custom-circle {
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #b0b9be;
+    border: 1px solid #b0b9be;
+    margin: auto;
 }

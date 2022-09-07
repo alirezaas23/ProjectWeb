@@ -30,7 +30,7 @@
                         @{
                             var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
                             <div class="dropdown">
-                                <a class="dropdown text-hover white-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                <a class="dropdown text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-caret-down"></i>
                                     @user.UserName
                                     <img src="~/imgs/icons8-administrator-male-30.png" alt="admin-Icon" class="mr-1" />

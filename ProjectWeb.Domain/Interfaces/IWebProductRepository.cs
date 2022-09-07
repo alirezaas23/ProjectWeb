@@ -11,5 +11,6 @@ namespace ProjectWeb.Domain.Interfaces
         WebProduct FindById(int id);
         void DeleteProduct(int id);
         void EditProduct(WebProduct webProduct);
+        int ProductsCount();
     }
 }

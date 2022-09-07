@@ -34,6 +34,11 @@ namespace ProjectWeb.Application.Services
             return _webProductRepository.FindById(id);
         }
 
+        public int ProductsCount()
+        {
+            return _webProductRepository.ProductsCount();
+        }
+
         public IEnumerable<WebProduct> WebProductsList()
         {
             return _webProductRepository.WebProductsList();
