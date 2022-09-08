@@ -13,5 +13,8 @@ namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
 
         [Required(ErrorMessage = "لطفا نوع سایت خود را انتخاب کنید")]
         public string WebType { get; set; }
+
+        [Required(ErrorMessage = "لطفا توضیحات را وارد کنید")]
+        public string Description { get; set; }
     }
 }

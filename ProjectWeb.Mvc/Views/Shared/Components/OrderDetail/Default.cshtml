@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ComponentOrderDetailViewModel>
+@{
+    int row = 1;
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-danger">
+        سبد خرید شما خالی است
+    </div>
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 mb-3">
+            <div class="card custom-box-shadow">
+                <div class="card-body">
+                    <span class="product-row custom-box-shadow">
+                        @row
+                    </span>
+                    <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@item.ProductId" class="text-hover">
+                        @item.ProductName
+                    </a>
+                    <p class="text-muted small mt-2">
+                        <span class="font-weight-bold">قیمت : </span>
+                        @item.ProductPrice تومان
+                    </p>
+                    <div>
+                        <a title="حذف محصول" asp-controller="Order" asp-action="RemoveOrder" asp-route-id="@item.OrderDetailId" class="remove-icon custom-box-shadow">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        row++;
+    }
+</div>

@@ -163,7 +163,7 @@
                                         <img src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
                                              title="@user.UserName" />
                                     </a>
-                                    <p class="text-white mt-1">@user.UserName</p>
+                                    <p class="mt-1 text-white">@user.UserName</p>
                                     <a asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" id="logout-tooltip" title="خروج از حساب">
                                         <i class="fas fa-power-off icon-hover"></i>
                                     </a>
@@ -226,6 +226,29 @@
                         </div>
                         <div class="col-12 col-lg-9">
                             @RenderBody()
+
+                            <div class="card custom-box-shadow mt-4">
+                                <div class="card-body">
+                                    <a asp-controller="Order" asp-action="ShowOrder" class="text-hover">
+                                        <p class="font-weight-bold">
+                                            <i class="fas fa-shopping-basket ml-1 text-primary"></i>
+                                            سبد خرید
+                                        </p>
+                                    </a>
+                                    <div>
+                                        @await Component.InvokeAsync("OrderDetail")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card custom-box-shadow mt-4">
+                                <div class="card-body">
+                                    <p class="font-weight-bold">
+                                        <i class="fas fa-heart ml-1 text-danger"></i>
+                                        محصولات مورد علاقه
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -233,9 +256,13 @@
         </div>
     </section>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted mt-5">
         <div class="container">
-            &copy; 2022 - ProjectWeb.Mvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+            </div>
         </div>
     </footer>
 

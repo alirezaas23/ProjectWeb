@@ -191,12 +191,12 @@ header .custom-nav .logo img{
     color: #79c74e;
 }
 
-.list-group-bg{
-    background-image: url("../imgs/Icon-Grid.svg") !important;
+.list-group-bg {
+    background-image: url("../imgs/Icon-Grid.svg");
 }
 
-.icon-hover{
-    color: white;
+.icon-hover {
+    color: #d0d5d8;
 }
 
 .icon-hover:hover{

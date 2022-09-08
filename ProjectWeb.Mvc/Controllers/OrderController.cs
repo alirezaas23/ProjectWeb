@@ -48,7 +48,8 @@ namespace ProjectWeb.Mvc.Controllers
                     Price = ((int)_webProductInterface.FindById(model.WebProductID).WebProductPrice),
                     WebProductId = model.WebProductID,
                     Order = order,
-                    WebType = model.WebType
+                    WebType = model.WebType,
+                    Description = model.Description
                 };
                 _orderDetailInterface.AddOrderDetail(orderDetail);
             }
@@ -64,7 +65,8 @@ namespace ProjectWeb.Mvc.Controllers
                         Price = ((int)_webProductInterface.FindById(model.WebProductID).WebProductPrice),
                         WebProductId = model.WebProductID,
                         Order = order,
-                        WebType = model.WebType
+                        WebType = model.WebType,
+                        Description = model.Description
                     };
                     _orderDetailInterface.AddOrderDetail(orderDetail);
                 }
@@ -102,7 +104,8 @@ namespace ProjectWeb.Mvc.Controllers
                         Sum = item.Price * item.Count,
                         OrderDetailId = item.OrderDetailId,
                         ProductId = product.WebProductID,
-                        WebType = item.WebType
+                        WebType = item.WebType,
+                        Description = item.Description
                     });
                 }
             }

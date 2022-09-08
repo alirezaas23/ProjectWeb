@@ -53,8 +53,12 @@
                                     @item.Sum تومان
                                 </p>
                                 <p class="text-muted small">
-                                    نوع سفارش :
+                                    <span class="font-weight-bold">نوع سفارش :</span>
                                     @item.WebType
+                                </p>
+                                <p class="text-muted small">
+                                    <span class="font-weight-bold">توضیحات :</span>  
+                                    @item.Description
                                 </p>
                             </div>
                             <div>
@@ -75,10 +79,12 @@
                     <p>ریز فاکتور : </p>
                     @foreach (var item in Model)
                     {
-                        <p>
-                            @row2 -
-                            @item.Title
-                        </p>
+                        <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@item.ProductId" class="basket-title">
+                            <p>
+                                @row2 -
+                                @item.Title
+                            </p>
+                        </a>
                         <p class="small">
                             @item.Price تومان
                         </p>

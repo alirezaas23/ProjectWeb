@@ -14,5 +14,6 @@ namespace ProjectWeb.Application.ViewModels.OrderViewModels
         public int Sum { get; set; }
         public int ProductId { get; set; }
         public string WebType { get; set; }
+        public string Description { get; set; }
     }
 }
