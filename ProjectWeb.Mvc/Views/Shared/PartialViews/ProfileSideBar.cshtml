@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using ProjectWeb.Domain.Models
+@inject UserManager<UserApp> _userManager
+
+@{
+    var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    <ul class="list-group border custom-box-shadow">
+        <li class="list-group-item text-center list-group-bg">
+            <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                <img src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
+                     title="@user.UserName" />
+            </a>
+            <p class="mt-1 text-white">@user.UserName</p>
+            <a asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" id="logout-tooltip" title="خروج از حساب">
+                <i class="fas fa-power-off icon-hover"></i>
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover small-font">
+                <i class="fas fa-circle menu-small-icon"></i>
+                ویرایش حساب کاربری
+            </a>
+        </li>
+        @if (User.IsInRole("ادمین"))
+        {
+            <li class="list-group-item">
+                <a class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    سفارشات
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    مشاهده تیکت ها
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="list-group-item">
+                <a asp-controller="Order" asp-action="ShowOrder" class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    سبد خرید
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    سفارشات من
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    ارسال تیکت
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a class="text-hover small-font">
+                    <i class="fas fa-circle menu-small-icon"></i>
+                    تیکت های ارسال شده من
+                </a>
+            </li>
+        }
+        <li class="list-group-item">
+            <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
+                <i class="fas fa-circle menu-small-icon"></i>
+                خروج از حساب
+            </a>
+        </li>
+    </ul>
+}

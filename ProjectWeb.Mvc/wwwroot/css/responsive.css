@@ -28,6 +28,7 @@
 
     #responsive-nav{
         overflow-y: auto;
+        overflow-x: hidden;
         display: none;
         width: 220px;
         height: 100%;

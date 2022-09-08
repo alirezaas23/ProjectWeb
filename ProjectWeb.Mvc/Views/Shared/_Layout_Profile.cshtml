@@ -1,154 +1,19 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
-@using ProjectWeb.Domain.Models
-@inject SignInManager<UserApp> _signInManager
-@inject UserManager<UserApp> _userManager
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html dir="rtl" lang="fa">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.rtl.css" />
-    <link rel="stylesheet" href="~/lib/aos/aos.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="~/css/Responsive.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    @await Html.PartialAsync("PartialViews/Css_LayOut")
 </head>
 <body>
     <header>
         <nav class="custom-nav mb-3">
             <div class="container">
-                <div id="hamburger-icon">
-                    <i class="fas fa-bars" id="ham-icon" onclick="ShowNav()"></i>
-                </div>
-                <ul>
-                    @{
-                        var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                        <li class="profile-ul-text-hover">
-                            <div class="dropdown pa-z1">
-                                <a class="dropdown navbar-hover-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-caret-down"></i>
-                                    @user.UserName
-                                    <img src="~/imgs/icons8-user-30.png" alt="User-Icon" class="mr-1" />
-                                </a>
-
-                                <div class="dropdown-menu">
-                                    @if (User.IsInRole("ادمین"))
-                                    {
-                                        <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
-                                            <i class="fas fa-circle small-dot"></i>
-                                            صفحه مدیریت سایت
-                                        </a>
-                                    }
-                                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
-                                        <i class="fas fa-circle small-dot"></i>
-                                        مشاهده حساب کاربری
-                                    </a>
-                                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
-                                        <i class="fas fa-circle small-dot"></i>
-                                        ویرایش حساب کاربری
-                                    </a>
-                                    <a asp-controller="" asp-action="" class="dropdown-item menu-text-hover">
-                                        <i class="fas fa-circle small-dot"></i>
-                                        سبد خرید
-                                    </a>
-                                    <a class="dropdown-item menu-text-hover">
-                                        <i class="fas fa-circle small-dot"></i>
-                                        سفارشات من
-                                    </a>
-                                    <a asp-controller="Account" asp-action="LogOut" class="dropdown-item menu-text-hover">
-                                        <i class="fas fa-circle small-dot"></i>
-                                        خروج از حساب کاربری
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="ul-nav-item navbar-hover-text">
-                            <a asp-controller="Order" asp-action="ShowOrder">
-                                <i class="fas fa-shopping-basket"></i>
-                            </a>
-                        </li>
-                        <li class="ul-nav-item navbar-hover-text">
-                            <a>
-                                ارتباط با ما
-                            </a>
-                        </li>
-                        <li class="ul-nav-item navbar-hover-text">
-                            <a>
-                                درباره ما
-                            </a>
-                        </li>
-                    }
-                </ul>
-
-                <div class="logo">
-                    <a asp-controller="Home" asp-action="Index">
-                        <img src="~/imgs/logo-web.png" alt="Logo" />
-                    </a>
-                </div>
+                @await Html.PartialAsync("PartialViews/NavBarItems")
             </div>
         </nav>
-        <nav id="responsive-nav">
-            <ul>
-                <li class="p-3">
-                    <img src="~/imgs/logo-web.png" alt="Logo" height="80" />
-                </li>
-                @{
-                    <li class="user-nav-item">
-                        <i class="far fa-user ml-1 text-white"></i>
-                        <span>@user.UserName</span>
-                    </li>
-                    @if (User.IsInRole("ادمین"))
-                    {
-                        <li>
-                            <a asp-controller="Admin" asp-action="Index">
-                                صفحه مدیریت سایت
-                            </a>
-                        </li>
-                    }
-                    <li>
-                        <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
-                            مشاهده حساب کاربری
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
-                            ویرایش حساب کاربری
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-controller="Order" asp-action="ShowOrder">
-                            سبد خرید
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            سفارشات من
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            ارتباط با ما
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            درباره ما
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-controller="Account" asp-action="LogOut">
-                            خروج از حساب کاربری
-                        </a>
-                    </li>
-                }
-            </ul>
-        </nav>
+        @await Html.PartialAsync("PartialViews/ResponsiveNav")
     </header>
 
     <section>
@@ -157,76 +22,10 @@
                 <main role="main" class="pb-3">
                     <div class="row">
                         <div class="col-12 col-lg-3 mb-3 mb-lg-0">
-                            <ul class="list-group border custom-box-shadow">
-                                <li class="list-group-item text-center list-group-bg">
-                                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
-                                        <img src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
-                                             title="@user.UserName" />
-                                    </a>
-                                    <p class="mt-1 text-white">@user.UserName</p>
-                                    <a asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" id="logout-tooltip" title="خروج از حساب">
-                                        <i class="fas fa-power-off icon-hover"></i>
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover small-font">
-                                        <i class="fas fa-circle menu-small-icon"></i>
-                                        ویرایش حساب کاربری
-                                    </a>
-                                </li>
-                                @if (User.IsInRole("ادمین"))
-                                {
-                                    <li class="list-group-item">
-                                        <a class="text-hover small-font">
-                                            <i class="fas fa-circle menu-small-icon"></i>
-                                            سفارشات
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover small-font">
-                                            <i class="fas fa-circle menu-small-icon"></i>
-                                            مشاهده تیکت ها
-                                        </a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="list-group-item">
-                                        <a class="text-hover small-font">
-                                            <i class="fas fa-circle menu-small-icon"></i>
-                                           سبد خرید
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a class="text-hover small-font">
-                                            <i class="fas fa-circle menu-small-icon"></i>
-                                            سفارشات من
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
-                                            <i class="fas fa-circle menu-small-icon"></i>
-                                            ارسال تیکت
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a class="text-hover small-font">
-                                            <i class="fas fa-circle menu-small-icon"></i>
-                                            تیکت های ارسال شده من
-                                        </a>
-                                    </li>
-                                }
-                                <li class="list-group-item">
-                                    <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
-                                        <i class="fas fa-circle menu-small-icon"></i>
-                                        خروج از حساب
-                                    </a>
-                                </li>
-                            </ul>
+                            @await Html.PartialAsync("PartialViews/ProfileSideBar")
                         </div>
                         <div class="col-12 col-lg-9">
                             @RenderBody()
-
                             <div class="card custom-box-shadow mt-4">
                                 <div class="card-body">
                                     <a asp-controller="Order" asp-action="ShowOrder" class="text-hover">
@@ -238,15 +37,6 @@
                                     <div>
                                         @await Component.InvokeAsync("OrderDetail")
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="card custom-box-shadow mt-4">
-                                <div class="card-body">
-                                    <p class="font-weight-bold">
-                                        <i class="fas fa-heart ml-1 text-danger"></i>
-                                        محصولات مورد علاقه
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -266,11 +56,7 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/aos/aos.js"></script>
-    <script src="~/lib/font-awesome/js/all.min.js"></script>
-    <script src="~/js/site.js"></script>
+    @await Html.PartialAsync("PartialViews/Scripts_LayOut")
     @RenderSection("Scripts", required: false)
 </body>
 </html>
