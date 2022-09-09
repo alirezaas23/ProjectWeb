@@ -22,6 +22,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             _ctx.Orders.Add(order);
         }
 
+        public int FinallyOrders()
+        {
+            return _ctx.Orders.Where(o => o.IsFinally).Count();
+        }
+
         public Order FindOrder(int orderId)
         {
             return _ctx.Orders.Find(orderId);

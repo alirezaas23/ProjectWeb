@@ -10,5 +10,6 @@ namespace ProjectWeb.Application.Interfaces
         void UpdateSum(int OrderId);
         Order IsOrderInUse(string userId);
         void AddOrder(Order order);
+        int FinallyOrders();
     }
 }

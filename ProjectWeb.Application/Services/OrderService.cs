@@ -20,6 +20,11 @@ namespace ProjectWeb.Application.Services
             _orderRepository.AddOrder(order);
         }
 
+        public int FinallyOrders()
+        {
+            return _orderRepository.FinallyOrders();
+        }
+
         public Order IsOrderInUse(string userId)
         {
             return _orderRepository.IsOrderInUse(userId);
