@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000" class="mb-5">
+<section class="mb-5">
     @if (ViewBag.Message != null)
     {
         <div class="alert alert-info">
@@ -64,7 +64,7 @@
 </section>
 
 <section>
-    <p class="mt-5 my-p" data-aos="fade-left" data-aos-duration="1000">
+    <p class="mt-5 my-p">
         محصولات مشابه
     </p>
     @await Component.InvokeAsync("WebProduct")

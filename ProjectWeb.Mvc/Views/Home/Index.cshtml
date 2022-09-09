@@ -34,7 +34,7 @@
         <div class="col-12 col-lg-4" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="600">
             <div class="card custom-box-shadow text-center">
                 <div class="card-body">
-                    <img src="~/imgs/best-price.png" alt="قیمت_مناسب"/>
+                    <img src="~/imgs/best-price.png" alt="قیمت_مناسب" />
                     <h5 class="mt-3">
                         بهترین قیمت
                     </h5>
@@ -68,5 +68,10 @@
     <p class="my-p" data-aos="fade-left" data-aos-duration="1000">
         محصولات
     </p>
-    @await Component.InvokeAsync("WebProduct")
+    <div data-aos="fade-up" data-aos-duration="1000">
+        @await Component.InvokeAsync("WebProduct")
+    </div>
 </section>
+
+@section Scripts{
+}

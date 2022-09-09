@@ -22,87 +22,87 @@
             @ViewBag.Message
         </div>
     }
-    <div class="row" data-aos="fade-down" data-aos-duration="1000">
-        <div class="col-lg-8">
-            @{
-                if (!Model.Any())
+<div class="row">
+    <div class="col-lg-8">
+        @{
+            if (!Model.Any())
+            {
+                <div class="text-center custom-box-shadow p-3">
+                    <img src="~/imgs/shopping_basket_resize.png" alt="سبد خرید" />
+                    <p class="text-muted font-weight-bold mt-4">
+                        سبد خرید شما خالی است
+                    </p>
+                </div>
+            }
+            else
+            {
+                @foreach (var item in Model)
                 {
-                    <div class="text-center custom-box-shadow p-3">
-                        <img src="~/imgs/shopping_basket_resize.png" alt="سبد خرید" />
-                        <p class="text-muted font-weight-bold mt-4">
-                            سبد خرید شما خالی است
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    @foreach (var item in Model)
-                    {
-                        <div class="card custom-box-shadow position-relative mb-3">
-                            <div class="card-body">
-                                <span class="product-row custom-box-shadow">
-                                    @row
-                                </span>
-                                <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@item.ProductId" class="basket-title">
-                                    <h5 class="font-weight-bold">
-                                        @item.Title
-                                    </h5>
-                                </a>
-                                <p class="text-muted mt-4 small">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    @item.Sum تومان
-                                </p>
-                                <p class="text-muted small">
-                                    <span class="font-weight-bold">نوع سفارش :</span>
-                                    @item.WebType
-                                </p>
-                                <p class="text-muted small">
-                                    <span class="font-weight-bold">توضیحات :</span>  
-                                    @item.Description
-                                </p>
-                            </div>
-                            <div>
-                                <a title="حذف محصول" asp-controller="Order" asp-action="RemoveOrder" asp-route-id="@item.OrderDetailId" class="remove-icon custom-box-shadow">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </div>
+                    <div class="card custom-box-shadow position-relative mb-3">
+                        <div class="card-body">
+                            <span class="product-row custom-box-shadow">
+                                @row
+                            </span>
+                            <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@item.ProductId" class="basket-title">
+                                <h5 class="font-weight-bold">
+                                    @item.Title
+                                </h5>
+                            </a>
+                            <p class="text-muted mt-4 small">
+                                <i class="fas fa-dollar-sign"></i>
+                                @item.Sum تومان
+                            </p>
+                            <p class="text-muted small">
+                                <span class="font-weight-bold">نوع سفارش :</span>
+                                @item.WebType
+                            </p>
+                            <p class="text-muted small">
+                                <span class="font-weight-bold">توضیحات :</span>
+                                @item.Description
+                            </p>
                         </div>
+                        <div>
+                            <a title="حذف محصول" asp-controller="Order" asp-action="RemoveOrder" asp-route-id="@item.OrderDetailId" class="remove-icon custom-box-shadow">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
 
-                        row++;
-                    }
+                    row++;
                 }
             }
-        </div>
-        <div class="col-lg-4">
-            <div class="card custom-box-shadow text-muted" style="font-size: 15px;">
-                <div class="card-body">
-                    <p>ریز فاکتور : </p>
-                    @foreach (var item in Model)
-                    {
-                        <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@item.ProductId" class="basket-title">
-                            <p>
-                                @row2 -
-                                @item.Title
-                            </p>
-                        </a>
-                        <p class="small">
-                            @item.Price تومان
-                        </p>
-
-                        row2++;
-                    }
-                    <hr />
-                    <div class="text-center">
-                        <p>مبلغ قابل پرداخت :</p>
+        }
+    </div>
+    <div class="col-lg-4">
+        <div class="card custom-box-shadow text-muted" style="font-size: 15px;">
+            <div class="card-body">
+                <p>ریز فاکتور : </p>
+                @foreach (var item in Model)
+                {
+                    <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@item.ProductId" class="basket-title">
                         <p>
-                            @Model.Sum(s => s.Sum) تومان
+                            @row2 -
+                            @item.Title
                         </p>
-                    </div>
-                    <button type="submit" class="btn btn-buy">
-                        ثبت و پرداخت
-                    </button>
+                    </a>
+                    <p class="small">
+                        @item.Price تومان
+                    </p>
+
+                    row2++;
+                }
+                <hr />
+                <div class="text-center">
+                    <p>مبلغ قابل پرداخت :</p>
+                    <p>
+                        @Model.Sum(s => s.Sum) تومان
+                    </p>
                 </div>
+                <button type="submit" class="btn btn-buy">
+                    ثبت و پرداخت
+                </button>
             </div>
         </div>
     </div>
+</div>
 </section>

@@ -1,8 +1,4 @@
-﻿AOS.init({
-    once: true
-});
-
-var loginUserInput = document.getElementById('login-user-input');
+﻿var loginUserInput = document.getElementById('login-user-input');
 
 loginUserInput.addEventListener("focusin", function () {
     let icon = document.getElementById('login-userName-icon');

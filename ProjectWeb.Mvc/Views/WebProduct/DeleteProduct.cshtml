@@ -1,10 +1,10 @@
 ﻿@model ShowWebProductViewModel
 @{
-    ViewData["Title"] = "DeleteProduct";
+    ViewData["Title"] = "حذف محصول " + Model.WebProductName;
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
-<div data-aos="fade-down" data-aos-duration="1000">
+<div>
     <h4>
         حذف محصول @Model.WebProductName
     </h4>

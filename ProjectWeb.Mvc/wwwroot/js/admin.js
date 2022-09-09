@@ -1,10 +1,5 @@
-﻿AOS.init({
-    once: true
-});
-
-$(".custom-tooltip").tooltip();
+﻿$(".custom-tooltip").tooltip();
 $(".ticket-tooltip").tooltip();
-
 
 var searchInput = document.getElementById('search-input');
 searchInput.addEventListener("focusin", changeIconColor);
@@ -59,5 +54,5 @@ function ShowNav() {
             }
         }
     });
-    
+
 }

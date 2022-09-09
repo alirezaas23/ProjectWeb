@@ -3,74 +3,72 @@
 @using ProjectWeb.Domain.Models
 @inject UserManager<UserApp> _userManager
 @{
-    ViewData["Title"] = "DeleteTicket";
+    ViewData["Title"] = "حذف تیکت " + Model.TicketSubject;
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
 <div class="row d-flex justify-content-center align-items-center vh-100">
-    <div class="col-12 col-lg-4">
-        <div class="card custom-box-shadow">
-            <div class="card-body">
-                <div class="text-right">
-                    <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover" title="برگشت به لیست پیام ها">
-                        <i class="fas fa-home"></i>
-                    </a>
-                </div>
-                <hr />
-                @{
-                    var user = await _userManager.FindByIdAsync(Model.UserId);
-                    <p>
-                        <i class="far fa-user"></i>
-                        <span class="font-weight-bold">ارسال کننده :</span>
-                        @user.UserName
-                    </p>
-                }
+    <div class="card custom-box-shadow">
+        <div class="card-body">
+            <div class="text-right">
+                <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover" title="برگشت به لیست پیام ها">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+            <hr />
+            @{
+                var user = await _userManager.FindByIdAsync(Model.UserId);
                 <p>
-                    <i class="far fa-envelope"></i>
-                    <span class="font-weight-bold">ایمیل ارسال کننده :</span>
-                    @user.Email
+                    <i class="far fa-user"></i>
+                    <span class="font-weight-bold">ارسال کننده :</span>
+                    @user.UserName
                 </p>
-                <p>
-                    <i class="far fa-comment"></i>
-                    <span class="font-weight-bold"> موضوع تیکت :</span>
-                    @Model.TicketSubject
-                </p>
-                <p>
-                    <i class="far fa-calendar-alt"></i>
-                    <span class="font-weight-bold">تاریخ ارسال :</span>
-                    @Model.TicketDateTime
-                </p>
-                <p>
-                    <a data-toggle="modal" data-target="#exampleModal" class="text-hover">مشاهده متن تیکت</a>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">متن تیکت</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @Html.Raw(Model.TicketText)
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
-                                </div>
+            }
+            <p>
+                <i class="far fa-envelope"></i>
+                <span class="font-weight-bold">ایمیل ارسال کننده :</span>
+                @user.Email
+            </p>
+            <p>
+                <i class="far fa-comment"></i>
+                <span class="font-weight-bold"> موضوع تیکت :</span>
+                @Model.TicketSubject
+            </p>
+            <p>
+                <i class="far fa-calendar-alt"></i>
+                <span class="font-weight-bold">تاریخ ارسال :</span>
+                @Model.TicketDateTime
+            </p>
+            <p>
+                <a data-toggle="modal" data-target="#exampleModal" class="text-hover">مشاهده متن تیکت</a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">متن تیکت</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @Html.Raw(Model.TicketText)
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
                             </div>
                         </div>
                     </div>
-                </p>
-                <hr />
-                <p>
-                    آیا میخواهید این تیکت را حذف کنید ؟
-                </p>
-                <form method="post" asp-controller="Ticket" asp-action="DeleteTicket">
-                    <input type="hidden" asp-for="TicketId" />
-                    <button type="submit" class="btn btn-delete">حذف تیکت</button>
-                </form>
-            </div>
+                </div>
+            </p>
+            <hr />
+            <p>
+                آیا میخواهید این تیکت را حذف کنید ؟
+            </p>
+            <form method="post" asp-controller="Ticket" asp-action="DeleteTicket">
+                <input type="hidden" asp-for="TicketId" />
+                <button type="submit" class="btn btn-delete">حذف تیکت</button>
+            </form>
         </div>
     </div>
 </div>

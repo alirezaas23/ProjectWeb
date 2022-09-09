@@ -4,71 +4,69 @@
     Layout = "~/Views/Shared/_Layout_Account.cshtml";
 }
 
-<div data-aos="fade-down" data-aos-duration="1000">
-    <div class="row d-flex justify-content-center align-items-center vh-100 m-1 m-md-0">
-        <div class="col-12 col-lg-5">
-            <div class="card custom-box-shadow">
-                <div class="card-body p-3 p-md-5">
-                    <div class="text-center">
-                        <a asp-controller="Home" asp-action="Index">
-                            <img src="~/imgs/Web Maker-1.png" width="200" alt="Register-Icon" />
-                        </a>
-                    </div>
-                    <!-- ViewData -->
-                    @{
-                        if (ViewData["ErrorMessage"] != null)
-                        {
-                            <div class="alert alert-danger small">
-                                <i class="fas fa-exclamation-circle"></i>
-                                @ViewData["ErrorMessage"]
-                            </div>
-                        }
-
-                        if (ViewData["ReturnUrl"] != null)
-                        {
-                            <div class="alert alert-warning small">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                برای دسترسی وارد اکانت خود شوید
-                            </div>
-                        }
+<div class="row d-flex justify-content-center align-items-center vh-100 m-1 m-md-0">
+    <div class="col-12 col-lg-5">
+        <div class="card custom-box-shadow">
+            <div class="card-body p-3 p-md-5">
+                <div class="text-center">
+                    <a asp-controller="Home" asp-action="Index">
+                        <img src="~/imgs/Web Maker-1.png" width="200" alt="Register-Icon" />
+                    </a>
+                </div>
+                <!-- ViewData -->
+                @{
+                    if (ViewData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger small">
+                            <i class="fas fa-exclamation-circle"></i>
+                            @ViewData["ErrorMessage"]
+                        </div>
                     }
-                    <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-                        <!-- ModelState -->
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
 
-                        <!-- UserName -->
-                        <div class="InputWithIcon">
-                            <input asp-for="UserName" class="input-custom" placeholder="نام کاربری" id="login-user-input" />
-                            <i class='bx bx-user' id="login-userName-icon"></i>
-                            <span asp-validation-for="UserName" class="text-danger small" id="login-user-error"></span>
+                    if (ViewData["ReturnUrl"] != null)
+                    {
+                        <div class="alert alert-warning small">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            برای دسترسی وارد اکانت خود شوید
                         </div>
+                    }
+                }
+                <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                    <!-- ModelState -->
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
 
-                        <!-- Password -->
-                        <div class="InputWithIcon">
-                            <input asp-for="Password" class="input-custom" placeholder="کلمه عبور" id="login-pass-input" />
-                            <i class='bx bx-lock-alt' id="login-pass-icon"></i>
-                            <i class='bx bxs-lock-open' id="show-pass-icon" title="نمایش کلمه عبور"></i>
-                            <span asp-validation-for="Password" class="text-danger small"></span>
-                        </div>
-
-                        <!-- Remember Me -->
-                        <div class="form-group">
-                            <input asp-for="RememberMe" class="checkbox" checked="checked" />
-                            <label asp-for="RememberMe"></label>
-                        </div>
-
-                        <button type="submit" class="btn btn-account">ورود</button>
-                    </form>
-                    <hr />
-                    <div class="d-flex justify-content-between">
-                        <a asp-controller="Account" asp-action="Register" class="text-hover">
-                            <i class="fas fa-user-plus"></i>
-                            عضویت
-                        </a>
-                        <a asp-controller="" asp-action="" class="text-hover">
-                            فراموشی کلمه عبور
-                        </a>
+                    <!-- UserName -->
+                    <div class="InputWithIcon">
+                        <input asp-for="UserName" class="input-custom" placeholder="نام کاربری" id="login-user-input" />
+                        <i class='bx bx-user' id="login-userName-icon"></i>
+                        <span asp-validation-for="UserName" class="text-danger small" id="login-user-error"></span>
                     </div>
+
+                    <!-- Password -->
+                    <div class="InputWithIcon">
+                        <input asp-for="Password" class="input-custom" placeholder="کلمه عبور" id="login-pass-input" />
+                        <i class='bx bx-lock-alt' id="login-pass-icon"></i>
+                        <i class='bx bxs-lock-open' id="show-pass-icon" title="نمایش کلمه عبور"></i>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="form-group">
+                        <input asp-for="RememberMe" class="checkbox" checked="checked" />
+                        <label asp-for="RememberMe"></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-account">ورود</button>
+                </form>
+                <hr />
+                <div class="d-flex justify-content-between">
+                    <a asp-controller="Account" asp-action="Register" class="text-hover">
+                        <i class="fas fa-user-plus"></i>
+                        عضویت
+                    </a>
+                    <a asp-controller="" asp-action="" class="text-hover">
+                        فراموشی کلمه عبور
+                    </a>
                 </div>
             </div>
         </div>
