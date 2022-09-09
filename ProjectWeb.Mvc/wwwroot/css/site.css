@@ -108,7 +108,7 @@ header {
 .custom-nav ul {
     float: left;
     list-style: none;
-    margin-top: 4px;
+    margin-top: 15px;
 }
 
 header .custom-nav ul {
@@ -125,11 +125,12 @@ header .custom-nav ul li {
 header .custom-nav .logo {
     float: right;
     align-items: center;
+    width: 30%;
+    position: relative;
 }
 
 header .custom-nav .logo img{
-    height: 55px;
-    z-index: 1;
+    width: 80px;
 }
 
 #hamburger-icon{
@@ -272,7 +273,7 @@ header .custom-nav .logo img{
 }
 
 .nav-text{
-    color: white;
+    color: black;
     cursor: pointer;
     transition: 0.5s;
 }

@@ -6,14 +6,14 @@
 <nav id="responsive-nav">
     <ul>
         <li class="p-3">
-            <img src="~/imgs/logo-web.png" alt="Logo" height="80" />
+            <img src="~/imgs/Web Maker-1.png" alt="Logo" height="100" />
         </li>
         @{
             var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             if (_signInManager.IsSignedIn(User))
             {
                 <li class="user-nav-item">
-                    <i class="far fa-user ml-1 text-white"></i>
+                    <i class="far fa-user ml-1"></i>
                     <span>@user.UserName</span>
                 </li>
                 @if (User.IsInRole("ادمین"))
@@ -63,7 +63,7 @@
             }
             else
             {
-                <li class="text-white">
+                <li class="">
                     <i class="far fa-user ml-1"></i>
                     <a asp-controller="Account" asp-action="Login" class="nav-text">ورود</a> /
                     <a asp-controller="Account" asp-action="Register" class="nav-text">عضویت</a>
