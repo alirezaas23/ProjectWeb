@@ -151,5 +151,11 @@ namespace ProjectWeb.Mvc.Controllers
                 }
             }
         }
+
+        [HttpGet]
+        public IActionResult PaymentError()
+        {
+            return View();
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace ProjectWeb.Mvc.Controllers
                     return View();
                 }
             }
-            return NotFound();
+            return RedirectToAction("PaymentError", "Order");
         }
     }
 }

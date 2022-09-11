@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "پرداخت انجام شد";
+    ViewData["Title"] = "پرداخت ناموفق";
     Layout = "~/Views/Shared/_Layout_Account.cshtml";
 }
 
@@ -8,20 +8,21 @@
     <div class="col-12 col-lg-5">
         <div class="card custom-box-shadow">
             <div class="card-body text-center">
-                <div class="text-center">
+                <div class="text-center mb-4">
                     <a asp-controller="Home" asp-action="Index">
-                        <img src="~/imgs/Web Maker-1.png" width="200" alt="Register-Icon" />
+                        <img src="~/imgs/error-100.png" alt="پرداخت_ناموفق" />
                     </a>
                 </div>
-                <h4 class="font-weight-bold text-success">پرداخت موفق</h4>
+                <h4 class="font-weight-bold text-danger">پرداخت ناموفق</h4>
                 <hr />
-                <h5 class="text-success">
-                    مشتری گرامی، با تشکر از پرداخت شما!
+                <h5 class="text-danger">
+                    عملیات پرداخت با ارور مواجه شد!
                 </h5>
                 <p class="mt-3 text-muted">
-                    کد پیگیری : @ViewBag.Code
+                    لطفا چند دقیقه دیگر اقدام کنید.
                 </p>
             </div>
         </div>
     </div>
 </div>
+
