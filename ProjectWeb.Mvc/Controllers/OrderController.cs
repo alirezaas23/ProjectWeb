@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.ViewModels.OrderViewModels;
@@ -10,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ZarinpalSandbox;
 
 namespace ProjectWeb.Mvc.Controllers
 {
@@ -18,11 +20,13 @@ namespace ProjectWeb.Mvc.Controllers
         private readonly IOrderInterface _orderInterface;
         private readonly IWebProductInterface _webProductInterface;
         private readonly IOrderDetailInterface _orderDetailInterface;
-        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface, IOrderDetailInterface orderDetailInterface)
+        private readonly UserManager<UserApp> _userManager;
+        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface, IOrderDetailInterface orderDetailInterface, UserManager<UserApp> userManager)
         {
             this._orderInterface = orderInterface;
             this._webProductInterface = webProductInterface;
             this._orderDetailInterface = orderDetailInterface;
+            _userManager = userManager;
         }
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult AddToBasket(ShowWebProductViewModel model)
@@ -38,7 +42,7 @@ namespace ProjectWeb.Mvc.Controllers
                     Sum = 0,
                     OrderDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
                     + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
-                    UserId = userId
+                    UserId = userId,
                 };
                 _orderInterface.AddOrder(order);
                 var orderDetail = new OrderDetail()
@@ -89,7 +93,7 @@ namespace ProjectWeb.Mvc.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = _orderInterface.IsOrderInUse(userId);
             List<ShowOrderDetailViewModel> List = new List<ShowOrderDetailViewModel>();
-            if(order != null)
+            if (order != null)
             {
                 var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
                 foreach (var item in detail)
@@ -120,6 +124,32 @@ namespace ProjectWeb.Mvc.Controllers
             _orderInterface.UpdateSum(order.OrderId);
             TempData["Message"] = "محصول با موفقیت از سبد خرید حذف شد.";
             return RedirectToAction(nameof(ShowOrder));
+        }
+
+        public IActionResult Payment()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _userManager.FindByIdAsync(userId);
+            var order = _orderInterface.IsOrderInUse(userId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var payment = new Payment(order.ShouldPaySum);
+                var res =
+                    payment.PaymentRequest($"پرداخت فاکتور شماره {order.OrderId}", "https://localhost:44349/Home/OnlinePayment/" + order.OrderId,
+                    user.Result.Email, user.Result.PhoneNumber);
+                if(res.Result.Status == 100)
+                {
+                    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
         }
     }
 }

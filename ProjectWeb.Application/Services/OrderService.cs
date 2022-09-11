@@ -25,9 +25,19 @@ namespace ProjectWeb.Application.Services
             return _orderRepository.FinallyOrders();
         }
 
+        public Order FindOrder(int orderId)
+        {
+            return _orderRepository.FindOrder(orderId);
+        }
+
         public Order IsOrderInUse(string userId)
         {
             return _orderRepository.IsOrderInUse(userId);
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            _orderRepository.UpdateOrder(order);
         }
 
         public void UpdateSum(int OrderId)

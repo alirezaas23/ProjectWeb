@@ -10,6 +10,8 @@
 
 body {
     font-family: Vazir;
+    background-image: url("https://cdn.zarinpal.com/theme/payment_gateway/images/pixel.png");
+    background-size: 3.25em;
 }
 
 .card {

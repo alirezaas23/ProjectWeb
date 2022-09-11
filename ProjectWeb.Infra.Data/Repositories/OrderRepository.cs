@@ -45,12 +45,15 @@ namespace ProjectWeb.Infra.Data.Repositories
         public void UpdateOrder(Order order)
         {
             _ctx.Orders.Update(order);
+            SaveChanges();
         }
 
         public void UpdateSum(int OrderId)
         {
             var order = FindOrder(OrderId);
             order.Sum = _ctx.OrderDetails.Where(o => o.OrderId == order.OrderId).Select(o => o.Count * o.Price).Sum();
+            order.ShouldPaySum = order.Sum / 2;
+            order.LeftSum = order.Sum - order.ShouldPaySum;
             UpdateOrder(order);
             SaveChanges();
         }

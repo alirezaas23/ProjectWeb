@@ -11,5 +11,7 @@ namespace ProjectWeb.Application.Interfaces
         Order IsOrderInUse(string userId);
         void AddOrder(Order order);
         int FinallyOrders();
+        Order FindOrder(int orderId);
+        void UpdateOrder(Order order);
     }
 }

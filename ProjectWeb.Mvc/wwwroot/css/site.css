@@ -349,13 +349,14 @@ header .custom-nav .logo img{
     background: #2a87c6;
     color: white;
     padding: 15px 20px;
-    border-radius: 25px;
+    border-radius: 25px 0 25px 0;
     outline: none;
+    transition: 1s ease;
 }
 
 #btn-header:hover{
     background: #47B5FF;
-    transition: all 0.1s ease;
+    
 }
 
 .remove-icon {
