@@ -143,7 +143,7 @@ namespace ProjectWeb.Mvc.Controllers
                     user.Result.Email, user.Result.PhoneNumber);
                 if(res.Result.Status == 100)
                 {
-                    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+                    return Redirect("https://zarinpal.com/pg/StartPay/" + res.Result.Authority);
                 }
                 else
                 {
