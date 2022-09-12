@@ -37,6 +37,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.Orders.SingleOrDefault(o => o.UserId == userId && !o.IsFinally);
         }
 
+        public IEnumerable<Order> MyOrders(string userId)
+        {
+            return _ctx.Orders.Where(o => o.UserId == userId && o.IsFinally).ToList();
+        }
+
         public void SaveChanges()
         {
             _ctx.SaveChanges();

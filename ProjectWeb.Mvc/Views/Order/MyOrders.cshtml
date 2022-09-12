@@ -1,0 +1,70 @@
+﻿@model List<MyOrdersViewModel>
+@using ProjectWeb.Application.Interfaces
+@inject IOrderDetailInterface _orderDetailInterface
+@inject IWebProductInterface _webProductInterface
+@{
+    ViewData["Title"] = "MyOrders";
+    Layout = "~/Views/Shared/_Layout_Profile.cshtml";
+    int row = 1;
+}
+@if (!Model.Any())
+{
+    <div class="card custom-box-shadow">
+        <div class="card-body">
+            <div class="alert alert-danger">
+                شما سفارشی ندارید
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var item in Model)
+{
+    <div class="card custom-box-shadow mb-3">
+        <div class="card-body text-muted">
+            <span class="product-row custom-box-shadow">
+                @row
+            </span>
+            @{
+                var detail = _orderDetailInterface.MyOrderDetails(item.OrderId);
+                var product = _webProductInterface.FindById(detail.WebProductId);
+                <h6>
+                    <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID" class="text-hover">
+                        @product.WebProductName
+                    </a>
+                </h6>
+                <hr />
+                <p>
+                    <span class="font-weight-bold">تاریخ سفارش : </span>
+                    @item.OrderDateTime
+                </p>
+                <p>
+                    <span class="font-weight-bold">نوع سایت : </span>
+                    @detail.WebType
+                </p>
+                <div class="small d-flex justify-content-between">
+                    <p>
+                        <span class="font-weight-bold">مبلغ کل سفارش : </span>
+                        @item.Sum
+                    </p>
+                    <p>
+                        <span class="font-weight-bold">مبلغ پرداخت شده : </span>
+                        @item.ShouldPaySum
+                    </p>
+                    <p class="text-danger">
+                        <span class="font-weight-bold">مبلغ باقی مانده : </span>
+                        @item.LeftSum
+                    </p>
+                </div>
+                <div>
+                    <p class="small font-weight-bold">توضیحات :</p>
+                    <p class="small text-info">
+                        - @detail.Description
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+
+    row++;
+}

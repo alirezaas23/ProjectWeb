@@ -13,5 +13,6 @@ namespace ProjectWeb.Application.Interfaces
         int FinallyOrders();
         Order FindOrder(int orderId);
         void UpdateOrder(Order order);
+        IEnumerable<Order> MyOrders(string userId);
     }
 }

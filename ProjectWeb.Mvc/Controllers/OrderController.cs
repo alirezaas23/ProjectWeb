@@ -143,7 +143,7 @@ namespace ProjectWeb.Mvc.Controllers
                     user.Result.Email, user.Result.PhoneNumber);
                 if(res.Result.Status == 100)
                 {
-                    return Redirect("https://zarinpal.com/pg/StartPay/" + res.Result.Authority);
+                    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
                 }
                 else
                 {
@@ -156,6 +156,29 @@ namespace ProjectWeb.Mvc.Controllers
         public IActionResult PaymentError()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult MyOrders(string userId)
+        {
+            var orders = _orderInterface.MyOrders(userId);
+            List<MyOrdersViewModel> List = new List<MyOrdersViewModel>();
+            if (orders != null)
+            {
+                foreach (var item in orders)
+                {
+                    List.Add(new MyOrdersViewModel()
+                    {
+                        LeftSum = item.LeftSum,
+                        OrderDateTime = item.OrderDateTime,
+                        OrderId = item.OrderId,
+                        ShouldPaySum = item.ShouldPaySum,
+                        Sum = item.Sum,
+                        UserId = item.UserId
+                    });
+                }
+            }
+            return View(List);
         }
     }
 }

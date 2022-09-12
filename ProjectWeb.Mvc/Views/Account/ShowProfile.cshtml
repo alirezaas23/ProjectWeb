@@ -18,17 +18,19 @@
         <div class="profile-font">
             <p>
                 <i class="far fa-user ml-2"></i>
-                نام کاربری : @Model.UserName
+                <span class="font-weight-bold">نام کاربری :</span>
+                @Model.UserName
             </p>
 
             <p>
                 <i class="far fa-envelope-open ml-2"></i>
-                ایمیل : @Model.Email
+                <span class="font-weight-bold">ایمیل :</span>
+                @Model.Email
             </p>
 
             <p>
                 <i class='fas fa-phone ml-2'></i>
-                شماره تماس :
+                <span class="font-weight-bold">شماره تماس :</span>
                 @if (Model.PhoneNumber == null)
                 {
                     <span>وارد نشده است</span>

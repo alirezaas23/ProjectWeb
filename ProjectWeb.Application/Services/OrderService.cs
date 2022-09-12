@@ -35,6 +35,11 @@ namespace ProjectWeb.Application.Services
             return _orderRepository.IsOrderInUse(userId);
         }
 
+        public IEnumerable<Order> MyOrders(string userId)
+        {
+            return _orderRepository.MyOrders(userId);
+        }
+
         public void UpdateOrder(Order order)
         {
             _orderRepository.UpdateOrder(order);
