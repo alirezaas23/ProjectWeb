@@ -14,8 +14,5 @@ namespace ProjectWeb.Domain.Interfaces
         IEnumerable<OrderDetail> GetOrderDetails(int orderId);
         void RemoveOrderDetail(int id);
         OrderDetail FindById(int id);
-
-        //Show OrderDetail For My Orders In Profile View
-        OrderDetail MyOrderDetails(int orderId);
     }
 }

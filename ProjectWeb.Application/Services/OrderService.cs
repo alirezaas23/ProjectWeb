@@ -25,6 +25,11 @@ namespace ProjectWeb.Application.Services
             return _orderRepository.FinallyOrders();
         }
 
+        public Order FindFinalyOrder(int orderId)
+        {
+            return _orderRepository.FindFinalyOrder(orderId);
+        }
+
         public Order FindOrder(int orderId)
         {
             return _orderRepository.FindOrder(orderId);

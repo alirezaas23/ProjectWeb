@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "پرداخت انجام شد";
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+}
+
+<div class="row d-flex justify-content-center align-items-center vh-100">
+    <div class="col-12 col-lg-5">
+        <div class="card custom-box-shadow">
+            <div class="card-body text-center">
+                <div class="text-center">
+                    <a asp-controller="Home" asp-action="Index">
+                        <img src="~/imgs/Web Maker-1.png" width="200" alt="Register-Icon" />
+                    </a>
+                </div>
+                <h4 class="font-weight-bold text-success">پرداخت موفق</h4>
+                <hr />
+                <h5 class="text-success">
+                    مشتری گرامی، سفارش شما به طور کامل پرداخت شد. با تشکر از پرداخت شما!
+                </h5>
+                <p class="mt-3 text-muted">
+                    <span class="font-weight-bold">
+                        کد پیگیری :
+                    </span>
+                    @ViewBag.Code
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

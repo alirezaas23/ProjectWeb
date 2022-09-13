@@ -37,11 +37,6 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.OrderDetails.SingleOrDefault(o => o.OrderId == orderId && o.WebProductId == productId);
         }
 
-        public OrderDetail MyOrderDetails(int orderId)
-        {
-            return _ctx.OrderDetails.SingleOrDefault(o => o.OrderId == orderId);
-        }
-
         public void RemoveOrderDetail(int id)
         {
             var order = FindById(id);

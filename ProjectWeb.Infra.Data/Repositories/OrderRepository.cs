@@ -27,6 +27,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.Orders.Where(o => o.IsFinally).Count();
         }
 
+        public Order FindFinalyOrder(int orderId)
+        {
+            return _ctx.Orders.SingleOrDefault(o => o.OrderId == orderId && o.IsFinally);
+        }
+
         public Order FindOrder(int orderId)
         {
             return _ctx.Orders.Find(orderId);

@@ -12,6 +12,5 @@ namespace ProjectWeb.Application.Interfaces
         void AddOrderDetail(OrderDetail orderDetail);
         IEnumerable<OrderDetail> GetOrderDetails(int orderId);
         void RemoveOrderDetail(int id);
-        OrderDetail MyOrderDetails(int orderId);
     }
 }

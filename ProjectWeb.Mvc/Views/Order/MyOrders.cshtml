@@ -22,25 +22,37 @@
 {
     <div class="card custom-box-shadow mb-3">
         <div class="card-body text-muted">
+            <div class="d-flex justify-content-between">
+                <p>
+                    <i class="far fa-check-circle"></i>
+                    <span class="font-weight-bold">وضعیت پرداخت :</span>
+                    @{
+                        if (item.FinalyPay)
+                        {
+                            <span class="text-success">
+                                پرداخت کامل
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                <a asp-controller="Order" asp-action="PaymentLeftSum" asp-route-orderId="@item.OrderId">
+                                    پرداخت نشده @item.LeftSum تومان
+                                </a>
+                            </span>
+                        }
+                    }
+                </p>
+            </div>
             <span class="product-row custom-box-shadow">
                 @row
             </span>
             @{
-                var detail = _orderDetailInterface.MyOrderDetails(item.OrderId);
-                var product = _webProductInterface.FindById(detail.WebProductId);
-                <h6>
-                    <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID" class="text-hover">
-                        @product.WebProductName
-                    </a>
-                </h6>
+                var detail = _orderDetailInterface.GetOrderDetails(item.OrderId);
                 <hr />
                 <p>
                     <span class="font-weight-bold">تاریخ سفارش : </span>
                     @item.OrderDateTime
-                </p>
-                <p>
-                    <span class="font-weight-bold">نوع سایت : </span>
-                    @detail.WebType
                 </p>
                 <div class="small d-flex justify-content-between">
                     <p>
@@ -56,12 +68,19 @@
                         @item.LeftSum
                     </p>
                 </div>
-                <div>
-                    <p class="small font-weight-bold">توضیحات :</p>
-                    <p class="small text-info">
-                        - @detail.Description
-                    </p>
-                </div>
+                <hr />
+                <p class="small">
+                    جزییات سفارش
+                </p>
+                foreach (var items in detail)
+                {
+                    var product = _webProductInterface.FindById(items.WebProductId);
+                    <div class="small">
+                        <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID" class="text-hover">
+                            - <span class="font-weight-bold">@product.WebProductName</span> (@items.WebType) - @items.Description
+                        </a>
+                    </div>
+                }
             }
         </div>
     </div>

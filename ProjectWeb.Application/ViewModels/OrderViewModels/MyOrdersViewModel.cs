@@ -12,5 +12,6 @@ namespace ProjectWeb.Application.ViewModels.OrderViewModels
         public int Sum { get; set; }
         public int ShouldPaySum { get; set; }
         public int LeftSum { get; set; }
+        public bool FinalyPay { get; set; }
     }
 }

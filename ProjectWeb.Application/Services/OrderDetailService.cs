@@ -31,11 +31,6 @@ namespace ProjectWeb.Application.Services
             return _orderDetailRepository.IsProductInUse(orderId, productId);
         }
 
-        public OrderDetail MyOrderDetails(int orderId)
-        {
-            return _orderDetailRepository.MyOrderDetails(orderId);
-        }
-
         public void RemoveOrderDetail(int id)
         {
             _orderDetailRepository.RemoveOrderDetail(id);

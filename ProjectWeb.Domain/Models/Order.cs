@@ -13,6 +13,7 @@ namespace ProjectWeb.Domain.Models
         public int ShouldPaySum { get; set; }
         public int LeftSum { get; set; }
         public bool IsFinally { get; set; }
+        public bool FinalyPay { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -57,5 +57,28 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return RedirectToAction("PaymentError", "Order");
         }
+
+        public IActionResult OnlinePaymentLeft(int id)
+        {
+            if(HttpContext.Request.Query["Status"] != "" &&
+                HttpContext.Request.Query["Status"].ToString().ToLower() == "ok" &&
+                HttpContext.Request.Query["Authority"] != "")
+            {
+                string authority = HttpContext.Request.Query["Authority"].ToString();
+                var order = _orderInterface.FindOrder(id);
+                var payment = new Payment(order.LeftSum);
+                var res = payment.Verification(authority).Result;
+                if(res.Status == 100)
+                {
+                    order.FinalyPay = true;
+                    order.LeftSum = 0;
+                    order.ShouldPaySum = order.Sum;
+                    _orderInterface.UpdateOrder(order);
+                    ViewBag.Code = res.RefId;
+                    return View();
+                }
+            }
+            return RedirectToAction("PaymentError", "Order");
+        }
     }
 }

@@ -38,6 +38,7 @@ namespace ProjectWeb.Mvc.Controllers
             {
                 order = new Order()
                 {
+                    FinalyPay = false,
                     IsFinally = false,
                     Sum = 0,
                     OrderDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
@@ -141,7 +142,7 @@ namespace ProjectWeb.Mvc.Controllers
                 var res =
                     payment.PaymentRequest($"پرداخت فاکتور شماره {order.OrderId}", "https://localhost:44349/Home/OnlinePayment/" + order.OrderId,
                     user.Result.Email, user.Result.PhoneNumber);
-                if(res.Result.Status == 100)
+                if (res.Result.Status == 100)
                 {
                     return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
                 }
@@ -174,11 +175,39 @@ namespace ProjectWeb.Mvc.Controllers
                         OrderId = item.OrderId,
                         ShouldPaySum = item.ShouldPaySum,
                         Sum = item.Sum,
-                        UserId = item.UserId
+                        UserId = item.UserId,
+                        FinalyPay = item.FinalyPay
                     });
                 }
             }
             return View(List);
+        }
+
+        [HttpGet]
+        public IActionResult PaymentLeftSum(int orderId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _userManager.FindByIdAsync(userId);
+            var order = _orderInterface.FindFinalyOrder(orderId);
+            if (order != null)
+            {
+                var payment = new Payment(order.LeftSum);
+                var res =
+                    payment.PaymentRequest($"پرداخت مبلغ باقی مانده فاکتور {order.OrderId}", "https://localhost:44349/Home/OnlinePaymentLeft/" + order.OrderId,
+                    user.Result.Email, user.Result.PhoneNumber);
+                if(res.Result.Status == 100)
+                {
+                    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
