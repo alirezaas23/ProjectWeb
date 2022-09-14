@@ -29,6 +29,11 @@ namespace ProjectWeb.Application.Services
             return _ticketRepository.GetTickets();
         }
 
+        public List<Ticket> MyTickets(string userId)
+        {
+            return _ticketRepository.MyTickets(userId);
+        }
+
         public Ticket SearchById(int id)
         {
             return _ticketRepository.SearchById(id);

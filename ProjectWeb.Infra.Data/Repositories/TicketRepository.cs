@@ -33,6 +33,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.Tickets;
         }
 
+        public List<Ticket> MyTickets(string userId)
+        {
+            return _ctx.Tickets.Where(t => t.UserId == userId).ToList();
+        }
+
         public void SaveChanges()
         {
             _ctx.SaveChanges();

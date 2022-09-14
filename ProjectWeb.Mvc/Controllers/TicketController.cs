@@ -4,6 +4,7 @@ using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.ViewModels;
 using ProjectWeb.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace ProjectWeb.Mvc.Controllers
                 ticket.TicketDateTime = model.TicketDateTime;
                 ticket.UserId = model.UserId;
                 _ticketInterface.AddTicket(ticket);
-                TempData["Message"] = "تیکت شما با موفقیت ارسال شد.برای دریافت پاسخ به قسمت پیام های من بروید.";
+                TempData["Message"] = "تیکت شما با موفقیت ارسال شد.کارشناسان ما بعد از بررسی با شما تماس خواهند گرفت.";
                 return RedirectToAction("ShowProfile", "Account", new { id = model.UserId });
             }
             return View(model);
@@ -97,6 +98,23 @@ namespace ProjectWeb.Mvc.Controllers
             _ticketInterface.DeleteTicket(model.TicketId);
             TempData["Message"] = "تیکت مورد نظر با موفقیت حذف شد.";
             return RedirectToAction("AllTickets", "Ticket");
+        }
+
+        [HttpGet]
+        public IActionResult MyTickets(string userId)
+        {
+            var myTickets = _ticketInterface.MyTickets(userId);
+            List<MyTicketsViewModel> TicketsList = new List<MyTicketsViewModel>();
+            foreach (var ticket in myTickets)
+            {
+                TicketsList.Add(new MyTicketsViewModel()
+                {
+                    TicketDateTime = ticket.TicketDateTime,
+                    TicketSubject = ticket.TicketSubject,
+                    TicketText = ticket.TicketText,
+                });
+            }
+            return View(TicketsList);
         }
     }
 }
