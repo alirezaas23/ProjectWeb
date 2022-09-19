@@ -45,6 +45,11 @@ namespace ProjectWeb.Application.Services
             return _orderRepository.MyOrders(userId);
         }
 
+        public List<Order> ShowFinallyOrders()
+        {
+            return _orderRepository.ShowFinallyOrders();
+        }
+
         public void UpdateOrder(Order order)
         {
             _orderRepository.UpdateOrder(order);

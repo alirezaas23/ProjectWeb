@@ -488,3 +488,20 @@ footer {
     border: 1px solid #b0b9be;
     margin: auto;
 }
+
+.product-row {
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    color: #b0b9be;
+    border: 1px solid #b0b9be;
+}

@@ -15,5 +15,6 @@ namespace ProjectWeb.Application.Interfaces
         void UpdateOrder(Order order);
         IEnumerable<Order> MyOrders(string userId);
         Order FindFinalyOrder(int orderId);
+        List<Order> ShowFinallyOrders();
     }
 }

@@ -16,5 +16,6 @@ namespace ProjectWeb.Domain.Interfaces
         void SaveChanges();
         IEnumerable<Order> MyOrders(string userId);
         Order FindFinalyOrder(int orderId);
+        List<Order> ShowFinallyOrders();
     }
 }

@@ -60,7 +60,7 @@
                                         <i class="fas fa-circle small-dot"></i>
                                         ویرایش حساب کاربری
                                     </a>
-                                    <a class="dropdown-item menu-text-hover">
+                                    <a asp-controller="Admin" asp-action="Orders" class="dropdown-item menu-text-hover">
                                         <i class="fas fa-circle small-dot"></i>
                                         سفارشات
                                     </a>
@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="" asp-action="">سفارشات</a>
+                    <a asp-controller="Admin" asp-action="Orders">سفارشات</a>
                 </li>
                 <li>
                     <a asp-controller="Ticket" asp-action="AllTickets">پیام ها</a>

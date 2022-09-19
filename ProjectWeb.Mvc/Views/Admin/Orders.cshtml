@@ -1,0 +1,75 @@
+﻿@model List<AllOrdersViewModel>
+@using ProjectWeb.Application.Interfaces
+@inject IOrderDetailInterface _orderDetailInterface
+@inject IWebProductInterface _webProductInterface
+@{
+    ViewData["Title"] = "لیست سفارشات";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    int row = 1;
+}
+
+@{
+    if (!Model.Any())
+    {
+        <div class="alert alert-danger">
+            سفارش پابان یافته ای ثبت نشد!
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var order in Model)
+            {
+                <div class="col-12 mb-3">
+                    <div class="card custom-box-shadow">
+                        <div class="card-body">
+                            <span class="product-row custom-box-shadow">
+                                @row
+                            </span>
+                            <div class="text-left">
+                                <div class="dropdown">
+                                    <i class="fas fa-ellipsis-v dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; font-size: 15px; padding: 10px;"></i>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-no-m">
+                                        <p class="dropdown-item menu-text-hover">
+                                            <span class="font-weight-bold">مبلغ پرداختی : </span>
+                                            @order.ShouldPaySum تومان
+                                        </p>
+                                        <p class="dropdown-item menu-text-hover">
+                                            <span class="font-weight-bold">مبلغ مانده : </span>
+                                            @order.LeftSum تومان
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="text-muted small">
+                                <p>
+                                    <span class="font-weight-bold">تاریخ سفارش : </span>
+                                    @order.OrderDateTime
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">مبلغ سفارش : </span>
+                                    @order.Sum تومان
+                                </p>
+                                <p class="font-weight-bold">جزییات :</p>
+                                @{
+                                    var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
+                                    foreach (var item in detail)
+                                    {
+                                        var product = _webProductInterface.FindById(item.WebProductId);
+                                        <p class="font-weight-bold">
+                                            <a class="text-hover" asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID">
+                                                @product.WebProductName (@item.WebType) - @item.Description
+                                            </a>
+                                        </p>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                row++;
+            }
+        </div>
+    }
+}

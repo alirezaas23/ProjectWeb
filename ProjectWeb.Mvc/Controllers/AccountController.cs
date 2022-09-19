@@ -137,47 +137,43 @@ namespace ProjectWeb.Mvc.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult ShowProfile(string id)
+        public async Task<IActionResult> ShowProfile(string id)
         {
             ViewBag.Message = TempData["Message"];
-            using(var user = _userManager.FindByIdAsync(id))
+            var user = await _userManager.FindByIdAsync(id);
+            if (string.IsNullOrEmpty(id)) return NotFound();
+            if (user == null) return NotFound();
+            var userModel = new ShowProfileViewModel()
             {
-                if (string.IsNullOrEmpty(id)) return NotFound();
-                if (user == null) return NotFound();
-                var userModel = new ShowProfileViewModel()
-                {
-                    Email = user.Result.Email,
-                    UserId = user.Result.Id,
-                    UserName = user.Result.UserName,
-                    PhoneNumber = user.Result.PhoneNumber
-                };
-                if (user.Result.PhoneNumber == null)
-                {
-                    ViewBag.Warning = "لطفا شماره تماس خود را در قسمت ویرایش حساب ثبت کنید";
-                }
-                return View(userModel);
+                Email = user.Email,
+                UserId = user.Id,
+                UserName = user.UserName,
+                PhoneNumber = user.PhoneNumber
+            };
+            if (user.PhoneNumber == null)
+            {
+                ViewBag.Warning = "لطفا شماره تماس خود را در قسمت ویرایش حساب ثبت کنید";
             }
+            return View(userModel);
         }
 
         [HttpGet]
         [Authorize]
-        public IActionResult EditAccount(string id)
+        public async Task<IActionResult> EditAccount(string id)
         {
-            using(var user = _userManager.FindByIdAsync(id))
+            var user = await _userManager.FindByIdAsync(id);
+            if (string.IsNullOrEmpty(id)) return NotFound();
+            if (user == null) return NotFound();
+            var userModel = new EditAccountViewModel()
             {
-                if (string.IsNullOrEmpty(id)) return NotFound();
-                if (user == null) return NotFound();
-                var userModel = new EditAccountViewModel()
-                {
-                    Email = user.Result.Email,
-                    FirstName = user.Result.FirstName,
-                    LastName = user.Result.LastName,
-                    PhoneNumber = user.Result.PhoneNumber,
-                    UserId = user.Result.Id,
-                    UserName = user.Result.UserName
-                };
-                return View(userModel);
-            }
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                UserId = user.Id,
+                UserName = user.UserName
+            };
+            return View(userModel);
         }
 
         [HttpPost]

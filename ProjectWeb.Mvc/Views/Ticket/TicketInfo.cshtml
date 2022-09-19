@@ -42,14 +42,16 @@
                 <span class="font-weight-bold">عنوان تیکت :</span>
                 @Model.TicketSubject
             </p>
-            <hr />
             <p>
+                <span class="font-weight-bold">متن تیکت : </span>
                 @Html.Raw(Model.TicketText)
             </p>
             <hr />
-            <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover">
-                بازگشت به لیست تیکت ها
-            </a>
+            <div class="text-right">
+                <a asp-controller="Ticket" asp-action="AllTickets" class="text-hover">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </a>
+            </div>
         </div>
     }
 </div>

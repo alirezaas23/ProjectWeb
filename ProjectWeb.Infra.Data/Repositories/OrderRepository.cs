@@ -52,6 +52,11 @@ namespace ProjectWeb.Infra.Data.Repositories
             _ctx.SaveChanges();
         }
 
+        public List<Order> ShowFinallyOrders()
+        {
+            return _ctx.Orders.Where(o => o.IsFinally).ToList();
+        }
+
         public void UpdateOrder(Order order)
         {
             _ctx.Orders.Update(order);
