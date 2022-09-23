@@ -59,5 +59,10 @@ namespace ProjectWeb.Application.Services
         {
             _orderRepository.UpdateSum(OrderId);
         }
+
+        public int UserPaysSum()
+        {
+            return _orderRepository.UserPaysSum();
+        }
     }
 }

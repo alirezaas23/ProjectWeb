@@ -72,5 +72,10 @@ namespace ProjectWeb.Infra.Data.Repositories
             UpdateOrder(order);
             SaveChanges();
         }
+
+        public int UserPaysSum()
+        {
+            return _ctx.Orders.Where(o => o.IsFinally).Sum(o => o.Sum);
+        }
     }
 }

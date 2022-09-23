@@ -13,7 +13,7 @@
             if (_signInManager.IsSignedIn(User))
             {
                 <li class="user-nav-item">
-                    <i class="far fa-user ml-1"></i>
+                    <i class="fas fa-user"></i>
                     <span>@user.UserName</span>
                 </li>
                 @if (User.IsInRole("ادمین"))
@@ -26,36 +26,31 @@
                 }
                 <li>
                     <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                        <i class="fas fa-user-circle"></i>
                         مشاهده حساب کاربری
                     </a>
                 </li>
                 <li>
                     <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
+                        <i class="fas fa-user-edit"></i>
                         ویرایش حساب کاربری
                     </a>
                 </li>
                 <li>
                     <a asp-controller="Order" asp-action="ShowOrder">
+                        <i class="fas fa-shopping-basket"></i>
                         سبد خرید
                     </a>
                 </li>
                 <li>
                     <a asp-controller="Order" asp-action="MyOrders" asp-route-userId="@user.Id">
+                        <i class="fas fa-cart-arrow-down"></i>
                         سفارشات من
                     </a>
                 </li>
                 <li>
-                    <a>
-                        ارتباط با ما
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        درباره ما
-                    </a>
-                </li>
-                <li>
                     <a asp-controller="Account" asp-action="LogOut">
+                        <i class="fas fa-sign-out-alt"></i>
                         خروج از حساب کاربری
                     </a>
                 </li>
@@ -64,19 +59,9 @@
             else
             {
                 <li class="">
-                    <i class="far fa-user ml-1"></i>
+                    <i class="fas fa-user"></i>
                     <a asp-controller="Account" asp-action="Login" class="nav-text">ورود</a> /
                     <a asp-controller="Account" asp-action="Register" class="nav-text">عضویت</a>
-                </li>
-                <li class="text-white">
-                    <a class="nav-text">
-                        ارتباط با ما
-                    </a>
-                </li>
-                <li class="text-white">
-                    <a class="nav-text">
-                        درباره ما
-                    </a>
                 </li>
             }
         }

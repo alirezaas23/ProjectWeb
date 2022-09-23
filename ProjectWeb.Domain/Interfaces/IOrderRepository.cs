@@ -17,5 +17,6 @@ namespace ProjectWeb.Domain.Interfaces
         IEnumerable<Order> MyOrders(string userId);
         Order FindFinalyOrder(int orderId);
         List<Order> ShowFinallyOrders();
+        int UserPaysSum();
     }
 }

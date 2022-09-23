@@ -16,7 +16,7 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-ul{
+ul {
     list-style-position: inside;
     margin: 0;
     padding: 0;
@@ -27,9 +27,9 @@ a {
     color: #0366d6;
 }
 
-a:hover{
-    text-decoration: none;
-}
+    a:hover {
+        text-decoration: none;
+    }
 
 .btn-primary {
     color: #fff;
@@ -91,6 +91,7 @@ body {
     width: 100%;
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
+    background: white;
 }
 
 .custom-nav {
@@ -102,7 +103,7 @@ body {
 header {
     width: 100%;
     margin-bottom: 20px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; 
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .custom-nav ul {
@@ -116,11 +117,11 @@ header .custom-nav ul {
     list-style: none;
 }
 
-header .custom-nav ul li {
-    display: flex;
-    font-size: 15px;
-    float: left;
-}
+    header .custom-nav ul li {
+        display: flex;
+        font-size: 15px;
+        float: left;
+    }
 
 header .custom-nav .logo {
     float: right;
@@ -129,16 +130,16 @@ header .custom-nav .logo {
     position: relative;
 }
 
-header .custom-nav .logo img{
-    width: 80px;
-}
+    header .custom-nav .logo img {
+        width: 80px;
+    }
 
-#hamburger-icon{
+#hamburger-icon {
     float: left;
     display: none;
 }
 
-#responsive-nav{
+#responsive-nav {
     display: none;
 }
 
@@ -147,30 +148,30 @@ header .custom-nav .logo img{
     cursor: pointer;
 }
 
-.text-hover:hover {
-    text-decoration: none;
-    color: #47B5FF !important;
-    transition: .5s;
-}
+    .text-hover:hover {
+        text-decoration: none;
+        color: #47B5FF !important;
+        transition: .5s;
+    }
 
-.text-hover:not(:hover) {
-    transition: .5s;
-}
+    .text-hover:not(:hover) {
+        transition: .5s;
+    }
 
 .menu-text-hover {
     color: black !important;
     cursor: pointer;
 }
 
-.menu-text-hover:hover {
-    text-decoration: none;
-    color: #79c74e !important;
-    transition: .5s;
-}
+    .menu-text-hover:hover {
+        text-decoration: none;
+        color: #79c74e !important;
+        transition: .5s;
+    }
 
-.menu-text-hover:not(:hover) {
-    transition: .5s;
-}
+    .menu-text-hover:not(:hover) {
+        transition: .5s;
+    }
 
 .dropdown .dropdown-menu {
     margin-top: 20px;
@@ -183,9 +184,9 @@ header .custom-nav .logo img{
     z-index: 1;
 }
 
-.dropdown .dropdown-menu :hover{
-    background-color: transparent;
-}
+    .dropdown .dropdown-menu :hover {
+        background-color: transparent;
+    }
 
 .small-dot {
     font-size: 5px;
@@ -200,22 +201,22 @@ header .custom-nav .logo img{
     color: #d0d5d8;
 }
 
-.icon-hover:hover{
-    transition: .5s;
-    color: #47B5FF;
-    cursor: pointer;
-}
+    .icon-hover:hover {
+        transition: .5s;
+        color: #47B5FF;
+        cursor: pointer;
+    }
 
-.icon-hover:not(:hover){
-    transition: .5s;
-}
+    .icon-hover:not(:hover) {
+        transition: .5s;
+    }
 
 .menu-small-icon {
     color: #47B5FF;
     font-size: 6px;
 }
 
-.small-font{
+.small-font {
     font-size: 13px;
 }
 
@@ -230,7 +231,7 @@ header .custom-nav .logo img{
     padding: 8px 8px;
 }
 
-.card-header{
+.card-header {
     background-color: white;
 }
 
@@ -245,9 +246,9 @@ header .custom-nav .logo img{
     font-size: 13px;
 }
 
-.input-custom:hover {
-    transition: .5s;
-}
+    .input-custom:hover {
+        transition: .5s;
+    }
 
 .btn-edit {
     width: 150px;
@@ -258,45 +259,45 @@ header .custom-nav .logo img{
     font-size: 13px;
 }
 
-.btn-edit:hover{
-    transition: 1s;
-    border-radius: 15px;
-    color: white;
-}
+    .btn-edit:hover {
+        transition: 1s;
+        border-radius: 15px;
+        color: white;
+    }
 
-.btn-edit:not(:hover){
-    transition: 1s;
-}
+    .btn-edit:not(:hover) {
+        transition: 1s;
+    }
 
-.close-icon{
+.close-icon {
     cursor: pointer;
 }
 
-.nav-text{
+.nav-text {
     color: black;
     cursor: pointer;
     transition: 0.5s;
 }
 
-.nav-text:hover{
-    color: #47B5FF;
-    transition: 0.5s;
-}
+    .nav-text:hover {
+        color: #47B5FF;
+        transition: 0.5s;
+    }
 
 .intro-title {
     text-shadow: 1px 1px 2px lightblue;
 }
 
-.intro-title p {
-    margin-top: 20px;
-}
+    .intro-title p {
+        margin-top: 20px;
+    }
 
-.pa-z1{
+.pa-z1 {
     position: relative;
     z-index: 1;
 }
 
-.svg-pi{
+.svg-pi {
     position: absolute;
     z-index: 0;
     top: 0;
@@ -317,12 +318,12 @@ header .custom-nav .logo img{
     cursor: pointer;
 }
 
-.navbar-hover-text:hover{
-    color: #47B5FF;
-    text-decoration: none;
-}
+    .navbar-hover-text:hover {
+        color: #47B5FF;
+        text-decoration: none;
+    }
 
-.custom-ul{
+.custom-ul {
     list-style: circle;
     list-style-position: inside;
 }
@@ -354,10 +355,9 @@ header .custom-nav .logo img{
     transition: 1s ease;
 }
 
-#btn-header:hover{
-    background: #47B5FF;
-    
-}
+    #btn-header:hover {
+        background: #47B5FF;
+    }
 
 .remove-icon {
     border-radius: 100%;
@@ -378,9 +378,9 @@ header .custom-nav .logo img{
     cursor: pointer;
 }
 
-.remove-icon:hover{
-    color: red;
-}
+    .remove-icon:hover {
+        color: red;
+    }
 
 .product-row {
     border-radius: 100%;
@@ -408,30 +408,36 @@ header .custom-nav .logo img{
     font-size: 13px;
 }
 
-.btn-buy:hover{
-    transition: 1s;
-    border-radius: 15px;
-    color: white;
-}
+    .btn-buy:hover {
+        transition: 1s;
+        border-radius: 15px;
+        color: white;
+    }
 
-.btn-buy:not(:hover){
-    transition: 1s;
-}
+    .btn-buy:not(:hover) {
+        transition: 1s;
+    }
 
 .basket-title {
     color: #47B5FF;
 }
 
-.basket-title:hover{
-    text-decoration: none;
-    color: #47B5FF;
-}
+    .basket-title:hover {
+        text-decoration: none;
+        color: #47B5FF;
+    }
 
 .muted-color {
     color: #b0b9be;
     transition: all 0.5s ease;
 }
 
-.muted-color:hover{
-    color: #47B5FF 
+    .muted-color:hover {
+        color: #47B5FF
+    }
+
+.my-image {
+    clip-path: circle();
+    outline: medium solid #47B5FF;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
 }

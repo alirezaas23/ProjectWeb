@@ -56,33 +56,14 @@
                     <i class="fas fa-shopping-basket"></i>
                 </a>
             </li>
-            <li class="ul-nav-item navbar-hover-text">
-                <a>
-                    ارتباط با ما
-                </a>
-            </li>
-            <li class="ul-nav-item navbar-hover-text">
-                <a>
-                    درباره ما
-                </a>
-            </li>
         }
         else
         {
             <li class="ul-nav-item">
-                <i class="far fa-user navbar-hover-text"></i>
+                <i class="fas fa-user navbar-hover-text"></i>
                 <a asp-controller="Account" asp-action="Login" class="navbar-hover-text">ورود</a>
+                <span class="navbar-hover-text"> / </span>
                 <a asp-controller="Account" asp-action="Register" class="navbar-hover-text">عضویت</a>
-            </li>
-            <li class="ul-nav-item navbar-hover-text">
-                <a>
-                    ارتباط با ما
-                </a>
-            </li>
-            <li class="ul-nav-item navbar-hover-text">
-                <a>
-                    درباره ما
-                </a>
             </li>
         }
     }

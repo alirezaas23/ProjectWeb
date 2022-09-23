@@ -1,0 +1,65 @@
+﻿@using ProjectWeb.Application.Interfaces
+@inject IWebProductInterface webProductInterface
+<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom bg-dark text-white">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+        <span>مارا در شبکه های مجازی دنبال کنید : </span>
+    </div>
+    <!-- Left -->
+    <!-- Right -->
+    <div>
+        <a href="https://twitter.com/alireza__as1" class="ml-1 text-reset">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/alireza__as1" class="ml-1 text-reset">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/alireza-asgari-3b9436248/" class="ml-1 text-reset">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/alirezaas23" class="text-reset">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+    <!-- Right -->
+</section>
+<section class="bg-white">
+    <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <img src="~/imgs/Web Maker-1.png" alt="Alternate Text" width="150" />
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="fw-bold mb-4 font-weight-bold">
+                    محصولات
+                </h6>
+                @{
+                    var products = webProductInterface.WebProductsList();
+                    foreach (var item in products)
+                    {
+                        <p>
+                            <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@item.WebProductID" class="text-reset">@item.WebProductName</a>
+                        </p>
+                    }
+                }
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <!-- Links -->
+                <h6 class="fw-bold mb-4 font-weight-bold">ارتباط با ما</h6>
+                <p><i class="fas fa-home mr-2"></i> قزوین</p>
+                <p>
+                    <i class="fas fa-envelope mr-2"></i>
+                    alirezaasgari683@gmail.com
+                </p>
+                <p><i class="fas fa-phone mr-2"></i>09910226763</p>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </div>
+</section>
