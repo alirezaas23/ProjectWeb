@@ -52,7 +52,7 @@ function ShowNav() {
             clearInterval(interval);
         }
         else {
-            pos += 5;
+            pos += 10;
             responsiveNav.style.right = pos + "px";
         }
     }
@@ -76,7 +76,7 @@ function ShowNav() {
                 responsiveNav.style.display = "none";
             }
             else {
-                pos -= 5;
+                pos -= 10;
                 responsiveNav.style.right = pos + "px";
             }
         }
@@ -88,3 +88,4 @@ btn.addEventListener("click", function () {
     document.getElementById("products").scrollIntoView({ behavior: 'smooth' });
 
 });
+
