@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.ViewModels;
 using ProjectWeb.Domain.Models;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
@@ -59,21 +61,32 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl = null)
+        public async Task<IActionResult> Login(string returnUrl = null)
         {
             if (_signInManager.IsSignedIn(User))
             {
                 return RedirectToAction("Index", "Home");
             }
 
+            var model = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            model.ReturnUrl = returnUrl;
+            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
@@ -230,6 +243,70 @@ namespace ProjectWeb.Mvc.Controllers
             await _userManager.UpdateAsync(user);
             TempData["Message"] = "حساب کاربری شما تایید شد. با تشکر.";
             return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
+        }
+
+        [HttpPost]
+        public IActionResult ExternalLogins(string provider, string returnUrl)
+        {
+            var redirectUrl =
+                Url.Action("ExternalLoginsCallBack", "Account", new { returnUrl = returnUrl });
+
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+
+            return new ChallengeResult(provider, properties);
+        }
+
+        public async Task<IActionResult> ExternalLoginsCallBack(string returnUrl = null, string remoteError = null)
+        {
+            returnUrl =
+                (returnUrl != null && Url.IsLocalUrl(returnUrl)) ? returnUrl : Url.Content("~/");
+
+            var loginViewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            if(remoteError != null)
+            {
+                ModelState.AddModelError("", $"Error : {remoteError}");
+                return View("Login", loginViewModel);
+            }
+
+            var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
+            if(externalLoginInfo == null)
+            {
+                ModelState.AddModelError("ErrorLoadingGetExternalLoginInfo", "مشکلی پیش آمد ! چند دقیقه دیگر امتحان کنید !");
+                return View("Login", loginViewModel);
+            }
+
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider,
+                externalLoginInfo.ProviderKey, true, true);
+            if (signInResult.Succeeded)
+            {
+                return Redirect(returnUrl);
+            }
+
+            var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
+            if(email != null)
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+                if(user == null)
+                {
+                    var userName = email.Split("@")[0];
+                    user = new UserApp
+                    {
+                        UserName = (userName.Length <= 10 ? userName : userName.Substring(0, 10)),
+                        Email = email,
+                        EmailConfirmed = true
+                    };
+                    await _userManager.CreateAsync(user);
+                }
+                await _userManager.AddLoginAsync(user, externalLoginInfo);
+                await _signInManager.SignInAsync(user, true);
+                return Redirect(returnUrl);
+            }
+            return View();
         }
     }
 }

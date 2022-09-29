@@ -58,6 +58,18 @@
 
                     <button type="submit" class="btn btn-account">ورود</button>
                 </form>
+                <div class="mt-4 text-center">
+                    <h6>یا ورود با اکانت :</h6>
+                    <form method="post" asp-controller="Account" asp-action="ExternalLogins" asp-route-returnUrl ="@Model.ReturnUrl">
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn btn-danger btn-block" value="@provider.Name" name="provider">
+                                @provider.DisplayName
+                                <i class="fab fa-google mr-2"></i>
+                            </button>
+                        }
+                    </form>
+                </div>
                 <hr />
                 <div class="d-flex justify-content-between">
                     <a asp-controller="Account" asp-action="Register" class="text-hover">

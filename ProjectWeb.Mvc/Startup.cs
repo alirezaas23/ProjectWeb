@@ -54,7 +54,7 @@ namespace ProjectWeb.Mvc
                 .AddGoogle(options =>
                 {
                     options.ClientId = "495263575838-dnqdt52jvcbsd475o2ej7kramve1s8vn.apps.googleusercontent.com";
-                    options.ClientId = "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";
+                    options.ClientSecret = "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";
                 });
 
             DependencyContainer.RegisterServices(services);
