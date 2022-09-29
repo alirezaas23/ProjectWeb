@@ -49,12 +49,25 @@
                     <button type="submit" class="btn btn-account">عضویت</button>
                 </form>
 
+                <div class="mt-4 text-center">
+                    <h6>یا عضویت با اکانت :</h6>
+                    <form method="post" asp-controller="Account" asp-action="ExternalLogins">
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button id="google-btn" type="submit" class="btn" value="@provider.Name" name="provider">
+                                @provider.DisplayName
+                                <img src="~/imgs/google-25.png" alt="google-icon" id="google-icon" />
+                            </button>
+                        }
+                    </form>
+                </div>
+
                 <hr />
 
-                <p class="text-center">
+                <a asp-controller="Account" asp-action="Login" class="text-right text-hover">
                     <i class="fas fa-user-check"></i>
-                    اکانت دارید؟ همین حالا <a asp-controller="Account" asp-action="Login" class="text-hover font-weight-bold">وارد</a> شوید!
-                </p>
+                    ورود
+                </a>
             </div>
         </div>
     </div>

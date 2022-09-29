@@ -54,8 +54,7 @@ body {
 }
 
 .input-custom {
-    border: none;
-    border-bottom: 1px solid #d1d4d7;
+    border: 1px solid #d1d4d7;
     border-radius: 0;
     padding: 10px;
     width: 100%;
@@ -179,4 +178,17 @@ body {
 
 .btn-edit:not(:hover){
     transition: 1s;
+}
+
+#google-btn {
+    width: 100%;
+    position: relative;
+    background: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 10px;
+}
+
+#google-icon{
+    position: absolute;
+    left: 10px;
 }

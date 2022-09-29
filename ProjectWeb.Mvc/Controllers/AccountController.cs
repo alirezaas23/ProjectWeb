@@ -24,13 +24,18 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             if (_signInManager.IsSignedIn(User))
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            var model = new RegisterViewModel
+            {
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            return View(model);
         }
 
         [HttpPost]

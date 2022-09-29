@@ -33,6 +33,7 @@ namespace ProjectWeb.Application.ViewModels
         [Compare(nameof(Password), ErrorMessage = "کلمه عبور و تکرارش یکسان نیست")]
         [MaxLength(255)]
         public string ConfirmPassword { get; set; }
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 
     public class LoginViewModel
@@ -50,7 +51,6 @@ namespace ProjectWeb.Application.ViewModels
 
         [Display(Name = "مرا به خاطر بسپار")]
         public bool RememberMe { get; set; }
-
         public string ReturnUrl { get; set; }
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }

@@ -63,9 +63,9 @@
                     <form method="post" asp-controller="Account" asp-action="ExternalLogins" asp-route-returnUrl ="@Model.ReturnUrl">
                         @foreach (var provider in Model.ExternalLogins)
                         {
-                            <button type="submit" class="btn btn-danger btn-block" value="@provider.Name" name="provider">
+                            <button id="google-btn" type="submit" class="btn" value="@provider.Name" name="provider">
                                 @provider.DisplayName
-                                <i class="fab fa-google mr-2"></i>
+                                <img src="~/imgs/google-25.png" alt="google-icon" id="google-icon" />
                             </button>
                         }
                     </form>
