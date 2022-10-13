@@ -2,6 +2,9 @@
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using ProjectWeb.Application.Security;
+using ProjectWeb.Application.ViewModels;
 
 namespace ProjectWeb.Application.Services
 {
@@ -14,14 +17,24 @@ namespace ProjectWeb.Application.Services
             _ticketRepository = ticketRepository;
         }
 
-        public void AddTicket(Ticket ticket)
+        public async Task AddTicketAsync(TicketViewModels ticket)
         {
-            _ticketRepository.AddTicket(ticket);
+            var newTicket = new Ticket()
+            {
+                TicketSubject = ticket.TicketSubject.SanitizeText(),
+                TicketText = ticket.TicketText.SanitizeText(),
+                UserId = ticket.UserId,
+                TicketDateTime = ticket.TicketDateTime.SanitizeText()
+            };
+
+            await _ticketRepository.AddTicketAsync(newTicket);
+            await _ticketRepository.SaveChangesAsync();
         }
 
-        public void DeleteTicket(int id)
+        public async Task DeleteTicketAsync(int id)
         {
-            _ticketRepository.DeleteTicket(id);
+            await _ticketRepository.DeleteTicketAsync(id);
+            await _ticketRepository.SaveChangesAsync();
         }
 
         public IEnumerable<Ticket> GetTickets()

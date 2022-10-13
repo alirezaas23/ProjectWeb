@@ -1,7 +1,7 @@
-﻿@model RegisterViewModel
+﻿@model ProjectWeb.Domain.ViewModels.Account.RegisterViewModel
 @{
     ViewData["Title"] = "عضویت در سایت";
-    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+    Layout = "_Layout_Account";
 }
 
 <div class="row d-flex justify-content-center align-items-center vh-100 m-1 m-md-0">
@@ -44,13 +44,14 @@
                         <i class='bx bx-lock-alt' id="reg-passconfirm-icon"></i>
                         <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
                     </div>
-
+                    
+                    <input type="hidden" asp-for="Captcha"/>
 
                     <button type="submit" class="btn btn-account">عضویت</button>
                 </form>
 
                 <div class="mt-4 text-center">
-                    <h6>یا عضویت با اکانت :</h6>
+                    <h6 class="font-weight-bold">یا عضویت با اکانت :</h6>
                     <form method="post" asp-controller="Account" asp-action="ExternalLogins">
                         @foreach (var provider in Model.ExternalLogins)
                         {
@@ -154,4 +155,6 @@
             }
         });
     </script>
+
+    <partial name="_GoogleReCaptcha" />
 }

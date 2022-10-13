@@ -4,16 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    @await Html.PartialAsync("PartialViews/Css_LayOut")
+
+    <partial name="PartialViews/Css_LayOut" />
+
+    @await RenderSectionAsync("Styles", false)
 </head>
 <body>
     <header>
         <nav class="custom-nav mb-3">
             <div class="container">
-                @await Html.PartialAsync("PartialViews/NavBarItems")
+                <partial name="PartialViews/NavBarItems"/>
             </div>
         </nav>
-        @await Html.PartialAsync("PartialViews/ResponsiveNav")
+        <partial name="PartialViews/ResponsiveNav"/>
     </header>
 
     <section>
@@ -24,11 +27,12 @@
         </div>
     </section>
 
-    <footer class="text-center text-lg-start text-muted">
-        @await Html.PartialAsync("PartialViews/WebFooter")
-    </footer>
+    <partial name="PartialViews/WebFooter" />
 
-    @await Html.PartialAsync("PartialViews/Scripts_LayOut")
-    @RenderSection("Scripts", required: false)
+    <partial name="PartialViews/Scripts_LayOut" />
+
+    <partial name="_Notification" />
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

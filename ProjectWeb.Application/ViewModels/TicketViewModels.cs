@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using ProjectWeb.Application.ViewModels.Common;
 
 namespace ProjectWeb.Application.ViewModels
 {
-    public class TicketViewModels
+    public class TicketViewModels : GoogleReCaptchaViewModel
     {
         public string UserId { get; set; }
 

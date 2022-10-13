@@ -41,6 +41,9 @@
             </div>
 
             <input asp-for="UserId" hidden />
+            
+            <input type="hidden" asp-for="Captcha"/>
+
             <button type="submit" class="btn btn-edit">ارسال تیکت</button>
         </form>
     </div>
@@ -55,4 +58,6 @@
             $('#my-textarea').ckeditor();
         });
     </script>
+    
+    <partial name="_GoogleReCaptcha"/>
 }

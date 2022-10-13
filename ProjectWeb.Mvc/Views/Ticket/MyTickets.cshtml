@@ -1,46 +1,57 @@
 ﻿@model List<MyTicketsViewModel>
 @{
     ViewData["Title"] = "تیکت های من";
-    Layout = "~/Views/Shared/_Layout_Profile.cshtml";
+    Layout = "_Layout_Profile";
     int row = 1;
 }
 
 @{
-    <div class="card custom-box-shadow mb-3">
-        <div class="card-body">
-            @if (!Model.Any())
-            {
+    if (!Model.Any())
+    {
+        <div class="card custom-box-shadow mb-3">
+            <div class="card-body">
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle"></i>
                     شما هیچ تیکت ارسال شده ای ندارید
                 </div>
-            }
-            else
+            </div>
+        </div>
+    }
+
+    else
+    {
+        <div class="row">
+            @foreach (var ticket in Model)
             {
-                foreach (var ticket in Model)
-                {
-                    <span class="product-row custom-box-shadow">
-                        @row
-                    </span>
-                    <div class="text-muted width-100">
-                        <p>
-                            <span class="font-weight-bold">عنوان تیکت :</span>
-                            @ticket.TicketSubject
-                        </p>
-                        <hr />
-                        <p>
-                            <span class="font-weight-bold">تاریخ ارسال :</span>
-                            @ticket.TicketDateTime
-                        </p>
-                        <p class="font-weight-bold">
-                            متن تیکت :
-                        </p>
-                        <p>
-                            @Html.Raw(ticket.TicketText)
-                        </p>
+                <div class="col-12">
+                    <div class="card custom-box-shadow mb-3">
+                        <div class="card-body">
+                            <span class="product-row custom-box-shadow">
+                                @row
+                            </span>
+                            <div class="text-muted width-100">
+                                <p>
+                                    <span class="font-weight-bold">عنوان تیکت :</span>
+                                    @ticket.TicketSubject
+                                </p>
+                                <hr />
+                                <p>
+                                    <span class="font-weight-bold">تاریخ ارسال :</span>
+                                    @ticket.TicketDateTime
+                                </p>
+                                <p class="font-weight-bold">
+                                    متن تیکت :
+                                </p>
+                                <p>
+                                    @Html.Raw(ticket.TicketText)
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                }
+                </div>
+
+                row++;
             }
         </div>
-    </div>
+    }
 }

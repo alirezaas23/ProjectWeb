@@ -1,35 +1,33 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Application.ViewModels;
 using ProjectWeb.Domain.Models;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GoogleReCaptcha.V3.Interface;
+using ProjectWeb.Mvc.ActionFilters;
+using ProjectWeb.Domain.ViewModels.Account;
 
 namespace ProjectWeb.Mvc.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserManager<UserApp> _userManager;
         private readonly SignInManager<UserApp> _signInManager;
-        private readonly ITicketInterface _ticketInterface;
+        private readonly ICaptchaValidator _captchaValidator;
 
-        public AccountController(UserManager<UserApp> userManager, SignInManager<UserApp> signInManager, ITicketInterface ticketInterface)
+        public AccountController(UserManager<UserApp> userManager, SignInManager<UserApp> signInManager, ICaptchaValidator captchaValidator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _ticketInterface = ticketInterface;
+            _captchaValidator = captchaValidator;
         }
 
         [HttpGet]
+        [RedirectToHomeIfLoggedInActionFilter]
         public async Task<IActionResult> Register()
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
             var model = new RegisterViewModel
             {
                 ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
@@ -42,6 +40,12 @@ namespace ProjectWeb.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            {
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا دوباره تلاش کنید.";
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new UserApp()
@@ -66,13 +70,9 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
+        [RedirectToHomeIfLoggedInActionFilter]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             var model = new LoginViewModel
             {
                 ReturnUrl = returnUrl,
@@ -92,11 +92,18 @@ namespace ProjectWeb.Mvc.Controllers
             model.ReturnUrl = returnUrl;
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            {
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا دوباره تلاش کنید.";
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
                 if (result.Succeeded)
                 {
+                    TempData[SuccessMessage] = "کاربر گرامی, خوش آمدید.";
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -105,18 +112,19 @@ namespace ProjectWeb.Mvc.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    ViewData["ErrorMessage"] = "اکانت شما به دلیل 5 بار ورود ناموفق به مدت 5 دقیقه قفل شد!";
+                    TempData[ErrorMessage] = "اکانت شما به دلیل 5 بار ورود ناموفق به مدت 5 دقیقه قفل شد!";
                     return View(model);
                 }
                 else
                 {
-                    ModelState.AddModelError("", "نام کاربری یا کلمه عبور اشتباه است!");
+                    TempData[ErrorMessage] = "نام کاربری یا کلمه عبور اشتباه است!";
                     return View(model);
                 }
             }
             return View(model);
         }
 
+        [RedirectToHomeIfLoggedInActionFilter]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
@@ -254,7 +262,7 @@ namespace ProjectWeb.Mvc.Controllers
         public IActionResult ExternalLogins(string provider, string returnUrl)
         {
             var redirectUrl =
-                Url.Action("ExternalLoginsCallBack", "Account", new { returnUrl = returnUrl });
+                Url.Action("ExternalLoginsCallBack", "Account", new { returnUrl });
 
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
 
@@ -311,7 +319,7 @@ namespace ProjectWeb.Mvc.Controllers
                 await _signInManager.SignInAsync(user, true);
                 return Redirect(returnUrl);
             }
-            return View();
+            return NotFound();
         }
     }
 }

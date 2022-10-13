@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
 {
-    public class WebProductController : Controller
+    public class WebProductController : BaseController
     {
         private readonly IWebProductInterface _webProductInterface;
         private readonly IUploadFileInterface _uploadFileInterface;
@@ -27,7 +27,6 @@ namespace ProjectWeb.Mvc.Controllers
         public IActionResult Index()
         {
             var WebProducts = _webProductInterface.WebProductsList();
-            ViewBag.Message = TempData["Message"];
             return View(WebProducts);
         }
 
@@ -49,7 +48,7 @@ namespace ProjectWeb.Mvc.Controllers
             webProduct.WebProductDescription = model.WebProductDescription;
             webProduct.WebProductImage = _uploadFileInterface.uploadPhoto(model.WebProductImage);
             _webProductInterface.AddWebProduct(webProduct);
-            TempData["Message"] = "محصول جدید با موفقیت ثبت شد.";
+            TempData[SuccessMessage] = "محصول جدید با موفقیت ثبت شد.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -75,7 +74,7 @@ namespace ProjectWeb.Mvc.Controllers
         public IActionResult DeleteProductPost(int id)
         {
             _webProductInterface.DeleteProduct(id);
-            TempData["Message"] = "محصول مورد نظر با موفقیت حذف شد.";
+            TempData[SuccessMessage] = "محصول مورد نظر با موفقیت حذف شد.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -107,7 +106,7 @@ namespace ProjectWeb.Mvc.Controllers
             product.WebProductName = model.WebProductName;
             product.WebProductPrice = model.WebProductPrice;
             _webProductInterface.EditProduct(product);
-            TempData["Message"] = "محصول مورد نظر با موفقیت ویرایش شد.";
+            TempData[SuccessMessage] = "محصول مورد نظر با موفقیت ویرایش شد.";
             return RedirectToAction(nameof(Index));
         }
 

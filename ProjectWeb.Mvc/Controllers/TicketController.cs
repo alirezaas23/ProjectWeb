@@ -8,18 +8,21 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GoogleReCaptcha.V3.Interface;
 
 namespace ProjectWeb.Mvc.Controllers
 {
-    public class TicketController : Controller
+    public class TicketController : BaseController
     {
         private readonly ITicketInterface _ticketInterface;
         private readonly UserManager<UserApp> _userManager;
+        private readonly ICaptchaValidator _captchaValidator;
 
-        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager)
+        public TicketController(ITicketInterface ticketInterface, UserManager<UserApp> userManager, ICaptchaValidator captchaValidator)
         {
             _ticketInterface = ticketInterface;
             _userManager = userManager;
+            _captchaValidator = captchaValidator;
         }
 
         [HttpGet]
@@ -38,8 +41,13 @@ namespace ProjectWeb.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SendTicket(TicketViewModels model)
+        public async Task<IActionResult> SendTicket(TicketViewModels model)
         {
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            {
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا مجدد تلاش کنید.";
+                return View(model);
+            }
             if (ModelState.IsValid)
             {
                 Ticket ticket = new Ticket();
@@ -47,8 +55,8 @@ namespace ProjectWeb.Mvc.Controllers
                 ticket.TicketText = model.TicketText;
                 ticket.TicketDateTime = model.TicketDateTime;
                 ticket.UserId = model.UserId;
-                _ticketInterface.AddTicket(ticket);
-                TempData["Message"] = "تیکت شما با موفقیت ارسال شد.کارشناسان ما بعد از بررسی با شما تماس خواهند گرفت.";
+                await _ticketInterface.AddTicketAsync(model);
+                TempData[SuccessMessage] = "تیکت شما با موفقیت ارسال شد.کارشناسان ما بعد از بررسی با شما تماس خواهند گرفت.";
                 return RedirectToAction("ShowProfile", "Account", new { id = model.UserId });
             }
             return View(model);
@@ -93,9 +101,9 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult DeleteTicket(TicketInfoViewModel model)
+        public async Task<IActionResult> DeleteTicket(TicketInfoViewModel model)
         {
-            _ticketInterface.DeleteTicket(model.TicketId);
+            await _ticketInterface.DeleteTicketAsync(model.TicketId);
             TempData["Message"] = "تیکت مورد نظر با موفقیت حذف شد.";
             return RedirectToAction("AllTickets", "Ticket");
         }

@@ -10,12 +10,6 @@
     </a>
     <hr />
     @{
-        if (ViewBag.Message != null)
-        {
-            <div class="alert alert-info">
-                @ViewBag.Message
-            </div>
-        }
         if (!Model.Any())
         {
             <div class="alert alert-danger">

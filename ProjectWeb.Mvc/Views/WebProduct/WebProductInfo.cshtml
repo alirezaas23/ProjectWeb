@@ -1,17 +1,10 @@
 ﻿@model ShowWebProductViewModel
 @{
     ViewData["Title"] = "خرید " + Model.WebProductName;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "_Layout";
 }
 
 <section class="mb-5">
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-info">
-            <i class="far fa-check-circle"></i>
-            @ViewBag.Message
-        </div>
-    }
     <div class="row">
         <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
             <img src="@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" />

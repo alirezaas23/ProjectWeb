@@ -131,7 +131,9 @@ header .custom-nav .logo {
 }
 
     header .custom-nav .logo img {
-        width: 80px;
+        width: 5rem;
+        height: 5rem;
+        object-fit: contain;
     }
 
 #hamburger-icon {

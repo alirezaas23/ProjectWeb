@@ -3,6 +3,7 @@ using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {
@@ -15,17 +16,15 @@ namespace ProjectWeb.Infra.Data.Repositories
             _ctx = ctx;
         }
 
-        public void AddTicket(Ticket ticket)
+        public async Task AddTicketAsync(Ticket ticket)
         {
-            _ctx.Tickets.Add(ticket);
-            SaveChanges();
+            await _ctx.Tickets.AddAsync(ticket);
         }
 
-        public void DeleteTicket(int id)
+        public async Task DeleteTicketAsync(int id)
         {
-            var ticket = _ctx.Tickets.Find(id);
+            var ticket = await _ctx.Tickets.FindAsync(id);
             _ctx.Tickets.Remove(ticket);
-            SaveChanges();
         }
 
         public IEnumerable<Ticket> GetTickets()
@@ -38,9 +37,9 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.Tickets.Where(t => t.UserId == userId).ToList();
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
         }
 
         public Ticket SearchById(int id)

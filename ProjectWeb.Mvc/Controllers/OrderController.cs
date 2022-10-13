@@ -15,7 +15,7 @@ using ZarinpalSandbox;
 
 namespace ProjectWeb.Mvc.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
         private readonly IOrderInterface _orderInterface;
         private readonly IWebProductInterface _webProductInterface;
@@ -77,12 +77,12 @@ namespace ProjectWeb.Mvc.Controllers
                 }
                 else
                 {
-                    TempData["Message"] = "شما این پروژه را در سبد خرید خود دارید. بعد از پرداخت نهایی دوباره اقدام کنید.";
+                    TempData[ErrorMessage] = "شما این پروژه را در سبد خرید خود دارید. بعد از پرداخت نهایی دوباره اقدام کنید.";
                     return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
                 }
             }
             _orderInterface.UpdateSum(order.OrderId);
-            TempData["Message"] = "محصول به سبد خرید اضافه شد!";
+            TempData[SuccessMessage] = "محصول به سبد خرید اضافه شد!";
             return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
         }
 
@@ -90,7 +90,6 @@ namespace ProjectWeb.Mvc.Controllers
         [Authorize]
         public IActionResult ShowOrder()
         {
-            ViewBag.Message = TempData["Message"];
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = _orderInterface.IsOrderInUse(userId);
             List<ShowOrderDetailViewModel> List = new List<ShowOrderDetailViewModel>();
@@ -123,7 +122,7 @@ namespace ProjectWeb.Mvc.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = _orderInterface.IsOrderInUse(userId);
             _orderInterface.UpdateSum(order.OrderId);
-            TempData["Message"] = "محصول با موفقیت از سبد خرید حذف شد.";
+            TempData[SuccessMessage] = "محصول با موفقیت از سبد خرید حذف شد.";
             return RedirectToAction(nameof(ShowOrder));
         }
 

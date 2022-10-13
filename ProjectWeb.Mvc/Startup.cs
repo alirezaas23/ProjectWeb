@@ -1,3 +1,7 @@
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+using GoogleReCaptcha.V3;
+using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -56,6 +60,11 @@ namespace ProjectWeb.Mvc
                     options.ClientId = "495263575838-dnqdt52jvcbsd475o2ej7kramve1s8vn.apps.googleusercontent.com";
                     options.ClientSecret = "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";
                 });
+
+            services.AddSingleton<HtmlEncoder>(
+                HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
+
+            services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
 
             DependencyContainer.RegisterServices(services);
         }
