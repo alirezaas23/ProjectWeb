@@ -1,11 +1,14 @@
 ﻿using ProjectWeb.Domain.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using ProjectWeb.Domain.ViewModels.WebProduct;
 
 namespace ProjectWeb.Application.Interfaces
 {
     public interface IWebProductInterface
     {
-        void AddWebProduct(WebProduct webProduct);
+        Task AddWebProduct(AddWebProductViewModel model);
+        //void AddWebProduct(WebProduct webProduct);
         IEnumerable<WebProduct> WebProductsList();
         WebProduct FindById(int id);
         void DeleteProduct(int id);

@@ -26,8 +26,8 @@ namespace ProjectWeb.Mvc.Controllers
         [Authorize(Roles = "ادمین")]
         public IActionResult Index()
         {
-            var WebProducts = _webProductInterface.WebProductsList();
-            return View(WebProducts);
+            var webProducts = _webProductInterface.WebProductsList();
+            return View(webProducts);
         }
 
         [HttpGet]
@@ -39,15 +39,9 @@ namespace ProjectWeb.Mvc.Controllers
 
         [HttpPost, ValidateAntiForgeryToken]
         [Authorize(Roles = "ادمین")]
-        public IActionResult AddWebProduct(AddWebProductViewModel model)
+        public async Task<IActionResult> AddWebProduct(AddWebProductViewModel model)
         {
-            WebProduct webProduct = new WebProduct();
-            webProduct.WebProductName = model.WebProductName;
-            webProduct.WebProductPrice = model.WebProductPrice;
-            webProduct.WebProductDeliverDate = model.WebProductDeliverDate;
-            webProduct.WebProductDescription = model.WebProductDescription;
-            webProduct.WebProductImage = _uploadFileInterface.uploadPhoto(model.WebProductImage);
-            _webProductInterface.AddWebProduct(webProduct);
+            await _webProductInterface.AddWebProduct(model);
             TempData[SuccessMessage] = "محصول جدید با موفقیت ثبت شد.";
             return RedirectToAction(nameof(Index));
         }

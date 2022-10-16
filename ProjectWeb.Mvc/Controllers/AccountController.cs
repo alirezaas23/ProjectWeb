@@ -8,6 +8,7 @@ using ProjectWeb.Mvc.ActionFilters;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ProjectWeb.Application.Security;
 
 namespace ProjectWeb.Mvc.Controllers
 {
@@ -56,11 +57,11 @@ namespace ProjectWeb.Mvc.Controllers
             {
                 var user = new UserApp()
                 {
-                    UserName = model.UserName,
-                    Email = model.Email,
+                    UserName = model.UserName.SanitizeText(),
+                    Email = model.Email.SanitizeText(),
                     EmailConfirmed = false
                 };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password.SanitizeText());
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, true);
@@ -110,7 +111,7 @@ namespace ProjectWeb.Mvc.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName.SanitizeText(), model.Password.SanitizeText(), model.RememberMe, true);
                 if (result.Succeeded)
                 {
                     TempData[SuccessMessage] = "کاربر گرامی, خوش آمدید.";
@@ -153,7 +154,7 @@ namespace ProjectWeb.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> IsEmailInUse(string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(email.SanitizeText());
             if (user == null)
             {
                 return Json(true);
@@ -168,7 +169,7 @@ namespace ProjectWeb.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> IsUserNameInUse(string userName)
         {
-            var user = await _userManager.FindByNameAsync(userName);
+            var user = await _userManager.FindByNameAsync(userName.SanitizeText());
             if (user == null)
             {
                 return Json(true);
@@ -236,10 +237,10 @@ namespace ProjectWeb.Mvc.Controllers
             {
                 var user = await _userManager.FindByIdAsync(model.UserId);
                 if (user == null) return NotFound();
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.Email = model.Email;
-                user.PhoneNumber = model.PhoneNumber;
+                user.FirstName = model.FirstName.SanitizeText();
+                user.LastName = model.LastName.SanitizeText();
+                user.Email = model.Email.SanitizeText();
+                user.PhoneNumber = model.PhoneNumber.SanitizeText();
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {

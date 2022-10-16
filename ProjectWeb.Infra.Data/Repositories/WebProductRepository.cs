@@ -3,6 +3,7 @@ using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {
@@ -15,10 +16,9 @@ namespace ProjectWeb.Infra.Data.Repositories
             _ctx = ctx;
         }
 
-        public void AddWebProduct(WebProduct webProduct)
+        public async Task AddWebProduct(WebProduct webProduct)
         {
-            _ctx.WebProducts.Add(webProduct);
-            SaveChanges();
+            await _ctx.WebProducts.AddAsync(webProduct);
         }
 
         public void DeleteProduct(int id)
@@ -53,9 +53,9 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.WebProducts.Count();
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
         }
 
         public IEnumerable<WebProduct> WebProductsList()
