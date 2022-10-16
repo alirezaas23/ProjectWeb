@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GoogleReCaptcha.V3.Interface;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Application.ViewModels;
 using ProjectWeb.Domain.Models;
+using ProjectWeb.Domain.ViewModels.Ticket;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using GoogleReCaptcha.V3.Interface;
+using MyTicketsViewModel = ProjectWeb.Domain.ViewModels.Ticket.MyTicketsViewModel;
 
 namespace ProjectWeb.Mvc.Controllers
 {
@@ -30,7 +31,7 @@ namespace ProjectWeb.Mvc.Controllers
         {
             var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             PersianCalendar calendar = new PersianCalendar();
-            var model = new TicketViewModels()
+            var model = new SendTicketViewModel()
             {
                 UserId = user.Id,
                 TicketDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
@@ -41,7 +42,7 @@ namespace ProjectWeb.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SendTicket(TicketViewModels model)
+        public async Task<IActionResult> SendTicket(SendTicketViewModel model)
         {
             if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
             {

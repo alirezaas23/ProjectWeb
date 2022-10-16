@@ -1,10 +1,10 @@
-﻿@model TicketInfoViewModel
+﻿@model ProjectWeb.Domain.ViewModels.Ticket.TicketInfoViewModel
 @using Microsoft.AspNetCore.Identity
 @using ProjectWeb.Domain.Models
-@inject UserManager<UserApp> _userManager
+@inject UserManager<UserApp> UserManager
 @{
     ViewData["Title"] = "حذف تیکت " + Model.TicketSubject;
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    Layout = "_Layout_Admin";
 }
 
 <div class="row d-flex justify-content-center align-items-center vh-100">
@@ -17,7 +17,7 @@
             </div>
             <hr />
             @{
-                var user = await _userManager.FindByIdAsync(Model.UserId);
+                var user = await UserManager.FindByIdAsync(Model.UserId);
                 <p>
                     <i class="far fa-user"></i>
                     <span class="font-weight-bold">ارسال کننده :</span>

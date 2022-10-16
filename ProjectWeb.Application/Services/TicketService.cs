@@ -1,10 +1,10 @@
 ﻿using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Application.Security;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
+using ProjectWeb.Domain.ViewModels.Ticket;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ProjectWeb.Application.Security;
-using ProjectWeb.Application.ViewModels;
 
 namespace ProjectWeb.Application.Services
 {
@@ -17,7 +17,7 @@ namespace ProjectWeb.Application.Services
             _ticketRepository = ticketRepository;
         }
 
-        public async Task AddTicketAsync(TicketViewModels ticket)
+        public async Task AddTicketAsync(SendTicketViewModel ticket)
         {
             var newTicket = new Ticket()
             {

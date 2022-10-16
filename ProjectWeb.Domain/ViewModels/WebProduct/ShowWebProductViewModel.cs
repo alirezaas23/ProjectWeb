@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ProjectWeb.Domain.ViewModels.Common;
 
-namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
+namespace ProjectWeb.Domain.ViewModels.WebProduct
 {
-    public class ShowWebProductViewModel
+    public class ShowWebProductViewModel : GoogleReCaptchaViewModel
     {
         public int WebProductID { get; set; }
         public string WebProductImage { get; set; }

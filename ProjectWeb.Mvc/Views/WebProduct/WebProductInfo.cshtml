@@ -1,4 +1,4 @@
-﻿@model ShowWebProductViewModel
+﻿@model ProjectWeb.Domain.ViewModels.WebProduct.ShowWebProductViewModel
 @{
     ViewData["Title"] = "خرید " + Model.WebProductName;
     Layout = "_Layout";
@@ -23,6 +23,8 @@
                         @Html.Raw(Model.WebProductDescription)
                     </p>
                     <form class="mt-5" asp-controller="Order" asp-action="AddToBasket">
+                        <input type="hidden" asp-for="Captcha"/>
+
                         <div class="form-group">
                             <select asp-for="WebType" class="form-control input-custom">
                                 <option value="">-- انتخاب نوع سایت --</option>
@@ -37,7 +39,7 @@
                             <textarea asp-for="Description" class="form-control input-custom"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
-                        <input type="hidden" asp-for="WebProductID" />
+                        <input type="hidden" asp-for="WebProductID"/>
                         <div class="position-relative">
                             <button class="btn btn-edit text-right">
                                 افزودن به سبد خرید
@@ -64,5 +66,6 @@
 </section>
 
 @section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <partial name="_ValidationScriptsPartial"/>
+    <partial name="_GoogleReCaptcha"/>
 }

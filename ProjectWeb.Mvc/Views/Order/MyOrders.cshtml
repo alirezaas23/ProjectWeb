@@ -1,10 +1,10 @@
-﻿@model List<MyOrdersViewModel>
+﻿@model List<ProjectWeb.Domain.ViewModels.Order.MyOrdersViewModel>
 @using ProjectWeb.Application.Interfaces
-@inject IOrderDetailInterface _orderDetailInterface
-@inject IWebProductInterface _webProductInterface
+@inject IOrderDetailInterface OrderDetailInterface
+@inject IWebProductInterface WebProductInterface
 @{
-    ViewData["Title"] = "MyOrders";
-    Layout = "~/Views/Shared/_Layout_Profile.cshtml";
+    ViewData["Title"] = "سفارشات من";
+    Layout = "_Layout_Profile";
     int row = 1;
 }
 @if (!Model.Any())
@@ -49,7 +49,7 @@
                 @row
             </span>
             @{
-                var detail = _orderDetailInterface.GetOrderDetails(item.OrderId);
+                var detail = OrderDetailInterface.GetOrderDetails(item.OrderId);
                 <hr />
                 <p>
                     <span class="font-weight-bold">تاریخ سفارش : </span>
@@ -75,7 +75,7 @@
                 </p>
                 foreach (var items in detail)
                 {
-                    var product = _webProductInterface.FindById(items.WebProductId);
+                    var product = WebProductInterface.FindById(items.WebProductId);
                     <div class="small">
                         <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID" class="text-hover">
                             - <span class="font-weight-bold">@product.WebProductName</span> (@items.WebType) - @items.Description

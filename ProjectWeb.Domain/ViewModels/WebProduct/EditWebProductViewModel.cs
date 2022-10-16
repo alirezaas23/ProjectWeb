@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
-namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
+namespace ProjectWeb.Domain.ViewModels.WebProduct
 {
-    public class AddWebProductViewModel
+    public class EditWebProductViewModel
     {
-        [Required(ErrorMessage = "لطفا تصویر را وارد کنید")]
-        [Display(Name = "تصویر محصول وب")]
+        public int WebProductID { get; set; }
+
+        [Display(Name = "تصویر جدید محصول")]
         public IFormFile WebProductImage { get; set; }
+
+        [Display(Name = "تصویر فعلی محصول")]
+        public string ImageUrl { get; set; }
 
         [Required(ErrorMessage = "لطفا نام را وارد کنید")]
         [Display(Name = "نام محصول وب")]
@@ -22,7 +25,7 @@ namespace ProjectWeb.Application.ViewModels.WebDeisgnViewModels
         [Required(ErrorMessage = "لطفا توضیحات را وارد کنید")]
         [Display(Name = "توضیحات محصول وب")]
         [DataType(DataType.MultilineText)]
-        [AllowHtml]
+        //[AllowHtml]
         public string WebProductDescription { get; set; }
 
         [Required(ErrorMessage = "لطفا زمان تحویل را وارد کنید")]

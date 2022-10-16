@@ -1,12 +1,12 @@
-﻿@model TicketViewModels
+﻿@model ProjectWeb.Domain.ViewModels.Ticket.SendTicketViewModel
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 @using ProjectWeb.Domain.Models
-@inject UserManager<UserApp> _userManager
+@inject UserManager<UserApp> UserManager
 
 @{
     ViewData["Title"] = "ارسال تیکت جدید";
-    Layout = "~/Views/Shared/_Layout_Profile.cshtml";
+    Layout = "_Layout_Profile";
 }
 
 <div class="card custom-box-shadow">

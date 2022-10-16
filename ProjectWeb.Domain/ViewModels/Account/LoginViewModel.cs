@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authentication;
+using ProjectWeb.Domain.ViewModels.Common;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Microsoft.AspNetCore.Authentication;
-using ProjectWeb.Domain.ViewModels.Common;
 
 namespace ProjectWeb.Domain.ViewModels.Account
 {

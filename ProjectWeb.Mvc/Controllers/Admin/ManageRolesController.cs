@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ProjectWeb.Application.ViewModels;
+using ProjectWeb.Domain.ViewModels.ManageRole;
 using System.Linq;
 using System.Threading.Tasks;
 

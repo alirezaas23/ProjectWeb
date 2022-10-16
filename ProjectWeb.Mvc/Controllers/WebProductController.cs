@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Application.ViewModels.WebDeisgnViewModels;
 using ProjectWeb.Domain.Models;
+using ProjectWeb.Domain.ViewModels.WebProduct;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -116,10 +116,10 @@ namespace ProjectWeb.Mvc.Controllers
         {
             ViewBag.Message = TempData["Message"];
             var product = _webProductInterface.FindById(id);
-            var user =  await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             if (user.AccountConfirm == false)
             {
-                return RedirectToAction("AccountConfirm", "Account", new {userId = user.Id, productId = id });
+                return RedirectToAction("AccountConfirm", "Account", new { userId = user.Id, productId = id });
             }
             var productModel = new ShowWebProductViewModel()
             {

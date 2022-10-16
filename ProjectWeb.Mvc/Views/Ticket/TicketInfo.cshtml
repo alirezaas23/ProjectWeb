@@ -1,15 +1,15 @@
-﻿@model TicketInfoViewModel
+﻿@model ProjectWeb.Domain.ViewModels.Ticket.TicketInfoViewModel
 @using Microsoft.AspNetCore.Identity
 @using ProjectWeb.Domain.Models
-@inject UserManager<UserApp> _userManager
+@inject UserManager<UserApp> UserManager
 @{
     ViewData["Title"] = "جزییات تیکت " + Model.TicketSubject;
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    Layout = "_Layout_Admin";
 }
 
 <div class="ticket-info">
     @{
-        var user = await _userManager.FindByIdAsync(Model.UserId);
+        var user = await UserManager.FindByIdAsync(Model.UserId);
         <p>
             <div class="dropdown" style="z-index: 0;">
                 <i class="far fa-comment-alt" style="font-size: 30px;"></i>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ProjectWeb.Domain.ViewModels.Common
+﻿namespace ProjectWeb.Domain.ViewModels.Common
 {
     public class GoogleReCaptchaViewModel
     {

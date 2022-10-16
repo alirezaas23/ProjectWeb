@@ -1,18 +1,20 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using GoogleReCaptcha.V3.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Domain.Models;
+using ProjectWeb.Domain.ViewModels.Account;
+using ProjectWeb.Mvc.ActionFilters;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using GoogleReCaptcha.V3.Interface;
-using ProjectWeb.Mvc.ActionFilters;
-using ProjectWeb.Domain.ViewModels.Account;
 
 namespace ProjectWeb.Mvc.Controllers
 {
     public class AccountController : BaseController
     {
+        #region Ctor
+
         private readonly UserManager<UserApp> _userManager;
         private readonly SignInManager<UserApp> _signInManager;
         private readonly ICaptchaValidator _captchaValidator;
@@ -23,6 +25,10 @@ namespace ProjectWeb.Mvc.Controllers
             _signInManager = signInManager;
             _captchaValidator = captchaValidator;
         }
+
+        #endregion
+
+        #region Register
 
         [HttpGet]
         [RedirectToHomeIfLoggedInActionFilter]
@@ -68,6 +74,10 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return View(model);
         }
+
+        #endregion
+
+        #region Login
 
         [HttpGet]
         [RedirectToHomeIfLoggedInActionFilter]
@@ -124,12 +134,20 @@ namespace ProjectWeb.Mvc.Controllers
             return View(model);
         }
 
-        [RedirectToHomeIfLoggedInActionFilter]
+        #endregion
+
+        #region Logout
+
+        [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        #endregion
+
+        #region Validate Username and Email
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -161,6 +179,10 @@ namespace ProjectWeb.Mvc.Controllers
             }
         }
 
+        #endregion
+
+        #region Show Profile
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> ShowProfile(string id)
@@ -182,6 +204,10 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return View(userModel);
         }
+
+        #endregion
+
+        #region Edit Account
 
         [HttpGet]
         [Authorize]
@@ -229,6 +255,10 @@ namespace ProjectWeb.Mvc.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region Confirm Account
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> AccountConfirm(string userId, int productId)
@@ -258,6 +288,10 @@ namespace ProjectWeb.Mvc.Controllers
             return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
         }
 
+        #endregion
+
+        #region External Login
+
         [HttpPost]
         public IActionResult ExternalLogins(string provider, string returnUrl)
         {
@@ -280,14 +314,14 @@ namespace ProjectWeb.Mvc.Controllers
                 ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
             };
 
-            if(remoteError != null)
+            if (remoteError != null)
             {
                 ModelState.AddModelError("", $"Error : {remoteError}");
                 return View("Login", loginViewModel);
             }
 
             var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
-            if(externalLoginInfo == null)
+            if (externalLoginInfo == null)
             {
                 ModelState.AddModelError("ErrorLoadingGetExternalLoginInfo", "مشکلی پیش آمد ! چند دقیقه دیگر امتحان کنید !");
                 return View("Login", loginViewModel);
@@ -301,10 +335,10 @@ namespace ProjectWeb.Mvc.Controllers
             }
 
             var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
-            if(email != null)
+            if (email != null)
             {
                 var user = await _userManager.FindByEmailAsync(email);
-                if(user == null)
+                if (user == null)
                 {
                     var userName = email.Split("@")[0];
                     user = new UserApp
@@ -321,5 +355,7 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return NotFound();
         }
+
+        #endregion
     }
 }

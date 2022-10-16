@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Application.ViewModels.OrderViewModels;
-using System;
+using ProjectWeb.Domain.ViewModels.Order;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -27,7 +25,7 @@ namespace ProjectWeb.Mvc.ViewComponents
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = _orderInterface.IsOrderInUse(userId);
             List<ComponentOrderDetailViewModel> List = new List<ComponentOrderDetailViewModel>();
-            if(order != null)
+            if (order != null)
             {
                 var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
                 foreach (var item in detail)

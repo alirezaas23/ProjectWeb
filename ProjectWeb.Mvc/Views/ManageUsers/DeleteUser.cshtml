@@ -1,11 +1,11 @@
-﻿@model ShowUserViewModel
+﻿@model ProjectWeb.Domain.ViewModels.ManageUser.ShowUserViewModel
 @using Microsoft.AspNetCore.Identity
 @using ProjectWeb.Domain.Models
-@inject UserManager<UserApp> _userManager
+@inject UserManager<UserApp> UserManager
 @{
-    var user = await _userManager.FindByIdAsync(Model.UserId);
+    var user = await UserManager.FindByIdAsync(Model.UserId);
     ViewData["Title"] = "حذف کاربر" + user.UserName;
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    Layout = "_Layout_Admin";
 }
 
 <div class="row d-flex justify-content-center align-items-center vh-100 m-1 m-md-0">

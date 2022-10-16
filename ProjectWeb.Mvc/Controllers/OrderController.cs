@@ -2,35 +2,50 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Application.ViewModels.OrderViewModels;
-using ProjectWeb.Application.ViewModels.WebDeisgnViewModels;
 using ProjectWeb.Domain.Models;
+using ProjectWeb.Domain.ViewModels.Order;
+using ProjectWeb.Domain.ViewModels.WebProduct;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GoogleReCaptcha.V3.Interface;
 using ZarinpalSandbox;
 
 namespace ProjectWeb.Mvc.Controllers
 {
     public class OrderController : BaseController
     {
+        #region Ctor
+
         private readonly IOrderInterface _orderInterface;
         private readonly IWebProductInterface _webProductInterface;
         private readonly IOrderDetailInterface _orderDetailInterface;
         private readonly UserManager<UserApp> _userManager;
-        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface, IOrderDetailInterface orderDetailInterface, UserManager<UserApp> userManager)
+        private readonly ICaptchaValidator _captchaValidator;
+        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface, IOrderDetailInterface orderDetailInterface, UserManager<UserApp> userManager, ICaptchaValidator captchaValidator)
         {
             this._orderInterface = orderInterface;
             this._webProductInterface = webProductInterface;
             this._orderDetailInterface = orderDetailInterface;
             _userManager = userManager;
+            _captchaValidator = captchaValidator;
         }
+
+        #endregion
+
+        #region Add To Basket
+
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult AddToBasket(ShowWebProductViewModel model)
+        public async Task<IActionResult> AddToBasket(ShowWebProductViewModel model)
         {
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            {
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا دوباره تلاش کنید.";
+                return RedirectToAction("WebProductInfo", "WebProduct", new{ id = model.WebProductID});
+            }
+
             PersianCalendar calendar = new PersianCalendar();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = _orderInterface.IsOrderInUse(userId);
@@ -42,7 +57,7 @@ namespace ProjectWeb.Mvc.Controllers
                     IsFinally = false,
                     Sum = 0,
                     OrderDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
-                    + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
+                                    + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
                     UserId = userId,
                 };
                 _orderInterface.AddOrder(order);
@@ -86,20 +101,24 @@ namespace ProjectWeb.Mvc.Controllers
             return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
         }
 
+        #endregion
+
+        #region Show Order
+
         [HttpGet]
         [Authorize]
         public IActionResult ShowOrder()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = _orderInterface.IsOrderInUse(userId);
-            List<ShowOrderDetailViewModel> List = new List<ShowOrderDetailViewModel>();
+            List<ShowOrderDetailViewModel> list = new List<ShowOrderDetailViewModel>();
             if (order != null)
             {
                 var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
                 foreach (var item in detail)
                 {
                     var product = _webProductInterface.FindById(item.WebProductId);
-                    List.Add(new ShowOrderDetailViewModel()
+                    list.Add(new ShowOrderDetailViewModel()
                     {
                         Count = item.Count,
                         ImageName = product.WebProductImage,
@@ -113,8 +132,12 @@ namespace ProjectWeb.Mvc.Controllers
                     });
                 }
             }
-            return View(List);
+            return View(list);
         }
+
+        #endregion
+
+        #region Remove Order
 
         public IActionResult RemoveOrder(int id)
         {
@@ -125,6 +148,10 @@ namespace ProjectWeb.Mvc.Controllers
             TempData[SuccessMessage] = "محصول با موفقیت از سبد خرید حذف شد.";
             return RedirectToAction(nameof(ShowOrder));
         }
+
+        #endregion
+
+        #region Paymanet
 
         public IActionResult Payment()
         {
@@ -140,7 +167,7 @@ namespace ProjectWeb.Mvc.Controllers
                 var payment = new Payment(order.ShouldPaySum);
                 var res =
                     payment.PaymentRequest($"پرداخت فاکتور شماره {order.OrderId}", "https://localhost:44349/Home/OnlinePayment/" + order.OrderId,
-                    user.Result.Email, user.Result.PhoneNumber);
+                        user.Result.Email, user.Result.PhoneNumber);
                 if (res.Result.Status == 100)
                 {
                     return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
@@ -159,30 +186,6 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult MyOrders(string userId)
-        {
-            var orders = _orderInterface.MyOrders(userId);
-            List<MyOrdersViewModel> List = new List<MyOrdersViewModel>();
-            if (orders != null)
-            {
-                foreach (var item in orders)
-                {
-                    List.Add(new MyOrdersViewModel()
-                    {
-                        LeftSum = item.LeftSum,
-                        OrderDateTime = item.OrderDateTime,
-                        OrderId = item.OrderId,
-                        ShouldPaySum = item.ShouldPaySum,
-                        Sum = item.Sum,
-                        UserId = item.UserId,
-                        FinalyPay = item.FinalyPay
-                    });
-                }
-            }
-            return View(List);
-        }
-
-        [HttpGet]
         public IActionResult PaymentLeftSum(int orderId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -193,8 +196,8 @@ namespace ProjectWeb.Mvc.Controllers
                 var payment = new Payment(order.LeftSum);
                 var res =
                     payment.PaymentRequest($"پرداخت مبلغ باقی مانده فاکتور {order.OrderId}", "https://localhost:44349/Home/OnlinePaymentLeft/" + order.OrderId,
-                    user.Result.Email, user.Result.PhoneNumber);
-                if(res.Result.Status == 100)
+                        user.Result.Email, user.Result.PhoneNumber);
+                if (res.Result.Status == 100)
                 {
                     return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
                 }
@@ -208,5 +211,35 @@ namespace ProjectWeb.Mvc.Controllers
                 return NotFound();
             }
         }
+
+        #endregion
+
+        #region My Orders
+
+        [HttpGet]
+        public IActionResult MyOrders(string userId)
+        {
+            var orders = _orderInterface.MyOrders(userId);
+            List<MyOrdersViewModel> list = new List<MyOrdersViewModel>();
+            if (orders != null)
+            {
+                foreach (var item in orders)
+                {
+                    list.Add(new MyOrdersViewModel()
+                    {
+                        LeftSum = item.LeftSum,
+                        OrderDateTime = item.OrderDateTime,
+                        OrderId = item.OrderId,
+                        ShouldPaySum = item.ShouldPaySum,
+                        Sum = item.Sum,
+                        UserId = item.UserId,
+                        FinalyPay = item.FinalyPay
+                    });
+                }
+            }
+            return View(list);
+        }
+
+        #endregion
     }
 }

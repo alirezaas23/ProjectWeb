@@ -1,5 +1,3 @@
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 using GoogleReCaptcha.V3;
 using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
 using ProjectWeb.Infra.IoC;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using WebMarkupMin.AspNetCore3;
 
 namespace ProjectWeb.Mvc

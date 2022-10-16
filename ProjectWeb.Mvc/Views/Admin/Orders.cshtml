@@ -1,10 +1,10 @@
-﻿@model List<AllOrdersViewModel>
+﻿@model List<ProjectWeb.Domain.ViewModels.Order.AllOrdersViewModel>
 @using ProjectWeb.Application.Interfaces
-@inject IOrderDetailInterface _orderDetailInterface
-@inject IWebProductInterface _webProductInterface
+@inject IOrderDetailInterface OrderDetailInterface
+@inject IWebProductInterface WebProductInterface
 @{
     ViewData["Title"] = "لیست سفارشات";
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    Layout = "_Layout_Admin";
     int row = 1;
 }
 
@@ -53,10 +53,10 @@
                                 </p>
                                 <p class="font-weight-bold">جزییات :</p>
                                 @{
-                                    var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
+                                    var detail = OrderDetailInterface.GetOrderDetails(order.OrderId);
                                     foreach (var item in detail)
                                     {
-                                        var product = _webProductInterface.FindById(item.WebProductId);
+                                        var product = WebProductInterface.FindById(item.WebProductId);
                                         <p class="font-weight-bold">
                                             <a class="text-hover" asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID">
                                                 @product.WebProductName (@item.WebType) - @item.Description

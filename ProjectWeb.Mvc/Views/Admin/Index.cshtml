@@ -1,12 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using ProjectWeb.Domain.Models
 @using ProjectWeb.Application.Interfaces
-@inject UserManager<UserApp> userManager
-@inject IWebProductInterface webProductInterface
-@inject IOrderInterface orderInterface
+@inject UserManager<UserApp> UserManager
+@inject IWebProductInterface WebProductInterface
+@inject IOrderInterface OrderInterface
 @{
     ViewData["Title"] = "صفحه مدیریت سایت";
-    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    Layout = "_Layout_Admin";
 }
 
 <section>
@@ -21,7 +21,7 @@
                         </p>
                     </a>
                     @{
-                        var usersCount = userManager.Users.Count();
+                        var usersCount = UserManager.Users.Count();
                         <div class="custom-circle custom-box-shadow ">
                             <span>
                                 @usersCount
@@ -42,7 +42,7 @@
                     </a>
                     <div class="custom-circle custom-box-shadow">
                         <span>
-                            @webProductInterface.ProductsCount()
+                            @WebProductInterface.ProductsCount()
                         </span>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                     </a>
                     <div class="custom-circle custom-box-shadow">
                         <span>
-                            @orderInterface.FinallyOrders()
+                            @OrderInterface.FinallyOrders()
                         </span>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                             <div class="text-muted mt-2">
                                 <p>
                                     <span class="font-weight-bold">مجموع پرداختی :</span>
-                                    @orderInterface.UserPaysSum() تومان 
+                                    @OrderInterface.UserPaysSum() تومان 
                                 </p>
                             </div>
                         </div>
