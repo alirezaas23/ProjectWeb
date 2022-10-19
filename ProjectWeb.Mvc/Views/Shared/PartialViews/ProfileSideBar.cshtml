@@ -5,16 +5,14 @@
 
 @{
     var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-    <ul class="list-group border custom-box-shadow">
-        <li class="list-group-item text-center list-group-bg">
-            <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
-                <img src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
+    <ul class="list-group custom-box-shadow">
+        <li class="list-group-item text-center" style="border-bottom: 1px solid #e4ebf4 !important;">
+            <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="profile-img-background">
+                <img class="profile-img" src="~/imgs/male-user-100.png" alt="user-icon" id="custom-tooltip" data-toggle="tooltip" data-placement="top"
                      title="@user.UserName" />
             </a>
-            <p class="mt-1 text-white">@user.UserName</p>
-            <a asp-controller="Account" asp-action="LogOut" data-toggle="tooltip" data-placement="top" id="logout-tooltip" title="خروج از حساب">
-                <i class="fas fa-power-off icon-hover"></i>
-            </a>
+            <p class="mt-1 font-weight-bold">@user.UserName</p>
+            <p class="text-muted small">عضویت : </p>
         </li>
         <li class="list-group-item">
             <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="text-hover small-font">

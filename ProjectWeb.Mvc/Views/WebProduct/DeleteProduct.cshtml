@@ -1,4 +1,6 @@
 ﻿@model ProjectWeb.Domain.ViewModels.WebProduct.ShowWebProductViewModel
+@using ProjectWeb.Application.Statics
+
 @{
     ViewData["Title"] = "حذف محصول " + Model.WebProductName;
     Layout = "_Layout_Admin";
@@ -9,7 +11,7 @@
         حذف محصول @Model.WebProductName
     </h4>
     <div class="border p-3">
-        <img src="@Model.WebProductImage" alt="@Model.WebProductName" style="width: 100%;" />
+        <img src="@PathTools.ProductImagePath@Model.WebProductImage" alt="@Model.WebProductName" style="width: 100%;" />
         <p class="mt-2">
             نام محصول : <span class="font-weight-bold">@Model.WebProductName</span>
         </p>

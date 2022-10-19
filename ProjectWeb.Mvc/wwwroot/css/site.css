@@ -195,10 +195,6 @@ header .custom-nav .logo {
     color: #79c74e;
 }
 
-.list-group-bg {
-    background-image: url("../imgs/Icon-Grid.svg");
-}
-
 .icon-hover {
     color: #d0d5d8;
 }
@@ -223,9 +219,13 @@ header .custom-nav .logo {
 }
 
 .custom-box-shadow {
-    border: 1px solid #ecf0f4 !important;
-    box-shadow: 0 0 7px 0 #eaeff4;
-    -moz-box-shadow: 0 0 7px 0 #eaeff4;
+    border: 1px solid #e4ebf4;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-shadow: 0 0 8px #e4ebf5;
+    -moz-box-shadow: 0 0 8px #e4ebf5;
+    -webkit-box-shadow: 0 0 8px #e4ebf5;
 }
 
 .list-group-item {
@@ -375,7 +375,6 @@ header .custom-nav .logo {
     line-height: 30px;
     font-size: 16px;
     color: #b0b9be;
-    border: 1px solid #b0b9be;
     transition: all 0.5s ease;
     cursor: pointer;
 }
@@ -398,7 +397,6 @@ header .custom-nav .logo {
     line-height: 30px;
     font-size: 16px;
     color: #b0b9be;
-    border: 1px solid #b0b9be;
 }
 
 .btn-buy {
@@ -442,4 +440,40 @@ header .custom-nav .logo {
     clip-path: circle();
     outline: medium solid #47B5FF;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    line-height: 100px;
+    text-align: center;
+    font-size: 27px;
+    color: #657d9a;
+    background-color: rgba(228,235,245,0.4);
+    position: absolute;
+    z-index: 2;
+}
+
+.profile-img-background {
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 130px;
+    height: 130px;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }

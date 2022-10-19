@@ -1,8 +1,12 @@
-﻿using ProjectWeb.Application.Interfaces;
+﻿using System;
+using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using ProjectWeb.Application.Extensions;
+using ProjectWeb.Application.Statics;
 using ProjectWeb.Domain.ViewModels.WebProduct;
 
 namespace ProjectWeb.Application.Services
@@ -21,12 +25,7 @@ namespace ProjectWeb.Application.Services
         }
 
         #endregion
-
-        public void AddWebProduct(WebProduct webProduct)
-        {
-            _webProductRepository.AddWebProduct(webProduct);
-        }
-
+        
         public void DeleteProduct(int id)
         {
             _webProductRepository.DeleteProduct(id);
@@ -47,12 +46,12 @@ namespace ProjectWeb.Application.Services
             return _webProductRepository.ProductsCount();
         }
 
-        public async Task AddWebProduct(AddWebProductViewModel model)
+        public async Task AddWebProduct(AddWebProductViewModel model, string fileName)
         {
             var webProduct = new WebProduct()
             {
                 WebProductDescription = model.WebProductDescription,
-                //WebProductImage = _uploadFileInterface.uploadPhoto(model.WebProductImage),
+                WebProductImage = fileName,
                 WebProductName = model.WebProductName,
                 WebProductPrice = model.WebProductPrice,
                 WebProductDeliverDate = model.WebProductDeliverDate

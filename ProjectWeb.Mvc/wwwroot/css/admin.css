@@ -286,9 +286,13 @@ footer {
 }
 
 .custom-box-shadow {
-    border: 1px solid #ecf0f4 !important;
-    box-shadow: 0 0 7px 0 #eaeff4;
-    -moz-box-shadow: 0 0 7px 0 #eaeff4;
+    border: 1px solid #e4ebf4;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-shadow: 0 0 8px #e4ebf5;
+    -moz-box-shadow: 0 0 8px #e4ebf5;
+    -webkit-box-shadow: 0 0 8px #e4ebf5;
 }
 
 .btn-user-settings {

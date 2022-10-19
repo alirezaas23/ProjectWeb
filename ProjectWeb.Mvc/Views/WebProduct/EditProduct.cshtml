@@ -1,4 +1,6 @@
 ﻿@model ProjectWeb.Domain.ViewModels.WebProduct.EditWebProductViewModel
+@using ProjectWeb.Application.Statics
+
 @{
     ViewData["Title"] = "ویرایش محصول " + Model.WebProductName;
     Layout = "_Layout_Admin";
@@ -11,7 +13,7 @@
         <form method="post" asp-controller="WebProduct" asp-action="EditProduct" enctype="multipart/form-data">
             <div class="form-group">
                 <label asp-for="ImageUrl"></label>
-                <img src="@Model.ImageUrl" alt="@Model.WebProductName" style="width: 100%;" />
+                <img src="@PathTools.ProductImagePath@Model.ImageUrl" alt="@Model.WebProductName" style="width: 100%;" />
             </div>
             <div class="row">
                 <div class="col-12 col-lg-6">

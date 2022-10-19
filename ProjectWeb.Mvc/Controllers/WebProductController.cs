@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ProjectWeb.Application.Extensions;
 using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Application.Statics;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Domain.ViewModels.WebProduct;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -41,7 +46,23 @@ namespace ProjectWeb.Mvc.Controllers
         [Authorize(Roles = "ادمین")]
         public async Task<IActionResult> AddWebProduct(AddWebProductViewModel model)
         {
-            await _webProductInterface.AddWebProduct(model);
+            var fileName = Guid.NewGuid() + Path.GetExtension(model.WebProductImage.FileName);
+
+            var validFormats = new List<string>()
+            {
+                ".png",
+                ".jpg",
+                ".jpeg"
+            };
+
+            var result = model.WebProductImage.UploadFile(fileName, PathTools.ProductImageServerPath, validFormats);
+            if(!result)
+            {
+                TempData[ErrorMessage] = "فرمت عکس وارد شده معتبر نمی باشد.";
+                return View(model);
+            }
+
+            await _webProductInterface.AddWebProduct(model, fileName);
             TempData[SuccessMessage] = "محصول جدید با موفقیت ثبت شد.";
             return RedirectToAction(nameof(Index));
         }

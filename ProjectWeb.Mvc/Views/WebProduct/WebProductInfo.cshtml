@@ -1,4 +1,6 @@
 ﻿@model ProjectWeb.Domain.ViewModels.WebProduct.ShowWebProductViewModel
+@using ProjectWeb.Application.Statics
+
 @{
     ViewData["Title"] = "خرید " + Model.WebProductName;
     Layout = "_Layout";
@@ -7,7 +9,7 @@
 <section class="mb-5">
     <div class="row">
         <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-            <img src="@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" />
+            <img src="@PathTools.ProductImagePath@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" />
         </div>
         <div class="col-12 col-md-6">
             <div class="card custom-box-shadow">
