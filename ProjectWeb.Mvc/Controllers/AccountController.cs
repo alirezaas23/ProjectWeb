@@ -1,4 +1,5 @@
-﻿using GoogleReCaptcha.V3.Interface;
+﻿using System.Collections.Generic;
+using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,11 @@ using ProjectWeb.Mvc.ActionFilters;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.Security;
+using ProjectWeb.Application.Services;
 
 namespace ProjectWeb.Mvc.Controllers
 {
@@ -19,119 +24,143 @@ namespace ProjectWeb.Mvc.Controllers
         private readonly UserManager<UserApp> _userManager;
         private readonly SignInManager<UserApp> _signInManager;
         private readonly ICaptchaValidator _captchaValidator;
+        private readonly IUserService _userService;
 
-        public AccountController(UserManager<UserApp> userManager, SignInManager<UserApp> signInManager, ICaptchaValidator captchaValidator)
+        public AccountController(UserManager<UserApp> userManager, SignInManager<UserApp> signInManager, ICaptchaValidator captchaValidator, IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _captchaValidator = captchaValidator;
+            _userService = userService;
         }
 
         #endregion
 
         #region Register
 
-        [HttpGet]
+        [HttpGet("Register")]
         [RedirectToHomeIfLoggedInActionFilter]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-            var model = new RegisterViewModel
+            return View();
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
             {
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
-            };
+                return View(model);
+            }
+
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            {
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا مجدد تلاش کنید.";
+                return View(model);
+            }
+
+            var result = await _userService.RegisterUser(model);
+
+            switch (result)
+            {
+                case RegisterResult.EmailExist:
+                    TempData[ErrorMessage] = "ایمیل وارد شده از قبل وجود دارد.";
+                    break;
+                case RegisterResult.Success:
+                    TempData[SuccessMessage] = "عملیات با موفقیت انجام شد. ایمیلی حاوی لینک فعالسازی حساب کاربری برای شما ارسال شد.";
+                    return RedirectToAction("Login", "Account");
+            }
 
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        #endregion
+
+        #region Activation Email
+
+        [HttpGet("Email-Activation/{emailActivationCode}")]
+        public async Task<IActionResult> ActivationEmail(string emailActivationCode)
         {
-            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            var result = await _userService.ActivationEmail(emailActivationCode);
+            if (!result)
             {
-                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا دوباره تلاش کنید.";
-                return View(model);
+                TempData[ErrorMessage] = "عملیات فعالسازی با خطا مواجه شد";
             }
 
-            if (ModelState.IsValid)
+            else
             {
-                var user = new UserApp()
-                {
-                    UserName = model.UserName.SanitizeText(),
-                    Email = model.Email.SanitizeText(),
-                    EmailConfirmed = false
-                };
-                var result = await _userManager.CreateAsync(user, model.Password.SanitizeText());
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, true);
-                    return RedirectToAction("Index", "Home");
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                    return View(model);
-                }
+                TempData[SuccessMessage] = "حساب کاربری با موفقیت فعال شد.";
             }
-            return View(model);
+
+            return RedirectToAction("Login", "Account");
         }
 
         #endregion
 
         #region Login
 
-        [HttpGet]
+        [HttpGet("Login")]
         [RedirectToHomeIfLoggedInActionFilter]
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public IActionResult Login(string ReturnUrl = "")
         {
-            var model = new LoginViewModel
-            {
-                ReturnUrl = returnUrl,
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
-            };
+            var result = new LoginViewModel();
 
-            ViewData["ReturnUrl"] = returnUrl;
-            return View(model);
+            if (!string.IsNullOrEmpty(ReturnUrl))
+            {
+                result.ReturnUrl = ReturnUrl;
+            }
+
+            return View(result);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-
-            model.ReturnUrl = returnUrl;
-            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            if (!ModelState.IsValid)
             {
-                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا دوباره تلاش کنید.";
                 return View(model);
             }
 
-            if (ModelState.IsValid)
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
             {
-                var result = await _signInManager.PasswordSignInAsync(model.UserName.SanitizeText(), model.Password.SanitizeText(), model.RememberMe, true);
-                if (result.Succeeded)
-                {
-                    TempData[SuccessMessage] = "کاربر گرامی, خوش آمدید.";
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    return RedirectToAction("Index", "Home");
-                }
-                if (result.IsLockedOut)
-                {
-                    TempData[ErrorMessage] = "اکانت شما به دلیل 5 بار ورود ناموفق به مدت 5 دقیقه قفل شد!";
-                    return View(model);
-                }
-                else
-                {
-                    TempData[ErrorMessage] = "نام کاربری یا کلمه عبور اشتباه است!";
-                    return View(model);
-                }
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا مجدد تلاش کنید.";
+                return View(model);
             }
+
+            var result = await _userService.CheckUserForLoggedIn(model);
+
+            switch (result)
+            {
+                case LoginResult.UserIsBan:
+                    TempData[WarningMessage] = "دسترسی شما به سایت مسدود می باشد.";
+                    break;
+                case LoginResult.UserNotFound:
+                    TempData[ErrorMessage] = "کاربری با مشخصات وارد شده یافت نشد.";
+                    break;
+                case LoginResult.EmailNotActivated:
+                    TempData[WarningMessage] = "برای وارد شدن به سایت حساب کاربری خود را تایید کنید.";
+                    break;
+                case LoginResult.Success:
+                    var user = await _userService.GetUserByEmail(model.Email);
+
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+                    var properties = new AuthenticationProperties { IsPersistent = model.RememberMe };
+
+                    await HttpContext.SignInAsync(principal, properties);
+                    TempData[SuccessMessage] = "خوش آمدید.";
+
+                    if (!string.IsNullOrEmpty(model.ReturnUrl))
+                        return Redirect(model.ReturnUrl);
+
+                    return RedirectToAction("Index", "Home");
+            }
+
             return View(model);
         }
 
@@ -139,45 +168,99 @@ namespace ProjectWeb.Mvc.Controllers
 
         #region Logout
 
-        [HttpGet]
-        public async Task<IActionResult> LogOut()
+        [HttpGet("Logout")]
+        public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
+            await HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
         #endregion
 
-        #region Validate Username and Email
+        #region Forgot Password
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> IsEmailInUse(string email)
+        [HttpGet("Forgot-Password")]
+        public IActionResult ForgotPassword()
         {
-            var user = await _userManager.FindByEmailAsync(email.SanitizeText());
-            if (user == null)
-            {
-                return Json(true);
-            }
-            else
-            {
-                return Json("اکانتی با این ایمیل وجود دارد");
-            }
+            return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> IsUserNameInUse(string userName)
+        [HttpPost("Forgot-Password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(userName.SanitizeText());
-            if (user == null)
+            if (!ModelState.IsValid)
             {
-                return Json(true);
+                return View(model);
             }
-            else
+
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
             {
-                return Json("اکانتی با این نام کاربری وجود دارد");
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا مجدد تلاش کنید.";
+                return View(model);
             }
+
+            var result = await _userService.ForgotPassword(model);
+            switch (result)
+            {
+                case ForgotPasswordResult.UserIsBan:
+                    TempData[WarningMessage] = "دسترسی شما به سایت مسدود می باشد.";
+                    break;
+                case ForgotPasswordResult.UserNotFound:
+                    TempData[ErrorMessage] = "کاربری با مشخصات وارد شده یافت نشد.";
+                    break;
+                case ForgotPasswordResult.Success:
+                    TempData[SuccessMessage] = "ایمیلی حاوی لینک بازیابی کلمه عبور برای شما ارسال شد.";
+                    return RedirectToAction("Login", "Account");
+            }
+
+            return View(model);
+        }
+
+        #endregion
+
+        #region Reset Password
+
+        [HttpGet("Reset-Password/{activationCode}")]
+        public async Task<IActionResult> ResetPassword(string activationCode)
+        {
+            var result = await _userService.GetUserByActivationCode(activationCode);
+            if (result == null) return NotFound();
+
+            return View(new ResetPasswordViewModel()
+            {
+                ActivationCode = activationCode
+            });
+        }
+
+        [HttpPost("Reset-Password/{activationCode}")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
+            {
+                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا مجدد تلاش کنید.";
+                return View(model);
+            }
+
+            var result = await _userService.ResetPassword(model);
+            switch (result)
+            {
+                case ResetPasswordResult.UserIsBan:
+                    TempData[WarningMessage] = "دسترسی شما به سایت مسدود می باشد.";
+                    break;
+                case ResetPasswordResult.UserNotFound:
+                    TempData[ErrorMessage] = "بازیابی کلمه عبور با خطا مواجه شد.";
+                    break;
+                case ResetPasswordResult.Success:
+                    TempData[SuccessMessage] = "بازیابی کلمه عبور با موفقیت انجام شد.";
+                    return RedirectToAction("Login", "Account");
+            }
+
+            return View(model);
         }
 
         #endregion
@@ -287,74 +370,6 @@ namespace ProjectWeb.Mvc.Controllers
             await _userManager.UpdateAsync(user);
             TempData["Message"] = "حساب کاربری شما تایید شد. با تشکر.";
             return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
-        }
-
-        #endregion
-
-        #region External Login
-
-        [HttpPost]
-        public IActionResult ExternalLogins(string provider, string returnUrl)
-        {
-            var redirectUrl =
-                Url.Action("ExternalLoginsCallBack", "Account", new { returnUrl });
-
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-
-            return new ChallengeResult(provider, properties);
-        }
-
-        public async Task<IActionResult> ExternalLoginsCallBack(string returnUrl = null, string remoteError = null)
-        {
-            returnUrl =
-                (returnUrl != null && Url.IsLocalUrl(returnUrl)) ? returnUrl : Url.Content("~/");
-
-            var loginViewModel = new LoginViewModel
-            {
-                ReturnUrl = returnUrl,
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
-            };
-
-            if (remoteError != null)
-            {
-                ModelState.AddModelError("", $"Error : {remoteError}");
-                return View("Login", loginViewModel);
-            }
-
-            var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
-            if (externalLoginInfo == null)
-            {
-                ModelState.AddModelError("ErrorLoadingGetExternalLoginInfo", "مشکلی پیش آمد ! چند دقیقه دیگر امتحان کنید !");
-                return View("Login", loginViewModel);
-            }
-
-            var signInResult = await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider,
-                externalLoginInfo.ProviderKey, true, true);
-            if (signInResult.Succeeded)
-            {
-                return Redirect(returnUrl);
-            }
-
-            var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
-            if (email != null)
-            {
-                var user = await _userManager.FindByEmailAsync(email);
-                if (user == null)
-                {
-                    var userName = email.Split("@")[0];
-                    user = new UserApp
-                    {
-                        UserName = (userName.Length <= 10 ? userName : userName.Substring(0, 10)),
-                        Email = email,
-                        EmailConfirmed = true
-                    };
-                    await _userManager.CreateAsync(user);
-                }
-                await _userManager.AddLoginAsync(user, externalLoginInfo);
-                await _signInManager.SignInAsync(user, true);
-                return Redirect(returnUrl);
-            }
-            return NotFound();
         }
 
         #endregion

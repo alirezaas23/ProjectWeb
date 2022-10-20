@@ -17,13 +17,6 @@
                     <!-- ModelState -->
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
 
-                    <!-- UserName -->
-                    <div class="InputWithIcon">
-                        <input asp-for="UserName" class="input-custom" placeholder="نام کاربری" id="reg-user-input" />
-                        <i class='bx bx-user' id="reg-user-icon"></i>
-                        <span asp-validation-for="UserName" class="text-danger small"></span>
-                    </div>
-
                     <!-- Email -->
                     <div class="InputWithIcon">
                         <input asp-for="Email" class="input-custom" placeholder="ایمیل" id="reg-email-input" />
@@ -40,9 +33,9 @@
 
                     <!-- Confirm Password -->
                     <div class="InputWithIcon">
-                        <input asp-for="ConfirmPassword" class="input-custom" placeholder="تکرار کلمه عبور" id="reg-passconfirm-input" />
+                        <input asp-for="RePassword" class="input-custom" placeholder="تکرار کلمه عبور" id="reg-passconfirm-input" />
                         <i class='bx bx-lock-alt' id="reg-passconfirm-icon"></i>
-                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        <span asp-validation-for="RePassword" class="text-danger small"></span>
                     </div>
                     
                     <input type="hidden" asp-for="Captcha"/>
@@ -50,111 +43,19 @@
                     <button type="submit" class="btn btn-account">عضویت</button>
                 </form>
 
-                <div class="mt-4 text-center">
-                    <h6 class="font-weight-bold">یا عضویت با اکانت :</h6>
-                    <form method="post" asp-controller="Account" asp-action="ExternalLogins">
-                        @foreach (var provider in Model.ExternalLogins)
-                        {
-                            <button id="google-btn" type="submit" class="btn" value="@provider.Name" name="provider">
-                                @provider.DisplayName
-                                <img src="~/imgs/google-25.png" alt="google-icon" id="google-icon" />
-                            </button>
-                        }
-                    </form>
-                </div>
-
                 <hr />
-
-                <a asp-controller="Account" asp-action="Login" class="text-right text-hover">
+                
+                <p>
                     <i class="fas fa-user-check"></i>
-                    ورود
-                </a>
+                    اکانت دارید؟ <a asp-controller="Account" asp-action="Login" class="text-right text-hover">وارد</a> شوید.
+                </p>
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script>
-        var regUserInput = document.getElementById('reg-user-input');
-        regUserInput.addEventListener("focusin", function () {
-            let icon = document.getElementById('reg-user-icon');
-            icon.style.color = "#54BAB9";
-            regUserInput.style.outline = "none";
-            regUserInput.style.border = "2px solid #54BAB9";
-        });
-        regUserInput.addEventListener("focusout", function () {
-            let icon = document.getElementById('reg-user-icon');
-            if (regUserInput.value == "") {
-                icon.style.color = "red";
-                regUserInput.style.border = "2px solid red";
-            }
-            else {
-                icon.style.color = "#7e8388";
-                regUserInput.style.border = "1px solid #d1d4d7";
-            }
-        });
-
-        var regEmailInput = document.getElementById('reg-email-input');
-        regEmailInput.addEventListener("focusin", function () {
-            let icon = document.getElementById('reg-email-icon');
-            icon.style.color = "#54BAB9";
-            regEmailInput.style.outline = "none";
-            regEmailInput.style.border = "2px solid #54BAB9";
-        });
-        regEmailInput.addEventListener("focusout", function () {
-            let icon = document.getElementById('reg-email-icon');
-            if (regEmailInput.value == "") {
-                icon.style.color = "red";
-                regEmailInput.style.border = "2px solid red";
-            }
-            else {
-                icon.style.color = "#7e8388";
-                regEmailInput.style.border = "1px solid #d1d4d7";
-            }
-        });
-
-        var regPassInput = document.getElementById('reg-pass-input');
-        regPassInput.addEventListener("focusin", function () {
-            let icon = document.getElementById('reg-pass-icon');
-            icon.style.color = "#54BAB9";
-            regPassInput.style.outline = "none";
-            regPassInput.style.border = "2px solid #54BAB9";
-        });
-        regPassInput.addEventListener("focusout", function () {
-            let icon = document.getElementById('reg-pass-icon');
-            if (regPassInput.value == "") {
-                icon.style.color = "red";
-                regPassInput.style.border = "2px solid red";
-            }
-            else {
-                icon.style.color = "#7e8388";
-                regPassInput.style.border = "1px solid #d1d4d7";
-            }
-        });
-
-        var regConfirmPassInput = document.getElementById('reg-passconfirm-input');
-        regConfirmPassInput.addEventListener("focusin", function () {
-            let icon = document.getElementById('reg-passconfirm-icon');
-            icon.style.color = "#54BAB9";
-            regConfirmPassInput.style.outline = "none";
-            regConfirmPassInput.style.border = "2px solid #54BAB9";
-        });
-        regConfirmPassInput.addEventListener("focusout", function () {
-            let icon = document.getElementById('reg-passconfirm-icon');
-            if (regConfirmPassInput.value == "") {
-                icon.style.color = "red";
-                regConfirmPassInput.style.border = "2px solid red";
-            }
-            else {
-                icon.style.color = "#7e8388";
-                regConfirmPassInput.style.border = "1px solid #d1d4d7";
-            }
-        });
-    </script>
+    <partial name="_ValidationScriptsPartial"/>
 
     <partial name="_GoogleReCaptcha" />
 }

@@ -1,3 +1,4 @@
+using System;
 using GoogleReCaptcha.V3;
 using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,7 @@ using ProjectWeb.Infra.Data.Context;
 using ProjectWeb.Infra.IoC;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using WebMarkupMin.AspNetCore3;
 
 namespace ProjectWeb.Mvc
@@ -65,6 +67,19 @@ namespace ProjectWeb.Mvc
                 HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
 
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.LoginPath = "/Login";
+                options.LogoutPath = "/Logout";
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+            });
 
             DependencyContainer.RegisterServices(services);
         }

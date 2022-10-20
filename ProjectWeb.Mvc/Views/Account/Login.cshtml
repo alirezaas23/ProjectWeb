@@ -1,5 +1,4 @@
 ﻿@model ProjectWeb.Domain.ViewModels.Account.LoginViewModel
-
 @{
     ViewData["Title"] = "ورود به سایت";
     Layout = "_Layout_Account";
@@ -28,51 +27,37 @@
                     <!-- ModelState -->
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
 
-                    <!-- UserName -->
                     <div class="InputWithIcon">
-                        <input asp-for="UserName" class="input-custom" placeholder="نام کاربری" id="login-user-input" />
+                        <input asp-for="Email" class="input-custom" placeholder="ایمیل" id="login-user-input"/>
                         <i class='bx bx-user' id="login-userName-icon"></i>
-                        <span asp-validation-for="UserName" class="text-danger small" id="login-user-error"></span>
+                        <span asp-validation-for="Email" class="text-danger small" id="login-user-error"></span>
                     </div>
 
-                    <!-- Password -->
                     <div class="InputWithIcon">
-                        <input asp-for="Password" class="input-custom" placeholder="کلمه عبور" id="login-pass-input" />
+                        <input asp-for="Password" class="input-custom" placeholder="کلمه عبور" id="login-pass-input"/>
                         <i class='bx bx-lock-alt' id="login-pass-icon"></i>
                         <i class='bx bxs-lock-open' id="show-pass-icon" title="نمایش کلمه عبور"></i>
                         <span asp-validation-for="Password" class="text-danger small"></span>
                     </div>
 
-                    <!-- Remember Me -->
                     <div class="form-group">
-                        <input asp-for="RememberMe" class="checkbox" checked="checked" />
-                        <label asp-for="RememberMe"></label>
+                        <input asp-for="RememberMe" class="checkbox" checked="checked"/>
+                        <label asp-for="RememberMe">مرا به خاطر بسپار</label>
                     </div>
 
-                    <input type="hidden" asp-for="Captcha" />
+                    <input type="hidden" asp-for="Captcha"/>
+                    <input type="hidden" asp-for="ReturnUrl"/>
 
                     <button type="submit" class="btn btn-account">ورود</button>
                 </form>
-                <div class="mt-4 text-center">
-                    <h6 class="font-weight-bold">یا ورود با اکانت :</h6>
-                    <form method="post" asp-controller="Account" asp-action="ExternalLogins" asp-route-returnUrl="@Model.ReturnUrl">
-                        @foreach (var provider in Model.ExternalLogins)
-                        {
-                            <button id="google-btn" type="submit" class="btn" value="@provider.Name" name="provider">
-                                @provider.DisplayName
-                                <img src="~/imgs/google-25.png" alt="google-icon" id="google-icon" />
-                            </button>
-                        }
-                    </form>
-                </div>
                 <hr />
                 <div class="d-flex justify-content-between">
                     <a asp-controller="Account" asp-action="Register" class="text-hover">
                         <i class="fas fa-user-plus"></i>
                         عضویت
                     </a>
-                    <a asp-controller="" asp-action="" class="text-hover">
-                        فراموشی کلمه عبور
+                    <a asp-controller="Account" asp-action="ForgotPassword" class="text-hover">
+                        کلمه عبور خود را فراموش کردم.
                     </a>
                 </div>
             </div>

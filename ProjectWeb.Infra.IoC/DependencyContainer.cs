@@ -10,15 +10,28 @@ namespace ProjectWeb.Infra.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddTransient<ITicketRepository, TicketRepository>();
+            #region Services
+
             services.AddTransient<ITicketInterface, TicketService>();
-            services.AddScoped<IWebProductRepository, WebProductRepository>();
-            services.AddScoped<IWebProductInterface, WebProductService>();
-            services.AddScoped<IUploadFileInterface, UploadFileService>();
-            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IOrderInterface, OrderService>();
-            services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
             services.AddTransient<IOrderDetailInterface, OrderDetailService>();
+            services.AddScoped<IWebProductInterface, WebProductService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUploadFileInterface, UploadFileService>();
+            services.AddScoped<IEmailService, EmailService>();
+
+            #endregion
+
+            #region Repositories
+
+            services.AddTransient<ITicketRepository, TicketRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IWebProductRepository, WebProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISiteSettingRepository, SiteSettingRepository>();
+
+            #endregion
         }
     }
 }

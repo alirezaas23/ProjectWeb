@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectWeb.Infra.Data.Context;
 
 namespace ProjectWeb.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221020164117_AddUserModel")]
+    partial class AddUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,60 +141,6 @@ namespace ProjectWeb.Infra.Data.Migrations
                     b.HasIndex("WebProductId");
 
                     b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("ProjectWeb.Domain.Models.SiteSetting.EmailSetting", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EnbaleSSL")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("From")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDefault")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Port")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SMTP")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmailSettings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DisplayName = "WebMaker",
-                            EnbaleSSL = true,
-                            From = "alirezaasgari685@gmail.com",
-                            IsDefault = true,
-                            IsDelete = false,
-                            Password = "aocrhtadtphauyjl",
-                            Port = 587,
-                            SMTP = "smtp.gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("ProjectWeb.Domain.Models.Ticket", b =>

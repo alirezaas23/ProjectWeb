@@ -1,19 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using ProjectWeb.Domain.ViewModels.Common;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
+using ProjectWeb.Domain.ViewModels.Common;
 
 namespace ProjectWeb.Domain.ViewModels.Account
 {
-    public class RegisterViewModel : GoogleReCaptchaViewModel
+    public class ResetPasswordViewModel : GoogleReCaptchaViewModel
     {
-        [Display(Name = "ایمیل")]
-        [MaxLength(100, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد.")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        [EmailAddress(ErrorMessage = "ایمیل وارد شده معبتر نمی باشد.")]
-        public string Email { get; set; }
-
         [Display(Name = "کلمه عبور")]
         [MaxLength(100, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد.")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
@@ -26,11 +20,15 @@ namespace ProjectWeb.Domain.ViewModels.Account
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "کلمات عبور مغایرت دارند.")]
         public string RePassword { get; set; }
+
+        [Required]
+        public string ActivationCode { get; set; }
     }
 
-    public enum RegisterResult
+    public enum ResetPasswordResult
     {
         Success,
-        EmailExist,
+        UserNotFound,
+        UserIsBan
     }
 }
