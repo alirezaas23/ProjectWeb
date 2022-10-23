@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using ProjectWeb.Application.Extensions
+@using ProjectWeb.Application.Statics
+@model ProjectWeb.Domain.Models.Account.User
+
+<div class="dropdown">
+    <a class="dropdown navbar-hover-text" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-caret-down"></i>
+        <span>حساب کاربری</span>
+        <img src="@PathTools.UserAvatarPath@Model.Avatar" class="navbar-img" />
+    </a>
+
+    <div class="dropdown-menu">
+        @if (User.IsInRole("ادمین"))
+        {
+            <a asp-controller="Admin" asp-action="Index" class="dropdown-item menu-text-hover">
+                <i class="fas fa-circle small-dot"></i>
+                صفحه مدیریت سایت
+            </a>
+        }
+        <a asp-action="Index" asp-controller="Home" asp-area="UserPanel" class="dropdown-item menu-text-hover">
+            <img src="@PathTools.UserAvatarPath@Model.Avatar" class="dropdown-img" />
+            @Model.GetUserDisplayName()
+        </a>
+        <hr />
+        <a asp-action="Index" asp-controller="Home" asp-area="UserPanel" class="dropdown-item menu-text-hover">
+            <i class="fas fa-circle small-dot"></i>
+            مشاهده حساب کاربری
+        </a>
+        <a asp-action="EditInfo" asp-controller="Account" asp-area="UserPanel" class="dropdown-item menu-text-hover">
+            <i class="fas fa-circle small-dot"></i>
+            ویرایش حساب کاربری
+        </a>
+        <a asp-action="ChangePassword" asp-controller="Account" asp-area="UserPanel" class="dropdown-item menu-text-hover">
+            <i class="fas fa-circle small-dot"></i>
+            تغییر کلمه عبور
+        </a>
+        <a asp-controller="Account" asp-action="LogOut" class="dropdown-item menu-text-hover">
+            <i class="fas fa-circle small-dot"></i>
+            خروج از حساب
+        </a>
+    </div>
+</div>

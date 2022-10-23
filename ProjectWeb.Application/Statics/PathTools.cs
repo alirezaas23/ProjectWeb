@@ -17,6 +17,8 @@ namespace ProjectWeb.Application.Statics
         #region User
 
         public static readonly string UserAvatar = "DefaultAvatar.png";
+        public static readonly string UserAvatarPath = "/content/user/";
+        public static readonly string UserAvatarServerPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/content/user/");
 
         #endregion
 

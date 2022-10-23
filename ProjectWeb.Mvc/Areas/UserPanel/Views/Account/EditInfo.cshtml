@@ -1,0 +1,104 @@
+﻿@using ProjectWeb.Domain.ViewModels.Common
+@model ProjectWeb.Domain.ViewModels.UserPanel.Account.EditUserViewModel
+
+@{
+    ViewData["Title"] = "ویرایش اطلاعات کاربری";
+    Layout = "_UserPanelLayout";
+    var states = ViewData["States"] as List<SelectListViewModel>;
+    var cities = ViewData["Cities"] as List<SelectListViewModel>;
+}
+
+@section BreadCrumb
+{
+    <a asp-action="EditInfo" asp-controller="Account" asp-area="UserPanel" class="text-hover">/ ویرایش اطلاعات کاربری</a>
+}
+
+<div class="card custom-box-shadow">
+    <div class="card-header">
+        <p class="font-weight-bold">@ViewData["Title"]</p>
+    </div>
+    <div class="card-body profile-font">
+        <form asp-controller="Account" asp-action="EditInfo" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control input-custom" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4 mt-md-0">
+                    <div class="form-group">
+                        <label asp-for="LastName"></label>
+                        <input asp-for="LastName" class="form-control input-custom" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group mt-4">
+                        <label asp-for="PhoneNumber"></label>
+                        <input asp-for="PhoneNumber" class="form-control input-custom" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group mt-4">
+                        <label asp-for="BirthDate"></label>
+                        <input asp-for="BirthDate" autocomplete="off" class="form-control input-custom datepicker" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="form-group">
+                        <label asp-for="CountryId"></label>
+                        <select asp-for="CountryId" class="form-control input-custom" data-url="@Url.Action("LoadCities", "Account", new{area="UserPanel"})">
+                            <option value="">لطفا شهر خود را انتخاب کنید</option>
+                            @if (states != null && states.Any())
+                            {
+                                foreach (var state in states)
+                                {
+                                    <option value="@state.Id">@state.Title</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="form-group">
+                        <label asp-for="CityId"></label>
+                        <select asp-for="CityId" class="form-control input-custom">
+                            <option value="">لطفا استان خود را انتخاب کنید</option>
+                            @if (cities != null && cities.Any())
+                            {
+                                foreach (var state in cities)
+                                {
+                                    <option value="@state.Id">@state.Title</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group mt-4">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description" class="form-control input-custom" rows="5"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-edit mt-4">ویرایش اطلاعات</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

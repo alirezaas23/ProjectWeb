@@ -51,5 +51,10 @@ namespace ProjectWeb.Infra.Data.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
         }
+
+        public async Task<User> GetUserById(long userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id.Equals(userId));
+        }
     }
 }

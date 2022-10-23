@@ -27,13 +27,27 @@ namespace ProjectWeb.Infra.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ActivationCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Avatar")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CountryId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -71,7 +85,38 @@ namespace ProjectWeb.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ProjectWeb.Domain.Models.Location.State", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("ParentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("ProjectWeb.Domain.Models.Order", b =>
@@ -246,6 +291,30 @@ namespace ProjectWeb.Infra.Data.Migrations
                     b.ToTable("WebProducts");
                 });
 
+            modelBuilder.Entity("ProjectWeb.Domain.Models.Account.User", b =>
+                {
+                    b.HasOne("ProjectWeb.Domain.Models.Location.State", "City")
+                        .WithMany("UserCities")
+                        .HasForeignKey("CityId");
+
+                    b.HasOne("ProjectWeb.Domain.Models.Location.State", "Country")
+                        .WithMany("UserCountries")
+                        .HasForeignKey("CountryId");
+
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("ProjectWeb.Domain.Models.Location.State", b =>
+                {
+                    b.HasOne("ProjectWeb.Domain.Models.Location.State", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("ProjectWeb.Domain.Models.OrderDetail", b =>
                 {
                     b.HasOne("ProjectWeb.Domain.Models.Order", "Order")
@@ -263,6 +332,13 @@ namespace ProjectWeb.Infra.Data.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("WebProduct");
+                });
+
+            modelBuilder.Entity("ProjectWeb.Domain.Models.Location.State", b =>
+                {
+                    b.Navigation("UserCities");
+
+                    b.Navigation("UserCountries");
                 });
 
             modelBuilder.Entity("ProjectWeb.Domain.Models.Order", b =>

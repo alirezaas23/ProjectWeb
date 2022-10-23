@@ -291,56 +291,6 @@ namespace ProjectWeb.Mvc.Controllers
 
         #endregion
 
-        #region Edit Account
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> EditAccount(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            if (string.IsNullOrEmpty(id)) return NotFound();
-            if (user == null) return NotFound();
-            var userModel = new EditAccountViewModel()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                PhoneNumber = user.PhoneNumber,
-                UserId = user.Id,
-                UserName = user.UserName
-            };
-            return View(userModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAccount(EditAccountViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByIdAsync(model.UserId);
-                if (user == null) return NotFound();
-                user.FirstName = model.FirstName.SanitizeText();
-                user.LastName = model.LastName.SanitizeText();
-                user.Email = model.Email.SanitizeText();
-                user.PhoneNumber = model.PhoneNumber.SanitizeText();
-                var result = await _userManager.UpdateAsync(user);
-                if (result.Succeeded)
-                {
-                    TempData["Message"] = "اطلاعات جدید با موفقیت ثبت شد";
-                    return RedirectToAction("ShowProfile", "Account", new { id = user.Id });
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                    return View(model);
-                }
-            }
-            return View(model);
-        }
-
-        #endregion
-
         #region Confirm Account
 
         [HttpGet]

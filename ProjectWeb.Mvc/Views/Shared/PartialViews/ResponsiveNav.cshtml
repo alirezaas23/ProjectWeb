@@ -1,21 +1,20 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
-@using ProjectWeb.Domain.Models
-@inject SignInManager<UserApp> _signInManager
-@inject UserManager<UserApp> _userManager
+﻿@using ProjectWeb.Application.Extensions
+@using ProjectWeb.Application.Interfaces
+@using ProjectWeb.Application.Statics
+@inject IUserService UserService
+@{
+    var user = await UserService.GetUserById(User.GetUserId());
+}
+
 <nav id="responsive-nav">
     <ul>
         <li class="p-3">
             <img src="~/imgs/Web Maker-1.png" alt="Logo" height="100" />
         </li>
         @{
-            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            if (_signInManager.IsSignedIn(User))
+            if (User.Identity.IsAuthenticated)
             {
-                <li class="user-nav-item">
-                    <i class="fas fa-user"></i>
-                    <span>@user.UserName</span>
-                </li>
+
                 @if (User.IsInRole("ادمین"))
                 {
                     <li>
@@ -25,15 +24,21 @@
                     </li>
                 }
                 <li>
-                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">
+                    <a asp-controller="Home" asp-action="Index" asp-area="UserPanel">
                         <i class="fas fa-user-circle"></i>
                         مشاهده حساب کاربری
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
+                    <a asp-controller="Account" asp-action="EditInfo" asp-area="UserPanel">
                         <i class="fas fa-user-edit"></i>
                         ویرایش حساب کاربری
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Account" asp-action="ChangePassword" asp-area="UserPanel">
+                        <i class="fas fa-lock"></i>
+                        تغییر کلمه عبور
                     </a>
                 </li>
                 <li>
@@ -43,7 +48,7 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Order" asp-action="MyOrders" asp-route-userId="@user.Id">
+                    <a asp-controller="Order" asp-action="MyOrders">
                         <i class="fas fa-cart-arrow-down"></i>
                         سفارشات من
                     </a>
@@ -51,7 +56,7 @@
                 <li>
                     <a asp-controller="Account" asp-action="LogOut">
                         <i class="fas fa-sign-out-alt"></i>
-                        خروج از حساب کاربری
+                        خروج از حساب
                     </a>
                 </li>
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using GoogleReCaptcha.V3;
 using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Builder;
@@ -81,6 +81,8 @@ namespace ProjectWeb.Mvc
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
             });
 
+            
+
             DependencyContainer.RegisterServices(services);
         }
 
@@ -110,6 +112,9 @@ namespace ProjectWeb.Mvc
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

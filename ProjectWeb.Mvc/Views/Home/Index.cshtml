@@ -3,76 +3,78 @@
     Layout = "_Layout";
 }
 
-<section>
-    <div class="row">
-        <div class="col-12 col-lg-6" data-aos="fade-left" data-aos-duration="1300">
-            <div class="animate__animated animate__pulse animate__delay-1s animate__slower animate__infinite">
-                <img src="~/imgs/development-vector.png" alt="طراحی_وبسایت_پیشرفته" style="width:100%;" />
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="col-12 col-lg-6" data-aos="fade-left" data-aos-duration="1300">
+                <div class="animate__animated animate__pulse animate__delay-1s animate__slower animate__infinite">
+                    <img src="~/imgs/development-vector.png" alt="طراحی_وبسایت_پیشرفته" style="width:100%;" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-5 mt-lg-0 d-flex justify-content-center align-items-center text-center">
+                <div class="intro-title">
+                    <h2 data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000">
+                        طراحی سایت خود را به ما بسپارید
+                    </h2>
+                    <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+                        طراحی کاربر پسند، تحویل سریع، سرعت بالا
+                    </p>
+                    <button onclick="ScrolToProducts()" id="btn-header" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1200" class="mt-3">
+                        همین حالا سفارش دهید
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 mt-5 mt-lg-0 d-flex justify-content-center align-items-center text-center">
-            <div class="intro-title">
-                <h2 data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000">
-                    طراحی سایت خود را به ما بسپارید
-                </h2>
-                <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
-                    طراحی کاربر پسند، تحویل سریع، سرعت بالا
-                </p>
-                <button id="btn-header" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1200" class="mt-3">
-                    همین حالا سفارش دهید
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
-<div class="text-center mt-5 mb-5 animate__animated animate__shakeY animate__delay-2s animate__slow animate__repeat-2" data-aos="zoom-in" data-aos-delay="1000">
-    <img src="~/imgs/scroll-down.png" alt="Scroll-down" width="100" />
+    <div class="text-center mt-5 mb-5 animate__animated animate__shakeY animate__delay-2s animate__slow animate__repeat-2" data-aos="zoom-in" data-aos-delay="1000">
+        <img src="~/imgs/scroll-down.png" alt="Scroll-down" width="100" />
+    </div>
+
+    <section class="mt-5">
+        <div class="row">
+            <div class="col-12 col-lg-4" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="600">
+                <div class="card custom-box-shadow text-center">
+                    <div class="card-body">
+                        <img src="~/imgs/best-price.png" alt="قیمت_مناسب" />
+                        <h5 class="mt-3">
+                            بهترین قیمت
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="700">
+                <div class="card custom-box-shadow text-center">
+                    <div class="card-body">
+                        <img src="~/imgs/support.png" alt="پشتیبانی_همیشگی" />
+                        <h5 class="mt-3">
+                            پشتیبانی همیشگی
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="800">
+                <div class="card custom-box-shadow text-center">
+                    <div class="card-body">
+                        <img src="~/imgs/responive-deisgn.png" alt="طراحی_تعاملی" />
+                        <h5 class="mt-3">
+                            طراحی تعاملی
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5" id="products">
+        <p class="my-p" data-aos="fade-left" data-aos-duration="1000">
+            محصولات
+        </p>
+        <div data-aos="fade-up" data-aos-duration="1000">
+            @await Component.InvokeAsync("WebProduct")
+        </div>
+    </section>
+
 </div>
-
-<section class="mt-5">
-    <div class="row">
-        <div class="col-12 col-lg-4" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="600">
-            <div class="card custom-box-shadow text-center">
-                <div class="card-body">
-                    <img src="~/imgs/best-price.png" alt="قیمت_مناسب" />
-                    <h5 class="mt-3">
-                        بهترین قیمت
-                    </h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="700">
-            <div class="card custom-box-shadow text-center">
-                <div class="card-body">
-                    <img src="~/imgs/support.png" alt="پشتیبانی_همیشگی" />
-                    <h5 class="mt-3">
-                        پشتیبانی همیشگی
-                    </h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 mt-4 mt-lg-0" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="800">
-            <div class="card custom-box-shadow text-center">
-                <div class="card-body">
-                    <img src="~/imgs/responive-deisgn.png" alt="طراحی_تعاملی" />
-                    <h5 class="mt-3">
-                        طراحی تعاملی
-                    </h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="mt-5" id="products">
-    <p class="my-p" data-aos="fade-left" data-aos-duration="1000">
-        محصولات
-    </p>
-    <div data-aos="fade-up" data-aos-duration="1000">
-        @await Component.InvokeAsync("WebProduct")
-    </div>
-</section>
-
 @section Scripts{
 }

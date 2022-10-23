@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = ViewData["Title"];
+}
+
+@section Styles
+{
+    @await RenderSectionAsync("Styles", false)
+}
+
+<div>
+    <div class="mt-2 BreadCrumb">
+        <div class="container">
+            <a href="/" class="text-hover">خانه</a>
+            <a asp-action="Index" asp-controller="Home" asp-area="UserPanel" class="text-hover">/ پنل کاربری</a>
+            @await RenderSectionAsync("BreadCrumb", true)
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-3 mb-5">
+                @await Component.InvokeAsync("UserSideBar")
+            </div>
+            <div class="col-12 col-lg-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @await RenderSectionAsync("Scripts", required: false)
+}

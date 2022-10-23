@@ -1,6 +1,10 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+* {
+    box-sizing: border-box;
+}
+
 @font-face {
     font-family: Vazir;
     src: url('../fonts/Vazir-FD.eot');
@@ -17,7 +21,8 @@ a.navbar-brand {
 }
 
 ul {
-    list-style-position: inside;
+    list-style: none !important;
+    list-style-type: none !important;
     margin: 0;
     padding: 0;
 }
@@ -83,6 +88,7 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     font-family: Vazir;
+    word-spacing: 1px;
 }
 
 .footer {
@@ -176,19 +182,32 @@ header .custom-nav .logo {
     }
 
 .dropdown .dropdown-menu {
-    margin-top: 20px;
+    margin-top: 15px;
     line-height: 2;
     font-size: 13px;
-    border-radius: 5px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    border: none;
+    border: 1px solid #eaf1f2;
     position: absolute;
     z-index: 1;
+    border-radius: 0;
+    min-width: 250px;
+    padding: 15px;
 }
 
-    .dropdown .dropdown-menu :hover {
-        background-color: transparent;
-    }
+.dropdown .dropdown-menu :hover {
+    background-color: transparent;
+}
+
+.dropdown-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    outline: 1px solid #eaf1f2;
+    outline-offset: 2px;
+}
+
+.dropdown-item {
+    padding: 0.25rem 0;
+}
 
 .small-dot {
     font-size: 5px;
@@ -254,26 +273,22 @@ header .custom-nav .logo {
 
 .btn-edit {
     width: 150px;
-    background: #7DCE13;
+    background: #77c444;
     color: white;
-    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.2);
     padding: 10px;
-    font-size: 13px;
+    font-size: 14px;
+    border-radius: 25px;
+    transition: all 0.5s ease;
 }
 
-    .btn-edit:hover {
-        transition: 1s;
-        border-radius: 15px;
-        color: white;
-    }
-
-    .btn-edit:not(:hover) {
-        transition: 1s;
-    }
-
-.close-icon {
-    cursor: pointer;
+.btn-edit:hover {
+    color: white;
+    background: #50c444;
 }
+
+    .close-icon {
+        cursor: pointer;
+    }
 
 .nav-text {
     color: black;
@@ -454,13 +469,15 @@ header .custom-nav .logo {
     color: #657d9a;
     background-color: rgba(228,235,245,0.4);
     position: absolute;
-    z-index: 2;
+    cursor: pointer;
+    object-fit: cover;
+    outline: 2px solid #eaf1f2;
+    outline-offset: 3px;
 }
 
 .profile-img-background {
     margin: 0 auto;
     position: relative;
-    z-index: 1;
     width: 130px;
     height: 130px;
     position: relative;
@@ -476,4 +493,56 @@ header .custom-nav .logo {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.BreadCrumb {
+    border-bottom: 1px solid #dee8ed;
+    background-color: #eaf0f2;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.profile-quick-access {
+    margin-bottom: 30px;
+    position: relative;
+    padding-top: 25px;
+}
+
+.profile-quick-access .details {
+    width: 100%;
+    padding: 10px 0 15px;
+    text-align: center;
+}
+
+.profile-quick-access ul {
+    width: 100%;
+    display: flex;
+    border-top: 1px solid #e4ebf4;
+}
+
+.profile-quick-access ul li {
+    width: 33.33%;
+    text-align: center;
+    border-left: 1px solid #e4ebf4;
+}
+
+.profile-quick-access ul li a {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.navbar-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    object-fit: cover;
+    outline: 1px solid #eaf1f2;
+    outline-offset: 2px;
 }

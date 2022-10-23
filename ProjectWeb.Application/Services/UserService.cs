@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectWeb.Application.Generators;
@@ -9,6 +10,8 @@ using ProjectWeb.Application.Statics;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models.Account;
 using ProjectWeb.Domain.ViewModels.Account;
+using ProjectWeb.Application.Extensions;
+using ProjectWeb.Domain.ViewModels.UserPanel.Account;
 
 namespace ProjectWeb.Application.Interfaces
 {
@@ -51,11 +54,9 @@ namespace ProjectWeb.Application.Interfaces
 
             #region Send Activation Code
 
-            var userEmail = user.Email.Split("@")[0];
-
             var body = @$"
                 <div style='direction: rtl; font-size: 18px;'>
-                    <h3>{userEmail} عزیز،</h3>
+                    <h3>{user.GetUserDisplayName()} عزیز،</h3>
                     <p>ثبت نام شما با موفقیت انجام شد.</p>
                     <div>برای دسترسی به سایت و فعال سازی حساب کاربری خود روی لینک زیر بزنید : </div>
                     <a style='background-color: green; color: white; display:block; padding: 10px 0; text-decoration: none; border-radius: 15px; width:100%; text-align: center; margin-top: 15px;' 
@@ -127,11 +128,9 @@ namespace ProjectWeb.Application.Interfaces
 
             #region Send Email
 
-            var userEmail = user.Email.Split("@")[0];
-
             var body = @$"
                 <div style='direction: rtl; font-size: 18px;'>
-                    <h3>{userEmail} عزیز ،</h3>
+                    <h3>{user.GetUserDisplayName()} عزیز ،</h3>
                     <div>برای بازیابی کلمه عبور خود روی لینک زیر بزنید : </div>
                     <a style='background-color: green; color: white; display:block; padding: 10px 0; text-decoration: none; border-radius: 15px; width:100%; text-align: center; margin-top: 15px;'
                         href='{PathTools.SiteAddress}/Reset-Password/{user.ActivationCode}'>بازیابی کلمه عبور</a>
@@ -169,6 +168,91 @@ namespace ProjectWeb.Application.Interfaces
         public async Task<User> GetUserByActivationCode(string activationCode)
         {
             return await _userRepository.GetUserByActivationCode(activationCode);
+        }
+
+        #endregion
+
+        #region User Panel
+
+        public async Task<User> GetUserById(long userId)
+        {
+            return await _userRepository.GetUserById(userId);
+        }
+
+        public async Task ChangeUserAvatar(long userId, string fileName)
+        {
+            var user = await GetUserById(userId);
+
+            user.Avatar = fileName;
+            await _userRepository.UpdateUser(user);
+            await _userRepository.Save();
+        }
+
+        public async Task<EditUserViewModel> FillEditUserViewModel(long userId)
+        {
+            var user = await GetUserById(userId);
+
+            var result = new EditUserViewModel()
+            {
+                BirthDate = user.BirthDate != null ? user.BirthDate.Value.ToShamsi() : string.Empty,
+                FirstName = user.FirstName ?? string.Empty,
+                LastName = user.LastName ?? string.Empty,
+                PhoneNumber = user.PhoneNumber ?? string.Empty,
+                Description = user.Description ?? string.Empty,
+                CityId = user.CityId,
+                CountryId = user.CountryId
+            };
+
+            return result;
+        }
+
+        public async Task<EditUserResult> EditUser(long userId, EditUserViewModel model)
+        {
+            var user = await GetUserById(userId);
+
+            if (!string.IsNullOrEmpty(model.BirthDate.SanitizeText()))
+            {
+                try
+                {
+                    var date = model.BirthDate.SanitizeText().ToMiladi();
+                    user.BirthDate = date;
+                }
+                catch
+                {
+                    return EditUserResult.NotValidDate;
+                }
+            }
+
+            user.FirstName = model.FirstName.SanitizeText();
+            user.LastName = model.LastName.SanitizeText();
+            user.PhoneNumber = model.PhoneNumber.SanitizeText() ?? string.Empty;
+            user.Description = model.Description.SanitizeText() ?? string.Empty;
+            user.CountryId = model.CountryId;
+            user.CityId = model.CityId;
+
+            await _userRepository.UpdateUser(user);
+            await _userRepository.Save();
+
+            return EditUserResult.Success;
+        }
+
+        public async Task<ChangePasswordResult> ChangePassword(long userId, ChangePasswordViewModel model)
+        {
+            var user = await GetUserById(userId);
+
+            var password = PasswordHelper.EncodePasswordMd5(model.OldPassword.SanitizeText());
+
+            if (password != user.Password)
+            {
+                return ChangePasswordResult.PasswordNotValid;
+            }
+
+            user.Password = PasswordHelper.EncodePasswordMd5(model.Password.SanitizeText());
+
+            await _userRepository.UpdateUser(user);
+            await _userRepository.Save();
+
+            return ChangePasswordResult.Success;
         }
 
         #endregion

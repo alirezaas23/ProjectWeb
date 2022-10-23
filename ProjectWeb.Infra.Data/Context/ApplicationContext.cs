@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Domain.Models.Account;
+using ProjectWeb.Domain.Models.Location;
 using ProjectWeb.Domain.Models.SiteSetting;
 
 namespace ProjectWeb.Infra.Data.Context
@@ -19,6 +20,7 @@ namespace ProjectWeb.Infra.Data.Context
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<EmailSetting> EmailSettings { get; set; }
+        public DbSet<State> States { get; set; }
 
         #endregion
 

@@ -14,5 +14,6 @@ namespace ProjectWeb.Domain.Interfaces
         Task<User> GetUserByActivationCode(string activationCode);
         Task UpdateUser(User user);
         Task<User> GetUserByEmail(string email);
+        Task<User> GetUserById(long userId);
     }
 }

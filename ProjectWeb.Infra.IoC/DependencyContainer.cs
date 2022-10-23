@@ -19,6 +19,7 @@ namespace ProjectWeb.Infra.IoC
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUploadFileInterface, UploadFileService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IStateService, StateService>();
 
             #endregion
 
@@ -30,6 +31,7 @@ namespace ProjectWeb.Infra.IoC
             services.AddScoped<IWebProductRepository, WebProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISiteSettingRepository, SiteSettingRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
 
             #endregion
         }
