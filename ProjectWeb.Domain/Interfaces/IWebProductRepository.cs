@@ -8,10 +8,10 @@ namespace ProjectWeb.Domain.Interfaces
     {
         Task AddWebProduct(WebProduct webProduct);
         Task SaveChanges();
-        IEnumerable<WebProduct> WebProductsList();
-        WebProduct FindById(int id);
-        void DeleteProduct(int id);
-        void EditProduct(WebProduct webProduct);
-        int ProductsCount();
+        Task<List<WebProduct>> WebProductsList();
+        Task<WebProduct> FindById(long productId);
+        Task DeleteProduct(long productId);
+        Task EditProduct(WebProduct webProduct);
+        Task<int> ProductsCount();
     }
 }

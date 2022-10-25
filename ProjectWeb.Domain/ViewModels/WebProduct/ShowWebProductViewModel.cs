@@ -3,9 +3,9 @@ using ProjectWeb.Domain.ViewModels.Common;
 
 namespace ProjectWeb.Domain.ViewModels.WebProduct
 {
-    public class ShowWebProductViewModel : GoogleReCaptchaViewModel
+    public class ShowWebProductViewModel
     {
-        public int WebProductID { get; set; }
+        public long WebProductId { get; set; }
         public string WebProductImage { get; set; }
         public string WebProductName { get; set; }
         public long WebProductPrice { get; set; }

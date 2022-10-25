@@ -5,7 +5,7 @@ namespace ProjectWeb.Domain.ViewModels.WebProduct
 {
     public class EditWebProductViewModel
     {
-        public int WebProductID { get; set; }
+        public long WebProductId { get; set; }
 
         [Display(Name = "تصویر جدید محصول")]
         public IFormFile WebProductImage { get; set; }
@@ -25,7 +25,6 @@ namespace ProjectWeb.Domain.ViewModels.WebProduct
         [Required(ErrorMessage = "لطفا توضیحات را وارد کنید")]
         [Display(Name = "توضیحات محصول وب")]
         [DataType(DataType.MultilineText)]
-        //[AllowHtml]
         public string WebProductDescription { get; set; }
 
         [Required(ErrorMessage = "لطفا زمان تحویل را وارد کنید")]

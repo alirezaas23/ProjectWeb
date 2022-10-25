@@ -76,11 +76,11 @@
                 foreach (var items in detail)
                 {
                     var product = WebProductInterface.FindById(items.WebProductId);
-                    <div class="small">
+                    @*<div class="small">
                         <a asp-controller="WebProduct" asp-action="WebProductInfo" asp-route-id="@product.WebProductID" class="text-hover">
                             - <span class="font-weight-bold">@product.WebProductName</span> (@items.WebType) - @items.Description
                         </a>
-                    </div>
+                    </div>*@
                 }
             }
         </div>

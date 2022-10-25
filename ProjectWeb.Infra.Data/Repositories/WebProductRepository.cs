@@ -4,6 +4,7 @@ using ProjectWeb.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {
@@ -21,36 +22,25 @@ namespace ProjectWeb.Infra.Data.Repositories
             await _ctx.WebProducts.AddAsync(webProduct);
         }
 
-        public void DeleteProduct(int id)
+        public async Task DeleteProduct(long productId)
         {
-            var product = FindById(id);
-            _ctx.WebProducts.Remove(product);
-            SaveChanges();
+            var product = await FindById(productId);
+            product.IsDelete = true;
         }
 
-        public void EditProduct(WebProduct webProduct)
+        public async Task EditProduct(WebProduct webProduct)
         {
-            var product = FindById(webProduct.WebProductID);
-            product.WebProductID = webProduct.WebProductID;
-            product.WebProductDeliverDate = webProduct.WebProductDeliverDate;
-            product.WebProductDescription = webProduct.WebProductDescription;
-            if (webProduct.WebProductImage != null && webProduct.WebProductImage != "")
-            {
-                product.WebProductImage = webProduct.WebProductImage;
-            }
-            product.WebProductName = webProduct.WebProductName;
-            product.WebProductPrice = webProduct.WebProductPrice;
-            SaveChanges();
+            _ctx.Update(webProduct);
         }
 
-        public WebProduct FindById(int id)
+        public async Task<WebProduct> FindById(long productId)
         {
-            return _ctx.WebProducts.Find(id);
+            return await _ctx.WebProducts.SingleOrDefaultAsync(w => w.Id.Equals(productId) && !w.IsDelete);
         }
 
-        public int ProductsCount()
+        public async Task<int> ProductsCount()
         {
-            return _ctx.WebProducts.Count();
+            return await _ctx.WebProducts.CountAsync();
         }
 
         public async Task SaveChanges()
@@ -58,9 +48,9 @@ namespace ProjectWeb.Infra.Data.Repositories
             await _ctx.SaveChangesAsync();
         }
 
-        public IEnumerable<WebProduct> WebProductsList()
+        public async Task<List<WebProduct>> WebProductsList()
         {
-            return _ctx.WebProducts;
+            return await _ctx.WebProducts.Where(w => !w.IsDelete).ToListAsync();
         }
     }
 }

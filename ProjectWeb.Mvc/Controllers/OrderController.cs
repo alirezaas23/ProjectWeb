@@ -36,68 +36,63 @@ namespace ProjectWeb.Mvc.Controllers
         #region Add To Basket
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToBasket(ShowWebProductViewModel model)
-        {
-            if (!await _captchaValidator.IsCaptchaPassedAsync(model.Captcha))
-            {
-                TempData[ErrorMessage] = "اعتبار سنجی Captcha موفق نبود. لطفا دوباره تلاش کنید.";
-                return RedirectToAction("WebProductInfo", "WebProduct", new{ id = model.WebProductID});
-            }
-
-            PersianCalendar calendar = new PersianCalendar();
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var order = _orderInterface.IsOrderInUse(userId);
-            if (order == null)
-            {
-                order = new Order()
-                {
-                    FinalyPay = false,
-                    IsFinally = false,
-                    Sum = 0,
-                    OrderDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
-                                    + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
-                    UserId = userId,
-                };
-                _orderInterface.AddOrder(order);
-                var orderDetail = new OrderDetail()
-                {
-                    Count = 1,
-                    OrderId = order.OrderId,
-                    Price = ((int)_webProductInterface.FindById(model.WebProductID).WebProductPrice),
-                    WebProductId = model.WebProductID,
-                    Order = order,
-                    WebType = model.WebType,
-                    Description = model.Description
-                };
-                _orderDetailInterface.AddOrderDetail(orderDetail);
-            }
-            else
-            {
-                var detail = _orderDetailInterface.IsProductInUse(order.OrderId, model.WebProductID);
-                if (detail == null)
-                {
-                    var orderDetail = new OrderDetail()
-                    {
-                        Count = 1,
-                        OrderId = order.OrderId,
-                        Price = ((int)_webProductInterface.FindById(model.WebProductID).WebProductPrice),
-                        WebProductId = model.WebProductID,
-                        Order = order,
-                        WebType = model.WebType,
-                        Description = model.Description
-                    };
-                    _orderDetailInterface.AddOrderDetail(orderDetail);
-                }
-                else
-                {
-                    TempData[ErrorMessage] = "شما این پروژه را در سبد خرید خود دارید. بعد از پرداخت نهایی دوباره اقدام کنید.";
-                    return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
-                }
-            }
-            _orderInterface.UpdateSum(order.OrderId);
-            TempData[SuccessMessage] = "محصول به سبد خرید اضافه شد!";
-            return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductID });
-        }
+        //public async Task<IActionResult> AddToBasket(ShowWebProductViewModel model)
+        //{
+        // 
+        //    PersianCalendar calendar = new PersianCalendar();
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var order = _orderInterface.IsOrderInUse(userId);
+        //    if (order == null)
+        //    {
+        //        order = new Order()
+        //        {
+        //            FinalyPay = false,
+        //            IsFinally = false,
+        //            Sum = 0,
+        //            OrderDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
+        //                            + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
+        //            //UserId = userId,
+        //        };
+        //        _orderInterface.AddOrder(order);
+        //        var orderDetail = new OrderDetail()
+        //        {
+        //            Count = 1,
+        //            OrderId = order.OrderId,
+        //            Price = ((int)_webProductInterface.FindById(model.WebProductId).WebProductPrice),
+        //            WebProductId = model.WebProductId,
+        //            Order = order,
+        //            WebType = model.WebType,
+        //            Description = model.Description
+        //        };
+        //        _orderDetailInterface.AddOrderDetail(orderDetail);
+        //    }
+        //    else
+        //    {
+        //        var detail = _orderDetailInterface.IsProductInUse(order.OrderId, model.WebProductId);
+        //        if (detail == null)
+        //        {
+        //            var orderDetail = new OrderDetail()
+        //            {
+        //                Count = 1,
+        //                OrderId = order.OrderId,
+        //                Price = ((int)_webProductInterface.FindById(model.WebProductId).WebProductPrice),
+        //                WebProductId = model.WebProductId,
+        //                Order = order,
+        //                WebType = model.WebType,
+        //                Description = model.Description
+        //            };
+        //            _orderDetailInterface.AddOrderDetail(orderDetail);
+        //        }
+        //        else
+        //        {
+        //            TempData[ErrorMessage] = "شما این پروژه را در سبد خرید خود دارید. بعد از پرداخت نهایی دوباره اقدام کنید.";
+        //            return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
+        //        }
+        //    }
+        //    _orderInterface.UpdateSum(order.OrderId);
+        //    TempData[SuccessMessage] = "محصول به سبد خرید اضافه شد!";
+        //    return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
+        //}
 
         #endregion
 

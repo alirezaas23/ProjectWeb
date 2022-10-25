@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using ProjectWeb.Domain.Models.Common;
 
 namespace ProjectWeb.Domain.Models
 {
-    public class WebProduct
+    public class WebProduct : BaseEntity
     {
-        public int WebProductID { get; set; }
         public string WebProductImage { get; set; }
         public string WebProductName { get; set; }
         public long WebProductPrice { get; set; }

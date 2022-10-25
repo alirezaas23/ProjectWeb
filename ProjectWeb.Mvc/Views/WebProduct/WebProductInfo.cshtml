@@ -7,67 +7,62 @@
 }
 
 <section class="mb-5">
-    <div class="row">
-        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-            <img src="@PathTools.ProductImagePath@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" />
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="card custom-box-shadow">
-                <div class="card-body">
-                    <h4 class="font-weight-bold">
-                        @Model.WebProductName
-                    </h4>
-                    <p class="text-muted">
-                        <i class="fas fa-dollar-sign"></i>
-                        @Model.WebProductPrice تومان
-                    </p>
-                    <p class="text-muted">
-                        @Html.Raw(Model.WebProductDescription)
-                    </p>
-                    <form class="mt-5" asp-controller="Order" asp-action="AddToBasket">
-                        <input type="hidden" asp-for="Captcha"/>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                <img src="@PathTools.ProductImagePath@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" />
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card custom-box-shadow">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold">
+                            @Model.WebProductName
+                        </h4>
+                        <p class="text-muted">
+                            <i class="fas fa-dollar-sign"></i>
+                            @Model.WebProductPrice تومان
+                        </p>
+                        <p class="text-muted">
+                            @Html.Raw(Model.WebProductDescription)
+                        </p>
+                        <form class="mt-5" asp-controller="Order" asp-action="AddToBasket">
 
-                        <div class="form-group">
-                            <select asp-for="WebType" class="form-control input-custom">
-                                <option value="">-- انتخاب نوع سایت --</option>
-                                <option value="فروشگاهی">سایت فروشگاهی</option>
-                                <option value="اطلاع رسانی">سایت اطلاع رسانی</option>
-                                <option value="خبری">سایت خبری</option>
-                            </select>
-                            <span asp-validation-for="WebType" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>توضیحات</label>
-                            <textarea asp-for="Description" class="form-control input-custom"></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-                        <input type="hidden" asp-for="WebProductID"/>
-                        <div class="position-relative">
-                            <button class="btn btn-edit text-right">
+                            <div class="form-group">
+                                <select asp-for="WebType" class="form-control input-custom">
+                                    <option value="">-- انتخاب نوع سایت --</option>
+                                    <option value="فروشگاهی">سایت فروشگاهی</option>
+                                    <option value="اطلاع رسانی">سایت اطلاع رسانی</option>
+                                    <option value="خبری">سایت خبری</option>
+                                </select>
+                                <span asp-validation-for="WebType" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>توضیحات</label>
+                                <textarea asp-for="Description" class="form-control input-custom"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <input type="hidden" asp-for="WebProductId" />
+                            <button class="btn btn-edit">
                                 افزودن به سبد خرید
                             </button>
-                            <i class="fas fa-shopping-cart icon-for-btn"></i>
-                        </div>
-                    </form>
-                    <hr />
-                    <p class="small text-muted">
-                        <i class="fas fa-info-circle"></i>
-                        در صورت داشتن هر گونه سوال در سفارش، از <a asp-controller="Ticket" asp-action="SendTicket" class="font-weight-bold text-hover">این</a> قسمت با ما در ارتباط باشید.
-                    </p>
+                        </form>
+                        <hr />
+                        <p class="small text-muted">
+                            <i class="fas fa-info-circle"></i>
+                            در صورت داشتن هر گونه سوال در سفارش، از <a asp-controller="Ticket" asp-action="SendTicket" class="font-weight-bold text-hover">این</a> قسمت با ما در ارتباط باشید.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<section>
-    <p class="mt-5 my-p">
-        محصولات مشابه
-    </p>
-    @await Component.InvokeAsync("WebProduct")
+        <p class="mt-5 my-p">
+            محصولات مشابه
+        </p>
+        @await Component.InvokeAsync("WebProduct")
+    </div>
 </section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
-    <partial name="_GoogleReCaptcha"/>
 }

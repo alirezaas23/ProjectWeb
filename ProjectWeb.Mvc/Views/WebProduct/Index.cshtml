@@ -38,11 +38,11 @@
                                 <td>@product.WebProductName</td>
                                 <td>@product.WebProductPrice</td>
                                 <td class="small">
-                                    <a asp-controller="WebProduct" asp-action="DeleteProduct" asp-route-id="@product.WebProductID" class="text-hover">
+                                    <a asp-controller="WebProduct" asp-action="DeleteProduct" asp-route-productId="@product.Id" class="text-hover">
                                         حذف محصول
                                     </a>
                                     /
-                                    <a asp-controller="WebProduct" asp-action="EditProduct" asp-route-id="@product.WebProductID" class="text-hover">
+                                    <a asp-controller="WebProduct" asp-action="EditProduct" asp-route-productId="@product.Id" class="text-hover">
                                         ویرایش محصول
                                     </a>
                                 </td>

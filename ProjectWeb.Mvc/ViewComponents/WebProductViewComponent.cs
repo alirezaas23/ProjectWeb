@@ -15,8 +15,8 @@ namespace ProjectWeb.Mvc.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var product = _webProductRepository.WebProductsList();
-            return View(product);
+            var product = await _webProductRepository.WebProductsList();
+            return View("WebProduct", product);
         }
     }
 }

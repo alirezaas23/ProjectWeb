@@ -1,6 +1,6 @@
 ﻿@using ProjectWeb.Application.Interfaces
 @inject IWebProductInterface WebProductInterface
-@inject IOrderInterface OrderInterface
+@*@inject IOrderInterface OrderInterface*@
 @{
     ViewData["Title"] = "صفحه مدیریت سایت";
     Layout = "_Layout_Admin";
@@ -36,13 +36,13 @@
                     </a>
                     <div class="custom-circle custom-box-shadow">
                         <span>
-                            @WebProductInterface.ProductsCount()
+                            @await WebProductInterface.ProductsCount()
                         </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-4 mt-3 mt-sm-0">
+        @*<div class="col-12 col-md-4 mt-3 mt-sm-0">
             <div class="card custom-box-shadow">
                 <div class="card-body text-center">
                     <img src="~/imgs/logistics-100.png" alt="users-icon" />
@@ -58,10 +58,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 
-    <div class="row mt-3">
+    @*<div class="row mt-3">
         <div class="col-12">
             <div class="card custom-box-shadow text-center">
                 <div class="card-body">
@@ -89,6 +89,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </section>
 

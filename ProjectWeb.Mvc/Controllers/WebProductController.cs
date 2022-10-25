@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Extensions;
 using ProjectWeb.Application.Interfaces;
@@ -9,7 +8,6 @@ using ProjectWeb.Domain.ViewModels.WebProduct;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
@@ -17,18 +15,17 @@ namespace ProjectWeb.Mvc.Controllers
     public class WebProductController : BaseController
     {
         private readonly IWebProductInterface _webProductInterface;
-        private readonly IUploadFileInterface _uploadFileInterface;
 
         public WebProductController(IWebProductInterface webProductInterface, IUploadFileInterface uploadFileInterface)
         {
             _webProductInterface = webProductInterface;
-            _uploadFileInterface = uploadFileInterface;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var webProducts = _webProductInterface.WebProductsList();
+            var webProducts = await _webProductInterface.WebProductsList();
+
             return View(webProducts);
         }
 
@@ -47,7 +44,8 @@ namespace ProjectWeb.Mvc.Controllers
             {
                 ".png",
                 ".jpg",
-                ".jpeg"
+                ".jpeg",
+                ".webp"
             };
 
             var result = model.WebProductImage.UploadFile(fileName, PathTools.ProductImageServerPath, validFormats);
@@ -58,85 +56,104 @@ namespace ProjectWeb.Mvc.Controllers
             }
 
             await _webProductInterface.AddWebProduct(model, fileName);
+
             TempData[SuccessMessage] = "محصول جدید با موفقیت ثبت شد.";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "WebProduct");
         }
 
         [HttpGet]
-        public IActionResult DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(long productId)
         {
-            var product = _webProductInterface.FindById(id);
+            var product = await _webProductInterface.FindById(productId);
+
             var modelProduct = new ShowWebProductViewModel()
             {
                 WebProductDeliverDate = product.WebProductDeliverDate,
                 WebProductDescription = product.WebProductDescription,
-                WebProductID = product.WebProductID,
+                WebProductId = product.Id,
                 WebProductImage = product.WebProductImage,
                 WebProductName = product.WebProductName,
                 WebProductPrice = product.WebProductPrice
             };
+
             return View(modelProduct);
         }
 
         [HttpPost, ValidateAntiForgeryToken, ActionName("DeleteProduct")]
-        public IActionResult DeleteProductPost(int id)
+        public async Task<IActionResult> DeleteProductPost(int id)
         {
-            _webProductInterface.DeleteProduct(id);
+            await _webProductInterface.DeleteProduct(id);
+
             TempData[SuccessMessage] = "محصول مورد نظر با موفقیت حذف شد.";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "WebProduct");
         }
 
         [HttpGet]
-        public IActionResult EditProduct(int id)
+        public async Task<IActionResult> EditProduct(long productId)
         {
-            var product = _webProductInterface.FindById(id);
+            var product = await _webProductInterface.FindById(productId);
+
             var productModel = new EditWebProductViewModel()
             {
                 ImageUrl = product.WebProductImage,
                 WebProductDeliverDate = product.WebProductDeliverDate,
                 WebProductDescription = product.WebProductDescription,
-                WebProductID = product.WebProductID,
+                WebProductId = product.Id,
                 WebProductName = product.WebProductName,
                 WebProductPrice = product.WebProductPrice
             };
+
             return View(productModel);
         }
+
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult EditProduct(EditWebProductViewModel model)
+        public async Task<IActionResult> EditProduct(EditWebProductViewModel model)
         {
-            var product = new WebProduct();
-            product.WebProductDeliverDate = model.WebProductDeliverDate;
-            product.WebProductDescription = model.WebProductDescription;
-            product.WebProductID = model.WebProductID;
-            product.WebProductImage = _uploadFileInterface.uploadPhoto(model.WebProductImage);
-            product.WebProductName = model.WebProductName;
-            product.WebProductPrice = model.WebProductPrice;
-            _webProductInterface.EditProduct(product);
+            var fileName = "";
+
+            if (model.WebProductImage != null)
+            {
+                var validFormat = new List<string>()
+                {
+                    ".png",
+                    ".jpeg",
+                    ".jpg",
+                    ".webp"
+                };
+
+                fileName = Guid.NewGuid() + Path.GetExtension(model.WebProductImage.FileName);
+                var result = model.WebProductImage.UploadFile(fileName, PathTools.ProductImageServerPath, validFormat);
+
+                if (!result)
+                {
+                    TempData[ErrorMessage] = "فرمت عکس وارد شده معتبر نمی باشد.";
+                    return View(model);
+                }
+            }
+
+            await _webProductInterface.EditProduct(model, fileName);
+
             TempData[SuccessMessage] = "محصول مورد نظر با موفقیت ویرایش شد.";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "WebProduct");
         }
 
-        //[HttpGet]
-        //[Authorize]
-        //public async Task<IActionResult> WebProductInfo(int id)
-        //{
-        //    ViewBag.Message = TempData["Message"];
-        //    var product = _webProductInterface.FindById(id);
-        //    var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-        //    if (user.AccountConfirm == false)
-        //    {
-        //        return RedirectToAction("AccountConfirm", "Account", new { userId = user.Id, productId = id });
-        //    }
-        //    var productModel = new ShowWebProductViewModel()
-        //    {
-        //        WebProductDeliverDate = product.WebProductDeliverDate,
-        //        WebProductDescription = product.WebProductDescription,
-        //        WebProductID = product.WebProductID,
-        //        WebProductImage = product.WebProductImage,
-        //        WebProductName = product.WebProductName,
-        //        WebProductPrice = product.WebProductPrice,
-        //    };
-        //    return View(productModel);
-        //}
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> WebProductInfo(long productId)
+        {
+            var product = await _webProductInterface.FindById(productId);
+
+            var productModel = new ShowWebProductViewModel()
+            {
+                WebProductDeliverDate = product.WebProductDeliverDate,
+                WebProductDescription = product.WebProductDescription,
+                WebProductId = product.Id,
+                WebProductImage = product.WebProductImage,
+                WebProductName = product.WebProductName,
+                WebProductPrice = product.WebProductPrice,
+            };
+
+            return View(productModel);
+        }
     }
 }
