@@ -17,12 +17,10 @@ namespace ProjectWeb.Application.Services
         #region Ctor
 
         private readonly IWebProductRepository _webProductRepository;
-        private readonly IUploadFileInterface _uploadFileInterface;
 
         public WebProductService(IWebProductRepository webProductRepository, IUploadFileInterface uploadFileInterface)
         {
             _webProductRepository = webProductRepository;
-            _uploadFileInterface = uploadFileInterface;
         }
 
         #endregion

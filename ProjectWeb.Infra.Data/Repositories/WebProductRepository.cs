@@ -10,16 +10,20 @@ namespace ProjectWeb.Infra.Data.Repositories
 {
     public class WebProductRepository : IWebProductRepository
     {
-        private readonly ApplicationContext _ctx;
+        #region Ctor
+
+        private readonly ApplicationContext _context;
 
         public WebProductRepository(ApplicationContext ctx)
         {
-            _ctx = ctx;
+            _context = ctx;
         }
+
+        #endregion
 
         public async Task AddWebProduct(WebProduct webProduct)
         {
-            await _ctx.WebProducts.AddAsync(webProduct);
+            await _context.WebProducts.AddAsync(webProduct);
         }
 
         public async Task DeleteProduct(long productId)
@@ -28,29 +32,30 @@ namespace ProjectWeb.Infra.Data.Repositories
             product.IsDelete = true;
         }
 
-        public async Task EditProduct(WebProduct webProduct)
+        public Task EditProduct(WebProduct webProduct)
         {
-            _ctx.Update(webProduct);
+            _context.Update(webProduct);
+            return Task.CompletedTask;
         }
 
         public async Task<WebProduct> FindById(long productId)
         {
-            return await _ctx.WebProducts.SingleOrDefaultAsync(w => w.Id.Equals(productId) && !w.IsDelete);
+            return await _context.WebProducts.SingleOrDefaultAsync(w => w.Id.Equals(productId) && !w.IsDelete);
         }
 
         public async Task<int> ProductsCount()
         {
-            return await _ctx.WebProducts.CountAsync();
+            return await _context.WebProducts.CountAsync();
         }
 
         public async Task SaveChanges()
         {
-            await _ctx.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<WebProduct>> WebProductsList()
         {
-            return await _ctx.WebProducts.Where(w => !w.IsDelete).ToListAsync();
+            return await _context.WebProducts.Where(w => !w.IsDelete).ToListAsync();
         }
     }
 }
