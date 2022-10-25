@@ -31,42 +31,42 @@ namespace ProjectWeb.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            #region DbContext
+
             services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
             });
-            services.AddDbContext<IdentityContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
-            });
-            services.AddIdentity<UserApp, IdentityRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredUniqueChars = 0;
-            })
-                .AddEntityFrameworkStores<IdentityContext>()
-                .AddDefaultTokenProviders();
+
+            #endregion
+
+            #region Web Mark Up Min
 
             services.AddWebMarkupMin(options =>
-            {
-                options.AllowMinificationInDevelopmentEnvironment = true;
-                options.AllowCompressionInDevelopmentEnvironment = true;
-            })
+                {
+                    options.AllowMinificationInDevelopmentEnvironment = true;
+                    options.AllowCompressionInDevelopmentEnvironment = true;
+                })
                 .AddHtmlMinification()
                 .AddHttpCompression();
 
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    options.ClientId = "495263575838-dnqdt52jvcbsd475o2ej7kramve1s8vn.apps.googleusercontent.com";
-                    options.ClientSecret = "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";
-                });
+            #endregion
+
+            #region Encode
 
             services.AddSingleton<HtmlEncoder>(
                 HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
 
+            #endregion
+
+            #region Captcha
+
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
+
+            #endregion
+
+            #region Authentication
 
             services.AddAuthentication(options =>
             {
@@ -81,7 +81,7 @@ namespace ProjectWeb.Mvc
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
             });
 
-            
+            #endregion
 
             DependencyContainer.RegisterServices(services);
         }

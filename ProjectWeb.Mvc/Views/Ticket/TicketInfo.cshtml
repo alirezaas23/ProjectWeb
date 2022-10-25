@@ -1,7 +1,4 @@
 ﻿@model ProjectWeb.Domain.ViewModels.Ticket.TicketInfoViewModel
-@using Microsoft.AspNetCore.Identity
-@using ProjectWeb.Domain.Models
-@inject UserManager<UserApp> UserManager
 @{
     ViewData["Title"] = "جزییات تیکت " + Model.TicketSubject;
     Layout = "_Layout_Admin";
@@ -9,23 +6,22 @@
 
 <div class="ticket-info">
     @{
-        var user = await UserManager.FindByIdAsync(Model.UserId);
         <p>
             <div class="dropdown" style="z-index: 0;">
                 <i class="far fa-comment-alt" style="font-size: 30px;"></i>
-                <span class="font-weight-bold dropdown-toggle text-hover" data-toggle="dropdown" style="cursor: pointer;">@user.UserName</span>
+                <span class="font-weight-bold dropdown-toggle text-hover" data-toggle="dropdown" style="cursor: pointer;">نام یوزر</span>
                 <div class="dropdown-menu dropdown-menu-right dropdown-no-m">
                     <p class="dropdown-item menu-text-hover">
                         <i class="far fa-user"></i>
-                        @user.FirstName @user.LastName
+                        نام یوزر
                     </p>
                     <p class="dropdown-item menu-text-hover">
                         <i class="far fa-envelope"></i>
-                        @user.Email
+                        ایمیلش
                     </p>
                     <p class="dropdown-item menu-text-hover">
                         <i class="fas fa-phone-alt"></i>
-                        @user.PhoneNumber
+                        شمارش
                     </p>
                 </div>
             </div>

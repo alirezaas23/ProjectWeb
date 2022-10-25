@@ -21,15 +21,11 @@ namespace ProjectWeb.Mvc.Controllers
     {
         #region Ctor
 
-        private readonly UserManager<UserApp> _userManager;
-        private readonly SignInManager<UserApp> _signInManager;
         private readonly ICaptchaValidator _captchaValidator;
         private readonly IUserService _userService;
 
-        public AccountController(UserManager<UserApp> userManager, SignInManager<UserApp> signInManager, ICaptchaValidator captchaValidator, IUserService userService)
+        public AccountController(ICaptchaValidator captchaValidator, IUserService userService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
             _captchaValidator = captchaValidator;
             _userService = userService;
         }
@@ -261,65 +257,6 @@ namespace ProjectWeb.Mvc.Controllers
             }
 
             return View(model);
-        }
-
-        #endregion
-
-        #region Show Profile
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> ShowProfile(string id)
-        {
-            ViewBag.Message = TempData["Message"];
-            var user = await _userManager.FindByIdAsync(id);
-            if (string.IsNullOrEmpty(id)) return NotFound();
-            if (user == null) return NotFound();
-            var userModel = new ShowProfileViewModel()
-            {
-                Email = user.Email,
-                UserId = user.Id,
-                UserName = user.UserName,
-                PhoneNumber = user.PhoneNumber
-            };
-            if (user.PhoneNumber == null)
-            {
-                ViewBag.Warning = "لطفا شماره تماس خود را در قسمت ویرایش حساب ثبت کنید";
-            }
-            return View(userModel);
-        }
-
-        #endregion
-
-        #region Confirm Account
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> AccountConfirm(string userId, int productId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            var userModel = new AccountConfirmViewModel()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                PhoneNumber = user.PhoneNumber,
-                UserId = user.Id,
-                UserName = user.UserName,
-                WebProductId = productId
-            };
-            return View(userModel);
-        }
-
-        [HttpPost, ValidateAntiForgeryToken, ActionName("AccountConfirm")]
-        public async Task<IActionResult> AccountConfirmPost(AccountConfirmViewModel model)
-        {
-            var user = await _userManager.FindByIdAsync(model.UserId);
-            if (user == null) return NotFound();
-            user.AccountConfirm = true;
-            await _userManager.UpdateAsync(user);
-            TempData["Message"] = "حساب کاربری شما تایید شد. با تشکر.";
-            return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
         }
 
         #endregion

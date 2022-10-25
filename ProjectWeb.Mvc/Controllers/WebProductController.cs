@@ -18,17 +18,14 @@ namespace ProjectWeb.Mvc.Controllers
     {
         private readonly IWebProductInterface _webProductInterface;
         private readonly IUploadFileInterface _uploadFileInterface;
-        private readonly UserManager<UserApp> _userManager;
 
-        public WebProductController(IWebProductInterface webProductInterface, IUploadFileInterface uploadFileInterface, UserManager<UserApp> userManager)
+        public WebProductController(IWebProductInterface webProductInterface, IUploadFileInterface uploadFileInterface)
         {
             _webProductInterface = webProductInterface;
             _uploadFileInterface = uploadFileInterface;
-            _userManager = userManager;
         }
 
         [HttpGet]
-        [Authorize(Roles = "ادمین")]
         public IActionResult Index()
         {
             var webProducts = _webProductInterface.WebProductsList();
@@ -36,14 +33,12 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ادمین")]
         public IActionResult AddWebProduct()
         {
             return View();
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        [Authorize(Roles = "ادمین")]
         public async Task<IActionResult> AddWebProduct(AddWebProductViewModel model)
         {
             var fileName = Guid.NewGuid() + Path.GetExtension(model.WebProductImage.FileName);
@@ -68,7 +63,6 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ادمین")]
         public IActionResult DeleteProduct(int id)
         {
             var product = _webProductInterface.FindById(id);
@@ -85,7 +79,6 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken, ActionName("DeleteProduct")]
-        [Authorize(Roles = "ادمین")]
         public IActionResult DeleteProductPost(int id)
         {
             _webProductInterface.DeleteProduct(id);
@@ -94,7 +87,6 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ادمین")]
         public IActionResult EditProduct(int id)
         {
             var product = _webProductInterface.FindById(id);
@@ -110,7 +102,6 @@ namespace ProjectWeb.Mvc.Controllers
             return View(productModel);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        [Authorize(Roles = "ادمین")]
         public IActionResult EditProduct(EditWebProductViewModel model)
         {
             var product = new WebProduct();
@@ -125,27 +116,27 @@ namespace ProjectWeb.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> WebProductInfo(int id)
-        {
-            ViewBag.Message = TempData["Message"];
-            var product = _webProductInterface.FindById(id);
-            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            if (user.AccountConfirm == false)
-            {
-                return RedirectToAction("AccountConfirm", "Account", new { userId = user.Id, productId = id });
-            }
-            var productModel = new ShowWebProductViewModel()
-            {
-                WebProductDeliverDate = product.WebProductDeliverDate,
-                WebProductDescription = product.WebProductDescription,
-                WebProductID = product.WebProductID,
-                WebProductImage = product.WebProductImage,
-                WebProductName = product.WebProductName,
-                WebProductPrice = product.WebProductPrice,
-            };
-            return View(productModel);
-        }
+        //[HttpGet]
+        //[Authorize]
+        //public async Task<IActionResult> WebProductInfo(int id)
+        //{
+        //    ViewBag.Message = TempData["Message"];
+        //    var product = _webProductInterface.FindById(id);
+        //    var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        //    if (user.AccountConfirm == false)
+        //    {
+        //        return RedirectToAction("AccountConfirm", "Account", new { userId = user.Id, productId = id });
+        //    }
+        //    var productModel = new ShowWebProductViewModel()
+        //    {
+        //        WebProductDeliverDate = product.WebProductDeliverDate,
+        //        WebProductDescription = product.WebProductDescription,
+        //        WebProductID = product.WebProductID,
+        //        WebProductImage = product.WebProductImage,
+        //        WebProductName = product.WebProductName,
+        //        WebProductPrice = product.WebProductPrice,
+        //    };
+        //    return View(productModel);
+        //}
     }
 }

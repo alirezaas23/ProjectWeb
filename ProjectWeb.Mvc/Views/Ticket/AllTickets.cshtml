@@ -1,6 +1,4 @@
 ﻿@model IEnumerable<ProjectWeb.Domain.Models.Ticket>
-@using Microsoft.AspNetCore.Identity
-@inject UserManager<ProjectWeb.Domain.Models.UserApp> UserManager
 @{
     ViewData["Title"] = "لیست تیکت ها";
     Layout = "_Layout_Admin";
@@ -55,11 +53,10 @@
                                 @ticket.TicketSubject
                             </p>
                             @{
-                                var user = await UserManager.FindByIdAsync(ticket.UserId);
                                 <p>
                                     <i class="far fa-user"></i>
                                     <span class="font-weight-bold">فرستنده :</span>
-                                    @user.UserName
+                                    نام یوزر اینجا قرار می گیرد.
                                 </p>
                             }
                         </div>

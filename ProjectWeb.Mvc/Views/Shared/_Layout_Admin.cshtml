@@ -2,8 +2,6 @@
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 @using ProjectWeb.Domain.Models
-@inject SignInManager<UserApp> _signInManager
-@inject UserManager<UserApp> _userManager
 
 <html lang="fa" dir="rtl">
 <head>
@@ -27,11 +25,9 @@
                 <ul>
                     <li>
                         @{
-                            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
                             <div class="dropdown">
                                 <a class="dropdown text-hover" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-caret-down"></i>
-                                    @user.UserName
                                     <img src="~/imgs/icons8-administrator-male-30.png" alt="admin-Icon" class="mr-1" />
                                 </a>
 
@@ -52,11 +48,11 @@
                                         <i class="fas fa-circle small-dot"></i>
                                         مدیریت مقام ها
                                     </a>
-                                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                                    <a asp-controller="Account" asp-action="ShowProfile" class="dropdown-item menu-text-hover">
                                         <i class="fas fa-circle small-dot"></i>
                                         مشاهده حساب کاربری
                                     </a>
-                                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id" class="dropdown-item menu-text-hover">
+                                    <a asp-controller="Account" asp-action="EditAccount" class="dropdown-item menu-text-hover">
                                         <i class="fas fa-circle small-dot"></i>
                                         ویرایش حساب کاربری
                                     </a>
@@ -100,10 +96,10 @@
                     <a asp-controller="ManageRoles" asp-action="Index">مدیریت مقام ها</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="ShowProfile" asp-route-id="@user.Id">مشاهده حساب کاربری</a>
+                    <a asp-controller="Account" asp-action="ShowProfile">مشاهده حساب کاربری</a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">
+                    <a asp-controller="Account" asp-action="EditAccount">
                         ویرایش حساب کاربری
                     </a>
                 </li>

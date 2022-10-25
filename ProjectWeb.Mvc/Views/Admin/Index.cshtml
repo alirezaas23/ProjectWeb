@@ -1,7 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using ProjectWeb.Domain.Models
-@using ProjectWeb.Application.Interfaces
-@inject UserManager<UserApp> UserManager
+﻿@using ProjectWeb.Application.Interfaces
 @inject IWebProductInterface WebProductInterface
 @inject IOrderInterface OrderInterface
 @{
@@ -15,19 +12,16 @@
             <div class="card custom-box-shadow">
                 <div class="card-body text-center">
                     <img src="~/imgs/users-100.png" alt="users-icon" />
-                    <a asp-controller="ManageUsers" asp-action="Index" class="text-hover">
+                    <a class="text-hover">
                         <p class="mt-3">
                             تعداد کاربران
                         </p>
                     </a>
-                    @{
-                        var usersCount = UserManager.Users.Count();
-                        <div class="custom-circle custom-box-shadow ">
-                            <span>
-                                @usersCount
-                            </span>
-                        </div>
-                    }
+                    <div class="custom-circle custom-box-shadow ">
+                        <span>
+                            نداریم
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

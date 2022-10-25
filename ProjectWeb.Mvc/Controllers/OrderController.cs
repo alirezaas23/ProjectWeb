@@ -22,14 +22,12 @@ namespace ProjectWeb.Mvc.Controllers
         private readonly IOrderInterface _orderInterface;
         private readonly IWebProductInterface _webProductInterface;
         private readonly IOrderDetailInterface _orderDetailInterface;
-        private readonly UserManager<UserApp> _userManager;
         private readonly ICaptchaValidator _captchaValidator;
-        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface, IOrderDetailInterface orderDetailInterface, UserManager<UserApp> userManager, ICaptchaValidator captchaValidator)
+        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface, IOrderDetailInterface orderDetailInterface, ICaptchaValidator captchaValidator)
         {
             this._orderInterface = orderInterface;
             this._webProductInterface = webProductInterface;
             this._orderDetailInterface = orderDetailInterface;
-            _userManager = userManager;
             _captchaValidator = captchaValidator;
         }
 
@@ -105,79 +103,79 @@ namespace ProjectWeb.Mvc.Controllers
 
         #region Show Order
 
-        [HttpGet]
-        [Authorize]
-        public IActionResult ShowOrder()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var order = _orderInterface.IsOrderInUse(userId);
-            List<ShowOrderDetailViewModel> list = new List<ShowOrderDetailViewModel>();
-            if (order != null)
-            {
-                var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
-                foreach (var item in detail)
-                {
-                    var product = _webProductInterface.FindById(item.WebProductId);
-                    list.Add(new ShowOrderDetailViewModel()
-                    {
-                        Count = item.Count,
-                        ImageName = product.WebProductImage,
-                        Price = item.Price,
-                        Title = product.WebProductName,
-                        Sum = item.Price * item.Count,
-                        OrderDetailId = item.OrderDetailId,
-                        ProductId = product.WebProductID,
-                        WebType = item.WebType,
-                        Description = item.Description
-                    });
-                }
-            }
-            return View(list);
-        }
+        //[HttpGet]
+        //[Authorize]
+        //public IActionResult ShowOrder()
+        //{
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var order = _orderInterface.IsOrderInUse(userId);
+        //    List<ShowOrderDetailViewModel> list = new List<ShowOrderDetailViewModel>();
+        //    if (order != null)
+        //    {
+        //        var detail = _orderDetailInterface.GetOrderDetails(order.OrderId);
+        //        foreach (var item in detail)
+        //        {
+        //            var product = _webProductInterface.FindById(item.WebProductId);
+        //            list.Add(new ShowOrderDetailViewModel()
+        //            {
+        //                Count = item.Count,
+        //                ImageName = product.WebProductImage,
+        //                Price = item.Price,
+        //                Title = product.WebProductName,
+        //                Sum = item.Price * item.Count,
+        //                OrderDetailId = item.OrderDetailId,
+        //                ProductId = product.WebProductID,
+        //                WebType = item.WebType,
+        //                Description = item.Description
+        //            });
+        //        }
+        //    }
+        //    return View(list);
+        //}
 
         #endregion
 
         #region Remove Order
 
-        public IActionResult RemoveOrder(int id)
-        {
-            _orderDetailInterface.RemoveOrderDetail(id);
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var order = _orderInterface.IsOrderInUse(userId);
-            _orderInterface.UpdateSum(order.OrderId);
-            TempData[SuccessMessage] = "محصول با موفقیت از سبد خرید حذف شد.";
-            return RedirectToAction(nameof(ShowOrder));
-        }
+        //public IActionResult RemoveOrder(int id)
+        //{
+        //    _orderDetailInterface.RemoveOrderDetail(id);
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var order = _orderInterface.IsOrderInUse(userId);
+        //    _orderInterface.UpdateSum(order.OrderId);
+        //    TempData[SuccessMessage] = "محصول با موفقیت از سبد خرید حذف شد.";
+        //    return RedirectToAction(nameof(ShowOrder));
+        //}
 
         #endregion
 
         #region Paymanet
 
-        public IActionResult Payment()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = _userManager.FindByIdAsync(userId);
-            var order = _orderInterface.IsOrderInUse(userId);
-            if (order == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                var payment = new Payment(order.ShouldPaySum);
-                var res =
-                    payment.PaymentRequest($"پرداخت فاکتور شماره {order.OrderId}", "https://localhost:44349/Home/OnlinePayment/" + order.OrderId,
-                        user.Result.Email, user.Result.PhoneNumber);
-                if (res.Result.Status == 100)
-                {
-                    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-        }
+        //public IActionResult Payment()
+        //{
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var user = _userManager.FindByIdAsync(userId);
+        //    var order = _orderInterface.IsOrderInUse(userId);
+        //    if (order == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        var payment = new Payment(order.ShouldPaySum);
+        //        var res =
+        //            payment.PaymentRequest($"پرداخت فاکتور شماره {order.OrderId}", "https://localhost:44349/Home/OnlinePayment/" + order.OrderId,
+        //                user.Result.Email, user.Result.PhoneNumber);
+        //        if (res.Result.Status == 100)
+        //        {
+        //            return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+        //        }
+        //        else
+        //        {
+        //            return NotFound();
+        //        }
+        //    }
+        //}
 
         [HttpGet]
         public IActionResult PaymentError()
@@ -185,60 +183,60 @@ namespace ProjectWeb.Mvc.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult PaymentLeftSum(int orderId)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = _userManager.FindByIdAsync(userId);
-            var order = _orderInterface.FindFinalyOrder(orderId);
-            if (order != null)
-            {
-                var payment = new Payment(order.LeftSum);
-                var res =
-                    payment.PaymentRequest($"پرداخت مبلغ باقی مانده فاکتور {order.OrderId}", "https://localhost:44349/Home/OnlinePaymentLeft/" + order.OrderId,
-                        user.Result.Email, user.Result.PhoneNumber);
-                if (res.Result.Status == 100)
-                {
-                    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //[HttpGet]
+        //public IActionResult PaymentLeftSum(int orderId)
+        //{
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var user = _userManager.FindByIdAsync(userId);
+        //    var order = _orderInterface.FindFinalyOrder(orderId);
+        //    if (order != null)
+        //    {
+        //        var payment = new Payment(order.LeftSum);
+        //        var res =
+        //            payment.PaymentRequest($"پرداخت مبلغ باقی مانده فاکتور {order.OrderId}", "https://localhost:44349/Home/OnlinePaymentLeft/" + order.OrderId,
+        //                user.Result.Email, user.Result.PhoneNumber);
+        //        if (res.Result.Status == 100)
+        //        {
+        //            return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+        //        }
+        //        else
+        //        {
+        //            return NotFound();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
         #endregion
 
         #region My Orders
 
-        [HttpGet]
-        public IActionResult MyOrders(string userId)
-        {
-            var orders = _orderInterface.MyOrders(userId);
-            List<MyOrdersViewModel> list = new List<MyOrdersViewModel>();
-            if (orders != null)
-            {
-                foreach (var item in orders)
-                {
-                    list.Add(new MyOrdersViewModel()
-                    {
-                        LeftSum = item.LeftSum,
-                        OrderDateTime = item.OrderDateTime,
-                        OrderId = item.OrderId,
-                        ShouldPaySum = item.ShouldPaySum,
-                        Sum = item.Sum,
-                        UserId = item.UserId,
-                        FinalyPay = item.FinalyPay
-                    });
-                }
-            }
-            return View(list);
-        }
+        //[HttpGet]
+        //public IActionResult MyOrders(string userId)
+        //{
+        //    var orders = _orderInterface.MyOrders(userId);
+        //    List<MyOrdersViewModel> list = new List<MyOrdersViewModel>();
+        //    if (orders != null)
+        //    {
+        //        foreach (var item in orders)
+        //        {
+        //            list.Add(new MyOrdersViewModel()
+        //            {
+        //                LeftSum = item.LeftSum,
+        //                OrderDateTime = item.OrderDateTime,
+        //                OrderId = item.OrderId,
+        //                ShouldPaySum = item.ShouldPaySum,
+        //                Sum = item.Sum,
+        //                UserId = item.UserId,
+        //                FinalyPay = item.FinalyPay
+        //            });
+        //        }
+        //    }
+        //    return View(list);
+        //}
 
         #endregion
     }

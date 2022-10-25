@@ -1,7 +1,4 @@
 ﻿@model ProjectWeb.Domain.ViewModels.Ticket.TicketInfoViewModel
-@using Microsoft.AspNetCore.Identity
-@using ProjectWeb.Domain.Models
-@inject UserManager<UserApp> UserManager
 @{
     ViewData["Title"] = "حذف تیکت " + Model.TicketSubject;
     Layout = "_Layout_Admin";
@@ -17,17 +14,16 @@
             </div>
             <hr />
             @{
-                var user = await UserManager.FindByIdAsync(Model.UserId);
                 <p>
                     <i class="far fa-user"></i>
                     <span class="font-weight-bold">ارسال کننده :</span>
-                    @user.UserName
+                    نام یوزر
                 </p>
             }
             <p>
                 <i class="far fa-envelope"></i>
                 <span class="font-weight-bold">ایمیل ارسال کننده :</span>
-                @user.Email
+                ایمیل یوزر
             </p>
             <p>
                 <i class="far fa-comment"></i>
