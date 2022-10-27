@@ -4,7 +4,9 @@ using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Domain.ViewModels.Ticket;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ProjectWeb.Application.Extensions;
 
 namespace ProjectWeb.Application.Services
 {
@@ -14,11 +16,13 @@ namespace ProjectWeb.Application.Services
 
         private readonly ITicketRepository _ticketRepository;
         private readonly IEmailService _emailService;
+        private readonly IUserService _userService;
 
-        public TicketService(ITicketRepository ticketRepository, IEmailService emailService)
+        public TicketService(ITicketRepository ticketRepository, IEmailService emailService, IUserService userService)
         {
             _ticketRepository = ticketRepository;
             _emailService = emailService;
+            _userService = userService;
         }
 
         #endregion
@@ -44,6 +48,39 @@ namespace ProjectWeb.Application.Services
                 </div>";
 
             await _emailService.SendEmail("alirezaasgari683@gmail.com", "تیکت جدید", body);
+
+            #region Send Email To User
+
+            var user = await _userService.GetUserById(newTicket.UserId);
+
+            var userBody = @$"
+                    <div style='direction: rtl;font-size:17px;'>
+                    <h3>تیکت جدید ثبت شد.</h3>
+                    <p>تیکت شما با موفقیت ثبت شد.</p>
+                    <div style='margin-top: 15px;'>
+                        <p>
+                            <span style='font-weight: bold;'>موضوع تیکت :</span> 
+                            <span>{newTicket.TicketSubject}</span>
+                        </p>
+                        <p>
+                            <span style='font-weight: bold;'>تاریخ ارسال :</span>  
+                            <span>{newTicket.CreateDateTime.ToShamsi()}</span>
+                        </p>
+
+                        <hr>
+
+                        <p style='font-weight: bold;'>
+                            متن تیکت : 
+                        </p>
+                        <p>
+                            {newTicket.TicketContent}
+                        </p>
+                    </div>
+                </div>";
+
+            await _emailService.SendEmail(user.Email, "تیکت جدید ثبت شد", userBody);
+
+            #endregion
 
             #endregion
         }
