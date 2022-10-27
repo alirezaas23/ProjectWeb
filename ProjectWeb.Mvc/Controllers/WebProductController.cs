@@ -138,22 +138,11 @@ namespace ProjectWeb.Mvc.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> WebProductInfo(long productId)
         {
-            var product = await _webProductInterface.FindById(productId);
+            var result = await _webProductInterface.FillShowWebProductViewModel(productId);
 
-            var productModel = new ShowWebProductViewModel()
-            {
-                WebProductDeliverDate = product.WebProductDeliverDate,
-                WebProductDescription = product.WebProductDescription,
-                WebProductId = product.Id,
-                WebProductImage = product.WebProductImage,
-                WebProductName = product.WebProductName,
-                WebProductPrice = product.WebProductPrice,
-            };
-
-            return View(productModel);
+            return View(result);
         }
     }
 }

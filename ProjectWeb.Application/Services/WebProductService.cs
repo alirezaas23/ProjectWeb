@@ -55,6 +55,21 @@ namespace ProjectWeb.Application.Services
             return await _webProductRepository.ProductsCount();
         }
 
+        public async Task<ShowWebProductViewModel> FillShowWebProductViewModel(long productId)
+        {
+            var product = await _webProductRepository.FindById(productId);
+
+            return new ShowWebProductViewModel()
+            {
+                WebProductImage = product.WebProductImage,
+                WebProductDescription = product.WebProductDescription,
+                WebProductName = product.WebProductName,
+                WebProductPrice = product.WebProductPrice,
+                WebProductDeliverDate = product.WebProductPrice.ToString(),
+                WebProductId = product.Id
+            };
+        }
+
         public async Task AddWebProduct(AddWebProductViewModel model, string fileName)
         {
             var webProduct = new WebProduct()

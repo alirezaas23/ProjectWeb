@@ -13,5 +13,6 @@ namespace ProjectWeb.Application.Interfaces
         Task DeleteProduct(long productId);
         Task EditProduct(EditWebProductViewModel model, string fileName);
         Task<int> ProductsCount();
+        Task<ShowWebProductViewModel> FillShowWebProductViewModel(long productId);
     }
 }
