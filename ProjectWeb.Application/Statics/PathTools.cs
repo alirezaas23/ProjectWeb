@@ -27,5 +27,12 @@ namespace ProjectWeb.Application.Statics
         public static readonly string SiteAddress = "https://localhost:44349";
 
         #endregion
+
+        #region ckeditor
+
+        public static readonly string EditorServerPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/content/ckeditor/");
+        public static readonly string EditorPath = "/content/ckeditor/";
+
+        #endregion
     }
 }

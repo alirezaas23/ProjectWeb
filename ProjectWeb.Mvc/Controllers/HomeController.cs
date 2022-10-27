@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProjectWeb.Application.Extensions;
 using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Application.Statics;
 using ZarinpalSandbox;
 
 namespace ProjectWeb.Mvc.Controllers
@@ -22,12 +27,7 @@ namespace ProjectWeb.Mvc.Controllers
             return View();
         }
 
-        [Authorize]
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        #region Online Payment
 
         public IActionResult OnlinePayment(int id)
         {
@@ -72,5 +72,21 @@ namespace ProjectWeb.Mvc.Controllers
             }
             return RedirectToAction("PaymentError", "Order");
         }
+
+
+        #endregion
+
+        #region Ckeditor
+
+        public IActionResult EditorUploadImage(IFormFile upload)
+        {
+            var fileName = Guid.NewGuid() + upload.FileName;
+
+            upload.UploadFile(fileName, PathTools.EditorServerPath);
+
+            return Json(new{ulr = $"{PathTools.EditorPath}{fileName}"});
+        }
+
+        #endregion
     }
 }

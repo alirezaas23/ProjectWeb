@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ProjectWeb.Application.Extensions
 {
     public static class FileExtensions
     {
-        public static bool UploadFile(this IFormFile file, string fileName, string path, List<string> validFormats)
+        public static bool UploadFile(this IFormFile file, string fileName, string path, List<string>? validFormats = null)
         {
             if (validFormats != null && validFormats.Any())
             {

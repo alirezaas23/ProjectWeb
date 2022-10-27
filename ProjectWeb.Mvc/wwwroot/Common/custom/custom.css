@@ -1,3 +1,7 @@
 ﻿.swal-text {
     text-align: center !important;
 }
+
+.ck-content {
+    min-height: 300px;
+}

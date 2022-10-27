@@ -26,24 +26,11 @@
 
             <div class="form-group mt-2">
                 <label asp-for="TicketContent"></label>
-                <textarea asp-for="TicketContent" id="my-textarea"></textarea>
+                <textarea asp-for="TicketContent" class="editor"></textarea>
                 <span asp-validation-for="TicketContent" class="text-danger"></span>
             </div>
-
+            
             <button type="submit" class="btn btn-edit">ارسال تیکت</button>
         </form>
     </div>
 </div>
-
-@section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="/ckeditor/ckeditor.js"></script>
-    <script src="/ckeditor/adapters/jquery.js"></script>
-    <script>
-        $(function () {
-            $('#my-textarea').ckeditor();
-        });
-    </script>
-
-    <partial name="_GoogleReCaptcha" />
-}
