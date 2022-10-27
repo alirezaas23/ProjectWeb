@@ -6,8 +6,8 @@ namespace ProjectWeb.Domain.Interfaces
 {
     public interface ITicketRepository
     {
-        Task AddTicketAsync(Ticket ticket);
-        Task SaveChangesAsync();
+        Task AddTicket(Ticket ticket);
+        Task SaveChanges();
         IEnumerable<Ticket> GetTickets();
         Ticket SearchById(int id);
         Task DeleteTicketAsync(int id);

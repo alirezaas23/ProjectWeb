@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Common\custom\" />
     <Folder Include="wwwroot\content\product\" />
   </ItemGroup>
 

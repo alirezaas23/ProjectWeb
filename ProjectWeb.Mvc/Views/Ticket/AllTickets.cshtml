@@ -30,11 +30,11 @@
                                 <div class="dropdown">
                                     <i class="fas fa-ellipsis-v dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; font-size: 15px; padding:10px;"></i>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-no-m">
-                                        <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="TicketInfo" asp-route-id="@ticket.TicketId">
+                                        <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="TicketInfo" asp-route-id="@ticket.Id">
                                             <i class="fas fa-circle small-dot"></i>
                                             مشاهده تیکت
                                         </a>
-                                        <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="DeleteTicket" asp-route-id="@ticket.TicketId">
+                                        <a class="dropdown-item menu-text-hover" asp-controller="Ticket" asp-action="DeleteTicket" asp-route-id="@ticket.Id">
                                             <i class="fas fa-circle small-dot"></i>
                                             حذف تیکت
                                         </a>
@@ -45,7 +45,7 @@
                             <p>
                                 <i class="far fa-calendar-alt"></i>
                                 <span class="font-weight-bold">تاریخ ارسال :</span>
-                                @ticket.TicketDateTime
+                                @ticket.CreateDateTime
                             </p>
                             <p>
                                 <i class="fas fa-file-signature"></i>

@@ -53,7 +53,13 @@
                 تغییر کلمه عبور
             </a>
         </li>
-        @if (User.IsInRole("ادمین"))
+        <li class="list-group-item">
+            <a asp-area="UserPanel" asp-controller="Account" asp-action="SendTicket" class="text-hover small-font">
+                <i class="fas fa-circle menu-small-icon"></i>
+                ارسال تیکت
+            </a>
+        </li>
+        @*@if (User.IsInRole("ادمین"))
         {
             <li class="list-group-item">
                 <a asp-controller="Admin" asp-action="Orders" class="text-hover small-font">
@@ -67,34 +73,25 @@
                     مشاهده تیکت ها
                 </a>
             </li>
-        }
-        else
-        {
-            <li class="list-group-item">
-                <a asp-controller="Order" asp-action="ShowOrder" class="text-hover small-font">
-                    <i class="fas fa-circle menu-small-icon"></i>
-                    سبد خرید
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a asp-controller="Order" asp-action="MyOrders" asp-route-userId="@Model.Id" class="text-hover small-font">
-                    <i class="fas fa-circle menu-small-icon"></i>
-                    سفارشات من
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a asp-controller="Ticket" asp-action="SendTicket" class="text-hover small-font">
-                    <i class="fas fa-circle menu-small-icon"></i>
-                    ارسال تیکت
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a asp-controller="Ticket" asp-action="MyTickets" asp-route-userId="@Model.Id" class="text-hover small-font">
-                    <i class="fas fa-circle menu-small-icon"></i>
-                    تیکت های ارسال شده من
-                </a>
-            </li>
-        }
+        }*@
+        @*<li class="list-group-item">
+            <a asp-controller="Order" asp-action="ShowOrder" class="text-hover small-font">
+                <i class="fas fa-circle menu-small-icon"></i>
+                سبد خرید
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="Order" asp-action="MyOrders" asp-route-userId="@Model.Id" class="text-hover small-font">
+                <i class="fas fa-circle menu-small-icon"></i>
+                سفارشات من
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="Ticket" asp-action="MyTickets" asp-route-userId="@Model.Id" class="text-hover small-font">
+                <i class="fas fa-circle menu-small-icon"></i>
+                تیکت های ارسال شده من
+            </a>
+        </li>*@
         <li class="list-group-item">
             <a asp-controller="Account" asp-action="LogOut" class="text-hover small-font">
                 <i class="fas fa-circle menu-small-icon"></i>

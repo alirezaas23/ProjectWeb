@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using ProjectWeb.Application.Extensions;
 using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Domain.ViewModels.Ticket;
 using ProjectWeb.Domain.ViewModels.UserPanel.Account;
 
 namespace ProjectWeb.Mvc.Areas.UserPanel.Controllers
@@ -18,11 +19,13 @@ namespace ProjectWeb.Mvc.Areas.UserPanel.Controllers
 
         private readonly IUserService _userService;
         private readonly IStateService _stateService;
+        private readonly ITicketInterface _ticketInterface;
 
-        public AccountController(IUserService userService, IStateService stateService)
+        public AccountController(IUserService userService, IStateService stateService, ITicketInterface ticketInterface)
         {
             _userService = userService;
             _stateService = stateService;
+            _ticketInterface = ticketInterface;
         }
 
         #endregion
@@ -99,6 +102,33 @@ namespace ProjectWeb.Mvc.Areas.UserPanel.Controllers
                     TempData[ErrorMessage] = "کلمه عبور فعلی وارد شده اشتباه است.";
                     break;
             }
+            return View(model);
+        }
+
+        #endregion
+
+        #region Tickets
+
+        [HttpGet("Send-Ticket")]
+        [Authorize]
+        public IActionResult SendTicket()
+        {
+            return View();
+        }
+
+        [HttpPost("Send-Ticket")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendTicket(SendTicketViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.UserId = HttpContext.User.GetUserId();
+                await _ticketInterface.AddTicket(model);
+
+                TempData[SuccessMessage] = "تیکت شما با موفقیت ارسال شد. پس از بررسی با شما تماس خواهیم گرفت.";
+                return RedirectToAction("SendTicket", "Account", new { area = "UserPanel" });
+            }
+
             return View(model);
         }
 

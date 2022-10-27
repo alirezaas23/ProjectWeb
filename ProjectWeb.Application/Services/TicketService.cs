@@ -10,31 +10,48 @@ namespace ProjectWeb.Application.Services
 {
     public class TicketService : ITicketInterface
     {
-        private readonly ITicketRepository _ticketRepository;
+        #region Ctor
 
-        public TicketService(ITicketRepository ticketRepository)
+        private readonly ITicketRepository _ticketRepository;
+        private readonly IEmailService _emailService;
+
+        public TicketService(ITicketRepository ticketRepository, IEmailService emailService)
         {
             _ticketRepository = ticketRepository;
+            _emailService = emailService;
         }
 
-        public async Task AddTicketAsync(SendTicketViewModel ticket)
+        #endregion
+
+        public async Task AddTicket(SendTicketViewModel ticket)
         {
             var newTicket = new Ticket()
             {
-                TicketSubject = ticket.TicketSubject.SanitizeText(),
-                TicketText = ticket.TicketText.SanitizeText(),
                 UserId = ticket.UserId,
-                TicketDateTime = ticket.TicketDateTime.SanitizeText()
+                TicketContent = ticket.TicketContent.SanitizeText(),
+                TicketSubject = ticket.TicketSubject.SanitizeText()
             };
 
-            await _ticketRepository.AddTicketAsync(newTicket);
-            await _ticketRepository.SaveChangesAsync();
+            await _ticketRepository.AddTicket(newTicket);
+            await _ticketRepository.SaveChanges();
+
+            #region Send Email
+
+            var body = @"
+                <div style='direction: rtl;'>
+                    <h3>تیکت جدید ثبت شد.</h3>
+                    <p>یک تیکت جدید ثبت شد. لطفا در سایت بررسی کنید.</p>
+                </div>";
+
+            await _emailService.SendEmail("alirezaasgari683@gmail.com", "تیکت جدید", body);
+
+            #endregion
         }
 
         public async Task DeleteTicketAsync(int id)
         {
             await _ticketRepository.DeleteTicketAsync(id);
-            await _ticketRepository.SaveChangesAsync();
+            await _ticketRepository.SaveChanges();
         }
 
         public IEnumerable<Ticket> GetTickets()

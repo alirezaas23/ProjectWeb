@@ -52,6 +52,8 @@ namespace ProjectWeb.Domain.Models.Account
         [InverseProperty("UserCities")]
         public State? City { get; set; }
 
+        public ICollection<Ticket>? Tickets { get; set; }
+
         #endregion
     }
 }

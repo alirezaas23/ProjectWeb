@@ -16,7 +16,7 @@ namespace ProjectWeb.Infra.Data.Repositories
             _ctx = ctx;
         }
 
-        public async Task AddTicketAsync(Ticket ticket)
+        public async Task AddTicket(Ticket ticket)
         {
             await _ctx.Tickets.AddAsync(ticket);
         }
@@ -34,10 +34,11 @@ namespace ProjectWeb.Infra.Data.Repositories
 
         public List<Ticket> MyTickets(string userId)
         {
-            return _ctx.Tickets.Where(t => t.UserId == userId).ToList();
+            //return _ctx.Tickets.Where(t => t.UserId == userId).ToList();
+            return null;
         }
 
-        public async Task SaveChangesAsync()
+        public async Task SaveChanges()
         {
             await _ctx.SaveChangesAsync();
         }

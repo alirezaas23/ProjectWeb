@@ -7,7 +7,7 @@ namespace ProjectWeb.Application.Interfaces
 {
     public interface ITicketInterface
     {
-        Task AddTicketAsync(SendTicketViewModel ticket);
+        Task AddTicket(SendTicketViewModel ticket);
         IEnumerable<Ticket> GetTickets();
         Ticket SearchById(int id);
         Task DeleteTicketAsync(int id);
