@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using ProjectWeb.Application.Extensions;
+using ProjectWeb.Application.Statics;
 
 namespace ProjectWeb.Application.Services
 {
@@ -55,7 +56,7 @@ namespace ProjectWeb.Application.Services
             var user = await _userService.GetUserById(newTicket.UserId);
 
             var userBody = @$"
-                    <div style='direction: rtl;font-size:17px;'>
+                <div style='direction: rtl;font-size:17px;'>
                     <h3>تیکت جدید ثبت شد.</h3>
                     <p>تیکت شما با موفقیت ثبت شد.</p>
                     <div style='margin-top: 15px;'>
@@ -76,6 +77,9 @@ namespace ProjectWeb.Application.Services
                         <p>
                             {newTicket.TicketContent}
                         </p>
+                        
+                        <p>برای مشاهده تیکت های خود روی لینک زیر بزنید : </p>
+                        <a href='{PathTools.SiteAddress}/My-Tickets'>تیکت های من</a>
                     </div>
                 </div>";
 
