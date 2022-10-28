@@ -4,6 +4,7 @@ using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Domain.ViewModels.Ticket;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using ProjectWeb.Application.Extensions;
@@ -91,14 +92,22 @@ namespace ProjectWeb.Application.Services
             await _ticketRepository.SaveChanges();
         }
 
+        public async Task<List<MyTicketsViewModel>> UserTickets(long userId)
+        {
+            var userTickets = await _ticketRepository.GetUserTickets(userId);
+
+            return userTickets.Select(u => new MyTicketsViewModel()
+            {
+                TicketContent = u.TicketContent,
+                TicketDateTime = u.CreateDateTime.ToShamsi(),
+                TicketSubject = u.TicketSubject,
+                TicketId = u.Id
+            }).ToList();
+        }
+
         public IEnumerable<Ticket> GetTickets()
         {
             return _ticketRepository.GetTickets();
-        }
-
-        public List<Ticket> MyTickets(string userId)
-        {
-            return _ticketRepository.MyTickets(userId);
         }
 
         public Ticket SearchById(int id)

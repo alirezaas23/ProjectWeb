@@ -59,6 +59,12 @@
                 ارسال تیکت
             </a>
         </li>
+        <li class="list-group-item">
+            <a asp-area="UserPanel" asp-controller="Account" asp-action="MyTickets" class="text-hover small-font">
+                <i class="fas fa-circle menu-small-icon"></i>
+                تیکت های ارسال شده من
+            </a>
+        </li>
         @*@if (User.IsInRole("ادمین"))
         {
             <li class="list-group-item">

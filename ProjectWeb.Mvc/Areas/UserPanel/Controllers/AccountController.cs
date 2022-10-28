@@ -126,10 +126,18 @@ namespace ProjectWeb.Mvc.Areas.UserPanel.Controllers
                 await _ticketInterface.AddTicket(model);
 
                 TempData[SuccessMessage] = "تیکت شما با موفقیت ارسال شد. پس از بررسی با شما تماس خواهیم گرفت.";
-                return RedirectToAction("SendTicket", "Account", new { area = "UserPanel" });
+                return RedirectToAction("MyTickets", "Account", new { area = "UserPanel" });
             }
 
             return View(model);
+        }
+
+        [HttpGet("My-Tickets")]
+        public async Task<IActionResult> MyTickets()
+        {
+            var userTickets = await _ticketInterface.UserTickets(HttpContext.User.GetUserId());
+
+            return View(userTickets);
         }
 
         #endregion

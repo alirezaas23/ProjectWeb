@@ -4,6 +4,7 @@ using ProjectWeb.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {
@@ -27,15 +28,14 @@ namespace ProjectWeb.Infra.Data.Repositories
             _ctx.Tickets.Remove(ticket);
         }
 
+        public async Task<List<Ticket>> GetUserTickets(long userId)
+        {
+            return await _ctx.Tickets.Where(t => t.UserId == userId).ToListAsync();
+        }
+
         public IEnumerable<Ticket> GetTickets()
         {
             return _ctx.Tickets;
-        }
-
-        public List<Ticket> MyTickets(string userId)
-        {
-            //return _ctx.Tickets.Where(t => t.UserId == userId).ToList();
-            return null;
         }
 
         public async Task SaveChanges()

@@ -1,8 +1,13 @@
 ﻿@model List<ProjectWeb.Domain.ViewModels.Ticket.MyTicketsViewModel>
 @{
     ViewData["Title"] = "تیکت های من";
-    Layout = "_Layout_Profile";
+    Layout = "_UserPanelLayout";
     int row = 1;
+}
+
+@section BreadCrumb
+{
+    <a asp-action="EditInfo" asp-controller="Account" asp-area="UserPanel" class="text-hover">/ @ViewData["Title"]</a>
 }
 
 @{
@@ -43,7 +48,7 @@
                                     متن تیکت :
                                 </p>
                                 <p>
-                                    @Html.Raw(ticket.TicketText)
+                                    @Html.Raw(ticket.TicketContent)
                                 </p>
                             </div>
                         </div>

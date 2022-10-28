@@ -7,7 +7,7 @@
 
 @section BreadCrumb
 {
-    <a asp-action="SendTicket" asp-controller="Account" asp-area="UserPanel" class="text-hover">/ ارسال تیکت</a>
+    <a asp-action="SendTicket" asp-controller="Account" asp-area="UserPanel" class="text-hover">/ @ViewData["Title"]</a>
 }
 
 <div class="card custom-box-shadow">
@@ -34,3 +34,8 @@
         </form>
     </div>
 </div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

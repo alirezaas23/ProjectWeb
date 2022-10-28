@@ -69,22 +69,5 @@ namespace ProjectWeb.Mvc.Controllers
             TempData["Message"] = "تیکت مورد نظر با موفقیت حذف شد.";
             return RedirectToAction("AllTickets", "Ticket");
         }
-
-        //[HttpGet]
-        //public IActionResult MyTickets(string userId)
-        //{
-        //    var myTickets = _ticketInterface.MyTickets(userId);
-        //    List<MyTicketsViewModel> TicketsList = new List<MyTicketsViewModel>();
-        //    foreach (var ticket in myTickets)
-        //    {
-        //        TicketsList.Add(new MyTicketsViewModel()
-        //        {
-        //            TicketDateTime = ticket.TicketDateTime,
-        //            TicketSubject = ticket.TicketSubject,
-        //            TicketText = ticket.TicketText,
-        //        });
-        //    }
-        //    return View(TicketsList);
-        //}
     }
 }

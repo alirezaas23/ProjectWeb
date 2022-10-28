@@ -11,6 +11,6 @@ namespace ProjectWeb.Domain.Interfaces
         IEnumerable<Ticket> GetTickets();
         Ticket SearchById(int id);
         Task DeleteTicketAsync(int id);
-        List<Ticket> MyTickets(string userId);
+        Task<List<Ticket>> GetUserTickets(long userId);
     }
 }
