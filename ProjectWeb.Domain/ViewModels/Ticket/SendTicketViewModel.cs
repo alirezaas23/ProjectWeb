@@ -1,5 +1,4 @@
-﻿using ProjectWeb.Domain.ViewModels.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWeb.Domain.ViewModels.Ticket
 {

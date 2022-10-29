@@ -1,10 +1,10 @@
-﻿using ProjectWeb.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {
@@ -30,7 +30,7 @@ namespace ProjectWeb.Infra.Data.Repositories
 
         public async Task<List<Ticket>> GetUserTickets(long userId)
         {
-            return await _ctx.Tickets.Where(t => t.UserId == userId).ToListAsync();
+            return await _ctx.Tickets.Where(t => t.UserId == userId && !t.IsDelete).ToListAsync();
         }
 
         public IEnumerable<Ticket> GetTickets()

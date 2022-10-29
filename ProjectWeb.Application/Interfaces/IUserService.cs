@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectWeb.Application.Generators;
-using ProjectWeb.Application.Security;
-using ProjectWeb.Application.Services;
-using ProjectWeb.Application.Statics;
-using ProjectWeb.Domain.Interfaces;
-using ProjectWeb.Domain.Models.Account;
+﻿using ProjectWeb.Domain.Models.Account;
 using ProjectWeb.Domain.ViewModels.Account;
 using ProjectWeb.Domain.ViewModels.UserPanel.Account;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Application.Interfaces
 {

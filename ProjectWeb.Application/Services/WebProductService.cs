@@ -1,14 +1,10 @@
-﻿using System;
-using ProjectWeb.Application.Interfaces;
+﻿using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Application.Security;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using ProjectWeb.Application.Extensions;
-using ProjectWeb.Application.Security;
-using ProjectWeb.Application.Statics;
 using ProjectWeb.Domain.ViewModels.WebProduct;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Application.Services
 {
@@ -24,7 +20,7 @@ namespace ProjectWeb.Application.Services
         }
 
         #endregion
-        
+
         public async Task DeleteProduct(long productId)
         {
             await _webProductRepository.DeleteProduct(productId);

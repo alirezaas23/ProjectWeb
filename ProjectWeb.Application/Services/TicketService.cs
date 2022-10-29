@@ -1,14 +1,13 @@
-﻿using ProjectWeb.Application.Interfaces;
+﻿using ProjectWeb.Application.Extensions;
+using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.Security;
+using ProjectWeb.Application.Statics;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models;
 using ProjectWeb.Domain.ViewModels.Ticket;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using ProjectWeb.Application.Extensions;
-using ProjectWeb.Application.Statics;
 
 namespace ProjectWeb.Application.Services
 {
@@ -49,7 +48,7 @@ namespace ProjectWeb.Application.Services
                     <p>یک تیکت جدید ثبت شد. لطفا در سایت بررسی کنید.</p>
                 </div>";
 
-            await _emailService.SendEmail("alirezaasgari683@gmail.com", "تیکت جدید", body);
+            await _emailService.SendEmail(PathTools.MyEmail, "تیکت جدید", body);
 
             #region Send Email To User
 
@@ -105,7 +104,8 @@ namespace ProjectWeb.Application.Services
                 TicketContent = u.TicketContent,
                 TicketDateTime = u.CreateDateTime.ToShamsi(),
                 TicketSubject = u.TicketSubject,
-                TicketId = u.Id
+                TicketId = u.Id,
+                TimeAgoTicketDate = u.CreateDateTime.TimeAgo()
             }).ToList();
         }
 

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using ProjectWeb.Domain.Models.Location;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using ProjectWeb.Domain.Models.Location;
-using ProjectWeb.Domain.ViewModels.Common;
 
 namespace ProjectWeb.Domain.Interfaces
 {

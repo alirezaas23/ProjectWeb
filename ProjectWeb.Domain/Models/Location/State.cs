@@ -1,10 +1,8 @@
 ﻿#nullable enable
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using ProjectWeb.Domain.Models.Account;
 using ProjectWeb.Domain.Models.Common;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectWeb.Domain.Models.Location
 {

@@ -1,7 +1,7 @@
 ﻿using ProjectWeb.Domain.Models;
+using ProjectWeb.Domain.ViewModels.WebProduct;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ProjectWeb.Domain.ViewModels.WebProduct;
 
 namespace ProjectWeb.Application.Interfaces
 {

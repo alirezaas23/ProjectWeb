@@ -1,19 +1,13 @@
-﻿using System.Collections.Generic;
-using GoogleReCaptcha.V3.Interface;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using ProjectWeb.Domain.Models;
-using ProjectWeb.Domain.ViewModels.Account;
-using ProjectWeb.Mvc.ActionFilters;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Application.Security;
-using ProjectWeb.Application.Services;
+using ProjectWeb.Domain.ViewModels.Account;
+using ProjectWeb.Mvc.ActionFilters;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Controllers
 {

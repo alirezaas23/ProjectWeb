@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectWeb.Application.Interfaces;
+﻿using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Domain.Interfaces;
+using System;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Application.Services
 {

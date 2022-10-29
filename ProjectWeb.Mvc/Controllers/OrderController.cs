@@ -1,17 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Domain.Models;
-using ProjectWeb.Domain.ViewModels.Order;
-using ProjectWeb.Domain.ViewModels.WebProduct;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Security.Claims;
+﻿using System;
 using System.Threading.Tasks;
 using GoogleReCaptcha.V3.Interface;
-using ZarinpalSandbox;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ProjectWeb.Application.Extensions;
+using ProjectWeb.Application.Interfaces;
+using ProjectWeb.Domain.ViewModels.WebProduct;
 
 namespace ProjectWeb.Mvc.Controllers
 {
@@ -23,7 +17,9 @@ namespace ProjectWeb.Mvc.Controllers
         private readonly IWebProductInterface _webProductInterface;
         private readonly IOrderDetailInterface _orderDetailInterface;
         private readonly ICaptchaValidator _captchaValidator;
-        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface, IOrderDetailInterface orderDetailInterface, ICaptchaValidator captchaValidator)
+
+        public OrderController(IOrderInterface orderInterface, IWebProductInterface webProductInterface,
+            IOrderDetailInterface orderDetailInterface, ICaptchaValidator captchaValidator)
         {
             this._orderInterface = orderInterface;
             this._webProductInterface = webProductInterface;
@@ -36,63 +32,24 @@ namespace ProjectWeb.Mvc.Controllers
         #region Add To Basket
 
         [HttpPost, ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddToBasket(ShowWebProductViewModel model)
-        //{
-        // 
-        //    PersianCalendar calendar = new PersianCalendar();
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var order = _orderInterface.IsOrderInUse(userId);
-        //    if (order == null)
-        //    {
-        //        order = new Order()
-        //        {
-        //            FinalyPay = false,
-        //            IsFinally = false,
-        //            Sum = 0,
-        //            OrderDateTime = calendar.GetYear(DateTime.Now) + "/" + calendar.GetMonth(DateTime.Now) + "/" + calendar.GetDayOfMonth(DateTime.Now)
-        //                            + ", " + calendar.GetHour(DateTime.Now) + ":" + calendar.GetMinute(DateTime.Now) + ":" + calendar.GetSecond(DateTime.Now),
-        //            //UserId = userId,
-        //        };
-        //        _orderInterface.AddOrder(order);
-        //        var orderDetail = new OrderDetail()
-        //        {
-        //            Count = 1,
-        //            OrderId = order.OrderId,
-        //            Price = ((int)_webProductInterface.FindById(model.WebProductId).WebProductPrice),
-        //            WebProductId = model.WebProductId,
-        //            Order = order,
-        //            WebType = model.WebType,
-        //            Description = model.Description
-        //        };
-        //        _orderDetailInterface.AddOrderDetail(orderDetail);
-        //    }
-        //    else
-        //    {
-        //        var detail = _orderDetailInterface.IsProductInUse(order.OrderId, model.WebProductId);
-        //        if (detail == null)
-        //        {
-        //            var orderDetail = new OrderDetail()
-        //            {
-        //                Count = 1,
-        //                OrderId = order.OrderId,
-        //                Price = ((int)_webProductInterface.FindById(model.WebProductId).WebProductPrice),
-        //                WebProductId = model.WebProductId,
-        //                Order = order,
-        //                WebType = model.WebType,
-        //                Description = model.Description
-        //            };
-        //            _orderDetailInterface.AddOrderDetail(orderDetail);
-        //        }
-        //        else
-        //        {
-        //            TempData[ErrorMessage] = "شما این پروژه را در سبد خرید خود دارید. بعد از پرداخت نهایی دوباره اقدام کنید.";
-        //            return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
-        //        }
-        //    }
-        //    _orderInterface.UpdateSum(order.OrderId);
-        //    TempData[SuccessMessage] = "محصول به سبد خرید اضافه شد!";
-        //    return RedirectToAction("WebProductInfo", "WebProduct", new { id = model.WebProductId });
-        //}
+        [Authorize]
+        public async Task<IActionResult> AddToBasket(ShowWebProductViewModel model)
+        {
+            var result = await _orderInterface.AddOrderToBasket(model, HttpContext.User.GetUserId());
+
+            switch (result)
+            {
+                case AddOrderResult.Success:
+                    TempData[SuccessMessage] = "محصول با موفقیت به سبد خرید اضافه شد.";
+                    break;
+                case AddOrderResult.ProductInUse:
+                    TempData[WarningMessage] =
+                        "شما این محصول را در سبد خرید خود دارید. بعد از پرداخت نهایی اقدام کنید.";
+                    break;
+            }
+
+            return RedirectToAction("WebProductInfo", "WebProduct", new { productId = model.WebProductId });
+        }
 
         #endregion
 

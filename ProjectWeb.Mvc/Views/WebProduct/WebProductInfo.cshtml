@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-                <img src="@PathTools.ProductImagePath@Model.WebProductImage" alt="@Model.WebProductName" class="width-100" />
+                <img src="@PathTools.ProductImagePath@Model.WebProductImage" alt="@Model.WebProductName" class="width-100"/>
             </div>
             <div class="col-12 col-md-6">
                 <div class="card custom-box-shadow">
@@ -41,15 +41,19 @@
                                 <textarea asp-for="Description" class="form-control input-custom"></textarea>
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
-                            <input type="hidden" asp-for="WebProductId" />
+                            <input type="hidden" asp-for="WebProductId"/>
                             <button class="btn btn-edit">
                                 افزودن به سبد خرید
                             </button>
                         </form>
-                        <hr />
+                        <hr/>
                         <p class="small text-muted">
                             <i class="fas fa-info-circle"></i>
-                            در صورت داشتن هر گونه سوال در سفارش، از <a asp-controller="Ticket" asp-action="SendTicket" class="font-weight-bold text-hover">این</a> قسمت با ما در ارتباط باشید.
+                            در صورت داشتن هر گونه سوال در سفارش، از
+                            <a asp-controller="Account" asp-action="SendTicket" asp-area="UserPanel"
+                               class="font-weight-bold text-hover">
+                                این
+                            </a> قسمت با ما در ارتباط باشید.
                         </p>
                     </div>
                 </div>

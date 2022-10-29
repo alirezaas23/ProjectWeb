@@ -1,8 +1,6 @@
-﻿using System;
+﻿using ProjectWeb.Domain.ViewModels.Common;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using ProjectWeb.Domain.ViewModels.Common;
 
 namespace ProjectWeb.Application.Interfaces
 {

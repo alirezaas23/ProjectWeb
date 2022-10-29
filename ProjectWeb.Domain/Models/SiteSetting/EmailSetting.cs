@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ProjectWeb.Domain.Models.Common;
+﻿using ProjectWeb.Domain.Models.Common;
 
 namespace ProjectWeb.Domain.Models.SiteSetting
 {

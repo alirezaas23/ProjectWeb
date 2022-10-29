@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ProjectWeb.Domain.Models.Common;
+﻿using ProjectWeb.Domain.Models.Common;
+using System.Collections.Generic;
 
 namespace ProjectWeb.Domain.Models
 {

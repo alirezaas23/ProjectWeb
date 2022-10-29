@@ -6,8 +6,8 @@ namespace ProjectWeb.Domain.Models
     {
         [Key]
         public int OrderDetailId { get; set; }
-        public int OrderId { get; set; }
-        public int WebProductId { get; set; }
+        public long OrderId { get; set; }
+        public long WebProductId { get; set; }
         public int Price { get; set; }
         public int Count { get; set; }
         public Order Order { get; set; }

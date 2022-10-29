@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using ProjectWeb.Domain.ViewModels.Common;
-using System.Collections.Generic;
+﻿using ProjectWeb.Domain.ViewModels.Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWeb.Domain.ViewModels.Account

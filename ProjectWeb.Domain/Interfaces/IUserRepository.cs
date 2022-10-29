@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProjectWeb.Domain.Models.Account;
 using System.Threading.Tasks;
-using ProjectWeb.Domain.Models.Account;
 
 namespace ProjectWeb.Domain.Interfaces
 {

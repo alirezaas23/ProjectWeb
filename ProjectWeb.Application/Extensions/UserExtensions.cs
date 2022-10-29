@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ProjectWeb.Domain.Models.Account;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using ProjectWeb.Domain.Models.Account;
 
 namespace ProjectWeb.Application.Extensions
 {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.Models.Location;
-using ProjectWeb.Domain.ViewModels.Common;
 using ProjectWeb.Infra.Data.Context;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProjectWeb.Domain.Models.SiteSetting;
 using System.Threading.Tasks;
-using ProjectWeb.Domain.Models.SiteSetting;
 
 namespace ProjectWeb.Domain.Interfaces
 {

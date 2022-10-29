@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectWeb.Application.Interfaces;
+﻿using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Domain.Interfaces;
 using ProjectWeb.Domain.ViewModels.Common;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Application.Services
 {

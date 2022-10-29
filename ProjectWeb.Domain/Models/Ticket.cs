@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ProjectWeb.Domain.Models.Account;
+﻿using ProjectWeb.Domain.Models.Account;
 using ProjectWeb.Domain.Models.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWeb.Domain.Models
 {

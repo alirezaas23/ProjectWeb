@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Extensions;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.Statics;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Areas.UserPanel.Controllers
 {

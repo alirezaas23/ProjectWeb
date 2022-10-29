@@ -1,19 +1,17 @@
-﻿using System;
-using GoogleReCaptcha.V3;
+﻿using GoogleReCaptcha.V3;
 using GoogleReCaptcha.V3.Interface;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
 using ProjectWeb.Infra.IoC;
+using System;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using WebMarkupMin.AspNetCore3;
 
 namespace ProjectWeb.Mvc

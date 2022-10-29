@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
 namespace ProjectWeb.Application.Statics
 {
@@ -32,6 +29,12 @@ namespace ProjectWeb.Application.Statics
 
         public static readonly string EditorServerPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/content/ckeditor/");
         public static readonly string EditorPath = "/content/ckeditor/";
+
+        #endregion
+
+        #region My Email
+
+        public static readonly string MyEmail = "alirezaasgari683@gmail.com";
 
         #endregion
     }

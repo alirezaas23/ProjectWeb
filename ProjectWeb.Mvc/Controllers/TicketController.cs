@@ -1,17 +1,7 @@
-﻿using GoogleReCaptcha.V3.Interface;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Domain.Models;
 using ProjectWeb.Domain.ViewModels.Ticket;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using ProjectWeb.Application.Extensions;
-using MyTicketsViewModel = ProjectWeb.Domain.ViewModels.Ticket.MyTicketsViewModel;
 
 namespace ProjectWeb.Mvc.Controllers
 {

@@ -1,19 +1,20 @@
 ﻿using ProjectWeb.Domain.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using ProjectWeb.Domain.Models.Account;
 
 namespace ProjectWeb.Domain.Interfaces
 {
     public interface IOrderRepository
     {
-        void UpdateOrder(Order order);
-        void UpdateSum(int OrderId);
-        Order IsOrderInUse(string userId);
-        void AddOrder(Order order);
-        Order FindOrder(int orderId);
+        Task UpdateOrder(Order order);
+        Task<Order> IsOrderInUse(long userId);
+        Task AddNewOrder(Order order);
+        Task<Order> GetOrderById(long orderId);
         int FinallyOrders();
-        void SaveChanges();
-        IEnumerable<Order> MyOrders(string userId);
-        Order FindFinalyOrder(int orderId);
+        Task SaveChanges();
+        //IEnumerable<Order> MyOrders(string userId);
+        //Order FindFinalyOrder(int orderId);
         List<Order> ShowFinallyOrders();
         int UserPaysSum();
     }

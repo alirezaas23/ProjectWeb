@@ -121,12 +121,18 @@ namespace ProjectWeb.Infra.Data.Migrations
 
             modelBuilder.Entity("ProjectWeb.Domain.Models.Order", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("FinalyPay")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsFinally")
@@ -144,10 +150,12 @@ namespace ProjectWeb.Infra.Data.Migrations
                     b.Property<int>("Sum")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -165,16 +173,13 @@ namespace ProjectWeb.Infra.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("WebProductId")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("WebProductId1")
+                    b.Property<long>("WebProductId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("WebType")
@@ -184,7 +189,7 @@ namespace ProjectWeb.Infra.Data.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("WebProductId1");
+                    b.HasIndex("WebProductId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -332,6 +337,17 @@ namespace ProjectWeb.Infra.Data.Migrations
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("ProjectWeb.Domain.Models.Order", b =>
+                {
+                    b.HasOne("ProjectWeb.Domain.Models.Account.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ProjectWeb.Domain.Models.OrderDetail", b =>
                 {
                     b.HasOne("ProjectWeb.Domain.Models.Order", "Order")
@@ -342,7 +358,9 @@ namespace ProjectWeb.Infra.Data.Migrations
 
                     b.HasOne("ProjectWeb.Domain.Models.WebProduct", "WebProduct")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("WebProductId1");
+                        .HasForeignKey("WebProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Order");
 
@@ -362,6 +380,8 @@ namespace ProjectWeb.Infra.Data.Migrations
 
             modelBuilder.Entity("ProjectWeb.Domain.Models.Account.User", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("Tickets");
                 });
 

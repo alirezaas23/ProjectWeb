@@ -1,12 +1,10 @@
 ﻿#nullable enable
+using ProjectWeb.Domain.Models.Common;
+using ProjectWeb.Domain.Models.Location;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.AccessControl;
-using System.Text;
-using ProjectWeb.Domain.Models.Common;
-using ProjectWeb.Domain.Models.Location;
 
 namespace ProjectWeb.Domain.Models.Account
 {
@@ -53,6 +51,8 @@ namespace ProjectWeb.Domain.Models.Account
         public State? City { get; set; }
 
         public ICollection<Ticket>? Tickets { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
 
         #endregion
     }

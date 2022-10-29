@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ProjectWeb.Domain.ViewModels.Common;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using ProjectWeb.Domain.ViewModels.Common;
 
 namespace ProjectWeb.Domain.ViewModels.Account
 {

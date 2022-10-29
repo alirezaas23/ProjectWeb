@@ -3,11 +3,16 @@ using ProjectWeb.Domain.Models;
 using ProjectWeb.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ProjectWeb.Domain.Models.Account;
 
 namespace ProjectWeb.Infra.Data.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
+        #region Ctor
+
         private readonly ApplicationContext _ctx;
 
         public OrderRepository(ApplicationContext ctx)
@@ -15,9 +20,27 @@ namespace ProjectWeb.Infra.Data.Repositories
             this._ctx = ctx;
         }
 
-        public void AddOrder(Order order)
+        #endregion
+
+        public Task UpdateOrder(Order order)
         {
-            _ctx.Orders.Add(order);
+            _ctx.Update(order);
+            return Task.CompletedTask;
+        }
+
+        public async Task<Order> IsOrderInUse(long userId)
+        {
+            return await _ctx.Orders.FirstOrDefaultAsync(o => o.UserId.Equals(userId) && !o.IsFinally);
+        }
+
+        public async Task AddNewOrder(Order order)
+        {
+            await _ctx.Orders.AddAsync(order);
+        }
+
+        public async Task<Order> GetOrderById(long orderId)
+        {
+            return await _ctx.Orders.SingleOrDefaultAsync(o => !o.IsDelete && o.Id.Equals(orderId));
         }
 
         public int FinallyOrders()
@@ -25,50 +48,24 @@ namespace ProjectWeb.Infra.Data.Repositories
             return _ctx.Orders.Where(o => o.IsFinally).Count();
         }
 
-        public Order FindFinalyOrder(int orderId)
-        {
-            return _ctx.Orders.SingleOrDefault(o => o.OrderId == orderId && o.IsFinally);
-        }
+        // public Order FindFinalyOrder(int orderId)
+        // {
+        //     return _ctx.Orders.SingleOrDefault(o => o.OrderId == orderId && o.IsFinally);
+        // }
 
-        public Order FindOrder(int orderId)
-        {
-            return _ctx.Orders.Find(orderId);
-        }
+        // public IEnumerable<Order> MyOrders(string userId)
+        // {
+        //     return _ctx.Orders.Where(o => o.UserId == userId && o.IsFinally).ToList();
+        // }
 
-        public Order IsOrderInUse(string userId)
+        public async Task SaveChanges()
         {
-            return _ctx.Orders.SingleOrDefault(o => o.UserId == userId && !o.IsFinally);
-        }
-
-        public IEnumerable<Order> MyOrders(string userId)
-        {
-            return _ctx.Orders.Where(o => o.UserId == userId && o.IsFinally).ToList();
-        }
-
-        public void SaveChanges()
-        {
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
         }
 
         public List<Order> ShowFinallyOrders()
         {
             return _ctx.Orders.Where(o => o.IsFinally).ToList();
-        }
-
-        public void UpdateOrder(Order order)
-        {
-            _ctx.Orders.Update(order);
-            SaveChanges();
-        }
-
-        public void UpdateSum(int OrderId)
-        {
-            var order = FindOrder(OrderId);
-            order.Sum = _ctx.OrderDetails.Where(o => o.OrderId == order.OrderId).Select(o => o.Count * o.Price).Sum();
-            order.ShouldPaySum = order.Sum / 2;
-            order.LeftSum = order.Sum - order.ShouldPaySum;
-            UpdateOrder(order);
-            SaveChanges();
         }
 
         public int UserPaysSum()

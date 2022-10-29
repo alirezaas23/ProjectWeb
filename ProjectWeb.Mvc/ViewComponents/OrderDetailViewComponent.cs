@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Domain.ViewModels.Order;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.ViewComponents

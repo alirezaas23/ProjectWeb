@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Interfaces;
-using ProjectWeb.Domain.ViewModels.Order;
-using System.Collections.Generic;
 
 namespace ProjectWeb.Mvc.Controllers.Admin
 {

@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Extensions;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Application.Statics;
-using ProjectWeb.Domain.Models;
 using ProjectWeb.Domain.ViewModels.WebProduct;
 using System;
 using System.Collections.Generic;
@@ -49,7 +47,7 @@ namespace ProjectWeb.Mvc.Controllers
             };
 
             var result = model.WebProductImage.UploadFile(fileName, PathTools.ProductImageServerPath, validFormats);
-            if(!result)
+            if (!result)
             {
                 TempData[ErrorMessage] = "فرمت عکس وارد شده معتبر نمی باشد.";
                 return View(model);

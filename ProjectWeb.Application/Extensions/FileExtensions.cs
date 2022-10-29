@@ -1,10 +1,8 @@
 ﻿#nullable enable
-using System;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace ProjectWeb.Application.Extensions
 {
@@ -31,7 +29,7 @@ namespace ProjectWeb.Application.Extensions
 
             using (var stream = new FileStream(finalPath, FileMode.Create))
             {
-                 file.CopyTo(stream);
+                file.CopyTo(stream);
             }
 
             return true;

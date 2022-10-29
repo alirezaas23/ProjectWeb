@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc;
 using ProjectWeb.Application.Extensions;
 using ProjectWeb.Application.Interfaces;
 using ProjectWeb.Domain.ViewModels.Ticket;
 using ProjectWeb.Domain.ViewModels.UserPanel.Account;
+using System.Threading.Tasks;
 
 namespace ProjectWeb.Mvc.Areas.UserPanel.Controllers
 {
@@ -63,7 +59,7 @@ namespace ProjectWeb.Mvc.Areas.UserPanel.Controllers
             {
                 case EditUserResult.Success:
                     TempData[SuccessMessage] = "اطلاعات با موفقیت ویرایش شد.";
-                    return RedirectToAction("EditInfo", "Account", new{area = "UserPanel"});
+                    return RedirectToAction("EditInfo", "Account", new { area = "UserPanel" });
                 case EditUserResult.NotValidDate:
                     TempData[ErrorMessage] = "تاریخ وارد شده معتبر نمی باشد.";
                     break;

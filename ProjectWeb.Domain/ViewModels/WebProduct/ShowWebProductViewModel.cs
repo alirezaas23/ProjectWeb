@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ProjectWeb.Domain.ViewModels.Common;
 
 namespace ProjectWeb.Domain.ViewModels.WebProduct
 {
@@ -17,5 +16,11 @@ namespace ProjectWeb.Domain.ViewModels.WebProduct
 
         [Required(ErrorMessage = "لطفا توضیحات را وارد کنید")]
         public string Description { get; set; }
+    }
+
+    public enum AddOrderResult
+    {
+        Success,
+        ProductInUse
     }
 }
